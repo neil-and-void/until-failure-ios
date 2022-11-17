@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2848C0312926289700277523 /* Signup.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2848C0302926289700277523 /* Signup.graphql */; };
 		2895BB4C292626A500A16CF8 /* WorkoutLoggerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2895BB4B292626A500A16CF8 /* WorkoutLoggerApp.swift */; };
 		2895BB4E292626A500A16CF8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2895BB4D292626A500A16CF8 /* ContentView.swift */; };
 		2895BB50292626A600A16CF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2895BB4F292626A600A16CF8 /* Assets.xcassets */; };
@@ -14,6 +15,9 @@
 		2895BB5D292626A700A16CF8 /* WorkoutLoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2895BB5C292626A700A16CF8 /* WorkoutLoggerTests.swift */; };
 		2895BB67292626A700A16CF8 /* WorkoutLoggerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2895BB66292626A700A16CF8 /* WorkoutLoggerUITests.swift */; };
 		2895BB69292626A700A16CF8 /* WorkoutLoggerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2895BB68292626A700A16CF8 /* WorkoutLoggerUITestsLaunchTests.swift */; };
+		2895BB77292626F700A16CF8 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 2895BB76292626F700A16CF8 /* Apollo */; };
+		2895BB7A2926271500A16CF8 /* schema.graphqls in Resources */ = {isa = PBXBuildFile; fileRef = 2895BB792926271500A16CF8 /* schema.graphqls */; };
+		2895BB7C292627B900A16CF8 /* WorkoutRoutines.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2895BB7B292627B900A16CF8 /* WorkoutRoutines.graphql */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2848C0302926289700277523 /* Signup.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Signup.graphql; sourceTree = "<group>"; };
 		2895BB48292626A500A16CF8 /* WorkoutLogger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkoutLogger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2895BB4B292626A500A16CF8 /* WorkoutLoggerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLoggerApp.swift; sourceTree = "<group>"; };
 		2895BB4D292626A500A16CF8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -44,6 +49,8 @@
 		2895BB62292626A700A16CF8 /* WorkoutLoggerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkoutLoggerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2895BB66292626A700A16CF8 /* WorkoutLoggerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLoggerUITests.swift; sourceTree = "<group>"; };
 		2895BB68292626A700A16CF8 /* WorkoutLoggerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLoggerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		2895BB792926271500A16CF8 /* schema.graphqls */ = {isa = PBXFileReference; lastKnownFileType = text; path = schema.graphqls; sourceTree = "<group>"; };
+		2895BB7B292627B900A16CF8 /* WorkoutRoutines.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = WorkoutRoutines.graphql; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2895BB77292626F700A16CF8 /* Apollo in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +102,7 @@
 		2895BB4A292626A500A16CF8 /* WorkoutLogger */ = {
 			isa = PBXGroup;
 			children = (
+				2895BB7D292627ED00A16CF8 /* Graqhql */,
 				2895BB4B292626A500A16CF8 /* WorkoutLoggerApp.swift */,
 				2895BB4D292626A500A16CF8 /* ContentView.swift */,
 				2895BB4F292626A600A16CF8 /* Assets.xcassets */,
@@ -127,6 +136,32 @@
 			path = WorkoutLoggerUITests;
 			sourceTree = "<group>";
 		};
+		2895BB7D292627ED00A16CF8 /* Graqhql */ = {
+			isa = PBXGroup;
+			children = (
+				2895BB7F2926280500A16CF8 /* Queries */,
+				2895BB7E292627FE00A16CF8 /* Mutations */,
+				2895BB792926271500A16CF8 /* schema.graphqls */,
+			);
+			path = Graqhql;
+			sourceTree = "<group>";
+		};
+		2895BB7E292627FE00A16CF8 /* Mutations */ = {
+			isa = PBXGroup;
+			children = (
+				2848C0302926289700277523 /* Signup.graphql */,
+			);
+			path = Mutations;
+			sourceTree = "<group>";
+		};
+		2895BB7F2926280500A16CF8 /* Queries */ = {
+			isa = PBXGroup;
+			children = (
+				2895BB7B292627B900A16CF8 /* WorkoutRoutines.graphql */,
+			);
+			path = Queries;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +178,9 @@
 			dependencies = (
 			);
 			name = WorkoutLogger;
+			packageProductDependencies = (
+				2895BB76292626F700A16CF8 /* Apollo */,
+			);
 			productName = WorkoutLogger;
 			productReference = 2895BB48292626A500A16CF8 /* WorkoutLogger.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +253,9 @@
 				Base,
 			);
 			mainGroup = 2895BB3F292626A500A16CF8;
+			packageReferences = (
+				2895BB75292626F700A16CF8 /* XCRemoteSwiftPackageReference "apollo-ios" */,
+			);
 			productRefGroup = 2895BB49292626A500A16CF8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -232,7 +273,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2895BB53292626A600A16CF8 /* Preview Assets.xcassets in Resources */,
+				2848C0312926289700277523 /* Signup.graphql in Resources */,
+				2895BB7A2926271500A16CF8 /* schema.graphqls in Resources */,
 				2895BB50292626A600A16CF8 /* Assets.xcassets in Resources */,
+				2895BB7C292627B900A16CF8 /* WorkoutRoutines.graphql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,6 +621,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2895BB75292626F700A16CF8 /* XCRemoteSwiftPackageReference "apollo-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apollographql/apollo-ios.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2895BB76292626F700A16CF8 /* Apollo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2895BB75292626F700A16CF8 /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = Apollo;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2895BB40292626A500A16CF8 /* Project object */;
 }

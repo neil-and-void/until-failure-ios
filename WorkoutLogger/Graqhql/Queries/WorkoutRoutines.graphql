@@ -1,0 +1,6 @@
+query WorkoutRoutines {
+    workoutRoutines {
+        id
+        name
+    }
+}
