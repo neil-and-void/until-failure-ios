@@ -1,0 +1,38 @@
+### TYPES ###
+
+type WorkoutRoutine {
+  id: ID!
+  name: String!
+  exerciseRoutines: [ExerciseRoutine]
+}
+
+type ExerciseRoutine {
+  id: ID!
+  name: String!
+  sets: Int!
+  reps: Int!
+}
+
+type AuthError {
+  message: String!
+}
+
+type AuthSuccess {
+  refreshToken: String!
+  accessToken: String!
+}
+
+union AuthResult = AuthError | AuthSuccess
+
+### END TYPES ###
+
+### END INPUTS ###
+
+type Query {
+  workoutRoutines: [WorkoutRoutine]
+}
+
+type Mutation {
+  signup(email: String!, name: String!, password: String!, confirmPassword: String!): AuthResult!
+}
+
