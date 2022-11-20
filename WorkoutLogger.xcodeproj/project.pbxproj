@@ -10,6 +10,8 @@
 		2809EF5B2926EB0200D0FF5B /* Signup.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2809EF5A2926EB0200D0FF5B /* Signup.View.swift */; };
 		2809EF5D2926EDA100D0FF5B /* Signup.ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2809EF5C2926EDA100D0FF5B /* Signup.ViewModel.swift */; };
 		2809EF662926F10C00D0FF5B /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2809EF652926F10C00D0FF5B /* AuthService.swift */; };
+		280B6A3729297D8A004D0F16 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B6A3629297D8A004D0F16 /* KeychainService.swift */; };
+		280B6A3929297FAA004D0F16 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B6A3829297FAA004D0F16 /* Auth.swift */; };
 		2848C0312926289700277523 /* Signup.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2848C0302926289700277523 /* Signup.graphql */; };
 		2885F1CA292740C9007D65A5 /* WorkoutLoggerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2885F1C9292740C9007D65A5 /* WorkoutLoggerApp.swift */; };
 		2885F1CF292778C3007D65A5 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 2885F1CE292778C3007D65A5 /* Apollo */; };
@@ -26,6 +28,7 @@
 		289CFDF1292836C100BE6773 /* Login.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289CFDF0292836C100BE6773 /* Login.View.swift */; };
 		289CFDF3292836D400BE6773 /* Login.ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289CFDF2292836D400BE6773 /* Login.ViewModel.swift */; };
 		289CFDFA2928458E00BE6773 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 289CFDF82928458D00BE6773 /* schema.json */; };
+		289CFDFE292859BB00BE6773 /* ResultTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289CFDFD292859BB00BE6773 /* ResultTypes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,8 @@
 		2809EF5A2926EB0200D0FF5B /* Signup.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup.View.swift; sourceTree = "<group>"; };
 		2809EF5C2926EDA100D0FF5B /* Signup.ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup.ViewModel.swift; sourceTree = "<group>"; };
 		2809EF652926F10C00D0FF5B /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		280B6A3629297D8A004D0F16 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		280B6A3829297FAA004D0F16 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		2848C0302926289700277523 /* Signup.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Signup.graphql; sourceTree = "<group>"; };
 		2885F1C9292740C9007D65A5 /* WorkoutLoggerApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WorkoutLoggerApp.swift; path = WorkoutLogger/UI/WorkoutLoggerApp.swift; sourceTree = SOURCE_ROOT; };
 		2885F1D129278402007D65A5 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -67,6 +72,7 @@
 		289CFDF0292836C100BE6773 /* Login.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.View.swift; sourceTree = "<group>"; };
 		289CFDF2292836D400BE6773 /* Login.ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.ViewModel.swift; sourceTree = "<group>"; };
 		289CFDF82928458D00BE6773 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
+		289CFDFD292859BB00BE6773 /* ResultTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTypes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +104,7 @@
 		2809EF552926EA3E00D0FF5B /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				280B6A3B2929B6C7004D0F16 /* Home */,
 				289CFDEF292836B200BE6773 /* Login */,
 				2809EF632926F0C300D0FF5B /* Signup */,
 			);
@@ -133,10 +140,19 @@
 		2809EF642926F0FE00D0FF5B /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				2885F1D129278402007D65A5 /* API.swift */,
+				289CFDFC2928598B00BE6773 /* Types */,
 				289CFDF429283A9C00BE6773 /* Services */,
 				2895BB7D292627ED00A16CF8 /* Graqhql */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		280B6A3B2929B6C7004D0F16 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		2895BB3F292626A500A16CF8 = {
@@ -162,7 +178,6 @@
 		2895BB4A292626A500A16CF8 /* WorkoutLogger */ = {
 			isa = PBXGroup;
 			children = (
-				2885F1D129278402007D65A5 /* API.swift */,
 				289CFDF82928458D00BE6773 /* schema.json */,
 				2809EF642926F0FE00D0FF5B /* Shared */,
 				2809EF622926F07500D0FF5B /* UI */,
@@ -238,8 +253,18 @@
 			isa = PBXGroup;
 			children = (
 				2809EF652926F10C00D0FF5B /* AuthService.swift */,
+				280B6A3629297D8A004D0F16 /* KeychainService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		289CFDFC2928598B00BE6773 /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				289CFDFD292859BB00BE6773 /* ResultTypes.swift */,
+				280B6A3829297FAA004D0F16 /* Auth.swift */,
+			);
+			path = Types;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -408,10 +433,13 @@
 				289CFDF1292836C100BE6773 /* Login.View.swift in Sources */,
 				2809EF662926F10C00D0FF5B /* AuthService.swift in Sources */,
 				2885F1CA292740C9007D65A5 /* WorkoutLoggerApp.swift in Sources */,
+				280B6A3729297D8A004D0F16 /* KeychainService.swift in Sources */,
 				289CFDF3292836D400BE6773 /* Login.ViewModel.swift in Sources */,
 				2809EF5D2926EDA100D0FF5B /* Signup.ViewModel.swift in Sources */,
+				280B6A3929297FAA004D0F16 /* Auth.swift in Sources */,
 				2809EF5B2926EB0200D0FF5B /* Signup.View.swift in Sources */,
 				2885F1D229278402007D65A5 /* API.swift in Sources */,
+				289CFDFE292859BB00BE6773 /* ResultTypes.swift in Sources */,
 				2895BB4C292626A500A16CF8 /* WorkoutLoggerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

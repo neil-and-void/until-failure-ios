@@ -9,14 +9,21 @@ import Foundation
 
 class SignupViewModel: ObservableObject {
     private let service: AuthServiceProtocol
-    
-    @Published var isLoading: Bool = false
+   
+    @Published var name: String = ""
+    @Published var email: String = ""
+    @Published var password: String = ""
+    @Published var confirmPassword: String = ""
+
+    @Published var error: String = ""
     
     init(service: AuthServiceProtocol) {
         self.service = service
     }
     
-    func signup(email: String, name: String, password: String, confirmPassword: String) {
-        self.service.signup(email: email, name: name, password: password, confirmPassword: confirmPassword)
+    func submit() {
+        self.service.signup(email: email, name: name, password: password, confirmPassword: confirmPassword) { result in
+            print(result)
+        }
     }
 }

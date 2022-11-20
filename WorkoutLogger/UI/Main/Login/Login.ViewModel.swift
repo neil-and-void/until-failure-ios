@@ -9,15 +9,29 @@ import Foundation
 
 class LoginViewModel: ObservableObject {
     private let service: AuthServiceProtocol
-    
+    private let keychain: KeychainServiceProtocol
+
     @Published var email: String = ""
     @Published var password: String = ""
-    
-    init(service: AuthServiceProtocol) {
+    @Published var error: String = ""
+
+    init(service: AuthServiceProtocol, keychain: KeychainServiceProtocol = KeychainService()) {
         self.service = service
+        self.keychain = keychain
     }
-    
+
     func submit() {
-        self.service.login(email: email, password: password)
+        self.service.login(email: email, password: password) { result in
+            switch result {
+            case .success(let result):
+                let tokens = AuthTokens(
+                    accessToken: result.data.accessToken,
+                    refreshToken: result.data.refreshToken
+                )
+                self.keychain.save(tokens, service: "token", account: "com.neil.workout-logger")
+            case .failure(let err):
+                self.error = err.error
+            }
+        }
     }
 }

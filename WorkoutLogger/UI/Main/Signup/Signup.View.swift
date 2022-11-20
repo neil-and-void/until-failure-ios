@@ -9,31 +9,47 @@ import SwiftUI
 
 struct Signup: View {
     @StateObject private var signupViewModel = SignupViewModel(service: AuthService())
-    // move to the view model
-    @State private var name: String = ""
-    @State private var email: String = ""
-    @State private var password: String = ""
-    @State private var confirmPassword: String = ""
-    
+    @Environment(\.dismiss) var dismiss
+
     var body: some View {
         VStack {
             Text("Signup")
+                .font(.system(size: 36))
             
-            TextField("Name", text: $name)
-                .autocapitalization(.none)
+            Text(signupViewModel.error)
+                .foregroundColor(.red)
             
-            TextField("Email", text: $email)
-                .autocapitalization(.none)
+            TextField("Name", text: $signupViewModel.name)
+                .padding()
+                .background(.thinMaterial)
+                .cornerRadius(10)
+                .textInputAutocapitalization(.never)
             
-            SecureField("Password", text: $password)
+            TextField("Email", text: $signupViewModel.email)
+                .padding()
+                .background(.thinMaterial)
+                .cornerRadius(10)
+                .textInputAutocapitalization(.never)
             
-            SecureField("Confirm Password", text: $confirmPassword)
+            SecureField("Password", text: $signupViewModel.password)
+                .padding()
+                .background(.thinMaterial)
+                .cornerRadius(10)
             
-            Button(action: {
-                signupViewModel.signup(email: email, name: name, password: password, confirmPassword: confirmPassword)
-            }) {
-                Text("Sign Up")
+            SecureField("Confirm Password", text: $signupViewModel.confirmPassword)
+                .padding()
+                .background(.thinMaterial)
+                .cornerRadius(10)
+                .padding(.bottom, 30)
+            
+            Button(action: { signupViewModel.submit() }) {
+                Text("Create account")
+                    .bold()
+                    .frame(width: 360, height: 50)
+                    .background(.thinMaterial)
+                    .cornerRadius(10)
             }
+            .padding(.bottom, 15)
         }
     }
 }

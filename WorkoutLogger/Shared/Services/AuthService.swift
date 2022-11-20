@@ -9,8 +9,8 @@ import Foundation
 import Apollo
 
 protocol AuthServiceProtocol {
-    func signup(email: String, name: String, password: String, confirmPassword: String)
-    func login(email: String, password: String)
+    func signup(email: String, name: String, password: String, confirmPassword: String, completion: @escaping (Result<SignupResult, GraphQLError>) -> Void)
+    func login(email: String, password: String, completion: @escaping (Result<LoginResult, GraphQLError>) -> Void)
 }
 
 final class AuthService: AuthServiceProtocol {
@@ -20,7 +20,7 @@ final class AuthService: AuthServiceProtocol {
         self.client = client
     }
     
-    func signup(email: String, name: String, password: String, confirmPassword: String) {
+    func signup(email: String, name: String, password: String, confirmPassword: String, completion: @escaping (Result<SignupResult, GraphQLError>) -> Void) {
         self.client.perform(mutation: SignupMutation(
             email: email,
             name: name,
@@ -28,30 +28,32 @@ final class AuthService: AuthServiceProtocol {
             confirmPassword: confirmPassword)
         ) { result in
             switch result {
-            case .success(let graphQLResult):
-                let refreshToken: String = graphQLResult.data?.signup.asAuthSuccess?.refreshToken ?? ""
-                let accessToken: String = graphQLResult.data?.signup.asAuthSuccess?.accessToken ?? ""
-                print(refreshToken, accessToken)
+            case .success(let response):
+                if let errors = response.errors {
+                    completion(Result.failure(GraphQLError(error: errors[0].message ?? "")))
+                    return
+                }
+                completion(Result.success(SignupResult(data: (response.data?.signup.asAuthSuccess)!)))
             case .failure(let error):
-                print("Failure! Error: \(error)")
+                // Network error
+                print(error)
             }
         }
     }
     
-    func login(email: String, password: String) {
+    func login(email: String, password: String, completion: @escaping (Result<LoginResult, GraphQLError>) -> Void) {
         self.client.perform(mutation: LoginMutation(email: email, password: password)) { result in
             switch result {
-            case .success(let graphQLResult):
-                if ((graphQLResult.errors != nil) && graphQLResult.errors!.count != 0) {
-                    print(graphQLResult.errors?[0] ?? "something")
+            case .success(let response):
+                if let errors = response.errors {
+                    completion(Result.failure(GraphQLError(error: errors[0].message ?? "")))
+                    return
                 }
-                let refreshToken: String = graphQLResult.data?.login.asAuthSuccess?.refreshToken ?? ""
-                let accessToken: String = graphQLResult.data?.login.asAuthSuccess?.accessToken ?? ""
-                print(refreshToken, accessToken)
-            case .failure:
-                print("Something went wrong")
+                completion(Result.success(LoginResult(data: (response.data?.login.asAuthSuccess)!)))
+            case .failure(let error):
+                // Network error
+                completion(Result.failure(GraphQLError(error: error.localizedDescription)))
             }
-
         }
     }
 }
