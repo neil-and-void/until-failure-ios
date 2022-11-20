@@ -13,12 +13,15 @@ struct Login: View {
     
     var body: some View {
         
-        VStack {
+        VStack() {
             Text("Login")
                 .font(.system(size: 36))
             
-            Text(loginViewModel.error)
-                .foregroundColor(.red)
+            if loginViewModel.error.count > 0 {
+                Text(loginViewModel.error)
+                    .foregroundColor(.red)
+                    .multilineTextAlignment(.center)
+            }
             
             TextField("Email", text: $loginViewModel.email)
                 .padding()
@@ -30,15 +33,18 @@ struct Login: View {
                 .padding()
                 .background(.thinMaterial)
                 .cornerRadius(10)
-                .padding(.bottom, 30)
+                .padding(.bottom, 15)
             
             Button(action: { loginViewModel.submit() }) {
-                Text("Login")
-                    .bold()
-                    .frame(width: 360, height: 50)
-                    .background(.thinMaterial)
-                    .cornerRadius(10)
+                if loginViewModel.isLoading {
+                    ProgressView()
+                } else {
+                    Text("Login").bold()
+                }
             }
+            .padding()
+            .background(.thinMaterial)
+            .cornerRadius(10)
             .padding(.bottom, 15)
             
             Button("Create an account") {

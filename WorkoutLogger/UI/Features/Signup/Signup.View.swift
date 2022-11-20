@@ -16,9 +16,12 @@ struct Signup: View {
             Text("Signup")
                 .font(.system(size: 36))
             
-            Text(signupViewModel.error)
-                .foregroundColor(.red)
-            
+            if signupViewModel.error.count > 0 {
+                Text(signupViewModel.error)
+                    .foregroundColor(.red)
+                    .multilineTextAlignment(.center)
+            }
+
             TextField("Name", text: $signupViewModel.name)
                 .padding()
                 .background(.thinMaterial)
@@ -43,12 +46,15 @@ struct Signup: View {
                 .padding(.bottom, 30)
             
             Button(action: { signupViewModel.submit() }) {
-                Text("Create account")
-                    .bold()
-                    .frame(width: 360, height: 50)
-                    .background(.thinMaterial)
-                    .cornerRadius(10)
+                if signupViewModel.isLoading {
+                    ProgressView()
+                } else {
+                    Text("Create account").bold()
+                }
             }
+            .padding()
+            .background(.thinMaterial)
+            .cornerRadius(10)
             .padding(.bottom, 15)
         }
     }

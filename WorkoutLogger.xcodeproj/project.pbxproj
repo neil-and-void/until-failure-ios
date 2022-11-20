@@ -101,14 +101,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2809EF552926EA3E00D0FF5B /* Main */ = {
+		2809EF552926EA3E00D0FF5B /* Features */ = {
 			isa = PBXGroup;
 			children = (
 				280B6A3B2929B6C7004D0F16 /* Home */,
 				289CFDEF292836B200BE6773 /* Login */,
 				2809EF632926F0C300D0FF5B /* Signup */,
 			);
-			path = Main;
+			path = Features;
 			sourceTree = "<group>";
 		};
 		2809EF562926EA4700D0FF5B /* General */ = {
@@ -123,7 +123,7 @@
 			children = (
 				2895BB4B292626A500A16CF8 /* WorkoutLoggerApp.swift */,
 				2809EF562926EA4700D0FF5B /* General */,
-				2809EF552926EA3E00D0FF5B /* Main */,
+				2809EF552926EA3E00D0FF5B /* Features */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -599,6 +599,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WorkoutLogger/Preview Content\"";
+				DEVELOPMENT_TEAM = GMQC6K47Q9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -627,6 +628,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WorkoutLogger/Preview Content\"";
+				DEVELOPMENT_TEAM = GMQC6K47Q9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

@@ -20,7 +20,13 @@ final class AuthService: AuthServiceProtocol {
         self.client = client
     }
     
-    func signup(email: String, name: String, password: String, confirmPassword: String, completion: @escaping (Result<SignupResult, GraphQLError>) -> Void) {
+    func signup(
+        email: String,
+        name: String,
+        password: String,
+        confirmPassword: String,
+        completion: @escaping (Result<SignupResult, GraphQLError>) -> Void
+    ) {
         self.client.perform(mutation: SignupMutation(
             email: email,
             name: name,
@@ -36,7 +42,7 @@ final class AuthService: AuthServiceProtocol {
                 completion(Result.success(SignupResult(data: (response.data?.signup.asAuthSuccess)!)))
             case .failure(let error):
                 // Network error
-                print(error)
+                completion(Result.failure(GraphQLError(error: error.localizedDescription)))
             }
         }
     }

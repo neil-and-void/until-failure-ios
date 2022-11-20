@@ -13,6 +13,8 @@ class LoginViewModel: ObservableObject {
 
     @Published var email: String = ""
     @Published var password: String = ""
+    
+    @Published var isLoading: Bool = false
     @Published var error: String = ""
 
     init(service: AuthServiceProtocol, keychain: KeychainServiceProtocol = KeychainService()) {
@@ -21,6 +23,7 @@ class LoginViewModel: ObservableObject {
     }
 
     func submit() {
+        self.isLoading = true
         self.service.login(email: email, password: password) { result in
             switch result {
             case .success(let result):
@@ -28,10 +31,12 @@ class LoginViewModel: ObservableObject {
                     accessToken: result.data.accessToken,
                     refreshToken: result.data.refreshToken
                 )
+                self.error = ""
                 self.keychain.save(tokens, service: "token", account: "com.neil.workout-logger")
             case .failure(let err):
                 self.error = err.error
             }
+            self.isLoading = false
         }
     }
 }
