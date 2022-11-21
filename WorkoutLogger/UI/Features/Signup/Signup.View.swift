@@ -9,8 +9,8 @@ import SwiftUI
 
 struct Signup: View {
     @StateObject private var signupViewModel = SignupViewModel(service: AuthService())
-    @Environment(\.dismiss) var dismiss
-
+    @EnvironmentObject private var authState: AuthenticationState
+    
     var body: some View {
         VStack {
             Text("Signup")
@@ -21,7 +21,7 @@ struct Signup: View {
                     .foregroundColor(.red)
                     .multilineTextAlignment(.center)
             }
-
+            
             TextField("Name", text: $signupViewModel.name)
                 .padding()
                 .background(.thinMaterial)
@@ -45,7 +45,9 @@ struct Signup: View {
                 .cornerRadius(10)
                 .padding(.bottom, 30)
             
-            Button(action: { signupViewModel.submit() }) {
+            Button(action: { signupViewModel.submit() { result in
+                authState.isAuthenticated = result
+            }}) {
                 if signupViewModel.isLoading {
                     ProgressView()
                 } else {

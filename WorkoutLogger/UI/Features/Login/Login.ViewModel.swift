@@ -22,7 +22,7 @@ class LoginViewModel: ObservableObject {
         self.keychain = keychain
     }
 
-    func submit() {
+    func submit(setAuth: @escaping (_ result: Bool) -> Void) {
         self.isLoading = true
         self.service.login(email: email, password: password) { result in
             switch result {
@@ -33,8 +33,10 @@ class LoginViewModel: ObservableObject {
                 )
                 self.error = ""
                 self.keychain.save(tokens, service: "token", account: "com.neil.workout-logger")
+                setAuth(true)
             case .failure(let err):
                 self.error = err.error
+                setAuth(false)
             }
             self.isLoading = false
         }

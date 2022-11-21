@@ -12,7 +12,6 @@ protocol KeychainServiceProtocol {
     func read<T>(service: String, account: String, type: T.Type) -> T? where T : Codable
 }
 
-
 /**
  Wrapper for Apple Keychain API
  */

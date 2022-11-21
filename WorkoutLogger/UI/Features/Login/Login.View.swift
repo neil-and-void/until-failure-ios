@@ -10,6 +10,7 @@ import SwiftUI
 struct Login: View {
     @StateObject private var loginViewModel = LoginViewModel(service: AuthService())
     @State private var showSheet = false
+    @EnvironmentObject private var authState: AuthenticationState
     
     var body: some View {
         
@@ -35,7 +36,9 @@ struct Login: View {
                 .cornerRadius(10)
                 .padding(.bottom, 15)
             
-            Button(action: { loginViewModel.submit() }) {
+            Button(action: { loginViewModel.submit() { result in
+                authState.isAuthenticated = result
+            } }) {
                 if loginViewModel.isLoading {
                     ProgressView()
                 } else {
@@ -70,6 +73,6 @@ struct Login: View {
 
 struct Login_Previews: PreviewProvider {
     static var previews: some View {
-        Login()
+        Login().environmentObject(AuthenticationState())
     }
 }

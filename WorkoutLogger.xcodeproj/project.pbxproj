@@ -13,6 +13,12 @@
 		280B6A3729297D8A004D0F16 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B6A3629297D8A004D0F16 /* KeychainService.swift */; };
 		280B6A3929297FAA004D0F16 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B6A3829297FAA004D0F16 /* Auth.swift */; };
 		2848C0312926289700277523 /* Signup.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2848C0302926289700277523 /* Signup.graphql */; };
+		28533294292ABBE700BACB6A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28533293292ABBE700BACB6A /* ContentView.swift */; };
+		28533296292ABD7A00BACB6A /* HomeTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28533295292ABD7A00BACB6A /* HomeTabView.swift */; };
+		2853329A292ABE3400BACB6A /* WorkoutSessionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28533299292ABE3300BACB6A /* WorkoutSessionListView.swift */; };
+		2853329C292ABE4300BACB6A /* WorkoutListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2853329B292ABE4300BACB6A /* WorkoutListView.swift */; };
+		2853329F292ABF8D00BACB6A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2853329E292ABF8D00BACB6A /* ProfileView.swift */; };
+		285332A2292AE9A000BACB6A /* AuthenticationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285332A1292AE9A000BACB6A /* AuthenticationState.swift */; };
 		2885F1CA292740C9007D65A5 /* WorkoutLoggerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2885F1C9292740C9007D65A5 /* WorkoutLoggerApp.swift */; };
 		2885F1CF292778C3007D65A5 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 2885F1CE292778C3007D65A5 /* Apollo */; };
 		2885F1D229278402007D65A5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2885F1D129278402007D65A5 /* API.swift */; };
@@ -55,6 +61,12 @@
 		280B6A3629297D8A004D0F16 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		280B6A3829297FAA004D0F16 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		2848C0302926289700277523 /* Signup.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Signup.graphql; sourceTree = "<group>"; };
+		28533293292ABBE700BACB6A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		28533295292ABD7A00BACB6A /* HomeTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabView.swift; sourceTree = "<group>"; };
+		28533299292ABE3300BACB6A /* WorkoutSessionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSessionListView.swift; sourceTree = "<group>"; };
+		2853329B292ABE4300BACB6A /* WorkoutListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutListView.swift; sourceTree = "<group>"; };
+		2853329E292ABF8D00BACB6A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		285332A1292AE9A000BACB6A /* AuthenticationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationState.swift; sourceTree = "<group>"; };
 		2885F1C9292740C9007D65A5 /* WorkoutLoggerApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WorkoutLoggerApp.swift; path = WorkoutLogger/UI/WorkoutLoggerApp.swift; sourceTree = SOURCE_ROOT; };
 		2885F1D129278402007D65A5 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		2895BB48292626A500A16CF8 /* WorkoutLogger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkoutLogger.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,6 +116,10 @@
 		2809EF552926EA3E00D0FF5B /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				285332A0292AE07C00BACB6A /* CreateWorkout */,
+				2853329D292ABF8400BACB6A /* Profile */,
+				28533298292ABDCB00BACB6A /* Workouts */,
+				28533297292ABDB200BACB6A /* WorkoutSessions */,
 				280B6A3B2929B6C7004D0F16 /* Home */,
 				289CFDEF292836B200BE6773 /* Login */,
 				2809EF632926F0C300D0FF5B /* Signup */,
@@ -122,8 +138,10 @@
 			isa = PBXGroup;
 			children = (
 				2895BB4B292626A500A16CF8 /* WorkoutLoggerApp.swift */,
+				28533293292ABBE700BACB6A /* ContentView.swift */,
 				2809EF562926EA4700D0FF5B /* General */,
 				2809EF552926EA3E00D0FF5B /* Features */,
+				285332A1292AE9A000BACB6A /* AuthenticationState.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -151,8 +169,40 @@
 		280B6A3B2929B6C7004D0F16 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				28533295292ABD7A00BACB6A /* HomeTabView.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		28533297292ABDB200BACB6A /* WorkoutSessions */ = {
+			isa = PBXGroup;
+			children = (
+				28533299292ABE3300BACB6A /* WorkoutSessionListView.swift */,
+			);
+			path = WorkoutSessions;
+			sourceTree = "<group>";
+		};
+		28533298292ABDCB00BACB6A /* Workouts */ = {
+			isa = PBXGroup;
+			children = (
+				2853329B292ABE4300BACB6A /* WorkoutListView.swift */,
+			);
+			path = Workouts;
+			sourceTree = "<group>";
+		};
+		2853329D292ABF8400BACB6A /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				2853329E292ABF8D00BACB6A /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		285332A0292AE07C00BACB6A /* CreateWorkout */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CreateWorkout;
 			sourceTree = "<group>";
 		};
 		2895BB3F292626A500A16CF8 = {
@@ -432,9 +482,15 @@
 			files = (
 				289CFDF1292836C100BE6773 /* Login.View.swift in Sources */,
 				2809EF662926F10C00D0FF5B /* AuthService.swift in Sources */,
+				2853329C292ABE4300BACB6A /* WorkoutListView.swift in Sources */,
+				2853329F292ABF8D00BACB6A /* ProfileView.swift in Sources */,
+				285332A2292AE9A000BACB6A /* AuthenticationState.swift in Sources */,
+				28533294292ABBE700BACB6A /* ContentView.swift in Sources */,
 				2885F1CA292740C9007D65A5 /* WorkoutLoggerApp.swift in Sources */,
 				280B6A3729297D8A004D0F16 /* KeychainService.swift in Sources */,
 				289CFDF3292836D400BE6773 /* Login.ViewModel.swift in Sources */,
+				28533296292ABD7A00BACB6A /* HomeTabView.swift in Sources */,
+				2853329A292ABE3400BACB6A /* WorkoutSessionListView.swift in Sources */,
 				2809EF5D2926EDA100D0FF5B /* Signup.ViewModel.swift in Sources */,
 				280B6A3929297FAA004D0F16 /* Auth.swift in Sources */,
 				2809EF5B2926EB0200D0FF5B /* Signup.View.swift in Sources */,
