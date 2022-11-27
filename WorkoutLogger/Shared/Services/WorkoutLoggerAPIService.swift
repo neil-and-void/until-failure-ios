@@ -9,7 +9,7 @@ import SwiftUI
 import Apollo
 
 protocol WorkoutLoggerAPIServiceProtocol {
-    func getWorkoutRoutines(_ completion: @escaping (Result<WorkoutRoutinesFull, GraphQLError>) -> Void)
+    func getWorkoutRoutines(_ completion: @escaping (Result<[WorkoutRoutinesFull], GraphQLError>) -> Void)
 }
 
 class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
@@ -19,7 +19,7 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
         self.client = client
     }
     
-    func getWorkoutRoutines(_ completion: @escaping (Result<WorkoutRoutinesFull, GraphQLError>) -> Void) {
+    func getWorkoutRoutines(_ completion: @escaping (Result<[WorkoutRoutinesFull], GraphQLError>) -> Void) {
         self.client.fetch(query: WorkoutRoutinesQuery()) { result in
             switch result {
             case .success(let response):
@@ -27,8 +27,8 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
                     completion(Result.failure(GraphQLError(error: errors[0].message ?? "")))
                     return
                 }
-                print("******", response.data?.workoutRoutines as Any, "WHATSKLDFJOIDS*(* WE")
-//                completion(Result.success(response))
+                let workoutRoutinesFull: [WorkoutRoutinesFull] = (response.data?.workoutRoutines)?.compactMap { $0?.fragments.workoutRoutinesFull } ?? []
+                completion(Result.success(workoutRoutinesFull))
             case .failure(let error):
                 // Network error
 //                print("error", error)
