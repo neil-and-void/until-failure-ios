@@ -7,6 +7,7 @@
 
 import Foundation
 
+// this is what we use to store in key chain
 struct AuthTokens: Codable {
     let accessToken: String
     let refreshToken: String

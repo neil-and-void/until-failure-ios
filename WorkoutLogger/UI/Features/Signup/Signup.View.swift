@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Signup: View {
+struct SignupView: View {
     @StateObject private var signupViewModel = SignupViewModel(service: AuthService())
     @EnvironmentObject private var authState: AuthenticationState
     
@@ -45,9 +45,7 @@ struct Signup: View {
                 .cornerRadius(10)
                 .padding(.bottom, 30)
             
-            Button(action: { signupViewModel.submit() { result in
-                authState.isAuthenticated = result
-            }}) {
+            Button(action: { signupViewModel.submit(setAuth: authState.setAuth) }) {
                 if signupViewModel.isLoading {
                     ProgressView()
                 } else {
@@ -64,6 +62,6 @@ struct Signup: View {
 
 struct Signup_Previews: PreviewProvider {
     static var previews: some View {
-        Signup()
+        SignupView()
     }
 }

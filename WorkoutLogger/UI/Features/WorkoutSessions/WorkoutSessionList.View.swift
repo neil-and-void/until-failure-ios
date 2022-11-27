@@ -9,7 +9,11 @@ import SwiftUI
 
 struct WorkoutSessionListView: View {
     var body: some View {
-        Text("workout session")
+        List {
+            Text("A List Item")
+            Text("A Second List Item")
+            Text("A Third List Item")
+        }
     }
 }
 

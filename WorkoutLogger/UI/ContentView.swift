@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-
-
 struct ContentView: View {
     @StateObject var authState = AuthenticationState()
  
@@ -17,7 +15,7 @@ struct ContentView: View {
             if authState.isAuthenticated {
                 HomeTabView()
             } else {
-                Login()
+                LoginView()
             }
         }.environmentObject(authState)
     }

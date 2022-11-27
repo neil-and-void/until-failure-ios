@@ -9,7 +9,37 @@ import SwiftUI
 
 struct ProfileView: View {
     var body: some View {
-        Text("User View")
+        VStack {
+            
+            HStack {
+                
+                Text("Name")
+                
+                Spacer()
+                
+                Text("Name")
+                
+            }
+            
+            HStack {
+                
+                Text("Email")
+                
+                Spacer()
+                
+                Text("Email")
+                
+            }
+            
+            Button(action: {} ) {
+                
+                Text("Logout")
+                
+            }
+            
+            Spacer()
+
+        }
     }
 }
 

@@ -7,6 +7,9 @@
 
 import Foundation
 
+var WORKOUT_LOGGER_KEYCHAIN_SERVICE = "token"
+var WORKOUT_LOGGER_KEYCHAIN_ACCOUNT = "com.neil.workout-logger"
+
 protocol KeychainServiceProtocol {
     func save<T>(_ item: T, service: String, account: String) where T : Codable
     func read<T>(service: String, account: String, type: T.Type) -> T? where T : Codable

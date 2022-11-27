@@ -34,7 +34,7 @@ class SignupViewModel: ObservableObject {
                     refreshToken: result.data.refreshToken
                 )
                 self.error = ""
-                self.keychain.save(tokens, service: "token", account: "com.neil.workout-logger")
+                self.keychain.save(tokens, service: WORKOUT_LOGGER_KEYCHAIN_SERVICE, account: WORKOUT_LOGGER_KEYCHAIN_ACCOUNT)
                 setAuth(true)
             case .failure(let err):
                 self.error = err.error

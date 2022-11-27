@@ -6,10 +6,7 @@
 //
 
 import Foundation
-
-struct GraphQLError: Error {
-    var error = ""
-}
+import Apollo
 
 struct SignupResult {
     var data = SignupMutation.Data.Signup.AsAuthSuccess(refreshToken: "", accessToken: "")
@@ -17,4 +14,8 @@ struct SignupResult {
 
 struct LoginResult {
     var data = LoginMutation.Data.Login.AsAuthSuccess(refreshToken: "", accessToken: "")
+}
+
+struct RefreshAccessTokenResult {
+    var accessToken: String
 }

@@ -10,19 +10,24 @@ import SwiftUI
 struct HomeTabView: View {
     var body: some View {
         TabView {
+            Group {
+                
             WorkoutSessionListView()
                 .tabItem {
-                    Label("Workout Sessions", systemImage: "tray.and.arrow.down.fill")
+                    Label("Workouts", systemImage: "tray.and.arrow.down.fill")
                 }
             WorkoutListView()
                 .tabItem {
-                    Label("Workouts", systemImage: "tray.and.arrow.up.fill")
+                    Label("Routines", systemImage: "tray.and.arrow.up.fill")
                 }
             ProfileView()
                 .tabItem {
                     Label("Profile", systemImage: "tray.and.arrow.up.fill")
                 }
             }
+            .toolbar(.visible, for: .tabBar)
+            .toolbarBackground(Color.yellow, for: .tabBar)
+        }
         }
     }
 
