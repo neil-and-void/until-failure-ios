@@ -4,6 +4,178 @@
 import Apollo
 import Foundation
 
+public struct WorkoutRoutineInput: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - name
+  ///   - exerciseRoutines
+  public init(name: String, exerciseRoutines: Swift.Optional<[ExerciseRoutineInput?]?> = nil) {
+    graphQLMap = ["name": name, "exerciseRoutines": exerciseRoutines]
+  }
+
+  public var name: String {
+    get {
+      return graphQLMap["name"] as! String
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "name")
+    }
+  }
+
+  public var exerciseRoutines: Swift.Optional<[ExerciseRoutineInput?]?> {
+    get {
+      return graphQLMap["exerciseRoutines"] as? Swift.Optional<[ExerciseRoutineInput?]?> ?? Swift.Optional<[ExerciseRoutineInput?]?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "exerciseRoutines")
+    }
+  }
+}
+
+public struct ExerciseRoutineInput: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - name
+  ///   - sets
+  ///   - reps
+  public init(name: String, sets: Int, reps: Int) {
+    graphQLMap = ["name": name, "sets": sets, "reps": reps]
+  }
+
+  public var name: String {
+    get {
+      return graphQLMap["name"] as! String
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "name")
+    }
+  }
+
+  public var sets: Int {
+    get {
+      return graphQLMap["sets"] as! Int
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sets")
+    }
+  }
+
+  public var reps: Int {
+    get {
+      return graphQLMap["reps"] as! Int
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "reps")
+    }
+  }
+}
+
+public final class CreateWorkoutRoutineMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
+  public let operationDefinition: String =
+    """
+    mutation CreateWorkoutRoutine($routine: WorkoutRoutineInput!) {
+      createWorkoutRoutine(routine: $routine) {
+        __typename
+        id
+        name
+      }
+    }
+    """
+
+  public let operationName: String = "CreateWorkoutRoutine"
+
+  public var routine: WorkoutRoutineInput
+
+  public init(routine: WorkoutRoutineInput) {
+    self.routine = routine
+  }
+
+  public var variables: GraphQLMap? {
+    return ["routine": routine]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["Mutation"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("createWorkoutRoutine", arguments: ["routine": GraphQLVariable("routine")], type: .nonNull(.object(CreateWorkoutRoutine.selections))),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(createWorkoutRoutine: CreateWorkoutRoutine) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "createWorkoutRoutine": createWorkoutRoutine.resultMap])
+    }
+
+    public var createWorkoutRoutine: CreateWorkoutRoutine {
+      get {
+        return CreateWorkoutRoutine(unsafeResultMap: resultMap["createWorkoutRoutine"]! as! ResultMap)
+      }
+      set {
+        resultMap.updateValue(newValue.resultMap, forKey: "createWorkoutRoutine")
+      }
+    }
+
+    public struct CreateWorkoutRoutine: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["WorkoutRoutine"]
+
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+          GraphQLField("name", type: .nonNull(.scalar(String.self))),
+        ]
+      }
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(id: GraphQLID, name: String) {
+        self.init(unsafeResultMap: ["__typename": "WorkoutRoutine", "id": id, "name": name])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var id: GraphQLID {
+        get {
+          return resultMap["id"]! as! GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
+        }
+      }
+
+      public var name: String {
+        get {
+          return resultMap["name"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "name")
+        }
+      }
+    }
+  }
+}
+
 public final class LoginMutation: GraphQLMutation {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
