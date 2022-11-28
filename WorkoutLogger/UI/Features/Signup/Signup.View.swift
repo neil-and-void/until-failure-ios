@@ -43,7 +43,7 @@ struct SignupView: View {
                 .padding()
                 .background(.thinMaterial)
                 .cornerRadius(10)
-                .padding(.bottom, 30)
+                .padding(.bottom, 15)
             
             Button(action: { signupViewModel.submit(setAuth: authState.setAuth) }) {
                 if signupViewModel.isLoading {
@@ -52,16 +52,14 @@ struct SignupView: View {
                     Text("Create account").bold()
                 }
             }
-            .padding()
-            .background(.thinMaterial)
-            .cornerRadius(10)
-            .padding(.bottom, 15)
-        }
+            .buttonStyle(RoundedButton())
+
+        }.padding()
     }
 }
 
 struct Signup_Previews: PreviewProvider {
     static var previews: some View {
-        SignupView()
+        SignupView().preferredColorScheme(.dark)
     }
 }

@@ -12,17 +12,22 @@
 		2809EF662926F10C00D0FF5B /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2809EF652926F10C00D0FF5B /* AuthService.swift */; };
 		280B6A3729297D8A004D0F16 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B6A3629297D8A004D0F16 /* KeychainService.swift */; };
 		280B6A3929297FAA004D0F16 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B6A3829297FAA004D0F16 /* Auth.swift */; };
+		2841B8382934793B00B4AC76 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2841B8372934793B00B4AC76 /* ButtonStyles.swift */; };
+		2841B83C29347D1B00B4AC76 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2841B83B29347D1B00B4AC76 /* CustomColors.swift */; };
 		2848C0312926289700277523 /* Signup.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2848C0302926289700277523 /* Signup.graphql */; };
+		2848D8062933161F001E8CD0 /* WorkoutRoutinesFull.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 2848D8052933161F001E8CD0 /* WorkoutRoutinesFull.graphql */; };
+		2848D808293316A3001E8CD0 /* CreateWorkoutRoutine.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2848D807293316A3001E8CD0 /* CreateWorkoutRoutine.graphql */; };
+		2848D80A2933414E001E8CD0 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2848D8092933414D001E8CD0 /* API.swift */; };
 		28533294292ABBE700BACB6A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28533293292ABBE700BACB6A /* ContentView.swift */; };
 		28533296292ABD7A00BACB6A /* HomeTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28533295292ABD7A00BACB6A /* HomeTabView.swift */; };
 		2853329A292ABE3400BACB6A /* WorkoutSessionList.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28533299292ABE3300BACB6A /* WorkoutSessionList.View.swift */; };
 		2853329C292ABE4300BACB6A /* WorkoutList.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2853329B292ABE4300BACB6A /* WorkoutList.View.swift */; };
 		2853329F292ABF8D00BACB6A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2853329E292ABF8D00BACB6A /* ProfileView.swift */; };
-		285332A2292AE9A000BACB6A /* AuthenticationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285332A1292AE9A000BACB6A /* AuthenticationState.swift */; };
+		285332A2292AE9A000BACB6A /* AuthenticationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285332A1292AE9A000BACB6A /* AuthenticationProvider.swift */; };
 		2858C563292B4088008DEA17 /* CreateWorkout.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2858C562292B4088008DEA17 /* CreateWorkout.View.swift */; };
 		2858C565292B412D008DEA17 /* CreateWorkout.ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2858C564292B412D008DEA17 /* CreateWorkout.ViewModel.swift */; };
 		2858C567292C0673008DEA17 /* WorkoutLoggerAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2858C566292C0673008DEA17 /* WorkoutLoggerAPIService.swift */; };
-		2858C56B292D4F69008DEA17 /* WorkoutList.ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2858C56A292D4F68008DEA17 /* WorkoutList.ViewModel.swift */; };
+		2858C56B292D4F69008DEA17 /* Workout.ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2858C56A292D4F68008DEA17 /* Workout.ViewModel.swift */; };
 		2858C574292D67FB008DEA17 /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2858C573292D67FB008DEA17 /* Interceptor.swift */; };
 		2858C576292D6918008DEA17 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2858C575292D6918008DEA17 /* Client.swift */; };
 		2885F1CA292740C9007D65A5 /* WorkoutLoggerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2885F1C9292740C9007D65A5 /* WorkoutLoggerApp.swift */; };
@@ -39,10 +44,9 @@
 		289CFDF1292836C100BE6773 /* Login.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289CFDF0292836C100BE6773 /* Login.View.swift */; };
 		289CFDF3292836D400BE6773 /* Login.ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289CFDF2292836D400BE6773 /* Login.ViewModel.swift */; };
 		289CFDFA2928458E00BE6773 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 289CFDF82928458D00BE6773 /* schema.json */; };
-		289CFDFE292859BB00BE6773 /* ResultTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289CFDFD292859BB00BE6773 /* ResultTypes.swift */; };
+		289CFDFE292859BB00BE6773 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289CFDFD292859BB00BE6773 /* Types.swift */; };
 		28C2EDFF292DA5C1000BE3EB /* InterceptorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2EDFE292DA5C1000BE3EB /* InterceptorProvider.swift */; };
 		28C2EE03292DA902000BE3EB /* RefreshMutation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 28C2EE02292DA902000BE3EB /* RefreshMutation.graphql */; };
-		28C2EE05292DAA22000BE3EB /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2EE04292DAA22000BE3EB /* API.swift */; };
 		28C2EE07292DF2E4000BE3EB /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2EE06292DF2E4000BE3EB /* Errors.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,17 +73,22 @@
 		2809EF652926F10C00D0FF5B /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		280B6A3629297D8A004D0F16 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		280B6A3829297FAA004D0F16 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
+		2841B8372934793B00B4AC76 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
+		2841B83B29347D1B00B4AC76 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
 		2848C0302926289700277523 /* Signup.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Signup.graphql; sourceTree = "<group>"; };
+		2848D8052933161F001E8CD0 /* WorkoutRoutinesFull.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = WorkoutRoutinesFull.graphql; sourceTree = "<group>"; };
+		2848D807293316A3001E8CD0 /* CreateWorkoutRoutine.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = CreateWorkoutRoutine.graphql; sourceTree = "<group>"; };
+		2848D8092933414D001E8CD0 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = API.swift; path = ../../../../../Desktop/API.swift; sourceTree = "<group>"; };
 		28533293292ABBE700BACB6A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		28533295292ABD7A00BACB6A /* HomeTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabView.swift; sourceTree = "<group>"; };
 		28533299292ABE3300BACB6A /* WorkoutSessionList.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSessionList.View.swift; sourceTree = "<group>"; };
 		2853329B292ABE4300BACB6A /* WorkoutList.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutList.View.swift; sourceTree = "<group>"; };
 		2853329E292ABF8D00BACB6A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		285332A1292AE9A000BACB6A /* AuthenticationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationState.swift; sourceTree = "<group>"; };
+		285332A1292AE9A000BACB6A /* AuthenticationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationProvider.swift; sourceTree = "<group>"; };
 		2858C562292B4088008DEA17 /* CreateWorkout.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWorkout.View.swift; sourceTree = "<group>"; };
 		2858C564292B412D008DEA17 /* CreateWorkout.ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWorkout.ViewModel.swift; sourceTree = "<group>"; };
 		2858C566292C0673008DEA17 /* WorkoutLoggerAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLoggerAPIService.swift; sourceTree = "<group>"; };
-		2858C56A292D4F68008DEA17 /* WorkoutList.ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutList.ViewModel.swift; sourceTree = "<group>"; };
+		2858C56A292D4F68008DEA17 /* Workout.ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.ViewModel.swift; sourceTree = "<group>"; };
 		2858C573292D67FB008DEA17 /* Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
 		2858C575292D6918008DEA17 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		2885F1C9292740C9007D65A5 /* WorkoutLoggerApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WorkoutLoggerApp.swift; path = WorkoutLogger/UI/WorkoutLoggerApp.swift; sourceTree = SOURCE_ROOT; };
@@ -98,10 +107,9 @@
 		289CFDF0292836C100BE6773 /* Login.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.View.swift; sourceTree = "<group>"; };
 		289CFDF2292836D400BE6773 /* Login.ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.ViewModel.swift; sourceTree = "<group>"; };
 		289CFDF82928458D00BE6773 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
-		289CFDFD292859BB00BE6773 /* ResultTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTypes.swift; sourceTree = "<group>"; };
+		289CFDFD292859BB00BE6773 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		28C2EDFE292DA5C1000BE3EB /* InterceptorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterceptorProvider.swift; sourceTree = "<group>"; };
 		28C2EE02292DA902000BE3EB /* RefreshMutation.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = RefreshMutation.graphql; sourceTree = "<group>"; };
-		28C2EE04292DAA22000BE3EB /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = API.swift; path = WorkoutLogger/API.swift; sourceTree = SOURCE_ROOT; };
 		28C2EE06292DF2E4000BE3EB /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -148,6 +156,7 @@
 		2809EF562926EA4700D0FF5B /* General */ = {
 			isa = PBXGroup;
 			children = (
+				2841B8372934793B00B4AC76 /* ButtonStyles.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -157,9 +166,10 @@
 			children = (
 				2895BB4B292626A500A16CF8 /* WorkoutLoggerApp.swift */,
 				28533293292ABBE700BACB6A /* ContentView.swift */,
-				285332A1292AE9A000BACB6A /* AuthenticationState.swift */,
+				285332A1292AE9A000BACB6A /* AuthenticationProvider.swift */,
 				2809EF562926EA4700D0FF5B /* General */,
 				2809EF552926EA3E00D0FF5B /* Features */,
+				2841B83B29347D1B00B4AC76 /* CustomColors.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -176,7 +186,7 @@
 		2809EF642926F0FE00D0FF5B /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				28C2EE04292DAA22000BE3EB /* API.swift */,
+				2848D8092933414D001E8CD0 /* API.swift */,
 				2858C572292D67DE008DEA17 /* Apollo */,
 				289CFDFC2928598B00BE6773 /* Types */,
 				289CFDF429283A9C00BE6773 /* Services */,
@@ -193,6 +203,14 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		2848D80429331603001E8CD0 /* Fragments */ = {
+			isa = PBXGroup;
+			children = (
+				2848D8052933161F001E8CD0 /* WorkoutRoutinesFull.graphql */,
+			);
+			name = Fragments;
+			sourceTree = "<group>";
+		};
 		28533297292ABDB200BACB6A /* WorkoutSessions */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,7 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				2853329B292ABE4300BACB6A /* WorkoutList.View.swift */,
-				2858C56A292D4F68008DEA17 /* WorkoutList.ViewModel.swift */,
+				2858C56A292D4F68008DEA17 /* Workout.ViewModel.swift */,
 			);
 			path = Workouts;
 			sourceTree = "<group>";
@@ -297,6 +315,7 @@
 		2895BB7D292627ED00A16CF8 /* Graqhql */ = {
 			isa = PBXGroup;
 			children = (
+				2848D80429331603001E8CD0 /* Fragments */,
 				2895BB7F2926280500A16CF8 /* Queries */,
 				2895BB7E292627FE00A16CF8 /* Mutations */,
 				2895BB792926271500A16CF8 /* schema.graphqls */,
@@ -311,6 +330,7 @@
 				2848C0302926289700277523 /* Signup.graphql */,
 				289CFDED2928327F00BE6773 /* LoginMutation.graphql */,
 				28C2EE02292DA902000BE3EB /* RefreshMutation.graphql */,
+				2848D807293316A3001E8CD0 /* CreateWorkoutRoutine.graphql */,
 			);
 			path = Mutations;
 			sourceTree = "<group>";
@@ -336,8 +356,8 @@
 			isa = PBXGroup;
 			children = (
 				2809EF652926F10C00D0FF5B /* AuthService.swift */,
-				280B6A3629297D8A004D0F16 /* KeychainService.swift */,
 				2858C566292C0673008DEA17 /* WorkoutLoggerAPIService.swift */,
+				280B6A3629297D8A004D0F16 /* KeychainService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -346,7 +366,7 @@
 			isa = PBXGroup;
 			children = (
 				28C2EE06292DF2E4000BE3EB /* Errors.swift */,
-				289CFDFD292859BB00BE6773 /* ResultTypes.swift */,
+				289CFDFD292859BB00BE6773 /* Types.swift */,
 				280B6A3829297FAA004D0F16 /* Auth.swift */,
 			);
 			path = Types;
@@ -469,6 +489,7 @@
 				2848C0312926289700277523 /* Signup.graphql in Resources */,
 				28C2EE03292DA902000BE3EB /* RefreshMutation.graphql in Resources */,
 				2895BB7A2926271500A16CF8 /* schema.graphqls in Resources */,
+				2848D808293316A3001E8CD0 /* CreateWorkoutRoutine.graphql in Resources */,
 				2895BB50292626A600A16CF8 /* Assets.xcassets in Resources */,
 				2895BB7C292627B900A16CF8 /* WorkoutRoutines.graphql in Resources */,
 			);
@@ -518,11 +539,13 @@
 			files = (
 				2858C563292B4088008DEA17 /* CreateWorkout.View.swift in Sources */,
 				289CFDF1292836C100BE6773 /* Login.View.swift in Sources */,
+				2841B83C29347D1B00B4AC76 /* CustomColors.swift in Sources */,
 				2858C567292C0673008DEA17 /* WorkoutLoggerAPIService.swift in Sources */,
 				2809EF662926F10C00D0FF5B /* AuthService.swift in Sources */,
 				2853329C292ABE4300BACB6A /* WorkoutList.View.swift in Sources */,
 				2853329F292ABF8D00BACB6A /* ProfileView.swift in Sources */,
-				285332A2292AE9A000BACB6A /* AuthenticationState.swift in Sources */,
+				2848D80A2933414E001E8CD0 /* API.swift in Sources */,
+				285332A2292AE9A000BACB6A /* AuthenticationProvider.swift in Sources */,
 				2858C565292B412D008DEA17 /* CreateWorkout.ViewModel.swift in Sources */,
 				28533294292ABBE700BACB6A /* ContentView.swift in Sources */,
 				2885F1CA292740C9007D65A5 /* WorkoutLoggerApp.swift in Sources */,
@@ -531,15 +554,16 @@
 				2858C576292D6918008DEA17 /* Client.swift in Sources */,
 				28533296292ABD7A00BACB6A /* HomeTabView.swift in Sources */,
 				28C2EDFF292DA5C1000BE3EB /* InterceptorProvider.swift in Sources */,
-				2858C56B292D4F69008DEA17 /* WorkoutList.ViewModel.swift in Sources */,
+				2841B8382934793B00B4AC76 /* ButtonStyles.swift in Sources */,
+				2848D8062933161F001E8CD0 /* WorkoutRoutinesFull.graphql in Sources */,
+				2858C56B292D4F69008DEA17 /* Workout.ViewModel.swift in Sources */,
 				28C2EE07292DF2E4000BE3EB /* Errors.swift in Sources */,
 				2853329A292ABE3400BACB6A /* WorkoutSessionList.View.swift in Sources */,
 				2809EF5D2926EDA100D0FF5B /* Signup.ViewModel.swift in Sources */,
 				2858C574292D67FB008DEA17 /* Interceptor.swift in Sources */,
 				280B6A3929297FAA004D0F16 /* Auth.swift in Sources */,
 				2809EF5B2926EB0200D0FF5B /* Signup.View.swift in Sources */,
-				289CFDFE292859BB00BE6773 /* ResultTypes.swift in Sources */,
-				28C2EE05292DAA22000BE3EB /* API.swift in Sources */,
+				289CFDFE292859BB00BE6773 /* Types.swift in Sources */,
 				2895BB4C292626A500A16CF8 /* WorkoutLoggerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

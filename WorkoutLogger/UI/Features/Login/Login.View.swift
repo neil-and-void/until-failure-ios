@@ -42,35 +42,40 @@ struct LoginView: View {
                 } else {
                     Text("Login").bold()
                 }
-            }
-            .padding()
-            .background(.thinMaterial)
-            .cornerRadius(10)
-            .padding(.bottom, 15)
+            }.buttonStyle(RoundedButton())
             
-            Button("Create an account") {
-                showSheet.toggle()
+            Button(action: { showSheet.toggle() }) {
+                Text("Create an account")
             }
+            .buttonStyle(TextButton())
             .sheet(isPresented: $showSheet) {
                 ZStack {
                     HStack {
                         VStack(alignment: .leading) {
+                            
                             Button(action: { showSheet.toggle()}) {
-                                Text("Cancel").padding()
+                                Text("Cancel")
                             }
+                            .buttonStyle(TextButton())
+                            .padding()
+ 
                             Spacer()
                         }
+                        
                         Spacer()
                     }
+                    
                     SignupView()
-                }
+
+                }.preferredColorScheme(.dark)
+
             }
-        }
+        }.padding()
     }
 }
 
 struct Login_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView().environmentObject(AuthenticationState())
+        LoginView().environmentObject(AuthenticationState()).preferredColorScheme(.dark)
     }
 }

@@ -25,11 +25,9 @@ struct HomeTabView: View {
                     Label("Profile", systemImage: "tray.and.arrow.up.fill")
                 }
             }
-            .toolbar(.visible, for: .tabBar)
-            .toolbarBackground(Color.yellow, for: .tabBar)
-        }
         }
     }
+}
 
 
 struct HomeTabView_Previews: PreviewProvider {

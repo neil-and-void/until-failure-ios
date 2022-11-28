@@ -13,7 +13,7 @@ struct ProfileView: View {
             
             HStack {
                 
-                Text("Name")
+                Text("Name:")
                 
                 Spacer()
                 
@@ -23,7 +23,7 @@ struct ProfileView: View {
             
             HStack {
                 
-                Text("Email")
+                Text("Email:")
                 
                 Spacer()
                 
@@ -35,16 +35,16 @@ struct ProfileView: View {
                 
                 Text("Logout")
                 
-            }
+            }.buttonStyle(RoundedButton())
             
             Spacer()
 
-        }
+        }.padding()
     }
 }
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        ProfileView().preferredColorScheme(.dark)
     }
 }
