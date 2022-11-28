@@ -62,7 +62,6 @@ final class AuthService: AuthServiceProtocol {
                 }
                 completion(Result.success(LoginResult(data: (response.data?.login.asAuthSuccess)!)))
             case .failure(let error):
-                // Network error
                 completion(Result.failure(GraphQLError(error: error.localizedDescription)))
             }
         }

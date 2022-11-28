@@ -1,5 +1,5 @@
 //
-//  WorkoutList.ViewModel.swift
+//  Workout.ViewModel.swift
 //  WorkoutLogger
 //
 //  Created by Neil Viloria on 2022-11-22.
@@ -11,7 +11,7 @@ class WorkoutViewModel: ObservableObject {
     private let service: WorkoutLoggerAPIServiceProtocol
    
     @Published var error: String = ""
-//    @Published var workoutRoutineList: WorkoutRoutinesResult
+    @Published var workoutRoutineList: [WorkoutRoutinesFull] = []
     
     init(service: WorkoutLoggerAPIServiceProtocol) {
         self.service = service
@@ -19,14 +19,12 @@ class WorkoutViewModel: ObservableObject {
     
     func getWorkoutRoutines() {
         self.service.getWorkoutRoutines() { result in
-            print(result)
             switch result {
             case .success(let workoutRoutines):
                 self.error = ""
-                print(workoutRoutines)
+                self.workoutRoutineList = workoutRoutines
             case .failure(let err):
                 self.error = err.error
-                print(err.error)
             }
         }
     }
