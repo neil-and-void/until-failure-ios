@@ -47,6 +47,7 @@
 		289CFDFE292859BB00BE6773 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289CFDFD292859BB00BE6773 /* Types.swift */; };
 		28B0E8802935A37D0093601C /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B0E87F2935A37D0093601C /* LoginViewModelTests.swift */; };
 		28B0E8812935A7310093601C /* MockServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B0E87B2935A22B0093601C /* MockServices.swift */; };
+		28B0E8832935C6290093601C /* SignupViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B0E8822935C6290093601C /* SignupViewModelTests.swift */; };
 		28C2EDFF292DA5C1000BE3EB /* InterceptorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2EDFE292DA5C1000BE3EB /* InterceptorProvider.swift */; };
 		28C2EE03292DA902000BE3EB /* RefreshMutation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 28C2EE02292DA902000BE3EB /* RefreshMutation.graphql */; };
 		28C2EE07292DF2E4000BE3EB /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2EE06292DF2E4000BE3EB /* Errors.swift */; };
@@ -112,6 +113,7 @@
 		289CFDFD292859BB00BE6773 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		28B0E87B2935A22B0093601C /* MockServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockServices.swift; sourceTree = "<group>"; };
 		28B0E87F2935A37D0093601C /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
+		28B0E8822935C6290093601C /* SignupViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModelTests.swift; sourceTree = "<group>"; };
 		28C2EDFE292DA5C1000BE3EB /* InterceptorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterceptorProvider.swift; sourceTree = "<group>"; };
 		28C2EE02292DA902000BE3EB /* RefreshMutation.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = RefreshMutation.graphql; sourceTree = "<group>"; };
 		28C2EE06292DF2E4000BE3EB /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 			isa = PBXGroup;
 			children = (
 				28B0E87F2935A37D0093601C /* LoginViewModelTests.swift */,
+				28B0E8822935C6290093601C /* SignupViewModelTests.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -605,6 +608,7 @@
 			files = (
 				28B0E8802935A37D0093601C /* LoginViewModelTests.swift in Sources */,
 				28B0E8812935A7310093601C /* MockServices.swift in Sources */,
+				28B0E8832935C6290093601C /* SignupViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,24 +20,31 @@ final class LoginViewModelTests: XCTestCase {
 
     func testLoginSuccess() {
         loginViewModel.submit(setAuth: { result in })
+
+        XCTAssertNil(loginViewModel.error)
     }
     
     func testLoginFailed_NetworkError() {
         mockAuthService.authResult = .failure(APIError.networkError)
 
         loginViewModel.submit(setAuth: { result in })
+
+        XCTAssertEqual(APIError.networkError.localizedDescription, loginViewModel.error)
     }
     
     func testLoginFailed_GraphQLError() {
         mockAuthService.authResult = .failure(APIError.GraphQLError(gqlError: "graphql error"))
 
         loginViewModel.submit(setAuth: { result in })
+
+        XCTAssertEqual(APIError.GraphQLError(gqlError: "graphql error").localizedDescription, loginViewModel.error)
     }
     
     func testLoginFailed_UnknownError() {
         mockAuthService.authResult = .failure(APIError.unknown)
 
         loginViewModel.submit(setAuth: { result in })
-    }
 
+        XCTAssertEqual(APIError.unknown.localizedDescription, loginViewModel.error)
+    }
 }
