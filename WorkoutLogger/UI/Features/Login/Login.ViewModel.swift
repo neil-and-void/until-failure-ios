@@ -28,16 +28,20 @@ class LoginViewModel: ObservableObject {
             switch result {
             case .success(let result):
                 let tokens = AuthTokens(
-                    accessToken: result.data.accessToken,
-                    refreshToken: result.data.refreshToken
+                    accessToken: result.accessToken,
+                    refreshToken: result.refreshToken
                 )
+                
                 self.error = nil
                 self.keychain.save(tokens, service: WORKOUT_LOGGER_KEYCHAIN_SERVICE, account: WORKOUT_LOGGER_KEYCHAIN_ACCOUNT)
+                
                 setAuth(true)
+
             case .failure(let err):
                 self.error = err.localizedDescription
                 setAuth(false)
             }
+
             self.isLoading = false
         }
     }

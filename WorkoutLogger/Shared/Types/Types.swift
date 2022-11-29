@@ -8,14 +8,7 @@
 import Foundation
 import Apollo
 
-struct SignupResult {
-    var data = SignupMutation.Data.Signup.AsAuthSuccess(refreshToken: "", accessToken: "")
-}
-
-struct LoginResult {
-    var data = LoginMutation.Data.Login.AsAuthSuccess(refreshToken: "", accessToken: "")
-}
-
-struct RefreshAccessTokenResult {
+struct AuthResult {
+    var refreshToken: String
     var accessToken: String
 }

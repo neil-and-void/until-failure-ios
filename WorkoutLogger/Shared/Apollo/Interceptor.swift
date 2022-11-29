@@ -81,6 +81,9 @@ class RefreshTokenInterceptor: ApolloInterceptor {
         self.authService = authService
     }
     
+    /*
+     intercepts an unauthorized response and attempts to refresh the access token
+     */
     func interceptAsync<Operation>(
         chain: Apollo.RequestChain,
         request: Apollo.HTTPRequest<Operation>,
@@ -118,7 +121,7 @@ class RefreshTokenInterceptor: ApolloInterceptor {
                 switch result {
                 case .success(let result):
                     let tokens = AuthTokens(
-                        accessToken: result.accessToken,
+                        accessToken: result,
                         refreshToken: tokens!.refreshToken
                     )
                     self.keychainService.save(

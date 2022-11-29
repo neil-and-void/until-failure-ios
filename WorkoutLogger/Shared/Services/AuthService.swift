@@ -9,9 +9,9 @@ import Foundation
 import Apollo
 
 protocol AuthServiceProtocol {
-    func signup(email: String, name: String, password: String, confirmPassword: String, completion: @escaping (Result<SignupResult, APIError>) -> Void)
-    func login(email: String, password: String, completion: @escaping (Result<LoginResult, APIError>) -> Void)
-    func refreshAccessToken(refreshToken: String, completion: @escaping (Result<RefreshAccessTokenResult, APIError>) -> Void)
+    func signup(email: String, name: String, password: String, confirmPassword: String, completion: @escaping (Result<AuthResult, APIError>) -> Void)
+    func login(email: String, password: String, completion: @escaping (Result<AuthResult, APIError>) -> Void)
+    func refreshAccessToken(refreshToken: String, completion: @escaping (Result<String, APIError>) -> Void)
 }
 
 final class AuthService: AuthServiceProtocol {
@@ -26,7 +26,7 @@ final class AuthService: AuthServiceProtocol {
         name: String,
         password: String,
         confirmPassword: String,
-        completion: @escaping (Result<SignupResult, APIError>) -> Void
+        completion: @escaping (Result<AuthResult, APIError>) -> Void
     ) {
         self.client.perform(mutation: SignupMutation(
             email: email,
@@ -41,7 +41,15 @@ final class AuthService: AuthServiceProtocol {
                     completion(Result.failure(error))
                     return
                 }
-                completion(Result.success(SignupResult(data: (response.data?.signup.asAuthSuccess)!)))
+                
+                if let tokens = response.data?.signup.asAuthSuccess {
+                    let authResult = AuthResult(refreshToken: tokens.refreshToken, accessToken: tokens.accessToken)
+                    completion(Result.success(authResult))
+                    return
+                }
+                
+                return completion(Result.failure(APIError.unknown))
+                
             case .failure:
                 completion(Result.failure(APIError.networkError))
             }
@@ -51,7 +59,7 @@ final class AuthService: AuthServiceProtocol {
     func login(
         email: String,
         password: String,
-        completion: @escaping (Result<LoginResult, APIError>) -> Void
+        completion: @escaping (Result<AuthResult, APIError>) -> Void
     ) {
         self.client.perform(mutation: LoginMutation(email: email, password: password)) { result in
             switch result {
@@ -61,14 +69,23 @@ final class AuthService: AuthServiceProtocol {
                     completion(Result.failure(error))
                     return
                 }
-                completion(Result.success(LoginResult(data: (response.data?.login.asAuthSuccess)!)))
+                
+                if let tokens = response.data?.login.asAuthSuccess {
+                    let authResult = AuthResult(refreshToken: tokens.refreshToken, accessToken: tokens.accessToken)
+                    completion(Result.success(authResult))
+                    return
+                }
+               
+                // if we get here irdk whats going on
+                return completion(Result.failure(APIError.unknown))
+                
             case .failure:
                 completion(Result.failure(APIError.networkError))
             }
         }
     }
     
-    func refreshAccessToken(refreshToken: String, completion: @escaping (Result<RefreshAccessTokenResult, APIError>) -> Void) {
+    func refreshAccessToken(refreshToken: String, completion: @escaping (Result<String, APIError>) -> Void) {
         self.client.perform(mutation: RefreshAccessTokenMutation(refreshToken: "Bearer " + refreshToken)) { result in
             switch result {
             case .success(let response):
@@ -77,7 +94,14 @@ final class AuthService: AuthServiceProtocol {
                     completion(Result.failure(error))
                     return
                 }
-                completion(Result.success(RefreshAccessTokenResult(accessToken: (response.data?.refreshAccessToken.accessToken)!)))
+
+                if let accessToken = response.data?.refreshAccessToken.accessToken {
+                    completion(Result.success(accessToken))
+                    return
+                }
+               
+                return completion(Result.failure(APIError.unknown))
+                
             case .failure:
                 completion(Result.failure(APIError.networkError))
             }
