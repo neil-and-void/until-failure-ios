@@ -13,17 +13,13 @@ struct CreateWorkoutView: View {
     @State private var showSheet = false
     
     var body: some View {
-        HStack {
-            
-            Spacer()
-            
+
             Button(action: { showSheet.toggle() }) {
                 
                 Text("Create Workout +")
 
             }
             .buttonStyle(TextButton())
-            .padding()
             .sheet(isPresented: $showSheet) {
                 
                 ZStack {
@@ -50,8 +46,8 @@ struct CreateWorkoutView: View {
                         Text("Give your workout routine a name")
                             .padding()
                         
-                        if createWorkoutViewModel.error.count > 0 {
-                            Text(createWorkoutViewModel.error)
+                        if let error = createWorkoutViewModel.error {
+                            Text(error)
                                 .foregroundColor(.red)
                                 .multilineTextAlignment(.center)
                         }
@@ -76,7 +72,6 @@ struct CreateWorkoutView: View {
                 
             }
             
-        }
     }
 }
 

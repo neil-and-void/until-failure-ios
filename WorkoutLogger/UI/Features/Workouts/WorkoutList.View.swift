@@ -12,14 +12,24 @@ struct WorkoutListView: View {
     
     var body: some View {
         VStack {
-            
-            CreateWorkoutView()
+            HStack {
+                Text("Workouts")
+                    .font(.title)
+                    .fontWeight(.bold)
+                
+                Spacer()
+                
+                CreateWorkoutView()
+            }.padding(.horizontal)
             
             List(workoutListViewModel.workoutRoutineList, id: \.id) { workoutRoutine in
+                
                 Text(workoutRoutine.name)
                 
-            }.onAppear(perform: workoutListViewModel.getWorkoutRoutines)
-           
+            }
+            .onAppear(perform: workoutListViewModel.getWorkoutRoutines)
+            .refreshable(action: { workoutListViewModel.getWorkoutRoutines() })
+ 
         }
     }
 }

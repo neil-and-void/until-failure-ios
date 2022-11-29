@@ -10,7 +10,7 @@ import Foundation
 class WorkoutViewModel: ObservableObject {
     private let service: WorkoutLoggerAPIServiceProtocol
    
-    @Published var error: String = ""
+    @Published var error: String?
     @Published var workoutRoutineList: [WorkoutRoutinesFull] = []
     
     init(service: WorkoutLoggerAPIServiceProtocol) {
@@ -21,10 +21,10 @@ class WorkoutViewModel: ObservableObject {
         self.service.getWorkoutRoutines() { result in
             switch result {
             case .success(let workoutRoutines):
-                self.error = ""
+                self.error = nil
                 self.workoutRoutineList = workoutRoutines
             case .failure(let err):
-                self.error = err.error
+                self.error = err.localizedDescription
             }
         }
     }

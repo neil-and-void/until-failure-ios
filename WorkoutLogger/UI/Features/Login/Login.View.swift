@@ -18,8 +18,8 @@ struct LoginView: View {
             Text("Login")
                 .font(.system(size: 36))
             
-            if loginViewModel.error.count > 0 {
-                Text(loginViewModel.error)
+            if let error = loginViewModel.error {
+                Text(error)
                     .foregroundColor(.red)
                     .multilineTextAlignment(.center)
             }

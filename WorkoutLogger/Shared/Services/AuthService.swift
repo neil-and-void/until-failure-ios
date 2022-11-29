@@ -9,9 +9,9 @@ import Foundation
 import Apollo
 
 protocol AuthServiceProtocol {
-    func signup(email: String, name: String, password: String, confirmPassword: String, completion: @escaping (Result<SignupResult, GraphQLError>) -> Void)
-    func login(email: String, password: String, completion: @escaping (Result<LoginResult, GraphQLError>) -> Void)
-    func refreshAccessToken(refreshToken: String, completion: @escaping (Result<RefreshAccessTokenResult, GraphQLError>) -> Void)
+    func signup(email: String, name: String, password: String, confirmPassword: String, completion: @escaping (Result<SignupResult, APIError>) -> Void)
+    func login(email: String, password: String, completion: @escaping (Result<LoginResult, APIError>) -> Void)
+    func refreshAccessToken(refreshToken: String, completion: @escaping (Result<RefreshAccessTokenResult, APIError>) -> Void)
 }
 
 final class AuthService: AuthServiceProtocol {
@@ -26,7 +26,7 @@ final class AuthService: AuthServiceProtocol {
         name: String,
         password: String,
         confirmPassword: String,
-        completion: @escaping (Result<SignupResult, GraphQLError>) -> Void
+        completion: @escaping (Result<SignupResult, APIError>) -> Void
     ) {
         self.client.perform(mutation: SignupMutation(
             email: email,
@@ -37,13 +37,13 @@ final class AuthService: AuthServiceProtocol {
             switch result {
             case .success(let response):
                 if let errors = response.errors {
-                    completion(Result.failure(GraphQLError(error: errors[0].message ?? "")))
+                    let error = APIError.GraphQLError(gqlError: errors[0].message)
+                    completion(Result.failure(error))
                     return
                 }
                 completion(Result.success(SignupResult(data: (response.data?.signup.asAuthSuccess)!)))
-            case .failure(let error):
-                // Network error
-                completion(Result.failure(GraphQLError(error: error.localizedDescription)))
+            case .failure:
+                completion(Result.failure(APIError.networkError))
             }
         }
     }
@@ -51,34 +51,35 @@ final class AuthService: AuthServiceProtocol {
     func login(
         email: String,
         password: String,
-        completion: @escaping (Result<LoginResult, GraphQLError>) -> Void
+        completion: @escaping (Result<LoginResult, APIError>) -> Void
     ) {
         self.client.perform(mutation: LoginMutation(email: email, password: password)) { result in
             switch result {
             case .success(let response):
                 if let errors = response.errors {
-                    completion(Result.failure(GraphQLError(error: errors[0].message ?? "")))
+                    let error = APIError.GraphQLError(gqlError: errors[0].message)
+                    completion(Result.failure(error))
                     return
                 }
                 completion(Result.success(LoginResult(data: (response.data?.login.asAuthSuccess)!)))
-            case .failure(let error):
-                completion(Result.failure(GraphQLError(error: error.localizedDescription)))
+            case .failure:
+                completion(Result.failure(APIError.networkError))
             }
         }
     }
     
-    func refreshAccessToken(refreshToken: String, completion: @escaping (Result<RefreshAccessTokenResult, GraphQLError>) -> Void) {
+    func refreshAccessToken(refreshToken: String, completion: @escaping (Result<RefreshAccessTokenResult, APIError>) -> Void) {
         self.client.perform(mutation: RefreshAccessTokenMutation(refreshToken: "Bearer " + refreshToken)) { result in
             switch result {
             case .success(let response):
                 if let errors = response.errors {
-                    completion(Result.failure(GraphQLError(error: errors[0].message ?? "")))
+                    let error = APIError.GraphQLError(gqlError: errors[0].message)
+                    completion(Result.failure(error))
                     return
                 }
                 completion(Result.success(RefreshAccessTokenResult(accessToken: (response.data?.refreshAccessToken.accessToken)!)))
-            case .failure(let error):
-                // Network error
-                completion(Result.failure(GraphQLError(error: error.localizedDescription)))
+            case .failure:
+                completion(Result.failure(APIError.networkError))
             }
 
         }

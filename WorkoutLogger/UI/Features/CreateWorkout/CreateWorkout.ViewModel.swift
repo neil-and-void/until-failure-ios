@@ -12,7 +12,7 @@ class CreateWorkoutViewModel: ObservableObject {
     
     @Published var workoutName: String = ""
     @Published var loading: Bool = false
-    @Published var error: String = ""
+    @Published var error: String?
     
     init(service: WorkoutLoggerAPIServiceProtocol) {
         self.service = service
@@ -23,10 +23,10 @@ class CreateWorkoutViewModel: ObservableObject {
         self.service.createWorkoutRoutine(name: self.workoutName) { result in
             switch result {
             case .success:
-                self.error = ""
+                self.error = nil
                 onCompletion(true)
             case .failure(let err):
-                self.error = err.error
+                self.error = err.localizedDescription
                 onCompletion(false)
             }
         }

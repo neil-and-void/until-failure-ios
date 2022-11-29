@@ -1,5 +1,5 @@
 //
-//  ResultTypes.swift
+//  Types.swift
 //  WorkoutLogger
 //
 //  Created by Neil Viloria on 2022-11-18.

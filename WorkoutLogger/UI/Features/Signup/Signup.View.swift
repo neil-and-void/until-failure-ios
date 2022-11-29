@@ -16,8 +16,8 @@ struct SignupView: View {
             Text("Signup")
                 .font(.system(size: 36))
             
-            if signupViewModel.error.count > 0 {
-                Text(signupViewModel.error)
+            if let error = signupViewModel.error {
+                Text(error)
                     .foregroundColor(.red)
                     .multilineTextAlignment(.center)
             }

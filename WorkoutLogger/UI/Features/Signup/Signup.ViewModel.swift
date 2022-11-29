@@ -17,7 +17,7 @@ class SignupViewModel: ObservableObject {
     @Published var confirmPassword: String = ""
     
     @Published var isLoading: Bool = false
-    @Published var error: String = ""
+    @Published var error: String?
     
     init(service: AuthServiceProtocol, keychain: KeychainServiceProtocol = KeychainService()) {
         self.service = service
@@ -33,11 +33,11 @@ class SignupViewModel: ObservableObject {
                     accessToken: result.data.accessToken,
                     refreshToken: result.data.refreshToken
                 )
-                self.error = ""
+                self.error = nil
                 self.keychain.save(tokens, service: WORKOUT_LOGGER_KEYCHAIN_SERVICE, account: WORKOUT_LOGGER_KEYCHAIN_ACCOUNT)
                 setAuth(true)
             case .failure(let err):
-                self.error = err.error
+                self.error = err.localizedDescription
                 setAuth(false)
             }
             self.isLoading = false

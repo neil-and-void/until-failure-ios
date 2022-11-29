@@ -9,8 +9,8 @@ import SwiftUI
 import Apollo
 
 protocol WorkoutLoggerAPIServiceProtocol {
-    func getWorkoutRoutines(completion: @escaping (Result<[WorkoutRoutinesFull], GraphQLError>) -> Void)
-    func createWorkoutRoutine(name: String, completion: @escaping (Result<CreateWorkoutRoutineMutation.Data.CreateWorkoutRoutine, GraphQLError>) -> Void)
+    func getWorkoutRoutines(completion: @escaping (Result<[WorkoutRoutinesFull], APIError>) -> Void)
+    func createWorkoutRoutine(name: String, completion: @escaping (Result<CreateWorkoutRoutineMutation.Data.CreateWorkoutRoutine, APIError>) -> Void)
 }
 
 class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
@@ -20,37 +20,39 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
         self.client = client
     }
     
-    func getWorkoutRoutines(completion: @escaping (Result<[WorkoutRoutinesFull], GraphQLError>) -> Void) {
+    func getWorkoutRoutines(completion: @escaping (Result<[WorkoutRoutinesFull], APIError>) -> Void) {
         self.client.fetch(query: WorkoutRoutinesQuery()) { result in
             switch result {
             case .success(let response):
                 if let errors = response.errors {
-                    completion(Result.failure(GraphQLError(error: errors[0].message ?? "")))
+                    let error = APIError.GraphQLError(gqlError: errors[0].message)
+                    completion(Result.failure(error))
                     return
                 }
                 let workoutRoutinesFull: [WorkoutRoutinesFull] = (response.data?.workoutRoutines)?.compactMap { $0?.fragments.workoutRoutinesFull } ?? []
                 completion(Result.success(workoutRoutinesFull))
-            case .failure(let error):
-                completion(Result.failure(GraphQLError(error: error.localizedDescription)))
+            case .failure:
+                completion(Result.failure(APIError.networkError))
             }
         }
     }
     
-    func createWorkoutRoutine(name: String, completion: @escaping (Result<CreateWorkoutRoutineMutation.Data.CreateWorkoutRoutine, GraphQLError>) -> Void) {
+    func createWorkoutRoutine(name: String, completion: @escaping (Result<CreateWorkoutRoutineMutation.Data.CreateWorkoutRoutine, APIError>) -> Void) {
         self.client.perform(mutation: CreateWorkoutRoutineMutation(routine: WorkoutRoutineInput(name: name))) { result in
             switch result {
             case .success(let response):
                 if let errors = response.errors {
-                    completion(Result.failure(GraphQLError(error: errors[0].message ?? "")))
+                    let error = APIError.GraphQLError(gqlError: errors[0].message)
+                    completion(Result.failure(error))
                     return
                 }
                 if let workoutRoutine = response.data?.createWorkoutRoutine {
                     completion(Result.success(workoutRoutine))
                 } else {
-                    completion(Result.failure(GraphQLError(error: "Something went wrong")))
+                    completion(Result.failure(APIError.GraphQLError(gqlError: nil)))
                 }
-            case .failure(let err):
-                completion(Result.failure(GraphQLError(error: err.localizedDescription)))
+            case .failure:
+                completion(Result.failure(APIError.networkError))
             }
         }
     }
