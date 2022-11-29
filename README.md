@@ -1,2 +1,3 @@
 # workout-logger-ios
-Mobile app for the Workout Logger I am building to keep track of my weights that I lift in workouts
+Mobile app for the recording the reps and weights for exercises done at the gym.
+Implements the use of MVVM and dependency injection to practice writing tests and decoupling code
