@@ -14,6 +14,7 @@
 		280B6A3929297FAA004D0F16 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B6A3829297FAA004D0F16 /* Auth.swift */; };
 		2841B8382934793B00B4AC76 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2841B8372934793B00B4AC76 /* ButtonStyles.swift */; };
 		2841B83C29347D1B00B4AC76 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2841B83B29347D1B00B4AC76 /* CustomColors.swift */; };
+		2841B8422935851100B4AC76 /* TextStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2841B8412935851100B4AC76 /* TextStyles.swift */; };
 		2848C0312926289700277523 /* Signup.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2848C0302926289700277523 /* Signup.graphql */; };
 		2848D8062933161F001E8CD0 /* WorkoutRoutinesFull.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 2848D8052933161F001E8CD0 /* WorkoutRoutinesFull.graphql */; };
 		2848D808293316A3001E8CD0 /* CreateWorkoutRoutine.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2848D807293316A3001E8CD0 /* CreateWorkoutRoutine.graphql */; };
@@ -35,7 +36,6 @@
 		2895BB4C292626A500A16CF8 /* WorkoutLoggerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2895BB4B292626A500A16CF8 /* WorkoutLoggerApp.swift */; };
 		2895BB50292626A600A16CF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2895BB4F292626A600A16CF8 /* Assets.xcassets */; };
 		2895BB53292626A600A16CF8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2895BB52292626A600A16CF8 /* Preview Assets.xcassets */; };
-		2895BB5D292626A700A16CF8 /* WorkoutLoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2895BB5C292626A700A16CF8 /* WorkoutLoggerTests.swift */; };
 		2895BB67292626A700A16CF8 /* WorkoutLoggerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2895BB66292626A700A16CF8 /* WorkoutLoggerUITests.swift */; };
 		2895BB69292626A700A16CF8 /* WorkoutLoggerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2895BB68292626A700A16CF8 /* WorkoutLoggerUITestsLaunchTests.swift */; };
 		2895BB7A2926271500A16CF8 /* schema.graphqls in Resources */ = {isa = PBXBuildFile; fileRef = 2895BB792926271500A16CF8 /* schema.graphqls */; };
@@ -45,6 +45,8 @@
 		289CFDF3292836D400BE6773 /* Login.ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289CFDF2292836D400BE6773 /* Login.ViewModel.swift */; };
 		289CFDFA2928458E00BE6773 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 289CFDF82928458D00BE6773 /* schema.json */; };
 		289CFDFE292859BB00BE6773 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289CFDFD292859BB00BE6773 /* Types.swift */; };
+		28B0E8802935A37D0093601C /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B0E87F2935A37D0093601C /* LoginViewModelTests.swift */; };
+		28B0E8812935A7310093601C /* MockServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B0E87B2935A22B0093601C /* MockServices.swift */; };
 		28C2EDFF292DA5C1000BE3EB /* InterceptorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2EDFE292DA5C1000BE3EB /* InterceptorProvider.swift */; };
 		28C2EE03292DA902000BE3EB /* RefreshMutation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 28C2EE02292DA902000BE3EB /* RefreshMutation.graphql */; };
 		28C2EE07292DF2E4000BE3EB /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2EE06292DF2E4000BE3EB /* Errors.swift */; };
@@ -75,6 +77,7 @@
 		280B6A3829297FAA004D0F16 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		2841B8372934793B00B4AC76 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		2841B83B29347D1B00B4AC76 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
+		2841B8412935851100B4AC76 /* TextStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyles.swift; sourceTree = "<group>"; };
 		2848C0302926289700277523 /* Signup.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Signup.graphql; sourceTree = "<group>"; };
 		2848D8052933161F001E8CD0 /* WorkoutRoutinesFull.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = WorkoutRoutinesFull.graphql; sourceTree = "<group>"; };
 		2848D807293316A3001E8CD0 /* CreateWorkoutRoutine.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = CreateWorkoutRoutine.graphql; sourceTree = "<group>"; };
@@ -97,7 +100,6 @@
 		2895BB4F292626A600A16CF8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2895BB52292626A600A16CF8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2895BB58292626A700A16CF8 /* WorkoutLoggerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkoutLoggerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2895BB5C292626A700A16CF8 /* WorkoutLoggerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLoggerTests.swift; sourceTree = "<group>"; };
 		2895BB62292626A700A16CF8 /* WorkoutLoggerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkoutLoggerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2895BB66292626A700A16CF8 /* WorkoutLoggerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLoggerUITests.swift; sourceTree = "<group>"; };
 		2895BB68292626A700A16CF8 /* WorkoutLoggerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLoggerUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -108,6 +110,8 @@
 		289CFDF2292836D400BE6773 /* Login.ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.ViewModel.swift; sourceTree = "<group>"; };
 		289CFDF82928458D00BE6773 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		289CFDFD292859BB00BE6773 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
+		28B0E87B2935A22B0093601C /* MockServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockServices.swift; sourceTree = "<group>"; };
+		28B0E87F2935A37D0093601C /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
 		28C2EDFE292DA5C1000BE3EB /* InterceptorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterceptorProvider.swift; sourceTree = "<group>"; };
 		28C2EE02292DA902000BE3EB /* RefreshMutation.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = RefreshMutation.graphql; sourceTree = "<group>"; };
 		28C2EE06292DF2E4000BE3EB /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
@@ -157,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				2841B8372934793B00B4AC76 /* ButtonStyles.swift */,
+				2841B8412935851100B4AC76 /* TextStyles.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -298,7 +303,9 @@
 		2895BB5B292626A700A16CF8 /* WorkoutLoggerTests */ = {
 			isa = PBXGroup;
 			children = (
-				2895BB5C292626A700A16CF8 /* WorkoutLoggerTests.swift */,
+				28B0E8762935A1890093601C /* Mocks */,
+				28B0E8752935A1050093601C /* Services */,
+				28B0E8742935A0FF0093601C /* ViewModels */,
 			);
 			path = WorkoutLoggerTests;
 			sourceTree = "<group>";
@@ -370,6 +377,29 @@
 				280B6A3829297FAA004D0F16 /* Auth.swift */,
 			);
 			path = Types;
+			sourceTree = "<group>";
+		};
+		28B0E8742935A0FF0093601C /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				28B0E87F2935A37D0093601C /* LoginViewModelTests.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		28B0E8752935A1050093601C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		28B0E8762935A1890093601C /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				28B0E87B2935A22B0093601C /* MockServices.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -558,6 +588,7 @@
 				2848D8062933161F001E8CD0 /* WorkoutRoutinesFull.graphql in Sources */,
 				2858C56B292D4F69008DEA17 /* Workout.ViewModel.swift in Sources */,
 				28C2EE07292DF2E4000BE3EB /* Errors.swift in Sources */,
+				2841B8422935851100B4AC76 /* TextStyles.swift in Sources */,
 				2853329A292ABE3400BACB6A /* WorkoutSessionList.View.swift in Sources */,
 				2809EF5D2926EDA100D0FF5B /* Signup.ViewModel.swift in Sources */,
 				2858C574292D67FB008DEA17 /* Interceptor.swift in Sources */,
@@ -572,7 +603,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2895BB5D292626A700A16CF8 /* WorkoutLoggerTests.swift in Sources */,
+				28B0E8802935A37D0093601C /* LoginViewModelTests.swift in Sources */,
+				28B0E8812935A7310093601C /* MockServices.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
