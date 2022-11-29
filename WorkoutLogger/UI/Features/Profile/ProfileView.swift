@@ -9,7 +9,15 @@ import SwiftUI
 
 struct ProfileView: View {
     var body: some View {
-        VStack {
+        VStack(spacing: 20) {
+            
+            HStack {
+                Text("Profile")
+                    .font(.title)
+                    .fontWeight(.bold)
+
+                Spacer()
+            }
             
             HStack {
                 
@@ -17,7 +25,7 @@ struct ProfileView: View {
                 
                 Spacer()
                 
-                Text("Name")
+                Text("Name").foregroundColor(.secondaryText)
                 
             }
             
@@ -27,7 +35,7 @@ struct ProfileView: View {
                 
                 Spacer()
                 
-                Text("Email")
+                Text("Email").foregroundColor(.secondaryText)
                 
             }
             

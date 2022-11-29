@@ -48,8 +48,8 @@ struct RoundedButton: ButtonStyle {
             .padding([.leading, .trailing], 20)
             .modifier(ButtonVariationModifier(variation: variation))
             .fontWeight(.medium)
-            .cornerRadius(.infinity)
-            
+            .cornerRadius(.infinity) 
+            .opacity(configuration.isPressed ? 0.5 : 1.0)
     }
 }
 
@@ -58,6 +58,7 @@ struct TextButton: ButtonStyle {
         configuration.label
             .padding([.top, .bottom], 10)
             .foregroundColor(.white)
+            .opacity(configuration.isPressed ? 0.5 : 1.0)
     }
 }
 

@@ -9,16 +9,31 @@ import SwiftUI
 
 struct WorkoutSessionListView: View {
     var body: some View {
-        List {
-            Text("A List Item")
-            Text("A Second List Item")
-            Text("A Third List Item")
+        VStack {
+            
+            HStack {
+                Text("Sessions")
+                    .font(.title)
+                    .fontWeight(.bold)
+                
+                Spacer()
+                
+                Button(action: {}) {
+                    Text("New Session")
+                }.buttonStyle(TextButton())
+            }.padding(.horizontal)
+            
+            List {
+                Text("A List Item")
+                Text("A Second List Item")
+                Text("A Third List Item")
+            }
         }
     }
 }
 
 struct WorkoutSessionListView_Previews: PreviewProvider {
     static var previews: some View {
-        WorkoutSessionListView()
+        WorkoutSessionListView().preferredColorScheme(.dark)
     }
 }
