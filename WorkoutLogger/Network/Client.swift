@@ -8,6 +8,8 @@
 import Foundation
 import Apollo
 
+let GRAPHQL_API_URL = "\(baseURL)/query"
+
 // singleton as recommended by apollo
 class WorkoutLoggerAPIClient {
     static let client: ApolloClient = {
@@ -23,7 +25,7 @@ class WorkoutLoggerAPIClient {
             keychainService: KeychainService(),
             authService: AuthService()
         )
-        let url = URL(string: "http://192.168.1.82:8080/query")!
+        let url = URL(string: GRAPHQL_API_URL)!
         
         let requestChainTransport = RequestChainNetworkTransport(
             interceptorProvider: provider,
@@ -39,7 +41,7 @@ class WorkoutLoggerAPIClient {
 }
 
 class AuthAPIClient{
-    static let client = ApolloClient(url: URL(string: "http://192.168.1.82:8080/query")!)
+    static let client = ApolloClient(url: URL(string: GRAPHQL_API_URL)!)
     
     private init() {}
 }
