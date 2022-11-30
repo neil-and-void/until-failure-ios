@@ -1,6 +1,0 @@
-mutation CreateWorkoutRoutine($routine: WorkoutRoutineInput!) {
-  createWorkoutRoutine(routine: $routine) {
-    id
-    name
-  }
-}
