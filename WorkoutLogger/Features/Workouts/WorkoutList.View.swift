@@ -20,16 +20,21 @@ struct WorkoutListView: View {
                 Spacer()
                 
                 CreateWorkoutView()
+
             }.padding(.horizontal)
             
-            List(workoutListViewModel.workoutRoutineList, id: \.id) { workoutRoutine in
+            ScrollView{
                 
-                Text(workoutRoutine.name)
+                ForEach(workoutListViewModel.workoutRoutineList, id: \.self.id) { workoutRoutine in
+
+                    WorkoutListItemView(name: workoutRoutine.name, exerciseCount: workoutRoutine.exerciseRoutines?.count ?? 12)
+                    
+                }
                 
             }
-            .onAppear(perform: workoutListViewModel.getWorkoutRoutines)
-            .refreshable(action: { workoutListViewModel.getWorkoutRoutines() })
- 
+            .onAppear(perform: { workoutListViewModel.getWorkoutRoutines() })
+            .padding(.horizontal)
+                 
         }
     }
 }

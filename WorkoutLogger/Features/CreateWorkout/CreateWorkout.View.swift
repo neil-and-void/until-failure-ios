@@ -16,7 +16,7 @@ struct CreateWorkoutView: View {
 
             Button(action: { showSheet.toggle() }) {
                 
-                Text("Create Routine")
+                Image(systemName: "plus")
 
             }
             .buttonStyle(TextButton())

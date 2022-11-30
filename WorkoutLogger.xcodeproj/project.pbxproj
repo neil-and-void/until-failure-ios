@@ -18,7 +18,6 @@
 		283DAA252936DA6C00AB2C18 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283DAA202936BA5000AB2C18 /* TestData.swift */; };
 		283DAA282936DC7100AB2C18 /* ExerciseRoutineList.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283DAA272936DC7100AB2C18 /* ExerciseRoutineList.View.swift */; };
 		283DAA2A2936DCC000AB2C18 /* WorkoutListItem.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283DAA292936DCC000AB2C18 /* WorkoutListItem.View.swift */; };
-		283DAA2C2936DE7D00AB2C18 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283DAA2B2936DE7D00AB2C18 /* SwiftUIView.swift */; };
 		283DAA2E2936E26400AB2C18 /* CreateWorkoutViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283DAA2D2936E26400AB2C18 /* CreateWorkoutViewModelTests.swift */; };
 		2841B8382934793B00B4AC76 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2841B8372934793B00B4AC76 /* ButtonStyles.swift */; };
 		2841B83C29347D1B00B4AC76 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2841B83B29347D1B00B4AC76 /* CustomColors.swift */; };
@@ -88,7 +87,6 @@
 		283DAA202936BA5000AB2C18 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		283DAA272936DC7100AB2C18 /* ExerciseRoutineList.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseRoutineList.View.swift; sourceTree = "<group>"; };
 		283DAA292936DCC000AB2C18 /* WorkoutListItem.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutListItem.View.swift; sourceTree = "<group>"; };
-		283DAA2B2936DE7D00AB2C18 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 		283DAA2D2936E26400AB2C18 /* CreateWorkoutViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWorkoutViewModelTests.swift; sourceTree = "<group>"; };
 		2841B8372934793B00B4AC76 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		2841B83B29347D1B00B4AC76 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
@@ -179,7 +177,6 @@
 			children = (
 				2841B8372934793B00B4AC76 /* ButtonStyles.swift */,
 				2841B8412935851100B4AC76 /* TextStyles.swift */,
-				283DAA2B2936DE7D00AB2C18 /* SwiftUIView.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -612,7 +609,6 @@
 				2809EF5D2926EDA100D0FF5B /* Signup.ViewModel.swift in Sources */,
 				2858C574292D67FB008DEA17 /* Interceptor.swift in Sources */,
 				283DAA282936DC7100AB2C18 /* ExerciseRoutineList.View.swift in Sources */,
-				283DAA2C2936DE7D00AB2C18 /* SwiftUIView.swift in Sources */,
 				283DAA242936DA6800AB2C18 /* MockServices.swift in Sources */,
 				280B6A3929297FAA004D0F16 /* Auth.swift in Sources */,
 				2809EF5B2926EB0200D0FF5B /* Signup.View.swift in Sources */,

@@ -19,7 +19,9 @@ struct WorkoutSessionListView: View {
                 Spacer()
                 
                 Button(action: {}) {
-                    Text("Start a workout")
+                    
+                    Image(systemName: "plus")
+
                 }.buttonStyle(TextButton())
 
             }.padding(.horizontal)

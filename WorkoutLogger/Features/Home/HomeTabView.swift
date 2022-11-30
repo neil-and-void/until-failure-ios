@@ -14,18 +14,22 @@ struct HomeTabView: View {
                 
             WorkoutSessionListView()
                 .tabItem {
-                    Label("Workouts", systemImage: "tray.and.arrow.down.fill")
+                    Label("Workouts", systemImage: "figure.strengthtraining.traditional")
                 }
+
             WorkoutListView()
                 .tabItem {
-                    Label("Routines", systemImage: "tray.and.arrow.up.fill")
+                    Label("Routines", systemImage: "dumbbell.fill")
                 }
+
             ProfileView()
                 .tabItem {
-                    Label("Profile", systemImage: "tray.and.arrow.up.fill")
+                    Label("Profile", systemImage: "person.circle.fill")
                 }
+
             }
-        }
+
+        }.accentColor(.white)
     }
 }
 
