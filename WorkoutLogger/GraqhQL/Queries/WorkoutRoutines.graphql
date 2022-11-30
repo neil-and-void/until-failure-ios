@@ -1,0 +1,16 @@
+query WorkoutRoutines {
+    workoutRoutines {
+        ...workoutRoutinesFull
+    }
+}
+
+fragment workoutRoutinesFull on WorkoutRoutine {
+    id
+    name
+    exerciseRoutines {
+        id
+        name
+        sets
+        reps
+    }
+}

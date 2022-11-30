@@ -1,0 +1,13 @@
+mutation Signup($email: String!, $name: String!, $password: String!, $confirmPassword: String!) {
+  signup(
+    email: $email,
+    name: $name,
+    password: $password,
+    confirmPassword: $confirmPassword
+  ) {
+    ... on AuthSuccess {
+        refreshToken
+        accessToken
+    }
+  }
+}
