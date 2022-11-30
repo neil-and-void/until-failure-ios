@@ -30,6 +30,7 @@ class CreateWorkoutViewModel: ObservableObject {
                 onCompletion(false)
             }
         }
+        self.workoutName = ""
         self.loading = false
     }
 }

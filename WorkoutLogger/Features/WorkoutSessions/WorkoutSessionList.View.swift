@@ -12,15 +12,16 @@ struct WorkoutSessionListView: View {
         VStack {
             
             HStack {
-                Text("Sessions")
+                Text("Workouts")
                     .font(.title)
                     .fontWeight(.bold)
                 
                 Spacer()
                 
                 Button(action: {}) {
-                    Text("New Session")
+                    Text("Start a workout")
                 }.buttonStyle(TextButton())
+
             }.padding(.horizontal)
             
             List {

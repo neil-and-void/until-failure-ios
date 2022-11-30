@@ -44,11 +44,11 @@ struct RoundedButton: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding([.top, .bottom], 10)
-            .padding([.leading, .trailing], 20)
+            .padding([.top, .bottom], 15)
+            .padding([.leading, .trailing], 30)
             .modifier(ButtonVariationModifier(variation: variation))
-            .fontWeight(.medium)
-            .cornerRadius(.infinity) 
+            .fontWeight(.semibold)
+            .cornerRadius(.infinity)
             .opacity(configuration.isPressed ? 0.5 : 1.0)
     }
 }

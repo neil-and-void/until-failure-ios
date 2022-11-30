@@ -13,7 +13,7 @@ struct WorkoutListView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Workouts")
+                Text("Routines")
                     .font(.title)
                     .fontWeight(.bold)
                 

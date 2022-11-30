@@ -16,7 +16,7 @@ struct CreateWorkoutView: View {
 
             Button(action: { showSheet.toggle() }) {
                 
-                Text("Create Workout +")
+                Text("Create Routine")
 
             }
             .buttonStyle(TextButton())
@@ -43,30 +43,37 @@ struct CreateWorkoutView: View {
                     
                     VStack {
                         
-                        Text("Give your workout routine a name")
-                            .padding()
-                        
-                        if let error = createWorkoutViewModel.error {
-                            Text(error)
-                                .foregroundColor(.red)
-                                .multilineTextAlignment(.center)
+                        VStack {
+                            
+                            Text("Give your workout routine a name")
+                                
+                            if let error = createWorkoutViewModel.error {
+                                Text(error)
+                                    .foregroundColor(.red)
+                                    .multilineTextAlignment(.center)
+                            }
+
                         }
                         
                         TextField("", text: $createWorkoutViewModel.workoutName)
-                            .overlay(VStack{Divider().offset(x: 0, y: 15)})
                             .multilineTextAlignment(.center)
-                            .padding()
+                            .fontWeight(.bold)
+                            .font(.system(size: 36))
+
+                        Divider()
+                         .frame(height: 1)
+                         .background(.gray)
                     
                         Button(action: { createWorkoutViewModel.createWorkoutRoutine { wasSuccessful in
                             showSheet = !wasSuccessful
                         }}) {
-                            
+
                             Text("Create")
 
                         }
                         .buttonStyle(RoundedButton())
                         .padding()
-                    }
+                    }.padding()
                     
                 }.preferredColorScheme(.dark)
                 
