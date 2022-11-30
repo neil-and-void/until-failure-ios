@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @EnvironmentObject private var authState: AuthenticationState
+    @StateObject private var userViewModel = UserViewModel()
+    
     var body: some View {
         VStack(spacing: 20) {
             
@@ -39,7 +42,10 @@ struct ProfileView: View {
                 
             }
             
-            Button(action: {} ) {
+            Button(action: {
+                userViewModel.logout() { loggedOut in
+                    authState.isAuthenticated = loggedOut
+                }}) {
                 
                 Text("Logout")
                 
@@ -53,6 +59,8 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView().preferredColorScheme(.dark)
+        ProfileView()
+            .environmentObject(AuthenticationState())
+            .preferredColorScheme(.dark)
     }
 }
