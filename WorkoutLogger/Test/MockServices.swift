@@ -7,7 +7,6 @@
 
 import Foundation
 import Apollo
-@testable import WorkoutLogger
 
 final class MockAuthenticationService: AuthServiceProtocol {
     var authResult: Result<AuthResult, APIError> = .success(AuthResult(refreshToken: "refresh_token", accessToken: "access_token"))
@@ -39,4 +38,21 @@ final class MockAuthenticationService: AuthServiceProtocol {
     ) {
         completion(refreshAccessTokenResult)
     }
+}
+
+final class MockWorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
+    var getWorkoutRoutinesResult: Result<[WorkoutRoutinesFull], APIError> = .success(workoutRoutinesfull_mock)
+    var createWorkoutRoutineResult: Result<CreateWorkoutRoutineMutation.Data.CreateWorkoutRoutine, APIError> = .success(createWorkoutRoutine_mock)
+   
+    init() {}
+    
+    func getWorkoutRoutines(completion: @escaping (Result<[WorkoutRoutinesFull], APIError>) -> Void) {
+        completion(getWorkoutRoutinesResult)
+    }
+    
+    func createWorkoutRoutine(name: String, completion: @escaping (Result<CreateWorkoutRoutineMutation.Data.CreateWorkoutRoutine, APIError>) -> Void) {
+        completion(createWorkoutRoutineResult)
+    }
+    
+    
 }
