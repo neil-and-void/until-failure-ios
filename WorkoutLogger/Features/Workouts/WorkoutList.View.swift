@@ -16,19 +16,29 @@ struct WorkoutListView: View {
                 
                 ScrollView{
 
-                    ForEach(workoutListViewModel.workoutRoutineList, id: \.self.id) { workoutRoutine in
-                        
-                        NavigationLink(destination: WorkoutDetailsView(workout: workoutRoutine)) {
+                    if workoutListViewModel.workoutRoutineList.count > 0 {
+                        ForEach(workoutListViewModel.workoutRoutineList, id: \.self.id) { workoutRoutine in
                             
-                            WorkoutListItemView(name: workoutRoutine.name, exerciseCount: workoutRoutine.exerciseRoutines?.count ?? 12)
-                            
+                            NavigationLink(destination: WorkoutDetailsView(workout: workoutRoutine)) {
+                                
+                                WorkoutListItemView(name: workoutRoutine.name, exerciseCount: workoutRoutine.exerciseRoutines?.count ?? 12)
+                                
+                            }
+
                         }
 
+                    } else {
+
+                            Text("You don't have any routines here... ADD ONE AND HIT THE GYM")
+                                .foregroundColor(.tertiaryText)
+                                .multilineTextAlignment(.center)
+                                .padding()
                     }
+
 
                 }
                 .onAppear(perform: { workoutListViewModel.getWorkoutRoutines() })
-    
+     
             }
             .padding(.horizontal)
             .toolbar {

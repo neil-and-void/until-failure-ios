@@ -27,6 +27,7 @@ struct ExerciseRoutineList: View {
                 Text("You don't have any exercise routines here, tap the Edit button to add some")
                     .foregroundColor(.tertiaryText)
                     .multilineTextAlignment(.center)
+                    .padding()
 
             }
             

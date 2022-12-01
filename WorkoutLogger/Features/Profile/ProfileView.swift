@@ -12,48 +12,57 @@ struct ProfileView: View {
     @StateObject private var userViewModel = UserViewModel()
     
     var body: some View {
-        VStack(spacing: 20) {
-            
-            HStack {
-                Text("Profile")
-                    .font(.title)
-                    .fontWeight(.bold)
+        NavigationStack {
 
-                Spacer()
-            }
-            
-            HStack {
-                
-                Text("Name:")
-                
-                Spacer()
-                
-                Text("Name").foregroundColor(.secondaryText)
-                
-            }
-            
-            HStack {
-                
-                Text("Email:")
-                
-                Spacer()
-                
-                Text("Email").foregroundColor(.secondaryText)
-                
-            }
-            
-            Button(action: {
-                userViewModel.logout() { loggedOut in
-                    authState.isAuthenticated = loggedOut
-                }}) {
-                
-                Text("Logout")
-                
-            }.buttonStyle(RoundedButton())
-            
-            Spacer()
+            VStack(spacing: 20) {
 
-        }.padding()
+                HStack {
+                    
+                    Text("Name:")
+                    
+                    Spacer()
+                    
+                    Text("Name").foregroundColor(.secondaryText)
+                    
+                }
+                
+                HStack {
+                    
+                    Text("Email:")
+                    
+                    Spacer()
+                    
+                    Text("Email").foregroundColor(.secondaryText)
+                    
+                }
+                
+                Button(action: {
+                    userViewModel.logout() { loggedOut in
+                        authState.isAuthenticated = loggedOut
+                    }}) {
+                    
+                    Text("Logout")
+                    
+                }.buttonStyle(RoundedButton())
+                
+                Spacer()
+
+            }
+            .padding(.horizontal)
+            .toolbar {
+                 
+                 ToolbarItem(placement: .navigationBarLeading) {
+
+                     Text("Profile")
+                         .font(.title)
+                         .fontWeight(.bold)
+
+                }
+
+            }
+
+        }
+
     }
 }
 

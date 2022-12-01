@@ -21,5 +21,6 @@ class UserViewModel: ObservableObject {
             account: WORKOUT_LOGGER_KEYCHAIN_ACCOUNT
         )
         setAuth(false)
+        // TODO: clear apollo cache
     }
 }
