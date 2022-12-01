@@ -11,31 +11,46 @@ struct WorkoutListView: View {
     @StateObject private var workoutListViewModel = WorkoutViewModel(service: WorkoutLoggerAPIService())
     
     var body: some View {
-        VStack {
-            HStack {
-                Text("Routines")
-                    .font(.title)
-                    .fontWeight(.bold)
+        NavigationStack {
+            VStack {
                 
-                Spacer()
-                
-                CreateWorkoutView()
+                ScrollView{
 
-            }.padding(.horizontal)
-            
-            ScrollView{
-                
-                ForEach(workoutListViewModel.workoutRoutineList, id: \.self.id) { workoutRoutine in
+                    ForEach(workoutListViewModel.workoutRoutineList, id: \.self.id) { workoutRoutine in
+                        
+                        NavigationLink(destination: WorkoutDetailsView(workout: workoutRoutine)) {
+                            
+                            WorkoutListItemView(name: workoutRoutine.name, exerciseCount: workoutRoutine.exerciseRoutines?.count ?? 12)
+                            
+                        }
 
-                    WorkoutListItemView(name: workoutRoutine.name, exerciseCount: workoutRoutine.exerciseRoutines?.count ?? 12)
-                    
+                    }
+
                 }
-                
+                .onAppear(perform: { workoutListViewModel.getWorkoutRoutines() })
+    
             }
-            .onAppear(perform: { workoutListViewModel.getWorkoutRoutines() })
             .padding(.horizontal)
+            .toolbar {
                  
+                 ToolbarItem(placement: .navigationBarLeading) {
+
+                     Text("Routines")
+                         .font(.title)
+                         .fontWeight(.bold)
+
+                }
+
+                ToolbarItem(placement: .navigationBarTrailing) {
+
+                    CreateWorkoutView()
+
+                 }
+
+            }
+
         }
+
     }
 }
 

@@ -29,14 +29,17 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
                     completion(Result.failure(error))
                     return
                 }
+
                 let workoutRoutinesFull: [WorkoutRoutinesFull] = (response.data?.workoutRoutines)?.compactMap { $0?.fragments.workoutRoutinesFull } ?? []
                 completion(Result.success(workoutRoutinesFull))
+
             case .failure:
                 completion(Result.failure(APIError.networkError))
+
             }
         }
     }
-    
+
     func createWorkoutRoutine(name: String, completion: @escaping (Result<CreateWorkoutRoutineMutation.Data.CreateWorkoutRoutine, APIError>) -> Void) {
         self.client.perform(mutation: CreateWorkoutRoutineMutation(routine: WorkoutRoutineInput(name: name))) { result in
             switch result {

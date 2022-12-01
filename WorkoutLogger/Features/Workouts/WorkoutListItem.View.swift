@@ -22,6 +22,7 @@ struct WorkoutListItemView: View {
 
                 Text("\(exerciseCount) \(exerciseCount > 1 ? "exercises" : "exercise")")
                     .foregroundColor(.secondaryText)
+
             }
    
             Spacer()
@@ -34,10 +35,7 @@ struct WorkoutListItemView: View {
         .background(Color.bgSecondary)
         .padding(.bottom, 2)
         .cornerRadius(15)
-        .onTapGesture {
-            print("what the fuck")
-        }
-        
+
     }
     
 }
