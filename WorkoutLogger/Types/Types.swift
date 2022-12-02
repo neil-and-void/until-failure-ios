@@ -12,3 +12,16 @@ struct AuthResult {
     var refreshToken: String
     var accessToken: String
 }
+
+struct EditableExerciseRoutine: Identifiable {
+    var id: String
+    var name: String
+    var sets: Int
+    var reps: Int
+}
+
+struct EditableWorkoutRoutine {
+    var name: String
+    var exerciseRoutines: [EditableExerciseRoutine]
+}
+

@@ -9,37 +9,47 @@ import SwiftUI
 
 struct WorkoutDetailsView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-
-    var workout: WorkoutRoutinesFull
-
+    @ObservedObject var workoutViewModel: WorkoutViewModel
+    @State private var showSheet = false
+    @State var editableWorkoutRoutine: EditableWorkoutRoutine
+    var workoutRoutine: EditableWorkoutRoutine
+    
     var body: some View {
- 
+        
         Group {
             
-            Text(workout.name)
+            Text(workoutRoutine.name)
                 .font(.title)
                 .fontWeight(.bold)
-
-                ExerciseRoutineList(exerciseRoutines: workout.exerciseRoutines?.compactMap { routine in
-                    return WorkoutRoutinesFull.ExerciseRoutine(
-                        id: routine?.id ?? "",
-                        name: routine?.name ?? "",
-                        sets: routine?.sets ?? 0,
-                        reps: routine?.reps ?? 0
-                    )
-                } ?? [])
-   
+            
+            ExerciseRoutineList(exerciseRoutines: workoutRoutine.exerciseRoutines)
+            
         }
-        .navigationBarItems(
-            trailing: Button(action: {}, label: {Text("Edit")}).buttonStyle(TextButton())
+        .navigationBarItems(trailing:
+                                Button(action: { showSheet.toggle() }, label: { Text("Edit") })
+            .buttonStyle(TextButton())
+            .sheet(isPresented: $showSheet) {
+
+                EditWorkout(
+                    workoutViewModel: workoutViewModel,
+                    showSheet: $showSheet,
+                    workoutRoutine: $editableWorkoutRoutine
+                )
+
+            }
+                            
         )
-
+        
     }
-
+    
 }
 
 struct WorkoutView_Previews: PreviewProvider {
     static var previews: some View {
-        WorkoutDetailsView(workout: WorkoutRoutinesFull(id: "0", name: "Leg Day"))
+        WorkoutDetailsView(
+            workoutViewModel: WorkoutViewModel(service: WorkoutLoggerAPIService()),
+            editableWorkoutRoutine: EditableWorkoutRoutine(name: "Legs", exerciseRoutines: []),
+            workoutRoutine: EditableWorkoutRoutine(name: "Legs", exerciseRoutines: [])
+        ).preferredColorScheme(.dark)
     }
 }

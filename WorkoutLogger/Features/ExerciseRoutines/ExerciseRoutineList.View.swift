@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ExerciseRoutineList: View {
-    var exerciseRoutines: [WorkoutRoutinesFull.ExerciseRoutine]
+    var exerciseRoutines: [EditableExerciseRoutine]
     
     var body: some View {
 
@@ -39,6 +39,11 @@ struct ExerciseRoutineList: View {
 
 struct ExerciseRoutineList_Previews: PreviewProvider {
     static var previews: some View {
-        ExerciseRoutineList(exerciseRoutines: [WorkoutRoutinesFull.ExerciseRoutine(id: "1", name: "Squat", sets: 4, reps: 5)])
+        ExerciseRoutineList(exerciseRoutines: [EditableExerciseRoutine(
+            id: "1",
+            name: "Squat",
+            sets: 4,
+            reps: 5
+        )]).preferredColorScheme(.dark)
     }
 }

@@ -10,6 +10,23 @@ import SwiftUI
 struct WorkoutListView: View {
     @StateObject private var workoutListViewModel = WorkoutViewModel(service: WorkoutLoggerAPIService())
     
+    // parses and sets a WorkoutRoutineFull to an EditableWorkoutRoutine
+    func buildEditableWorkoutRoutine(_ workoutRoutineFull: WorkoutRoutinesFull) -> EditableWorkoutRoutine {
+        let exerciseRoutines = workoutRoutineFull.exerciseRoutines?.compactMap { exerciseRoutine in
+            return EditableExerciseRoutine(
+                id: exerciseRoutine?.id ?? "",
+                name: exerciseRoutine?.name ?? "",
+                sets: exerciseRoutine?.sets ?? 0,
+                reps: exerciseRoutine?.reps ?? 0
+            )
+        }
+
+       return EditableWorkoutRoutine(
+            name: workoutRoutineFull.name,
+            exerciseRoutines: exerciseRoutines ?? []
+        )
+    }
+     
     var body: some View {
         NavigationStack {
             VStack {
@@ -17,11 +34,18 @@ struct WorkoutListView: View {
                 ScrollView{
 
                     if workoutListViewModel.workoutRoutineList.count > 0 {
+
                         ForEach(workoutListViewModel.workoutRoutineList, id: \.self.id) { workoutRoutine in
                             
-                            NavigationLink(destination: WorkoutDetailsView(workout: workoutRoutine)) {
+                            NavigationLink(
+                                destination: WorkoutDetailsView(
+                                    workoutViewModel: workoutListViewModel,
+                                    editableWorkoutRoutine: buildEditableWorkoutRoutine(workoutRoutine),
+                                    workoutRoutine: buildEditableWorkoutRoutine(workoutRoutine)
+                                )
+                            ) {
                                 
-                                WorkoutListItemView(name: workoutRoutine.name, exerciseCount: workoutRoutine.exerciseRoutines?.count ?? 12)
+                                WorkoutListItemView(name: workoutRoutine.name, exerciseCount: workoutRoutine.exerciseRoutines?.count ?? 0)
                                 
                             }
 
@@ -29,12 +53,12 @@ struct WorkoutListView: View {
 
                     } else {
 
-                            Text("You don't have any routines here... ADD ONE AND HIT THE GYM")
-                                .foregroundColor(.tertiaryText)
-                                .multilineTextAlignment(.center)
-                                .padding()
-                    }
+                        Text("You don't have any routines here... ADD ONE AND HIT THE GYM")
+                            .foregroundColor(.tertiaryText)
+                            .multilineTextAlignment(.center)
+                            .padding()
 
+                    }
 
                 }
                 .onAppear(perform: { workoutListViewModel.getWorkoutRoutines() })

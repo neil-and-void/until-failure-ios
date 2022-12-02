@@ -15,16 +15,17 @@ struct CreateWorkoutView: View {
     var body: some View {
 
             Button(action: { showSheet.toggle() }) {
-                
+
                 Image(systemName: "plus")
 
             }
             .buttonStyle(TextButton())
             .sheet(isPresented: $showSheet) {
-                
+
                 ZStack {
                     
                     HStack {
+
                         Spacer()
                         
                         VStack(alignment: .leading) {
@@ -73,10 +74,11 @@ struct CreateWorkoutView: View {
                         }
                         .buttonStyle(RoundedButton())
                         .padding()
+
                     }.padding()
                     
                 }.preferredColorScheme(.dark)
-                
+
             }
             
     }
