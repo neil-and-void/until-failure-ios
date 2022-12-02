@@ -22,6 +22,7 @@ struct WorkoutListView: View {
         }
 
        return WorkoutRoutine(
+            id: workoutRoutineFull.id,
             name: workoutRoutineFull.name,
             exerciseRoutines: exerciseRoutines ?? []
         )
@@ -40,7 +41,7 @@ struct WorkoutListView: View {
                             NavigationLink(
                                 destination: WorkoutDetailsView(
                                     workoutViewModel: workoutListViewModel,
-                                    editableWorkoutRoutine: buildEditableWorkoutRoutine(workoutRoutine),
+                                    updateWorkoutRoutineDraft: buildEditableWorkoutRoutine(workoutRoutine),
                                     workoutRoutine: buildEditableWorkoutRoutine(workoutRoutine)
                                 )
                             ) {

@@ -75,7 +75,7 @@ struct EditWorkout_Previews: PreviewProvider {
         EditWorkout(
             workoutViewModel: WorkoutViewModel(service: WorkoutLoggerAPIService()),
             showSheet: .constant(true),
-            workoutRoutine: .constant(WorkoutRoutine(name: "Name", exerciseRoutines: []))
+            workoutRoutine: .constant(WorkoutRoutine(id: "2", name: "Name", exerciseRoutines: []))
         ).preferredColorScheme(.dark)
     }
 }

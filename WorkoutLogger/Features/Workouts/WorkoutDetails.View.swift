@@ -11,7 +11,7 @@ struct WorkoutDetailsView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @ObservedObject var workoutViewModel: WorkoutViewModel
     @State private var showSheet = false
-    @State var editableWorkoutRoutine: WorkoutRoutine
+    @State var updateWorkoutRoutineDraft: WorkoutRoutine
     var workoutRoutine: WorkoutRoutine
     
     var body: some View {
@@ -33,7 +33,7 @@ struct WorkoutDetailsView: View {
                 EditWorkout(
                     workoutViewModel: workoutViewModel,
                     showSheet: $showSheet,
-                    workoutRoutine: $editableWorkoutRoutine
+                    workoutRoutine: $updateWorkoutRoutineDraft
                 )
 
             }
@@ -48,8 +48,8 @@ struct WorkoutView_Previews: PreviewProvider {
     static var previews: some View {
         WorkoutDetailsView(
             workoutViewModel: WorkoutViewModel(service: WorkoutLoggerAPIService()),
-            editableWorkoutRoutine: WorkoutRoutine(name: "Legs", exerciseRoutines: []),
-            workoutRoutine: WorkoutRoutine(name: "Legs", exerciseRoutines: [])
+            updateWorkoutRoutineDraft: WorkoutRoutine(id: "0", name: "Legs", exerciseRoutines: []),
+            workoutRoutine: WorkoutRoutine(id: "0" , name: "Legs", exerciseRoutines: [])
         ).preferredColorScheme(.dark)
     }
 }
