@@ -14,3 +14,5 @@ let exerciseRoutines_mock = [
 let workoutRoutinesfull_mock = [WorkoutRoutinesFull(id: "11", name: "Legs", exerciseRoutines: exerciseRoutines_mock)]
 
 let createWorkoutRoutine_mock = CreateWorkoutRoutineMutation.Data.CreateWorkoutRoutine(id: "11", name: "Legs")
+
+let workoutSessionsFull_mock = [WorkoutSessionFull(id: "11", start: "july 12", end: "july 13", workoutRoutineId: "1", exercises: [])]

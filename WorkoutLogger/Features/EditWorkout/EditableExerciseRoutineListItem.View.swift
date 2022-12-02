@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EditableExerciseRoutineListItem: View {
-    @Binding var editableExerciseRoutine: EditableExerciseRoutine
+    @Binding var editableExerciseRoutine: ExerciseRoutine
     
     var body: some View {
         
@@ -48,7 +48,7 @@ struct EditableExerciseRoutineListItem: View {
 
 struct EditableExerciseRoutineListItem_Previews: PreviewProvider {
     static var previews: some View {
-        EditableExerciseRoutineListItem(editableExerciseRoutine: .constant(EditableExerciseRoutine(
+        EditableExerciseRoutineListItem(editableExerciseRoutine: .constant(ExerciseRoutine(
             id: "0",
             name: "Squat",
             sets: 4,

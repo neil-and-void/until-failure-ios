@@ -29,7 +29,7 @@ class WorkoutViewModel: ObservableObject {
         }
     }
     
-    func updateWorkoutRoutine(_ workoutRoutine: EditableWorkoutRoutine, onSuccess: @escaping () -> Void) {
+    func updateWorkoutRoutine(_ workoutRoutine: WorkoutRoutine, onSuccess: @escaping () -> Void) {
         print(workoutRoutine as Any)
         onSuccess()
     }

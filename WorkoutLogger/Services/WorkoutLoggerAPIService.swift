@@ -10,6 +10,7 @@ import Apollo
 
 protocol WorkoutLoggerAPIServiceProtocol {
     func getWorkoutRoutines(completion: @escaping (Result<[WorkoutRoutinesFull], APIError>) -> Void)
+    func getWorkoutSessions(completion: @escaping (Result<[WorkoutSessionFull], APIError>) -> Void)
     func createWorkoutRoutine(name: String, completion: @escaping (Result<CreateWorkoutRoutineMutation.Data.CreateWorkoutRoutine, APIError>) -> Void)
 }
 
@@ -32,6 +33,27 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
 
                 let workoutRoutinesFull: [WorkoutRoutinesFull] = (response.data?.workoutRoutines)?.compactMap { $0?.fragments.workoutRoutinesFull } ?? []
                 completion(Result.success(workoutRoutinesFull))
+
+            case .failure:
+                completion(Result.failure(APIError.networkError))
+
+            }
+        }
+    }
+
+    func getWorkoutSessions(completion: @escaping (Result<[WorkoutSessionFull], APIError>) -> Void) {
+        self.client.fetch(query: WorkoutSessionsQuery()) { result in
+            switch result {
+            case .success(let response):
+                if let errors = response.errors {
+                    let error = APIError.GraphQLError(gqlError: errors[0].message)
+                    completion(Result.failure(error))
+                    return
+                }
+//                response.data?.workoutRoutines
+
+                let workoutSessionFull: [WorkoutSessionFull] = (response.data?.workoutSessions)?.compactMap { $0?.fragments.workoutSessionFull } ?? []
+                completion(Result.success(workoutSessionFull))
 
             case .failure:
                 completion(Result.failure(APIError.networkError))

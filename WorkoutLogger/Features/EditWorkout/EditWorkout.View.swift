@@ -10,7 +10,7 @@ import SwiftUI
 struct EditWorkout: View {
     var workoutViewModel: WorkoutViewModel
     @Binding var showSheet: Bool
-    @Binding var workoutRoutine: EditableWorkoutRoutine
+    @Binding var workoutRoutine: WorkoutRoutine
     
     var body: some View {
 
@@ -75,7 +75,7 @@ struct EditWorkout_Previews: PreviewProvider {
         EditWorkout(
             workoutViewModel: WorkoutViewModel(service: WorkoutLoggerAPIService()),
             showSheet: .constant(true),
-            workoutRoutine: .constant(EditableWorkoutRoutine(name: "Name", exerciseRoutines: []))
+            workoutRoutine: .constant(WorkoutRoutine(name: "Name", exerciseRoutines: []))
         ).preferredColorScheme(.dark)
     }
 }
