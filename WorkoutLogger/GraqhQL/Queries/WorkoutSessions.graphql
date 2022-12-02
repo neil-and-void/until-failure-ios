@@ -1,0 +1,36 @@
+query WorkoutSessions {
+    workoutRoutines {
+        ...workoutRoutinesFull
+    }
+    workoutSessions {
+        ...workoutSessionFull
+    }
+}
+
+fragment workoutRoutinesFull on WorkoutRoutine {
+    id
+    name
+    exerciseRoutines {
+        id
+        name
+        sets
+        reps
+    }
+}
+
+fragment workoutSessionFull on WorkoutSession {
+        id
+        start
+        end
+        workoutRoutineId
+        exercises {
+                id
+                exerciseRoutineId
+                sets {
+                        id
+                        weight
+                        reps
+                }
+                notes
+        }
+}
