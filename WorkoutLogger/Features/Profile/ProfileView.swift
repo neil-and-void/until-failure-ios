@@ -13,9 +13,9 @@ struct ProfileView: View {
     
     var body: some View {
         NavigationStack {
-
+            
             VStack(spacing: 20) {
-
+                
                 HStack {
                     
                     Text("Name:")
@@ -40,29 +40,29 @@ struct ProfileView: View {
                     userViewModel.logout() { loggedOut in
                         authState.isAuthenticated = loggedOut
                     }}) {
-                    
-                    Text("Logout")
-                    
-                }.buttonStyle(RoundedButton())
+                        
+                        Text("Logout")
+                        
+                    }.buttonStyle(RoundedButton())
                 
                 Spacer()
-
+                
             }
             .padding(.horizontal)
             .toolbar {
-                 
-                 ToolbarItem(placement: .navigationBarLeading) {
-
-                     Text("Profile")
-                         .font(.largeTitle)
-                         .fontWeight(.bold)
-
+                
+                ToolbarItem(placement: .navigationBarLeading) {
+                    
+                    Text("Profile")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                    
                 }
-
+                
             }
-
+            
         }
-
+        
     }
 }
 
