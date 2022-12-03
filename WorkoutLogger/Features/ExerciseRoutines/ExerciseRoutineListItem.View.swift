@@ -15,7 +15,7 @@ struct ExerciseRoutineListItem: View {
     var body: some View {
         HStack {
 
-            Text(name).font(.system(size: 20, weight: .semibold))
+            Text(name).font(.system(size: 18, weight: .medium))
 
             Spacer()
             
@@ -23,16 +23,16 @@ struct ExerciseRoutineListItem: View {
 
                 Group {
                     
-                    Text("\(sets)").font(.system(size: 20, weight: .semibold))
+                    Text("\(sets)").font(.system(size: 18, weight: .medium))
 
-                    Text("sets").foregroundColor(.secondaryText).font(.system(size: 18))
+                    Text("sets").foregroundColor(.secondaryText)
                 }.multilineTextAlignment(.leading)
                 
                 Group {
                     
-                    Text("\(reps)").font(.system(size: 20, weight: .semibold))
+                    Text("\(reps)").font(.system(size: 18, weight: .medium))
 
-                    Text("reps").foregroundColor(.secondaryText).font(.system(size: 18))
+                    Text("reps").foregroundColor(.secondaryText)
 
                 }.multilineTextAlignment(.leading)
                 

@@ -21,8 +21,8 @@ struct WorkoutSessionListView: View {
                     if workoutSessionViewModel.workoutSessionList.count > 0 {
 
                         ForEach(workoutSessionViewModel.workoutSessionList, id: \.self.id) { workoutSession in
-                            
-                            WorkoutSessionListItem(active: true, workoutSession: WorkoutSession(id: "", start: Date(), workoutRoutineId: "", exercises: []))
+
+                            WorkoutSessionListItem(active: true, workoutSession: workoutSession)
                             
                         }
 
@@ -35,8 +35,6 @@ struct WorkoutSessionListView: View {
                         
                     }
                     
-
-                    
                 }.onAppear(perform: { workoutSessionViewModel.getWorkoutSessions() })
                 
             }
@@ -46,7 +44,7 @@ struct WorkoutSessionListView: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     
                     Text("Workouts")
-                        .font(.title)
+                        .font(.largeTitle)
                         .fontWeight(.bold)
                     
                 }

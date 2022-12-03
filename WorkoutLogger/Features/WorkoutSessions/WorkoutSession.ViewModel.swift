@@ -10,7 +10,7 @@ import Foundation
 class WorkoutSessionViewModel: ObservableObject {
     private let service: WorkoutLoggerAPIServiceProtocol
     
-    @Published var workoutSessionList: [WorkoutSessionFull] = []
+    @Published var workoutSessionList: [WorkoutSession] = []
     @Published var error: String?
 
     init(service: WorkoutLoggerAPIServiceProtocol) {
@@ -21,7 +21,6 @@ class WorkoutSessionViewModel: ObservableObject {
         self.service.getWorkoutSessions() { result in
             switch result {
             case .success(let workoutSessions):
-                print(workoutSessions, "seowif")
                 self.error = nil
                 self.workoutSessionList = workoutSessions
             case .failure(let err):

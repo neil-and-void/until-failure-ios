@@ -15,4 +15,4 @@ let workoutRoutinesfull_mock = [WorkoutRoutinesFull(id: "11", name: "Legs", exer
 
 let createWorkoutRoutine_mock = CreateWorkoutRoutineMutation.Data.CreateWorkoutRoutine(id: "11", name: "Legs")
 
-let workoutSessionsFull_mock = [WorkoutSessionFull(id: "11", start: "july 12", end: "july 13", workoutRoutineId: "1", exercises: [])]
+let workoutSessionsFull_mock = [WorkoutSession(id: "11", start: Date(), workoutRoutine: EmbeddedWorkoutRoutine(id: "1", name: "Legs"), exercises: [])]

@@ -30,19 +30,31 @@ struct WorkoutSession: Identifiable {
     var id: String
     var start: Date
     var end: Date?
-    var workoutRoutineId: String
+    var workoutRoutine: EmbeddedWorkoutRoutine
     var exercises: [Exercise]
+}
+
+struct EmbeddedWorkoutRoutine {
+    var id: String
+    var name: String
 }
 
 struct Exercise: Identifiable {
     var id: String
-    var exerciseRoutineId: String
+    var exerciseRoutine: EmbeddedExerciseRoutine
     var sets: [SetEntry]
     var notes: String
 }
 
+struct EmbeddedExerciseRoutine {
+    var id: String
+    var name: String
+    var sets: Int
+    var reps: Int
+}
+
 struct SetEntry: Identifiable {
     var id: String
-    var weight: Float
+    var weight: Double
     var reps: Int
 }

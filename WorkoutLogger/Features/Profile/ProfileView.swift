@@ -54,7 +54,7 @@ struct ProfileView: View {
                  ToolbarItem(placement: .navigationBarLeading) {
 
                      Text("Profile")
-                         .font(.title)
+                         .font(.largeTitle)
                          .fontWeight(.bold)
 
                 }

@@ -12,19 +12,19 @@ struct WorkoutListView: View {
     
     // parses and sets a WorkoutRoutineFull to an EditableWorkoutRoutine
     func buildEditableWorkoutRoutine(_ workoutRoutineFull: WorkoutRoutinesFull) -> WorkoutRoutine {
-        let exerciseRoutines = workoutRoutineFull.exerciseRoutines?.compactMap { exerciseRoutine in
+        let exerciseRoutines = workoutRoutineFull.exerciseRoutines.compactMap { exerciseRoutine in
             return ExerciseRoutine(
-                id: exerciseRoutine?.id ?? "",
-                name: exerciseRoutine?.name ?? "",
-                sets: exerciseRoutine?.sets ?? 0,
-                reps: exerciseRoutine?.reps ?? 0
+                id: exerciseRoutine.id,
+                name: exerciseRoutine.name,
+                sets: exerciseRoutine.sets,
+                reps: exerciseRoutine.reps
             )
         }
 
        return WorkoutRoutine(
             id: workoutRoutineFull.id,
             name: workoutRoutineFull.name,
-            exerciseRoutines: exerciseRoutines ?? []
+            exerciseRoutines: exerciseRoutines
         )
     }
      
@@ -46,7 +46,7 @@ struct WorkoutListView: View {
                                 )
                             ) {
                                 
-                                WorkoutListItemView(name: workoutRoutine.name, exerciseCount: workoutRoutine.exerciseRoutines?.count ?? 0)
+                                WorkoutListItemView(name: workoutRoutine.name, exerciseCount: workoutRoutine.exerciseRoutines.count)
                                 
                             }
 
@@ -71,7 +71,7 @@ struct WorkoutListView: View {
                  ToolbarItem(placement: .navigationBarLeading) {
 
                      Text("Routines")
-                         .font(.title)
+                         .font(.largeTitle)
                          .fontWeight(.bold)
 
                 }

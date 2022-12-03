@@ -14,6 +14,7 @@ struct GraphQLAPIError: Error {
 enum APIError: LocalizedError {
     case networkError
     case GraphQLError(gqlError: String?)
+    case parsingError
     case unknown
 
     var localizedDescription: String {
@@ -26,7 +27,7 @@ enum APIError: LocalizedError {
                 errMessage = "Sorry, someting went wrong: \(err)"
             }
             return errMessage
-        case .unknown:
+        case .unknown, .parsingError:
             return "Sorry, something went wrong"
         }
     }

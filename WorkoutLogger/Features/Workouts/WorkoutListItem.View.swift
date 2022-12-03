@@ -18,9 +18,10 @@ struct WorkoutListItemView: View {
                 
                 VStack(alignment: .leading) {
 
-                Text(name).fontWeight(.semibold).font(.system(size: 25))
+                Text(name).fontWeight(.semibold).font(.system(size: 20))
 
                 Text("\(exerciseCount) \(exerciseCount > 1 ? "exercises" : "exercise")")
+                    .font(.system(size: 16))
                     .foregroundColor(.secondaryText)
 
             }

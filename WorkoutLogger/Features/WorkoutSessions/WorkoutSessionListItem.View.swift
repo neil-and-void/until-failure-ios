@@ -15,37 +15,39 @@ struct WorkoutSessionListItem: View {
         
         HStack {
             
-            VStack {
+            VStack(alignment: .leading) {
                 
-                Text("Wtf")
+                Text(workoutSession.workoutRoutine.name).font(.system(size: 20, weight: .bold))
                 
-                Text("July 12")
+                Text("July 12").font(.system(size: 16)).foregroundColor(.secondaryText)
                 
             }
             
             Spacer()
             
-            if active {
-                
-                Text("ACTIVE")
+            if workoutSession.end != nil {
+
+                Image(systemName: "dumbbell.fill").rotationEffect(.degrees(45)).foregroundColor(.primaryColor)
                 
             } else {
                 
-                Text("30 mins")
+                Text("30 mins").foregroundColor(.secondaryText)
                 
             }
             
         }
         .padding()
+        .background(Color.bgSecondary)
+        .cornerRadius(10)
         
     }
 }
 
-struct WorkoutSessionListItem_Previews: PreviewProvider {
-    static var previews: some View {
-        WorkoutSessionListItem(
-            active: true,
-            workoutSession: WorkoutSession(id: "1", start: Date(), workoutRoutineId: "1", exercises: [])
-        )
-    }
-}
+//struct WorkoutSessionListItem_Previews: PreviewProvider {
+//    static var previews: some View {
+//        WorkoutSessionListItem(
+//            active: true,
+//            workoutSession: WorkoutSession(id: "1", start: Date(), workoutRoutineId: "1", exercises: [])
+//        )
+//    }
+//}
