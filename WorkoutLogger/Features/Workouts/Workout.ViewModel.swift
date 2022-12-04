@@ -11,7 +11,7 @@ class WorkoutViewModel: ObservableObject {
     private let service: WorkoutLoggerAPIServiceProtocol
    
     @Published var error: String?
-    @Published var workoutRoutineList: [WorkoutRoutinesFull] = []
+    @Published var workoutRoutineList: [WorkoutRoutineFull] = []
     
     init(service: WorkoutLoggerAPIServiceProtocol) {
         self.service = service

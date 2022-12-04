@@ -15,11 +15,11 @@ protocol WorkoutSessionParserProtocol {
 // used for parsing graphql objects to our defined project types
 class WorkoutSessionParser: WorkoutSessionParserProtocol {
     func parseGraphQL(workoutSessions: [WorkoutSessionsQuery.Data.WorkoutSession], workoutRoutines: [WorkoutSessionsQuery.Data.WorkoutRoutine]) -> [WorkoutSession] {
-        var workoutRoutineDict: [String:  WorkoutRoutinesFull] = [:]
-        var exerciseRoutineDict: [String: WorkoutRoutinesFull.ExerciseRoutine] = [:]
+        var workoutRoutineDict: [String:  WorkoutRoutineFull] = [:]
+        var exerciseRoutineDict: [String: WorkoutRoutineFull.ExerciseRoutine] = [:]
 
         for wr in workoutRoutines {
-            let workoutRoutine = wr.fragments.workoutRoutinesFull
+            let workoutRoutine = wr.fragments.workoutRoutineFull
             workoutRoutineDict[workoutRoutine.id] = workoutRoutine
 
             workoutRoutine.exerciseRoutines.forEach { exerciseRoutine in

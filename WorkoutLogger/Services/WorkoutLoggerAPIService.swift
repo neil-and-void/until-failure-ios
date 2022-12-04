@@ -9,7 +9,7 @@ import SwiftUI
 import Apollo
 
 protocol WorkoutLoggerAPIServiceProtocol {
-    func getWorkoutRoutines(completion: @escaping (Result<[WorkoutRoutinesFull], APIError>) -> Void)
+    func getWorkoutRoutines(completion: @escaping (Result<[WorkoutRoutineFull], APIError>) -> Void)
     func getWorkoutSessions(completion: @escaping (Result<[WorkoutSession], APIError>) -> Void)
     func createWorkoutRoutine(name: String, completion: @escaping (Result<CreateWorkoutRoutineMutation.Data.CreateWorkoutRoutine, APIError>) -> Void)
 }
@@ -23,7 +23,7 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
         self.parser = WorkoutSessionParser()
     }
     
-    func getWorkoutRoutines(completion: @escaping (Result<[WorkoutRoutinesFull], APIError>) -> Void) {
+    func getWorkoutRoutines(completion: @escaping (Result<[WorkoutRoutineFull], APIError>) -> Void) {
         self.client.fetch(query: WorkoutRoutinesQuery()) { result in
             switch result {
             case .success(let response):
@@ -33,7 +33,7 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
                     return
                 }
 
-                let workoutRoutinesFull: [WorkoutRoutinesFull] = response.data?.workoutRoutines.compactMap { $0.fragments.workoutRoutinesFull } ?? []
+                let workoutRoutinesFull: [WorkoutRoutineFull] = response.data?.workoutRoutines.compactMap { $0.fragments.workoutRoutineFull } ?? []
                 completion(Result.success(workoutRoutinesFull))
 
             case .failure:

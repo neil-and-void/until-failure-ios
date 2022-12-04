@@ -45,13 +45,13 @@ final class MockWorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
         completion(getWorkoutSessions)
     }
     
-    var getWorkoutRoutinesResult: Result<[WorkoutRoutinesFull], APIError> = .success(workoutRoutinesfull_mock)
+    var getWorkoutRoutinesResult: Result<[WorkoutRoutineFull], APIError> = .success(workoutRoutinesfull_mock)
     var createWorkoutRoutineResult: Result<CreateWorkoutRoutineMutation.Data.CreateWorkoutRoutine, APIError> = .success(createWorkoutRoutine_mock)
     var getWorkoutSessions: Result<[WorkoutSession], APIError> = .success(workoutSessionsFull_mock)
    
     init() {}
     
-    func getWorkoutRoutines(completion: @escaping (Result<[WorkoutRoutinesFull], APIError>) -> Void) {
+    func getWorkoutRoutines(completion: @escaping (Result<[WorkoutRoutineFull], APIError>) -> Void) {
         completion(getWorkoutRoutinesResult)
     }
     

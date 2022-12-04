@@ -11,7 +11,7 @@ struct WorkoutListView: View {
     @StateObject private var workoutListViewModel = WorkoutViewModel(service: WorkoutLoggerAPIService())
     
     // parses and sets a WorkoutRoutineFull to an EditableWorkoutRoutine
-    func buildEditableWorkoutRoutine(_ workoutRoutineFull: WorkoutRoutinesFull) -> WorkoutRoutine {
+    func buildEditableWorkoutRoutine(_ workoutRoutineFull: WorkoutRoutineFull) -> WorkoutRoutine {
         let exerciseRoutines = workoutRoutineFull.exerciseRoutines.compactMap { exerciseRoutine in
             return ExerciseRoutine(
                 id: exerciseRoutine.id,

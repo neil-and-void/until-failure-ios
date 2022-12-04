@@ -8,10 +8,10 @@
 import Foundation
 
 let exerciseRoutines_mock = [
-    WorkoutRoutinesFull.ExerciseRoutine(id: "12", name: "Squat", sets: 4, reps: 8),
-    WorkoutRoutinesFull.ExerciseRoutine(id: "13", name: "hamstring curls", sets: 4, reps: 10)
+    WorkoutRoutineFull.ExerciseRoutine(id: "12", name: "Squat", sets: 4, reps: 8),
+    WorkoutRoutineFull.ExerciseRoutine(id: "13", name: "hamstring curls", sets: 4, reps: 10)
 ]
-let workoutRoutinesfull_mock = [WorkoutRoutinesFull(id: "11", name: "Legs", exerciseRoutines: exerciseRoutines_mock)]
+let workoutRoutinesfull_mock = [WorkoutRoutineFull(id: "11", name: "Legs", exerciseRoutines: exerciseRoutines_mock)]
 
 let createWorkoutRoutine_mock = CreateWorkoutRoutineMutation.Data.CreateWorkoutRoutine(id: "11", name: "Legs")
 

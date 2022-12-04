@@ -1,4 +1,4 @@
-fragment workoutRoutinesFull on WorkoutRoutine {
+fragment workoutRoutineFull on WorkoutRoutine {
     id
     name
     exerciseRoutines {
