@@ -9,9 +9,11 @@ import SwiftUI
 
 struct EditWorkout: View {
     @StateObject var editWorkoutViewModel = EditWorkoutViewModel(service: WorkoutLoggerAPIService())
-    @Binding var showSheet: Bool
-    
     @State var showAlert: Bool = false
+    
+    @Binding var showSheet: Bool
+    @State var newExerciseRoutineName = ""
+    @State var workoutRoutine: WorkoutRoutine
 
     var body: some View {
         ZStack {
@@ -30,7 +32,9 @@ struct EditWorkout: View {
                     
                     Button("Done") {
 
-                        // TODO update 
+                        editWorkoutViewModel.updateWorkoutRoutine(workoutRoutine) {
+                            showSheet = false
+                        }
 
                     }.buttonStyle(TextButton())
 
@@ -38,51 +42,51 @@ struct EditWorkout: View {
                 .padding(.top)
                 .padding(.horizontal)
                 
-//                VStack {
-//                    
-//                    HStack {
-//                        
-//                        EditableWorkoutName(name: $workoutRoutine.name)
-//                        
-//                    }
-//                    
-//                    List {
-//                        
-//                        Button(action: { showAlert.toggle() }) {
-//                            
-//                            Text("Add exercise")
-//                            
-//                        }
-//                        .buttonStyle(TextButton())
-//                        .alert("Add exercise", isPresented: $showAlert) {
-//                            AddExerciseRoutineAlert(
-//                                name: $newExerciseRoutineName,
-//                                onAdd: {
-//                                    workoutRoutine.exerciseRoutines.append(ExerciseRoutine(
-//                                        id: "",
-//                                        name: newExerciseRoutineName,
-//                                        sets: 0,
-//                                        reps: 0
-//                                    ))
-//                                }
-//                            ).preferredColorScheme(.dark)
-//                        }
-//                        
-//                        ForEach($workoutRoutine.exerciseRoutines) { $exerciseRoutine in
-//                            
-//                            EditableExerciseRoutineListItem(editableExerciseRoutine: $exerciseRoutine)
-//                            
-//                        }.onDelete(perform: { idx in
-//                            
-//                            workoutRoutine.exerciseRoutines.remove(atOffsets: idx)
-// 
-//                        })
-//                        
-//                    }
-//                    .listStyle(PlainListStyle())
-//                    
-//                }
-//                
+                VStack {
+
+                    HStack {
+
+                        EditableWorkoutName(name: $workoutRoutine.name)
+
+                    }
+
+                    List {
+
+                        Button(action: { showAlert.toggle() }) {
+
+                            Text("Add exercise")
+
+                        }
+                        .buttonStyle(TextButton())
+                        .alert("Add exercise", isPresented: $showAlert) {
+                            AddExerciseRoutineAlert(
+                                name: $newExerciseRoutineName,
+                                onAdd: {
+                                    workoutRoutine.exerciseRoutines.append(ExerciseRoutine(
+                                        id: "",
+                                        name: newExerciseRoutineName,
+                                        sets: 0,
+                                        reps: 0
+                                    ))
+                                }
+                            ).preferredColorScheme(.dark)
+                        }
+
+                        ForEach($workoutRoutine.exerciseRoutines) { $exerciseRoutine in
+
+                            EditableExerciseRoutineListItem(editableExerciseRoutine: $exerciseRoutine)
+
+                        }.onDelete(perform: { idx in
+
+                            workoutRoutine.exerciseRoutines.remove(atOffsets: idx)
+
+                        })
+
+                    }
+                    .listStyle(PlainListStyle())
+
+                }
+
             }
 
         }
@@ -92,6 +96,9 @@ struct EditWorkout: View {
 
 struct EditWorkout_Previews: PreviewProvider {
     static var previews: some View {
-        EditWorkout(showSheet: .constant(true)).preferredColorScheme(.dark)
+        EditWorkout(
+            showSheet: .constant(true),
+            workoutRoutine: WorkoutRoutine(id: "0", name: "Legs", exerciseRoutines: [])
+        ).preferredColorScheme(.dark)
     }
 }

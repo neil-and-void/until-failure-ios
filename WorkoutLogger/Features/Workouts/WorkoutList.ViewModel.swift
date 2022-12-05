@@ -30,19 +30,4 @@ class WorkoutListViewModel: ObservableObject {
             }
         }
     }
-    
-    func updateWorkoutRoutine(_ workoutRoutine: WorkoutRoutine, onSuccess: @escaping () -> Void) {
-        print(workoutRoutine)
-        self.service.updateWorkoutRoutine(workoutRoutine) { result in
-            switch result {
-            case .success:
-                // refresh cache
-                self.getWorkoutRoutines()
-                onSuccess()
-            case .failure(let err):
-                print(err.localizedDescription)
-                self.editError = err.localizedDescription
-            }
-        }
-    }
 }

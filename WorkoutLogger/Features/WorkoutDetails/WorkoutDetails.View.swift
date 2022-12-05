@@ -15,11 +15,12 @@ struct WorkoutDetailsView: View {
     @State var workoutRoutineId: String
 
     var body: some View {
-
+        
             Group {
+
                 if workoutDetailsViewModel.isLoading {
                     
-                    Text("Loading...0")
+                    Text("Loading...")
                     
                 } else {
                     
@@ -40,12 +41,13 @@ struct WorkoutDetailsView: View {
                 }
                 
             }
-            .navigationBarItems(trailing:
-                                    Button(action: { showSheet.toggle() }, label: { Text("Edit") })
+            .navigationBarItems(trailing: Button(action: { showSheet.toggle() }, label: { Text("Edit") })
                 .buttonStyle(TextButton())
                 .sheet(isPresented: $showSheet) {
 
-                    EditWorkout(showSheet: $showSheet)
+                    if let workoutRoutine = workoutDetailsViewModel.workoutRoutine {
+                        EditWorkout(showSheet: $showSheet, workoutRoutine: workoutRoutine)
+                    }
 
                 }
                                 
