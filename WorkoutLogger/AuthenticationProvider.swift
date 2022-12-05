@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Apollo
 
 protocol AuthenticationStateProtocol {
     func setAuth(_ isAuthenticated: Bool)
@@ -13,9 +14,16 @@ protocol AuthenticationStateProtocol {
 
 // global state of whether user is signed in or not
 class AuthenticationState: ObservableObject, AuthenticationStateProtocol {
+    private var client: ApolloClientProtocol
     @Published var isAuthenticated = false
     
+    init(client: ApolloClientProtocol = WorkoutLoggerAPIClient.client) {
+        self.client = client
+    }
+    
     func setAuth(_ isAuthenticated: Bool) {
-        self.isAuthenticated = isAuthenticated
+        self.client.store.clearCache() { _ in
+            self.isAuthenticated = isAuthenticated
+        }
     }
 }
