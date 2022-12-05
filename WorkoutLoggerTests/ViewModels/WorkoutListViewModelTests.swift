@@ -9,13 +9,13 @@ import XCTest
 @testable import WorkoutLogger
 
 final class WorkoutListViewModelTests: XCTestCase {
-    var workoutViewModel: WorkoutViewModel!
+    var workoutViewModel: WorkoutListViewModel!
     var mockWorkoutAPIService: MockWorkoutLoggerAPIService!
 
     override func setUp() {
         super.setUp()
         mockWorkoutAPIService = MockWorkoutLoggerAPIService()
-        workoutViewModel = WorkoutViewModel(service: mockWorkoutAPIService)
+        workoutViewModel = WorkoutListViewModel(service: mockWorkoutAPIService)
     }
     
     func testGetWorkoutRoutinesSuccess() throws {

@@ -17,7 +17,7 @@ struct ContentView: View {
             } else {
                 LoginView()
             }
-        }.environmentObject(authState)
+        }.environmentObject(authState).preferredColorScheme(.dark)
     }
 }
 

@@ -6,31 +6,3 @@ query WorkoutSessions {
         ...workoutSessionFull
     }
 }
-
-fragment workoutRoutineFull on WorkoutRoutine {
-    id
-    name
-    exerciseRoutines {
-        id
-        name
-        sets
-        reps
-    }
-}
-
-fragment workoutSessionFull on WorkoutSession {
-        id
-        start
-        end
-        workoutRoutineId
-        exercises {
-                id
-                exerciseRoutineId
-                sets {
-                        id
-                        weight
-                        reps
-                }
-                notes
-        }
-}

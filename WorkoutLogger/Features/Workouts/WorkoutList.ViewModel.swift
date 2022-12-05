@@ -6,11 +6,13 @@
 //
 
 import Foundation
+import Apollo
 
-class WorkoutViewModel: ObservableObject {
+class WorkoutListViewModel: ObservableObject {
     private let service: WorkoutLoggerAPIServiceProtocol
    
     @Published var error: String?
+    @Published var editError: String?
     @Published var workoutRoutineList: [WorkoutRoutineFull] = []
     
     init(service: WorkoutLoggerAPIServiceProtocol) {
@@ -30,7 +32,17 @@ class WorkoutViewModel: ObservableObject {
     }
     
     func updateWorkoutRoutine(_ workoutRoutine: WorkoutRoutine, onSuccess: @escaping () -> Void) {
-        print(workoutRoutine as Any)
-        onSuccess()
+        print(workoutRoutine)
+        self.service.updateWorkoutRoutine(workoutRoutine) { result in
+            switch result {
+            case .success:
+                // refresh cache
+                self.getWorkoutRoutines()
+                onSuccess()
+            case .failure(let err):
+                print(err.localizedDescription)
+                self.editError = err.localizedDescription
+            }
+        }
     }
 }

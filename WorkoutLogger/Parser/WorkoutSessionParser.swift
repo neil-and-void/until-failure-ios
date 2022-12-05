@@ -9,11 +9,27 @@ import Foundation
 
 protocol WorkoutSessionParserProtocol {
     func parseGraphQL(workoutSessions: [WorkoutSessionsQuery.Data.WorkoutSession], workoutRoutines: [WorkoutSessionsQuery.Data.WorkoutRoutine]) -> [WorkoutSession]
-//    func parseWorkoutSession() ->
+    func parseWorkoutRoutine(_ workoutRoutine: WorkoutRoutine) -> UpdateWorkoutRoutineInput
 }
 
 // used for parsing graphql objects to our defined project types
-class WorkoutSessionParser: WorkoutSessionParserProtocol {
+class Parser: WorkoutSessionParserProtocol {
+    func parseWorkoutRoutine(_ workoutRoutine: WorkoutRoutine) -> UpdateWorkoutRoutineInput {
+        let exerciseRoutines = workoutRoutine.exerciseRoutines.map { exerciseRoutine in
+            return UpdateExerciseRoutineInput(
+                id: exerciseRoutine.id.count > 0 ? exerciseRoutine.id : nil,
+                name: exerciseRoutine.name,
+                sets: exerciseRoutine.sets,
+                reps: exerciseRoutine.reps
+            )
+        }
+       return UpdateWorkoutRoutineInput(
+            id: workoutRoutine.id,
+            name: workoutRoutine.name,
+            exerciseRoutines: exerciseRoutines
+        )
+    }
+    
     func parseGraphQL(workoutSessions: [WorkoutSessionsQuery.Data.WorkoutSession], workoutRoutines: [WorkoutSessionsQuery.Data.WorkoutRoutine]) -> [WorkoutSession] {
         var workoutRoutineDict: [String:  WorkoutRoutineFull] = [:]
         var exerciseRoutineDict: [String: WorkoutRoutineFull.ExerciseRoutine] = [:]
@@ -31,8 +47,8 @@ class WorkoutSessionParser: WorkoutSessionParserProtocol {
         return workoutSessions.compactMap { ws in
             let workoutSession = ws.fragments.workoutSessionFull
             
-            var exercises = workoutSession.exercises.compactMap { exercise in
-                var setEntries = exercise.sets.map { setEntry in
+            let exercises = workoutSession.exercises.compactMap { exercise in
+                let setEntries = exercise.sets.map { setEntry in
                     SetEntry(
                         id: setEntry.id,
                         weight: setEntry.weight,

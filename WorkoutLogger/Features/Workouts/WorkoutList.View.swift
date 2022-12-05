@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WorkoutListView: View {
-    @StateObject private var workoutListViewModel = WorkoutViewModel(service: WorkoutLoggerAPIService())
+    @StateObject private var workoutListViewModel = WorkoutListViewModel(service: WorkoutLoggerAPIService())
     
     // parses and sets a WorkoutRoutineFull to an EditableWorkoutRoutine
     func buildEditableWorkoutRoutine(_ workoutRoutineFull: WorkoutRoutineFull) -> WorkoutRoutine {
@@ -39,11 +39,7 @@ struct WorkoutListView: View {
                         ForEach(workoutListViewModel.workoutRoutineList, id: \.self.id) { workoutRoutine in
                             
                             NavigationLink(
-                                destination: WorkoutDetailsView(
-                                    workoutViewModel: workoutListViewModel,
-                                    updateWorkoutRoutineDraft: buildEditableWorkoutRoutine(workoutRoutine),
-                                    workoutRoutine: buildEditableWorkoutRoutine(workoutRoutine)
-                                )
+                                destination: WorkoutDetailsView(workoutRoutineId: workoutRoutine.id)
                             ) {
                                 
                                 WorkoutListItemView(name: workoutRoutine.name, exerciseCount: workoutRoutine.exerciseRoutines.count)

@@ -1,8 +1,10 @@
 fragment workoutRoutineFull on WorkoutRoutine {
     id
+    active
     name
     exerciseRoutines {
         id
+        active
         name
         sets
         reps

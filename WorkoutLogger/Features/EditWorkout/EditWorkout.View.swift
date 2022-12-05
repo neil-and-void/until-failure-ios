@@ -8,74 +8,90 @@
 import SwiftUI
 
 struct EditWorkout: View {
-    var workoutViewModel: WorkoutViewModel
+    @StateObject var editWorkoutViewModel = EditWorkoutViewModel(service: WorkoutLoggerAPIService())
     @Binding var showSheet: Bool
-    @Binding var workoutRoutine: WorkoutRoutine
     
+    @State var showAlert: Bool = false
+
     var body: some View {
+        ZStack {
 
-        VStack {
-
-            HStack {
-
-                Button(action: { showSheet = false }) {
-
-                    Text("Cancel")
-
-                }.buttonStyle(TextButton())
-
-                Spacer()
-
-                Button(action: {
-                    workoutViewModel.updateWorkoutRoutine(workoutRoutine) { 
-                        showSheet = false
-                    }
-                }) {
-
-                    Text("Done")
-
-                }.buttonStyle(TextButton())
-
-            }
-            .padding(.top)
-            .padding(.horizontal)
-
-                VStack {
-
-                    HStack {
-
-                        EditableWorkoutName(name: $workoutRoutine.name)
-
-                    }
-
-                    List {
-
-                        ForEach($workoutRoutine.exerciseRoutines) { $exerciseRoutine in
-
-                            EditableExerciseRoutineListItem(editableExerciseRoutine: $exerciseRoutine)
-
-                        }.onDelete(perform: { idx in
-
-                            print("skldfjlskd", idx)
-
-                        })
-
-                    }
-                    .listStyle(PlainListStyle())
+            VStack {
+                
+                HStack {
                     
-                }
+                    Button("Cancel") {
+                        
+                        showSheet = false
+                        
+                    }.buttonStyle(TextButton())
+                    
+                    Spacer()
+                    
+                    Button("Done") {
 
+                        // TODO update 
+
+                    }.buttonStyle(TextButton())
+
+                }
+                .padding(.top)
+                .padding(.horizontal)
+                
+//                VStack {
+//                    
+//                    HStack {
+//                        
+//                        EditableWorkoutName(name: $workoutRoutine.name)
+//                        
+//                    }
+//                    
+//                    List {
+//                        
+//                        Button(action: { showAlert.toggle() }) {
+//                            
+//                            Text("Add exercise")
+//                            
+//                        }
+//                        .buttonStyle(TextButton())
+//                        .alert("Add exercise", isPresented: $showAlert) {
+//                            AddExerciseRoutineAlert(
+//                                name: $newExerciseRoutineName,
+//                                onAdd: {
+//                                    workoutRoutine.exerciseRoutines.append(ExerciseRoutine(
+//                                        id: "",
+//                                        name: newExerciseRoutineName,
+//                                        sets: 0,
+//                                        reps: 0
+//                                    ))
+//                                }
+//                            ).preferredColorScheme(.dark)
+//                        }
+//                        
+//                        ForEach($workoutRoutine.exerciseRoutines) { $exerciseRoutine in
+//                            
+//                            EditableExerciseRoutineListItem(editableExerciseRoutine: $exerciseRoutine)
+//                            
+//                        }.onDelete(perform: { idx in
+//                            
+//                            workoutRoutine.exerciseRoutines.remove(atOffsets: idx)
+// 
+//                        })
+//                        
+//                    }
+//                    .listStyle(PlainListStyle())
+//                    
+//                }
+//                
+            }
 
         }
+
     }
 }
 
 struct EditWorkout_Previews: PreviewProvider {
     static var previews: some View {
-        EditWorkout(
-            workoutViewModel: WorkoutViewModel(service: WorkoutLoggerAPIService()),
-            showSheet: .constant(true),
-            workoutRoutine: .constant(WorkoutRoutine(id: "2", name: "Name", exerciseRoutines: []))
-        ).preferredColorScheme(.dark)
+        EditWorkout(showSheet: .constant(true)).preferredColorScheme(.dark)
     }
 }

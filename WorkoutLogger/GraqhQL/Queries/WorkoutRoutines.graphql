@@ -3,14 +3,3 @@ query WorkoutRoutines {
         ...workoutRoutineFull
     }
 }
-
-fragment workoutRoutineFull on WorkoutRoutine {
-    id
-    name
-    exerciseRoutines {
-        id
-        name
-        sets
-        reps
-    }
-}

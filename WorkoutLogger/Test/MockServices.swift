@@ -41,13 +41,11 @@ final class MockAuthenticationService: AuthServiceProtocol {
 }
 
 final class MockWorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
-    func getWorkoutSessions(completion: @escaping (Result<[WorkoutSession], APIError>) -> Void) {
-        completion(getWorkoutSessions)
-    }
-    
     var getWorkoutRoutinesResult: Result<[WorkoutRoutineFull], APIError> = .success(workoutRoutinesfull_mock)
     var createWorkoutRoutineResult: Result<CreateWorkoutRoutineMutation.Data.CreateWorkoutRoutine, APIError> = .success(createWorkoutRoutine_mock)
-    var getWorkoutSessions: Result<[WorkoutSession], APIError> = .success(workoutSessionsFull_mock)
+    var getWorkoutSessionsResult: Result<[WorkoutSession], APIError> = .success(workoutSessionsFull_mock)
+    var updateWorkoutRoutineResult: Result<WorkoutRoutineFull, APIError> = .success(workoutRoutinesfull_mock[0])
+    var getWorkoutRoutineResult: Result<WorkoutRoutine, APIError> = .success(workoutRoutine_mock)
    
     init() {}
     
@@ -55,7 +53,20 @@ final class MockWorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
         completion(getWorkoutRoutinesResult)
     }
     
+    func getWorkoutRoutine(workoutRoutineId: String, completion: @escaping (Result<WorkoutRoutine, APIError>) -> Void) {
+        completion(getWorkoutRoutineResult)
+    }
+    
     func createWorkoutRoutine(name: String, completion: @escaping (Result<CreateWorkoutRoutineMutation.Data.CreateWorkoutRoutine, APIError>) -> Void) {
         completion(createWorkoutRoutineResult)
     }
+    
+    func updateWorkoutRoutine(_ workoutRoutine: WorkoutRoutine, completion: @escaping (Result<WorkoutRoutineFull, APIError>) -> Void) {
+        completion(updateWorkoutRoutineResult)
+    }
+    
+    func getWorkoutSessions(completion: @escaping (Result<[WorkoutSession], APIError>) -> Void) {
+        completion(getWorkoutSessionsResult)
+    }
+    
 }

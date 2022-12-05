@@ -1,0 +1,63 @@
+//
+//  WorkoutDetailsView.swift
+//  WorkoutLogger
+//
+//  Created by Neil Viloria on 2022-11-29.
+//
+
+import SwiftUI
+
+struct WorkoutDetailsView: View {
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @ObservedObject var workoutDetailsViewModel = WorkoutDetailsViewModel(service: WorkoutLoggerAPIService())
+    @State private var showSheet = false
+
+    @State var workoutRoutineId: String
+
+    var body: some View {
+
+            Group {
+                if workoutDetailsViewModel.isLoading {
+                    
+                    Text("Loading...0")
+                    
+                } else {
+                    
+                    if let workoutRoutine = workoutDetailsViewModel.workoutRoutine {
+                        
+                        Text(workoutRoutine.name)
+                            .font(.title)
+                            .fontWeight(.bold)
+                        
+                        ExerciseRoutineList(exerciseRoutines: workoutRoutine.exerciseRoutines)
+                        
+                    } else {
+                        
+                        Text("Nothing to view here")
+                        
+                    }
+                    
+                }
+                
+            }
+            .navigationBarItems(trailing:
+                                    Button(action: { showSheet.toggle() }, label: { Text("Edit") })
+                .buttonStyle(TextButton())
+                .sheet(isPresented: $showSheet) {
+
+                    EditWorkout(showSheet: $showSheet)
+
+                }
+                                
+            )
+            .onAppear(perform: { workoutDetailsViewModel.getWorkoutRoutine(workoutRoutineId: workoutRoutineId) })
+            
+        }
+    
+}
+
+struct WorkoutView_Previews: PreviewProvider {
+    static var previews: some View {
+        WorkoutDetailsView(workoutRoutineId: "23").preferredColorScheme(.dark)
+    }
+}

@@ -1,0 +1,7 @@
+mutation UpdateWorkoutRoutine($workoutRoutine: UpdateWorkoutRoutineInput!) {
+    updateWorkoutRoutine(workoutRoutine: $workoutRoutine) {
+        ...workoutRoutineFull
+    }
+}
+
+

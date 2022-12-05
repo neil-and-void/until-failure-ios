@@ -20,6 +20,12 @@ struct ExerciseRoutine: Identifiable {
     var reps: Int
 }
 
+struct NewDraftExerciseRoutine {
+    var name: String = ""
+    var reps: Int = 0
+    var sets: Int = 0
+}
+
 struct WorkoutRoutine: Identifiable {
     var id: String
     var name: String
