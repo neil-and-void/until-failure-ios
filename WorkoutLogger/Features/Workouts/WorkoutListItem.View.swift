@@ -17,26 +17,19 @@ struct WorkoutListItemView: View {
             Group {
                 
                 VStack(alignment: .leading) {
-
-                Text(name).fontWeight(.semibold).font(.system(size: 20))
-
-                Text("\(exerciseCount) \(exerciseCount > 1 ? "exercises" : "exercise")")
-                    .font(.system(size: 16))
-                    .foregroundColor(.secondaryText)
-
+                    
+                    Text(name).fontWeight(.semibold).font(.system(size: 20))
+                    
+                    Text("\(exerciseCount) \(exerciseCount > 1 ? "exercises" : "exercise")")
+                        .font(.system(size: 16))
+                        .foregroundColor(.secondaryText)
+                    
+                }
+                
             }
-   
-            Spacer()
-            
-            Image(systemName: "chevron.right")
-
-            }.padding()
             
         }
-        .background(Color.bgSecondary)
-        .padding(.bottom, 2)
-        .cornerRadius(15)
-
+        
     }
     
 }

@@ -12,7 +12,6 @@ struct EditWorkout: View {
     @State var showAlert: Bool = false
     
     @Binding var showSheet: Bool
-    @State var newExerciseRoutineName = ""
     @State var workoutRoutine: WorkoutRoutine
 
     var body: some View {
@@ -60,11 +59,10 @@ struct EditWorkout: View {
                         .buttonStyle(TextButton())
                         .alert("Add exercise", isPresented: $showAlert) {
                             AddExerciseRoutineAlert(
-                                name: $newExerciseRoutineName,
-                                onAdd: {
+                                onAdd: { exerciseName in
                                     workoutRoutine.exerciseRoutines.append(ExerciseRoutine(
                                         id: "",
-                                        name: newExerciseRoutineName,
+                                        name: exerciseName,
                                         sets: 0,
                                         reps: 0
                                     ))
@@ -72,7 +70,7 @@ struct EditWorkout: View {
                             ).preferredColorScheme(.dark)
                         }
 
-                        ForEach($workoutRoutine.exerciseRoutines) { $exerciseRoutine in
+                        ForEach($workoutRoutine.exerciseRoutines, id: \.self._id) { $exerciseRoutine in
 
                             EditableExerciseRoutineListItem(editableExerciseRoutine: $exerciseRoutine)
 

@@ -9,41 +9,41 @@ import XCTest
 @testable import WorkoutLogger
 
 final class CreateWorkoutViewModelTests: XCTestCase {
-    var creatWorkoutViewModel: CreateWorkoutViewModel!
+    var workoutListViewModel: WorkoutListViewModel!
     var mockWorkoutAPIService: MockWorkoutLoggerAPIService!
-
+    
     override func setUp() {
         super.setUp()
         mockWorkoutAPIService = MockWorkoutLoggerAPIService()
-        creatWorkoutViewModel = CreateWorkoutViewModel(service: mockWorkoutAPIService)
+        workoutListViewModel = WorkoutListViewModel(service: mockWorkoutAPIService)
     }
     
     func testGetWorkoutRoutinesSuccess() throws {
-        creatWorkoutViewModel.createWorkoutRoutine(onCompletion: {result in})
-        XCTAssertNil(creatWorkoutViewModel.error)
+        workoutListViewModel.createWorkoutRoutine(name: "stuff",completion: {result in})
+        XCTAssertNil(workoutListViewModel.error)
     }
-
+    
     func testGetWorkoutRoutinesFailure_NetworkError() throws {
         mockWorkoutAPIService.createWorkoutRoutineResult = .failure(APIError.networkError)
-  
-        creatWorkoutViewModel.createWorkoutRoutine(onCompletion: {result in})
-
-        XCTAssertEqual(APIError.networkError.localizedDescription, creatWorkoutViewModel.error, "Errors did not match")
+        
+        workoutListViewModel.createWorkoutRoutine(name: "stuff",completion: {result in})
+        
+        XCTAssertEqual(APIError.networkError.localizedDescription, workoutListViewModel.error, "Errors did not match")
     }
-
+    
     func testGetWorkoutRoutines_GraphQLError() throws {
         mockWorkoutAPIService.createWorkoutRoutineResult = .failure(APIError.GraphQLError(gqlError: "Graphql error"))
-
-        creatWorkoutViewModel.createWorkoutRoutine(onCompletion: {result in})
-
-        XCTAssertEqual(APIError.GraphQLError(gqlError: "Graphql error").localizedDescription, creatWorkoutViewModel.error)
+        
+        workoutListViewModel.createWorkoutRoutine(name: "stuff",completion: {result in})
+        
+        XCTAssertEqual(APIError.GraphQLError(gqlError: "Graphql error").localizedDescription, workoutListViewModel.error)
     }
     
     func testGetWorkoutRoutines_UnknownError() throws {
         mockWorkoutAPIService.createWorkoutRoutineResult = .failure(APIError.unknown)
-
-        creatWorkoutViewModel.createWorkoutRoutine(onCompletion: {result in})
-
-        XCTAssertEqual(APIError.unknown.localizedDescription, creatWorkoutViewModel.error)
+        
+        workoutListViewModel.createWorkoutRoutine(name: "stuff", completion: {result in})
+        
+        XCTAssertEqual(APIError.unknown.localizedDescription, workoutListViewModel.error)
     }
 }

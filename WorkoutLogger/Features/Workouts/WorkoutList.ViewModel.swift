@@ -10,7 +10,7 @@ import Apollo
 
 class WorkoutListViewModel: ObservableObject {
     private let service: WorkoutLoggerAPIServiceProtocol
-   
+    
     @Published var error: String?
     @Published var workoutRoutineList: [WorkoutRoutineFull] = []
     
@@ -37,6 +37,18 @@ class WorkoutListViewModel: ObservableObject {
                 self.error = nil
                 self.getWorkoutRoutines(withNetwork: true)
                 completion(true)
+            case .failure(let err):
+                self.error = err.localizedDescription
+            }
+        }
+    }
+    
+    func deleteWorkoutRoutine(id: String) {
+        self.service.deleteWorkoutRoutine(id: id) { result in
+            switch result {
+            case .success:
+                print(result as Any)
+                self.error = nil
             case .failure(let err):
                 self.error = err.localizedDescription
             }

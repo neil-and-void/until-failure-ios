@@ -69,6 +69,7 @@
 		28C2EE03292DA902000BE3EB /* RefreshMutation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 28C2EE02292DA902000BE3EB /* RefreshMutation.graphql */; };
 		28C2EE07292DF2E4000BE3EB /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2EE06292DF2E4000BE3EB /* Errors.swift */; };
 		28E03C5529401E8900B38824 /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E03C5429401E8900B38824 /* PullToRefresh.swift */; };
+		28E03C5729406F1000B38824 /* DeleteWorkoutRoutineMutation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 28E03C5629406F1000B38824 /* DeleteWorkoutRoutineMutation.graphql */; };
 		28F14021293DCF8C00DF6857 /* Workout.ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F14020293DCF8C00DF6857 /* Workout.ViewModel.swift */; };
 		28F14025293DDA4C00DF6857 /* WorkoutRoutine.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 28F14024293DDA4C00DF6857 /* WorkoutRoutine.graphql */; };
 /* End PBXBuildFile section */
@@ -155,6 +156,7 @@
 		28C2EE02292DA902000BE3EB /* RefreshMutation.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = RefreshMutation.graphql; sourceTree = "<group>"; };
 		28C2EE06292DF2E4000BE3EB /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		28E03C5429401E8900B38824 /* PullToRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
+		28E03C5629406F1000B38824 /* DeleteWorkoutRoutineMutation.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = DeleteWorkoutRoutineMutation.graphql; sourceTree = "<group>"; };
 		28F14020293DCF8C00DF6857 /* Workout.ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.ViewModel.swift; sourceTree = "<group>"; };
 		28F14024293DDA4C00DF6857 /* WorkoutRoutine.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = WorkoutRoutine.graphql; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -402,6 +404,7 @@
 				28C2EE02292DA902000BE3EB /* RefreshMutation.graphql */,
 				2848D807293316A3001E8CD0 /* CreateWorkoutRoutine.graphql */,
 				2841A117293D425600751D13 /* UpdateWorkoutRoutineMutation.graphql */,
+				28E03C5629406F1000B38824 /* DeleteWorkoutRoutineMutation.graphql */,
 			);
 			path = Mutations;
 			sourceTree = "<group>";
@@ -604,6 +607,7 @@
 				2865A811293AE01A00020C7A /* schema.json in Resources */,
 				2848D808293316A3001E8CD0 /* CreateWorkoutRoutine.graphql in Resources */,
 				2895BB50292626A600A16CF8 /* Assets.xcassets in Resources */,
+				28E03C5729406F1000B38824 /* DeleteWorkoutRoutineMutation.graphql in Resources */,
 				2895BB7C292627B900A16CF8 /* WorkoutRoutines.graphql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

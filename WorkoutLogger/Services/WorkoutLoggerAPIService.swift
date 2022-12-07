@@ -14,6 +14,7 @@ protocol WorkoutLoggerAPIServiceProtocol {
     func getWorkoutSessions(completion: @escaping (Result<[WorkoutSession], APIError>) -> Void)
     func createWorkoutRoutine(name: String, completion: @escaping (Result<CreateWorkoutRoutineMutation.Data.CreateWorkoutRoutine, APIError>) -> Void)
     func updateWorkoutRoutine(_ workoutRoutine: WorkoutRoutine, completion: @escaping (Result<WorkoutRoutineFull, APIError>) -> Void)
+    func deleteWorkoutRoutine(id: String, completion: @escaping (Result<String, APIError>) -> Void)
 }
 
 extension WorkoutLoggerAPIServiceProtocol {
@@ -163,6 +164,23 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
             case .failure:
                 completion(Result.failure(APIError.networkError))
 
+            }
+        }
+    }
+    
+    func deleteWorkoutRoutine(id: String, completion: @escaping (Result<String, APIError>) -> Void) {
+        self.client.perform(mutation: DeleteWorkoutRoutineMutation(workoutRoutineId: id)) { result in
+            switch result {
+            case .success(let response):
+                print(response.data as Any)
+                if let errors = response.errors {
+                    let error = APIError.GraphQLError(gqlError: errors[0].message)
+                    completion(Result.failure(error))
+                    return
+                }
+//                completion(Result.success(response.data))
+            case .failure:
+                completion(Result.failure(APIError.networkError))
             }
         }
     }

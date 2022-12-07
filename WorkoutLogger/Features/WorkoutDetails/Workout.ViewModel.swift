@@ -44,4 +44,8 @@ class WorkoutViewModel: ObservableObject {
             }
         }
     }
+    
+    func deleteWorkoutRoutine(id: String) {
+        
+    }
 }

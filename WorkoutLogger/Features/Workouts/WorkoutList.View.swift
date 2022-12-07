@@ -15,12 +15,8 @@ struct WorkoutListView: View {
 
             VStack {
                 
-                ScrollView {
-                    
-                    PullToRefresh(coordinateSpaceName: "pullToRefreshWorkouts") {
-                        workoutListViewModel.getWorkoutRoutines(withNetwork: true)
-                    }
-                    
+                List {
+                     
                     if workoutListViewModel.workoutRoutineList.count > 0 {
                         
                         ForEach(workoutListViewModel.workoutRoutineList, id: \.self.id) { workoutRoutine in
@@ -32,9 +28,20 @@ struct WorkoutListView: View {
                                 WorkoutListItemView(name: workoutRoutine.name, exerciseCount: workoutRoutine.exerciseRoutines.count)
                                 
                             }
-                            
+ 
                         }
-                        
+                        .onDelete(perform: { indexSet in
+                            for i in indexSet {
+                                workoutListViewModel.deleteWorkoutRoutine(id: workoutListViewModel.workoutRoutineList[i].id)
+                            }
+                        })
+                        .padding()
+                        .background(RoundedRectangle(cornerRadius: 12).fill(Color.bgSecondary))
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
+                        .listRowInsets(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0))
+
+ 
                     } else {
                         
                         Text("You don't have any routines here, tap the '+' above to add a workout")
@@ -46,10 +53,13 @@ struct WorkoutListView: View {
                     
                 }
                 .onAppear(perform: { workoutListViewModel.getWorkoutRoutines() })
+                .refreshable {
+                    workoutListViewModel.getWorkoutRoutines(withNetwork: true)
+                }
                 
+
             }
             .coordinateSpace(name: "pullToRefreshWorkouts")
-            .padding(.horizontal)
             .toolbar {
                 
                 ToolbarItem(placement: .navigationBarLeading) {

@@ -264,6 +264,57 @@ public final class CreateWorkoutRoutineMutation: GraphQLMutation {
   }
 }
 
+public final class DeleteWorkoutRoutineMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
+  public let operationDefinition: String =
+    """
+    mutation DeleteWorkoutRoutine($workoutRoutineId: ID!) {
+      deleteWorkoutRoutine(workoutRoutineId: $workoutRoutineId)
+    }
+    """
+
+  public let operationName: String = "DeleteWorkoutRoutine"
+
+  public var workoutRoutineId: GraphQLID
+
+  public init(workoutRoutineId: GraphQLID) {
+    self.workoutRoutineId = workoutRoutineId
+  }
+
+  public var variables: GraphQLMap? {
+    return ["workoutRoutineId": workoutRoutineId]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["Mutation"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("deleteWorkoutRoutine", arguments: ["workoutRoutineId": GraphQLVariable("workoutRoutineId")], type: .nonNull(.scalar(Int.self))),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(deleteWorkoutRoutine: Int) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "deleteWorkoutRoutine": deleteWorkoutRoutine])
+    }
+
+    public var deleteWorkoutRoutine: Int {
+      get {
+        return resultMap["deleteWorkoutRoutine"]! as! Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "deleteWorkoutRoutine")
+      }
+    }
+  }
+}
+
 public final class LoginMutation: GraphQLMutation {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =

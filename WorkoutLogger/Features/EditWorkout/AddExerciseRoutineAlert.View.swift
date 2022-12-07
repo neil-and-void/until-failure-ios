@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct AddExerciseRoutineAlert: View {
-    @Binding var name: String
-    var onAdd: () -> Void
+    @State var name = ""
+    var onAdd: (String) -> Void
  
     var body: some View {
         VStack {
@@ -23,7 +23,10 @@ struct AddExerciseRoutineAlert: View {
                 Text("Cancel")
             }
 
-            Button(action: onAdd ) {
+            Button(action: {
+                onAdd(name)
+                name = ""
+            }) {
                 Text("Add")
             }
 
@@ -35,8 +38,7 @@ struct AddExerciseRoutineAlert: View {
 struct AddExerciseRoutineAlert_Previews: PreviewProvider {
     static var previews: some View {
         AddExerciseRoutineAlert(
-            name: .constant("Legs"),
-            onAdd: { }
+            onAdd: { _ in }
         ).preferredColorScheme(.dark)
     }
 }

@@ -49,6 +49,8 @@ final class MockWorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
    
     init() {}
     
+    func deleteWorkoutRoutine(id: String, completion: @escaping (Result<String, APIError>) -> Void) {}
+    
     func getWorkoutRoutines(completion: @escaping (Result<[WorkoutRoutineFull], APIError>) -> Void) {
         completion(getWorkoutRoutinesResult)
     }

@@ -14,6 +14,7 @@ struct AuthResult {
 }
 
 struct ExerciseRoutine: Identifiable {
+    var _id = UUID()
     var id: String
     var name: String
     var sets: Int
