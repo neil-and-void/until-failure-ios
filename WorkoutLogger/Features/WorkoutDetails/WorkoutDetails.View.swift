@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WorkoutDetailsView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    @ObservedObject var workoutDetailsViewModel = WorkoutDetailsViewModel(service: WorkoutLoggerAPIService())
+    @ObservedObject var workoutViewModel = WorkoutViewModel(service: WorkoutLoggerAPIService())
     @State private var showSheet = false
 
     @State var workoutRoutineId: String
@@ -18,13 +18,13 @@ struct WorkoutDetailsView: View {
         
             Group {
 
-                if workoutDetailsViewModel.isLoading {
+                if workoutViewModel.isLoading {
                     
                     Text("Loading...")
                     
                 } else {
                     
-                    if let workoutRoutine = workoutDetailsViewModel.workoutRoutine {
+                    if let workoutRoutine = workoutViewModel.workoutRoutine {
                         
                         Text(workoutRoutine.name)
                             .font(.title)
@@ -45,14 +45,14 @@ struct WorkoutDetailsView: View {
                 .buttonStyle(TextButton())
                 .sheet(isPresented: $showSheet) {
 
-                    if let workoutRoutine = workoutDetailsViewModel.workoutRoutine {
-                        EditWorkout(showSheet: $showSheet, workoutRoutine: workoutRoutine)
+                    if let workoutRoutine = workoutViewModel.workoutRoutine {
+                        EditWorkout(workoutViewModel: workoutViewModel, showSheet: $showSheet, workoutRoutine: workoutRoutine)
                     }
 
                 }
                                 
             )
-            .onAppear(perform: { workoutDetailsViewModel.getWorkoutRoutine(workoutRoutineId: workoutRoutineId) })
+            .onAppear(perform: { workoutViewModel.getWorkoutRoutine(workoutRoutineId: workoutRoutineId) })
             
         }
     

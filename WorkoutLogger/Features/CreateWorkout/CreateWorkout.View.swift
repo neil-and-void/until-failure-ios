@@ -9,83 +9,84 @@ import SwiftUI
 
 struct CreateWorkoutView: View {
     @EnvironmentObject private var authState: AuthenticationState
-    @StateObject private var createWorkoutViewModel = CreateWorkoutViewModel(service: WorkoutLoggerAPIService())
+    @StateObject var workoutListViewModel: WorkoutListViewModel
+    @State private var workoutName = ""
     @State private var showSheet = false
     
     var body: some View {
-
-            Button(action: { showSheet.toggle() }) {
-
-                Image(systemName: "plus")
-
-            }
-            .buttonStyle(TextButton())
-            .sheet(isPresented: $showSheet) {
-
-                ZStack {
+        
+        Button(action: { showSheet.toggle() }) {
+            
+            Image(systemName: "plus")
+            
+        }
+        .buttonStyle(TextButton())
+        .sheet(isPresented: $showSheet) {
+            
+            ZStack {
+                
+                HStack {
                     
-                    HStack {
-
+                    Spacer()
+                    
+                    VStack(alignment: .leading) {
+                        
+                        Button(action: { showSheet.toggle()}) {
+                            Text("Cancel")
+                        }
+                        .buttonStyle(TextButton())
+                        .padding()
+                        
                         Spacer()
                         
-                        VStack(alignment: .leading) {
-                            
-                            Button(action: { showSheet.toggle()}) {
-                                Text("Cancel")
-                            }
-                            .buttonStyle(TextButton())
-                            .padding()
-                            
-                            Spacer()
-                            
+                    }
+                    
+                }
+                
+                VStack {
+                    
+                    VStack {
+                        
+                        Text("Give your workout routine a name")
+                        
+                        if let error = workoutListViewModel.error {
+                            Text(error)
+                                .foregroundColor(.red)
+                                .multilineTextAlignment(.center)
                         }
                         
                     }
                     
-                    VStack {
-                        
-                        VStack {
-                            
-                            Text("Give your workout routine a name")
-                                
-                            if let error = createWorkoutViewModel.error {
-                                Text(error)
-                                    .foregroundColor(.red)
-                                    .multilineTextAlignment(.center)
-                            }
-
-                        }
-                        
-                        TextField("", text: $createWorkoutViewModel.workoutName)
-                            .multilineTextAlignment(.center)
-                            .fontWeight(.bold)
-                            .font(.system(size: 36))
-
-                        Divider()
-                         .frame(height: 1)
-                         .background(.gray)
+                    TextField("", text: $workoutName)
+                        .multilineTextAlignment(.center)
+                        .fontWeight(.bold)
+                        .font(.system(size: 36))
                     
-                        Button(action: { createWorkoutViewModel.createWorkoutRoutine { wasSuccessful in
-                            showSheet = !wasSuccessful
-                        }}) {
-
-                            Text("Create")
-
-                        }
-                        .buttonStyle(RoundedButton())
-                        .padding()
-
-                    }.padding()
+                    Divider()
+                        .frame(height: 1)
+                        .background(.gray)
                     
-                }.preferredColorScheme(.dark)
-
-            }
+                    Button(action: { workoutListViewModel.createWorkoutRoutine(name: workoutName) { wasSuccessful in
+                        showSheet = !wasSuccessful
+                    }}) {
+                        
+                        Text("Create")
+                        
+                    }
+                    .buttonStyle(RoundedButton())
+                    .padding()
+                    
+                }.padding()
+                
+            }.preferredColorScheme(.dark)
             
+        }
+        
     }
 }
 
 struct CreateWorkoutView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateWorkoutView().preferredColorScheme(.dark)
+        CreateWorkoutView(workoutListViewModel: WorkoutListViewModel(service: WorkoutLoggerAPIService())).preferredColorScheme(.dark)
     }
 }

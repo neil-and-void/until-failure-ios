@@ -10,32 +10,19 @@ import SwiftUI
 struct WorkoutListView: View {
     @StateObject private var workoutListViewModel = WorkoutListViewModel(service: WorkoutLoggerAPIService())
     
-    // parses and sets a WorkoutRoutineFull to an EditableWorkoutRoutine
-    func buildEditableWorkoutRoutine(_ workoutRoutineFull: WorkoutRoutineFull) -> WorkoutRoutine {
-        let exerciseRoutines = workoutRoutineFull.exerciseRoutines.compactMap { exerciseRoutine in
-            return ExerciseRoutine(
-                id: exerciseRoutine.id,
-                name: exerciseRoutine.name,
-                sets: exerciseRoutine.sets,
-                reps: exerciseRoutine.reps
-            )
-        }
-
-       return WorkoutRoutine(
-            id: workoutRoutineFull.id,
-            name: workoutRoutineFull.name,
-            exerciseRoutines: exerciseRoutines
-        )
-    }
-     
     var body: some View {
         NavigationStack {
+
             VStack {
                 
-                ScrollView{
-
+                ScrollView {
+                    
+                    PullToRefresh(coordinateSpaceName: "pullToRefreshWorkouts") {
+                        workoutListViewModel.getWorkoutRoutines(withNetwork: true)
+                    }
+                    
                     if workoutListViewModel.workoutRoutineList.count > 0 {
-
+                        
                         ForEach(workoutListViewModel.workoutRoutineList, id: \.self.id) { workoutRoutine in
                             
                             NavigationLink(
@@ -45,43 +32,44 @@ struct WorkoutListView: View {
                                 WorkoutListItemView(name: workoutRoutine.name, exerciseCount: workoutRoutine.exerciseRoutines.count)
                                 
                             }
-
+                            
                         }
-
+                        
                     } else {
-
-                        Text("You don't have any routines here... ADD ONE AND HIT THE GYM")
+                        
+                        Text("You don't have any routines here, tap the '+' above to add a workout")
                             .foregroundColor(.tertiaryText)
                             .multilineTextAlignment(.center)
                             .padding()
-
+                        
                     }
-
+                    
                 }
                 .onAppear(perform: { workoutListViewModel.getWorkoutRoutines() })
-     
+                
             }
+            .coordinateSpace(name: "pullToRefreshWorkouts")
             .padding(.horizontal)
             .toolbar {
-                 
-                 ToolbarItem(placement: .navigationBarLeading) {
-
-                     Text("Routines")
-                         .font(.largeTitle)
-                         .fontWeight(.bold)
-
+                
+                ToolbarItem(placement: .navigationBarLeading) {
+                    
+                    Text("Routines")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                    
                 }
-
+                
                 ToolbarItem(placement: .navigationBarTrailing) {
-
-                    CreateWorkoutView()
-
-                 }
-
+                    
+                    CreateWorkoutView(workoutListViewModel: workoutListViewModel)
+                    
+                }
+                
             }
-
+            
         }
-
+        
     }
 }
 

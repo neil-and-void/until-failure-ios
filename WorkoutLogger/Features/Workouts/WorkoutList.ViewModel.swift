@@ -12,19 +12,31 @@ class WorkoutListViewModel: ObservableObject {
     private let service: WorkoutLoggerAPIServiceProtocol
    
     @Published var error: String?
-    @Published var editError: String?
     @Published var workoutRoutineList: [WorkoutRoutineFull] = []
     
     init(service: WorkoutLoggerAPIServiceProtocol) {
         self.service = service
     }
     
-    func getWorkoutRoutines() {
-        self.service.getWorkoutRoutines() { result in
+    func getWorkoutRoutines(withNetwork: Bool = false) {
+        self.service.getWorkoutRoutines(withNetwork: withNetwork) { result in
             switch result {
             case .success(let workoutRoutines):
                 self.error = nil
                 self.workoutRoutineList = workoutRoutines
+            case .failure(let err):
+                self.error = err.localizedDescription
+            }
+        }
+    }
+    
+    func createWorkoutRoutine(name: String, completion: @escaping (Bool) -> Void) {
+        self.service.createWorkoutRoutine(name: name) { result in
+            switch result {
+            case .success:
+                self.error = nil
+                self.getWorkoutRoutines(withNetwork: true)
+                completion(true)
             case .failure(let err):
                 self.error = err.localizedDescription
             }

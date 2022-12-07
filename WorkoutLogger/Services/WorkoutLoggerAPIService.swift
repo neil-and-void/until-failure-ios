@@ -9,11 +9,20 @@ import SwiftUI
 import Apollo
 
 protocol WorkoutLoggerAPIServiceProtocol {
-    func getWorkoutRoutines(completion: @escaping (Result<[WorkoutRoutineFull], APIError>) -> Void)
-    func getWorkoutRoutine(workoutRoutineId: String, completion: @escaping (Result<WorkoutRoutine, APIError>) -> Void)
+    func getWorkoutRoutines(withNetwork: Bool, completion: @escaping (Result<[WorkoutRoutineFull], APIError>) -> Void)
+    func getWorkoutRoutine(withNetwork: Bool, workoutRoutineId: String, completion: @escaping (Result<WorkoutRoutine, APIError>) -> Void)
     func getWorkoutSessions(completion: @escaping (Result<[WorkoutSession], APIError>) -> Void)
     func createWorkoutRoutine(name: String, completion: @escaping (Result<CreateWorkoutRoutineMutation.Data.CreateWorkoutRoutine, APIError>) -> Void)
     func updateWorkoutRoutine(_ workoutRoutine: WorkoutRoutine, completion: @escaping (Result<WorkoutRoutineFull, APIError>) -> Void)
+}
+
+extension WorkoutLoggerAPIServiceProtocol {
+    func getWorkoutRoutine(withNetwork: Bool = false, workoutRoutineId: String, completion: @escaping (Result<WorkoutRoutine, APIError>) -> Void) {
+        return getWorkoutRoutine(withNetwork: withNetwork, workoutRoutineId: workoutRoutineId, completion: completion)
+    }
+    func getWorkoutRoutines(withNetwork: Bool = false, completion: @escaping (Result<[WorkoutRoutineFull], APIError>) -> Void) {
+        return getWorkoutRoutines(withNetwork: withNetwork, completion: completion)
+    }
 }
 
 class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
@@ -25,8 +34,12 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
         self.parser = Parser()
     }
     
-    func getWorkoutRoutine(workoutRoutineId: String, completion: @escaping (Result<WorkoutRoutine, APIError>) -> Void) {
-        self.client.fetch(query: WorkoutRoutineQuery(workoutRoutineId: workoutRoutineId)) { result in
+    func getWorkoutRoutine(withNetwork: Bool = false, workoutRoutineId: String, completion: @escaping (Result<WorkoutRoutine, APIError>) -> Void) {
+        var cachePolicy: CachePolicy = .returnCacheDataElseFetch
+        if withNetwork {
+            cachePolicy = .fetchIgnoringCacheData
+        }
+        self.client.fetch(query: WorkoutRoutineQuery(workoutRoutineId: workoutRoutineId), cachePolicy: cachePolicy) { result in
             switch result {
             case .success(let response):
                 if let errors = response.errors {
@@ -60,8 +73,12 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
         }
     }
     
-    func getWorkoutRoutines(completion: @escaping (Result<[WorkoutRoutineFull], APIError>) -> Void) {
-        self.client.fetch(query: WorkoutRoutinesQuery()) { result in
+    func getWorkoutRoutines(withNetwork: Bool = false, completion: @escaping (Result<[WorkoutRoutineFull], APIError>) -> Void) {
+        var cachePolicy: CachePolicy = .returnCacheDataElseFetch
+        if withNetwork {
+            cachePolicy = .fetchIgnoringCacheData
+        }
+        self.client.fetch(query: WorkoutRoutinesQuery(), cachePolicy: cachePolicy) { result in
             switch result {
             case .success(let response):
                 if let errors = response.errors {
@@ -149,5 +166,4 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
             }
         }
     }
-                                                                                                           
 }
