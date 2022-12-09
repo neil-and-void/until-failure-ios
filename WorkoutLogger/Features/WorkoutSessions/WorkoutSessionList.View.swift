@@ -9,6 +9,8 @@ import SwiftUI
 
 struct WorkoutSessionListView: View {
     @StateObject private var workoutSessionViewModel = WorkoutSessionViewModel(service: WorkoutLoggerAPIService())
+    @State var workoutSessionId: String?
+    @State private var showSheet = false
     
     var body: some View {
         
@@ -22,7 +24,11 @@ struct WorkoutSessionListView: View {
 
                         ForEach(workoutSessionViewModel.workoutSessionList, id: \.self.id) { workoutSession in
 
-                            WorkoutSessionListItem(active: true, workoutSession: workoutSession)
+                            NavigationLink(destination: EditWorkoutSession(workoutSessionId: workoutSession.id)) {
+                                
+                                WorkoutSessionListItem(active: true, workoutSession: workoutSession)
+                                
+                            }
                             
                         }
 
@@ -51,7 +57,7 @@ struct WorkoutSessionListView: View {
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     
-                    Button(action: {}) {
+                    Button(action: { showSheet.toggle() }) {
                         
                         Image(systemName: "plus")
                         
@@ -60,7 +66,15 @@ struct WorkoutSessionListView: View {
                 }
                 
             }
-            
+            .sheet(isPresented: $showSheet) {
+                
+                AddWorkoutSession() { workoutRoutineId in 
+                    workoutSessionViewModel.addWorkoutSession(workoutRoutineId: workoutRoutineId, date: Date())
+                    showSheet = false
+                }
+ 
+            }
+
         }
         
     }
