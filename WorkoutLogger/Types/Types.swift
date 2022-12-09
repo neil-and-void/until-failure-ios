@@ -41,7 +41,7 @@ struct WorkoutSession: Identifiable {
     var exercises: [Exercise]
 }
 
-struct EmbeddedWorkoutRoutine {
+struct EmbeddedWorkoutRoutine: Identifiable {
     var id: String
     var name: String
 }

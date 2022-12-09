@@ -12,6 +12,7 @@ class WorkoutListViewModel: ObservableObject {
     private let service: WorkoutLoggerAPIServiceProtocol
     
     @Published var error: String?
+    @Published var isLoading = false
     @Published var workoutRoutineList: [WorkoutRoutineFull] = []
     
     init(service: WorkoutLoggerAPIServiceProtocol) {
@@ -19,6 +20,7 @@ class WorkoutListViewModel: ObservableObject {
     }
     
     func getWorkoutRoutines(withNetwork: Bool = false) {
+        self.isLoading = true
         self.service.getWorkoutRoutines(withNetwork: withNetwork) { result in
             switch result {
             case .success(let workoutRoutines):
@@ -27,6 +29,7 @@ class WorkoutListViewModel: ObservableObject {
             case .failure(let err):
                 self.error = err.localizedDescription
             }
+            self.isLoading = false
         }
     }
     

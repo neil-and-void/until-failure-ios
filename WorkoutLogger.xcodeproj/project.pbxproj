@@ -47,6 +47,8 @@
 		2865A813293B274600020C7A /* AddExerciseRoutineAlert.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2865A812293B274600020C7A /* AddExerciseRoutineAlert.View.swift */; };
 		2885F1CF292778C3007D65A5 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 2885F1CE292778C3007D65A5 /* Apollo */; };
 		2888DD0B2938A66B003F8905 /* EditableExerciseRoutineListItem.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2888DD0A2938A66B003F8905 /* EditableExerciseRoutineListItem.View.swift */; };
+		288A6E82294318DD008EFF7A /* EditWorkoutSessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A6E81294318DD008EFF7A /* EditWorkoutSessionViewModel.swift */; };
+		288A6E8429431EF1008EFF7A /* GetWorkoutSession.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 288A6E8329431EF1008EFF7A /* GetWorkoutSession.graphql */; };
 		2895BB4C292626A500A16CF8 /* WorkoutLoggerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2895BB4B292626A500A16CF8 /* WorkoutLoggerApp.swift */; };
 		2895BB50292626A600A16CF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2895BB4F292626A600A16CF8 /* Assets.xcassets */; };
 		2895BB53292626A600A16CF8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2895BB52292626A600A16CF8 /* Preview Assets.xcassets */; };
@@ -68,8 +70,11 @@
 		28C2EDFF292DA5C1000BE3EB /* InterceptorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2EDFE292DA5C1000BE3EB /* InterceptorProvider.swift */; };
 		28C2EE03292DA902000BE3EB /* RefreshMutation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 28C2EE02292DA902000BE3EB /* RefreshMutation.graphql */; };
 		28C2EE07292DF2E4000BE3EB /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2EE06292DF2E4000BE3EB /* Errors.swift */; };
+		28C9C9D129426B4C00ED77C3 /* EditWorkoutSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C9C9D029426B4C00ED77C3 /* EditWorkoutSession.swift */; };
 		28E03C5529401E8900B38824 /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E03C5429401E8900B38824 /* PullToRefresh.swift */; };
 		28E03C5729406F1000B38824 /* DeleteWorkoutRoutineMutation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 28E03C5629406F1000B38824 /* DeleteWorkoutRoutineMutation.graphql */; };
+		28E03C592941264000B38824 /* AddWorkoutSessionMutation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 28E03C582941264000B38824 /* AddWorkoutSessionMutation.graphql */; };
+		28E03C612941AB7000B38824 /* AddWorkoutSession.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E03C602941AB7000B38824 /* AddWorkoutSession.View.swift */; };
 		28F14021293DCF8C00DF6857 /* Workout.ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F14020293DCF8C00DF6857 /* Workout.ViewModel.swift */; };
 		28F14025293DDA4C00DF6857 /* WorkoutRoutine.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 28F14024293DDA4C00DF6857 /* WorkoutRoutine.graphql */; };
 /* End PBXBuildFile section */
@@ -130,6 +135,8 @@
 		2865A810293AE01A00020C7A /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		2865A812293B274600020C7A /* AddExerciseRoutineAlert.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExerciseRoutineAlert.View.swift; sourceTree = "<group>"; };
 		2888DD0A2938A66B003F8905 /* EditableExerciseRoutineListItem.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableExerciseRoutineListItem.View.swift; sourceTree = "<group>"; };
+		288A6E81294318DD008EFF7A /* EditWorkoutSessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWorkoutSessionViewModel.swift; sourceTree = "<group>"; };
+		288A6E8329431EF1008EFF7A /* GetWorkoutSession.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetWorkoutSession.graphql; sourceTree = "<group>"; };
 		2895BB48292626A500A16CF8 /* WorkoutLogger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkoutLogger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2895BB4B292626A500A16CF8 /* WorkoutLoggerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLoggerApp.swift; sourceTree = "<group>"; };
 		2895BB4F292626A600A16CF8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -155,8 +162,11 @@
 		28C2EDFE292DA5C1000BE3EB /* InterceptorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterceptorProvider.swift; sourceTree = "<group>"; };
 		28C2EE02292DA902000BE3EB /* RefreshMutation.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = RefreshMutation.graphql; sourceTree = "<group>"; };
 		28C2EE06292DF2E4000BE3EB /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		28C9C9D029426B4C00ED77C3 /* EditWorkoutSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWorkoutSession.swift; sourceTree = "<group>"; };
 		28E03C5429401E8900B38824 /* PullToRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
 		28E03C5629406F1000B38824 /* DeleteWorkoutRoutineMutation.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = DeleteWorkoutRoutineMutation.graphql; sourceTree = "<group>"; };
+		28E03C582941264000B38824 /* AddWorkoutSessionMutation.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = AddWorkoutSessionMutation.graphql; sourceTree = "<group>"; };
+		28E03C602941AB7000B38824 /* AddWorkoutSession.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutSession.View.swift; sourceTree = "<group>"; };
 		28F14020293DCF8C00DF6857 /* Workout.ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.ViewModel.swift; sourceTree = "<group>"; };
 		28F14024293DDA4C00DF6857 /* WorkoutRoutine.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = WorkoutRoutine.graphql; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -201,6 +211,8 @@
 		2809EF552926EA3E00D0FF5B /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				28C9C9CD29426B0600ED77C3 /* WorkoutSession */,
+				28E03C5F2941AB5E00B38824 /* AddWorkoutSession */,
 				28F1401C293DCF3E00DF6857 /* WorkoutDetails */,
 				280874082938731000443453 /* EditWorkout */,
 				283DAA262936DC5B00AB2C18 /* ExerciseRoutines */,
@@ -273,9 +285,9 @@
 		28533298292ABDCB00BACB6A /* Workouts */ = {
 			isa = PBXGroup;
 			children = (
+				2858C56A292D4F68008DEA17 /* WorkoutList.ViewModel.swift */,
 				2853329B292ABE4300BACB6A /* WorkoutList.View.swift */,
 				283DAA292936DCC000AB2C18 /* WorkoutListItem.View.swift */,
-				2858C56A292D4F68008DEA17 /* WorkoutList.ViewModel.swift */,
 			);
 			path = Workouts;
 			sourceTree = "<group>";
@@ -405,6 +417,8 @@
 				2848D807293316A3001E8CD0 /* CreateWorkoutRoutine.graphql */,
 				2841A117293D425600751D13 /* UpdateWorkoutRoutineMutation.graphql */,
 				28E03C5629406F1000B38824 /* DeleteWorkoutRoutineMutation.graphql */,
+				28E03C582941264000B38824 /* AddWorkoutSessionMutation.graphql */,
+				288A6E8329431EF1008EFF7A /* GetWorkoutSession.graphql */,
 			);
 			path = Mutations;
 			sourceTree = "<group>";
@@ -473,6 +487,23 @@
 				283DAA202936BA5000AB2C18 /* TestData.swift */,
 			);
 			path = Test;
+			sourceTree = "<group>";
+		};
+		28C9C9CD29426B0600ED77C3 /* WorkoutSession */ = {
+			isa = PBXGroup;
+			children = (
+				28C9C9D029426B4C00ED77C3 /* EditWorkoutSession.swift */,
+				288A6E81294318DD008EFF7A /* EditWorkoutSessionViewModel.swift */,
+			);
+			path = WorkoutSession;
+			sourceTree = "<group>";
+		};
+		28E03C5F2941AB5E00B38824 /* AddWorkoutSession */ = {
+			isa = PBXGroup;
+			children = (
+				28E03C602941AB7000B38824 /* AddWorkoutSession.View.swift */,
+			);
+			path = AddWorkoutSession;
 			sourceTree = "<group>";
 		};
 		28F1401C293DCF3E00DF6857 /* WorkoutDetails */ = {
@@ -600,9 +631,11 @@
 				289CFDEE2928327F00BE6773 /* LoginMutation.graphql in Resources */,
 				2895BB53292626A600A16CF8 /* Preview Assets.xcassets in Resources */,
 				2841A11A293D432200751D13 /* WorkoutSessionFull.graphql in Resources */,
+				288A6E8429431EF1008EFF7A /* GetWorkoutSession.graphql in Resources */,
 				2848C0312926289700277523 /* Signup.graphql in Resources */,
 				28C2EE03292DA902000BE3EB /* RefreshMutation.graphql in Resources */,
 				2895BB7A2926271500A16CF8 /* schema.graphqls in Resources */,
+				28E03C592941264000B38824 /* AddWorkoutSessionMutation.graphql in Resources */,
 				28F14025293DDA4C00DF6857 /* WorkoutRoutine.graphql in Resources */,
 				2865A811293AE01A00020C7A /* schema.json in Resources */,
 				2848D808293316A3001E8CD0 /* CreateWorkoutRoutine.graphql in Resources */,
@@ -665,11 +698,13 @@
 				28F14021293DCF8C00DF6857 /* Workout.ViewModel.swift in Sources */,
 				2809EF662926F10C00D0FF5B /* AuthService.swift in Sources */,
 				2865A813293B274600020C7A /* AddExerciseRoutineAlert.View.swift in Sources */,
+				288A6E82294318DD008EFF7A /* EditWorkoutSessionViewModel.swift in Sources */,
 				2853329C292ABE4300BACB6A /* WorkoutList.View.swift in Sources */,
 				2853329F292ABF8D00BACB6A /* ProfileView.swift in Sources */,
 				28E03C5529401E8900B38824 /* PullToRefresh.swift in Sources */,
 				285332A2292AE9A000BACB6A /* AuthenticationProvider.swift in Sources */,
 				28533294292ABBE700BACB6A /* ContentView.swift in Sources */,
+				28C9C9D129426B4C00ED77C3 /* EditWorkoutSession.swift in Sources */,
 				280B6A3729297D8A004D0F16 /* KeychainService.swift in Sources */,
 				283DAA302937295800AB2C18 /* WorkoutDetails.View.swift in Sources */,
 				289CFDF3292836D400BE6773 /* Login.ViewModel.swift in Sources */,
@@ -683,6 +718,7 @@
 				2848D8062933161F001E8CD0 /* WorkoutRoutineFull.graphql in Sources */,
 				2858C56B292D4F69008DEA17 /* WorkoutList.ViewModel.swift in Sources */,
 				28C2EE07292DF2E4000BE3EB /* Errors.swift in Sources */,
+				28E03C612941AB7000B38824 /* AddWorkoutSession.View.swift in Sources */,
 				2865A80D293AC21700020C7A /* WorkoutSessionParser.swift in Sources */,
 				289F155E2939B90F0074BBE8 /* EditableWorkoutName.View.swift in Sources */,
 				2841B8422935851100B4AC76 /* TextStyles.swift in Sources */,

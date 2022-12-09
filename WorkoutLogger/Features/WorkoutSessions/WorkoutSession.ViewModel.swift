@@ -17,7 +17,7 @@ class WorkoutSessionViewModel: ObservableObject {
         self.service = service
     }
     
-    func getWorkoutSessions() {
+    func getWorkoutSessions(withNetwork: Bool = false) {
         self.service.getWorkoutSessions() { result in
             switch result {
             case .success(let workoutSessions):
@@ -26,6 +26,22 @@ class WorkoutSessionViewModel: ObservableObject {
             case .failure(let err):
                 self.error = err.localizedDescription
             }
+        }
+    }
+    
+    func addWorkoutSession(workoutRoutineId: String, date: Date) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        let formattedDate = formatter.string(from: date)
+        self.service.addWorkoutSession(id: workoutRoutineId, start: formattedDate) { result in
+            switch result {
+            case .success:
+                self.error = nil
+            case .failure(let err):
+                self.error = err.localizedDescription
+            }
+
         }
     }
 }

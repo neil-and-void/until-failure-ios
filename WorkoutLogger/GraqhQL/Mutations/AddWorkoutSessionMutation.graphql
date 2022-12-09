@@ -1,0 +1,3 @@
+mutation AddWorkoutSession($workout: WorkoutSessionInput!) {
+    addWorkoutSession(workout: $workout)
+}

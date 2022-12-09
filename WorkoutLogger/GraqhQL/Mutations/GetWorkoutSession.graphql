@@ -1,0 +1,37 @@
+query WorkoutSession($workoutRoutineId: ID!, $workoutSessionId: ID!) {
+    workoutSession(workoutSessionId: $workoutSessionId) {
+            ...workoutSessionFull
+    }
+    workoutRoutine(workoutRoutineId: $workoutRoutineId) {
+            ...workoutRoutinesFull
+    }
+}
+
+fragment workoutRoutinesFull on WorkoutRoutine {
+    id
+    name
+    exerciseRoutines {
+        id
+        name
+        sets
+        reps
+    }
+}
+
+fragment workoutSessionFull on WorkoutSession {
+        id
+        start
+        end
+        workoutRoutineId
+        exercises {
+                id
+                exerciseRoutineId
+                sets {
+                        id
+                        weight
+                        reps
+                }
+                notes
+        }
+}
+

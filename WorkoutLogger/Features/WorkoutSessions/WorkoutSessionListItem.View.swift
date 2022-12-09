@@ -11,6 +11,18 @@ struct WorkoutSessionListItem: View {
     var active: Bool
     var workoutSession: WorkoutSession
     
+    func formattedDate(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d"
+        formatter.timeZone = .current
+        return formatter.string(from: date)
+    }
+    
+    func formattedDuration(start: Date, end: Date) -> String {
+        let duration = end.timeIntervalSinceReferenceDate - start.timeIntervalSinceReferenceDate
+        return "\(Int(duration) / 60) mins"
+    }
+    
     var body: some View {
         
         HStack {
@@ -19,19 +31,24 @@ struct WorkoutSessionListItem: View {
                 
                 Text(workoutSession.workoutRoutine.name).font(.system(size: 20, weight: .bold))
                 
-                Text("July 12").font(.system(size: 16)).foregroundColor(.secondaryText)
+                Text(formattedDate(date: workoutSession.start))
+                    .font(.system(size: 16))
+                    .foregroundColor(.secondaryText)
                 
             }
             
             Spacer()
             
-            if workoutSession.end != nil {
-
-                Image(systemName: "dumbbell.fill").rotationEffect(.degrees(45)).foregroundColor(.primaryColor)
+            if let end = workoutSession.end {
                 
+                Text(formattedDuration(start: workoutSession.start, end: end))
+                    .foregroundColor(.secondaryText)
+
             } else {
                 
-                Text("30 mins").foregroundColor(.secondaryText)
+                Image(systemName: "dumbbell.fill")
+                    .rotationEffect(.degrees(45))
+                    .foregroundColor(.primaryColor)
                 
             }
             
@@ -39,7 +56,7 @@ struct WorkoutSessionListItem: View {
         .padding()
         .background(Color.bgSecondary)
         .cornerRadius(10)
-        
+
     }
 }
 

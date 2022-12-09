@@ -71,4 +71,11 @@ final class MockWorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
         completion(getWorkoutSessionsResult)
     }
     
+    func addWorkoutSession(id: String, start: String, completion: @escaping (Result<String, APIError>) -> Void) {
+        
+    }
+    
+    func getWorkoutSession(workoutRoutineId: String, workoutSessionId: String, completion: @escaping (Result<WorkoutSession, APIError>) -> Void) {
+        
+    }
 }
