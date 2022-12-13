@@ -206,8 +206,32 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
         }
     }
     
-    func getWorkoutSession(workoutRoutineId: String, workoutSessionId: String, completion: @escaping (Result<WorkoutSession, APIError>) -> Void) {
-        //        self.client.fetch(query: WorkoutSessionQuery)
+    func getWorkoutSession(
+        workoutRoutineId: String,
+        workoutSessionId: String,
+        completion: @escaping (Result<WorkoutSession, APIError>) -> Void
+    ) {
+        self.client.fetch(query: WorkoutSessionQuery(workoutRoutineId: workoutRoutineId, workoutSessionId: workoutSessionId)) { result in
+            switch result {
+            case .success(let response):
+                if let errors = response.errors {
+                    let error = APIError.GraphQLError(gqlError: errors[0].message)
+                    completion(Result.failure(error))
+                    return
+                }
+                if let workoutSession = response.data?.workoutSession,
+                   let workoutRoutine = response.data?.workoutRoutine {
+                    let parsedWorkoutSession = self.parser.parseGraphQL(
+                        workoutSession: workoutSession.fragments.workoutSessionFull,
+                        workoutRoutine: workoutRoutine.fragments.workoutRoutineFull
+                    )
+                    return completion(Result.success(parsedWorkoutSession))
+                }
+                completion(Result.failure(APIError.unknown))
+            case .failure:
+                completion(Result.failure(APIError.networkError))
+            }
+        }
     }
 }
 

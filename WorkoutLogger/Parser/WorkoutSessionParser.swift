@@ -10,6 +10,10 @@ import Foundation
 protocol WorkoutSessionParserProtocol {
     func parseGraphQL(workoutSessions: [WorkoutSessionsQuery.Data.WorkoutSession], workoutRoutines: [WorkoutSessionsQuery.Data.WorkoutRoutine]) -> [WorkoutSession]
     func parseWorkoutRoutine(_ workoutRoutine: WorkoutRoutine) -> UpdateWorkoutRoutineInput
+    func parseGraphQL(
+        workoutSession: WorkoutSessionFull,
+        workoutRoutine: WorkoutRoutineFull
+    ) -> WorkoutSession
 }
 
 // used for parsing graphql objects to our defined project types
@@ -27,6 +31,54 @@ class Parser: WorkoutSessionParserProtocol {
             id: workoutRoutine.id,
             name: workoutRoutine.name,
             exerciseRoutines: exerciseRoutines
+        )
+    }
+    
+    func parseGraphQL(
+        workoutSession: WorkoutSessionFull,
+        workoutRoutine: WorkoutRoutineFull
+    ) -> WorkoutSession {
+        let parsedWorkoutRoutine = EmbeddedWorkoutRoutine(
+            id: workoutRoutine.id,
+            name: workoutRoutine.name
+        )
+        
+        var exerciseRoutineDict: [String: EmbeddedExerciseRoutine] = [:]
+        for exerciseRoutine in workoutRoutine.exerciseRoutines {
+            exerciseRoutineDict[exerciseRoutine.id] = EmbeddedExerciseRoutine(
+                id: exerciseRoutine.id,
+                name: exerciseRoutine.name,
+                sets: exerciseRoutine.sets,
+                reps: exerciseRoutine.reps
+            )
+        }
+        
+        let parsedExercises = workoutSession.exercises.compactMap { exercise in
+            
+            let parsedSets = exercise.sets.map { setEntry in
+                SetEntry(
+                    id: setEntry.id,
+                    weight: setEntry.weight,
+                    reps: setEntry.reps
+                )
+            }
+            
+            if let exerciseRoutine = exerciseRoutineDict[exercise.id] {
+                return Exercise(
+                    id: exercise.id,
+                    exerciseRoutine: exerciseRoutine,
+                    sets: parsedSets,
+                    notes: exercise.notes
+                )
+            }
+            return nil
+        }
+
+        return WorkoutSession(
+            id: workoutSession.id,
+            start: Date(),
+            workoutRoutine: parsedWorkoutRoutine,
+            exercises: parsedExercises
         )
     }
     
@@ -71,7 +123,6 @@ class Parser: WorkoutSessionParserProtocol {
                 }
                 return nil
             }
-
 
             if let workoutRoutine = workoutRoutineDict[workoutSession.workoutRoutineId] {
                 return WorkoutSession(

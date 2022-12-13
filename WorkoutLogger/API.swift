@@ -494,7 +494,7 @@ public final class WorkoutSessionQuery: GraphQLQuery {
       }
       workoutRoutine(workoutRoutineId: $workoutRoutineId) {
         __typename
-        ...workoutRoutinesFull
+        ...workoutRoutineFull
       }
     }
     """
@@ -504,7 +504,7 @@ public final class WorkoutSessionQuery: GraphQLQuery {
   public var queryDocument: String {
     var document: String = operationDefinition
     document.append("\n" + WorkoutSessionFull.fragmentDefinition)
-    document.append("\n" + WorkoutRoutinesFull.fragmentDefinition)
+    document.append("\n" + WorkoutRoutineFull.fragmentDefinition)
     return document
   }
 
@@ -616,7 +616,7 @@ public final class WorkoutSessionQuery: GraphQLQuery {
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLFragmentSpread(WorkoutRoutinesFull.self),
+          GraphQLFragmentSpread(WorkoutRoutineFull.self),
         ]
       }
 
@@ -651,9 +651,9 @@ public final class WorkoutSessionQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public var workoutRoutinesFull: WorkoutRoutinesFull {
+        public var workoutRoutineFull: WorkoutRoutineFull {
           get {
-            return WorkoutRoutinesFull(unsafeResultMap: resultMap)
+            return WorkoutRoutineFull(unsafeResultMap: resultMap)
           }
           set {
             resultMap += newValue.resultMap
@@ -1685,17 +1685,19 @@ public final class WorkoutSessionsQuery: GraphQLQuery {
   }
 }
 
-public struct WorkoutRoutinesFull: GraphQLFragment {
+public struct WorkoutRoutineFull: GraphQLFragment {
   /// The raw GraphQL definition of this fragment.
   public static let fragmentDefinition: String =
     """
-    fragment workoutRoutinesFull on WorkoutRoutine {
+    fragment workoutRoutineFull on WorkoutRoutine {
       __typename
       id
+      active
       name
       exerciseRoutines {
         __typename
         id
+        active
         name
         sets
         reps
@@ -1709,6 +1711,7 @@ public struct WorkoutRoutinesFull: GraphQLFragment {
     return [
       GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
       GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+      GraphQLField("active", type: .nonNull(.scalar(Bool.self))),
       GraphQLField("name", type: .nonNull(.scalar(String.self))),
       GraphQLField("exerciseRoutines", type: .nonNull(.list(.nonNull(.object(ExerciseRoutine.selections))))),
     ]
@@ -1720,8 +1723,8 @@ public struct WorkoutRoutinesFull: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(id: GraphQLID, name: String, exerciseRoutines: [ExerciseRoutine]) {
-    self.init(unsafeResultMap: ["__typename": "WorkoutRoutine", "id": id, "name": name, "exerciseRoutines": exerciseRoutines.map { (value: ExerciseRoutine) -> ResultMap in value.resultMap }])
+  public init(id: GraphQLID, active: Bool, name: String, exerciseRoutines: [ExerciseRoutine]) {
+    self.init(unsafeResultMap: ["__typename": "WorkoutRoutine", "id": id, "active": active, "name": name, "exerciseRoutines": exerciseRoutines.map { (value: ExerciseRoutine) -> ResultMap in value.resultMap }])
   }
 
   public var __typename: String {
@@ -1739,6 +1742,15 @@ public struct WorkoutRoutinesFull: GraphQLFragment {
     }
     set {
       resultMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var active: Bool {
+    get {
+      return resultMap["active"]! as! Bool
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "active")
     }
   }
 
@@ -1767,6 +1779,7 @@ public struct WorkoutRoutinesFull: GraphQLFragment {
       return [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+        GraphQLField("active", type: .nonNull(.scalar(Bool.self))),
         GraphQLField("name", type: .nonNull(.scalar(String.self))),
         GraphQLField("sets", type: .nonNull(.scalar(Int.self))),
         GraphQLField("reps", type: .nonNull(.scalar(Int.self))),
@@ -1779,8 +1792,8 @@ public struct WorkoutRoutinesFull: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(id: GraphQLID, name: String, sets: Int, reps: Int) {
-      self.init(unsafeResultMap: ["__typename": "ExerciseRoutine", "id": id, "name": name, "sets": sets, "reps": reps])
+    public init(id: GraphQLID, active: Bool, name: String, sets: Int, reps: Int) {
+      self.init(unsafeResultMap: ["__typename": "ExerciseRoutine", "id": id, "active": active, "name": name, "sets": sets, "reps": reps])
     }
 
     public var __typename: String {
@@ -1798,6 +1811,15 @@ public struct WorkoutRoutinesFull: GraphQLFragment {
       }
       set {
         resultMap.updateValue(newValue, forKey: "id")
+      }
+    }
+
+    public var active: Bool {
+      get {
+        return resultMap["active"]! as! Bool
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "active")
       }
     }
 
@@ -2056,173 +2078,6 @@ public struct WorkoutSessionFull: GraphQLFragment {
         set {
           resultMap.updateValue(newValue, forKey: "reps")
         }
-      }
-    }
-  }
-}
-
-public struct WorkoutRoutineFull: GraphQLFragment {
-  /// The raw GraphQL definition of this fragment.
-  public static let fragmentDefinition: String =
-    """
-    fragment workoutRoutineFull on WorkoutRoutine {
-      __typename
-      id
-      active
-      name
-      exerciseRoutines {
-        __typename
-        id
-        active
-        name
-        sets
-        reps
-      }
-    }
-    """
-
-  public static let possibleTypes: [String] = ["WorkoutRoutine"]
-
-  public static var selections: [GraphQLSelection] {
-    return [
-      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-      GraphQLField("active", type: .nonNull(.scalar(Bool.self))),
-      GraphQLField("name", type: .nonNull(.scalar(String.self))),
-      GraphQLField("exerciseRoutines", type: .nonNull(.list(.nonNull(.object(ExerciseRoutine.selections))))),
-    ]
-  }
-
-  public private(set) var resultMap: ResultMap
-
-  public init(unsafeResultMap: ResultMap) {
-    self.resultMap = unsafeResultMap
-  }
-
-  public init(id: GraphQLID, active: Bool, name: String, exerciseRoutines: [ExerciseRoutine]) {
-    self.init(unsafeResultMap: ["__typename": "WorkoutRoutine", "id": id, "active": active, "name": name, "exerciseRoutines": exerciseRoutines.map { (value: ExerciseRoutine) -> ResultMap in value.resultMap }])
-  }
-
-  public var __typename: String {
-    get {
-      return resultMap["__typename"]! as! String
-    }
-    set {
-      resultMap.updateValue(newValue, forKey: "__typename")
-    }
-  }
-
-  public var id: GraphQLID {
-    get {
-      return resultMap["id"]! as! GraphQLID
-    }
-    set {
-      resultMap.updateValue(newValue, forKey: "id")
-    }
-  }
-
-  public var active: Bool {
-    get {
-      return resultMap["active"]! as! Bool
-    }
-    set {
-      resultMap.updateValue(newValue, forKey: "active")
-    }
-  }
-
-  public var name: String {
-    get {
-      return resultMap["name"]! as! String
-    }
-    set {
-      resultMap.updateValue(newValue, forKey: "name")
-    }
-  }
-
-  public var exerciseRoutines: [ExerciseRoutine] {
-    get {
-      return (resultMap["exerciseRoutines"] as! [ResultMap]).map { (value: ResultMap) -> ExerciseRoutine in ExerciseRoutine(unsafeResultMap: value) }
-    }
-    set {
-      resultMap.updateValue(newValue.map { (value: ExerciseRoutine) -> ResultMap in value.resultMap }, forKey: "exerciseRoutines")
-    }
-  }
-
-  public struct ExerciseRoutine: GraphQLSelectionSet {
-    public static let possibleTypes: [String] = ["ExerciseRoutine"]
-
-    public static var selections: [GraphQLSelection] {
-      return [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-        GraphQLField("active", type: .nonNull(.scalar(Bool.self))),
-        GraphQLField("name", type: .nonNull(.scalar(String.self))),
-        GraphQLField("sets", type: .nonNull(.scalar(Int.self))),
-        GraphQLField("reps", type: .nonNull(.scalar(Int.self))),
-      ]
-    }
-
-    public private(set) var resultMap: ResultMap
-
-    public init(unsafeResultMap: ResultMap) {
-      self.resultMap = unsafeResultMap
-    }
-
-    public init(id: GraphQLID, active: Bool, name: String, sets: Int, reps: Int) {
-      self.init(unsafeResultMap: ["__typename": "ExerciseRoutine", "id": id, "active": active, "name": name, "sets": sets, "reps": reps])
-    }
-
-    public var __typename: String {
-      get {
-        return resultMap["__typename"]! as! String
-      }
-      set {
-        resultMap.updateValue(newValue, forKey: "__typename")
-      }
-    }
-
-    public var id: GraphQLID {
-      get {
-        return resultMap["id"]! as! GraphQLID
-      }
-      set {
-        resultMap.updateValue(newValue, forKey: "id")
-      }
-    }
-
-    public var active: Bool {
-      get {
-        return resultMap["active"]! as! Bool
-      }
-      set {
-        resultMap.updateValue(newValue, forKey: "active")
-      }
-    }
-
-    public var name: String {
-      get {
-        return resultMap["name"]! as! String
-      }
-      set {
-        resultMap.updateValue(newValue, forKey: "name")
-      }
-    }
-
-    public var sets: Int {
-      get {
-        return resultMap["sets"]! as! Int
-      }
-      set {
-        resultMap.updateValue(newValue, forKey: "sets")
-      }
-    }
-
-    public var reps: Int {
-      get {
-        return resultMap["reps"]! as! Int
-      }
-      set {
-        resultMap.updateValue(newValue, forKey: "reps")
       }
     }
   }
