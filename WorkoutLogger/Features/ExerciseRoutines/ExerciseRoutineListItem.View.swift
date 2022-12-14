@@ -26,6 +26,7 @@ struct ExerciseRoutineListItem: View {
                     Text("\(sets)").font(.system(size: 18, weight: .medium))
 
                     Text("sets").foregroundColor(.secondaryText)
+
                 }.multilineTextAlignment(.leading)
                 
                 Group {

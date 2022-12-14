@@ -8,18 +8,35 @@
 import SwiftUI
 
 struct ExerciseRoutineList: View {
+    var workoutRoutineName: String
     var exerciseRoutines: [ExerciseRoutine]
     
     var body: some View {
 
         ScrollView {
             
+            VStack(alignment: .leading) {
+                
+                Text(workoutRoutineName)
+                    .font(.title)
+                    .fontWeight(.bold)
+                
+                Text("\(exerciseRoutines.count) exercises")
+                    .foregroundColor(.tertiaryText)
+
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+             
             if exerciseRoutines.count > 0 {
                    
                 ForEach(exerciseRoutines, id: \.self.id) { exerciseRoutine in
-                    
-                    ExerciseRoutineListItem(name: exerciseRoutine.name, sets: exerciseRoutine.sets, reps: exerciseRoutine.reps)
-                    
+
+                    ExerciseRoutineListItem(
+                        name: exerciseRoutine.name,
+                        sets: exerciseRoutine.sets,
+                        reps: exerciseRoutine.reps
+                    )
+
                 }
                 
             } else {
@@ -31,7 +48,8 @@ struct ExerciseRoutineList: View {
 
             }
             
-        }.padding()
+        }
+        .padding()
         
     }
 
@@ -39,11 +57,14 @@ struct ExerciseRoutineList: View {
 
 struct ExerciseRoutineList_Previews: PreviewProvider {
     static var previews: some View {
-        ExerciseRoutineList(exerciseRoutines: [ExerciseRoutine(
-            id: "1",
-            name: "Squat",
-            sets: 4,
-            reps: 5
-        )]).preferredColorScheme(.dark)
+        ExerciseRoutineList(
+            workoutRoutineName: "Legs",
+            exerciseRoutines: [ExerciseRoutine(
+                id: "1",
+                name: "Squat",
+                sets: 4,
+                reps: 5
+            )]
+        ).preferredColorScheme(.dark)
     }
 }
