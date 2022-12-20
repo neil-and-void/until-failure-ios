@@ -66,12 +66,24 @@ struct CreateWorkoutView: View {
                         .frame(height: 1)
                         .background(.gray)
                     
-                    Button(action: { workoutListViewModel.createWorkoutRoutine(name: workoutName) { wasSuccessful in
-                        showSheet = !wasSuccessful
-                    }}) {
+                    Button(action: {
+                        if !workoutListViewModel.isLoading {
+                            workoutListViewModel.createWorkoutRoutine(name: workoutName) { wasSuccessful in
+                                showSheet = !wasSuccessful
+                            }
+                        }
+                    }) {
                         
-                        Text("Create")
-                        
+                        if workoutListViewModel.isLoading {
+
+                            ProgressView()
+
+                        } else {
+                            
+                            Text("Create")
+                            
+                        }
+
                     }
                     .buttonStyle(RoundedButton())
                     .padding()

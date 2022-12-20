@@ -34,6 +34,7 @@ class WorkoutListViewModel: ObservableObject {
     }
     
     func createWorkoutRoutine(name: String, completion: @escaping (Bool) -> Void) {
+        self.isLoading = true
         self.service.createWorkoutRoutine(name: name) { result in
             switch result {
             case .success:
@@ -44,6 +45,7 @@ class WorkoutListViewModel: ObservableObject {
                 self.error = err.localizedDescription
             }
         }
+        self.isLoading = false
     }
     
     func deleteWorkoutRoutine(id: String) {

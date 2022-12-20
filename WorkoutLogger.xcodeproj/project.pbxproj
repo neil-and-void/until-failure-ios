@@ -67,6 +67,7 @@
 		289F156A2939FAB30074BBE8 /* WorkoutSession.ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289F15692939FAB30074BBE8 /* WorkoutSession.ViewModel.swift */; };
 		28B0E8802935A37D0093601C /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B0E87F2935A37D0093601C /* LoginViewModelTests.swift */; };
 		28B0E8832935C6290093601C /* SignupViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B0E8822935C6290093601C /* SignupViewModelTests.swift */; };
+		28BF4E5C294EC66700AB8E49 /* EditableExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BF4E5B294EC66700AB8E49 /* EditableExercise.swift */; };
 		28C2EDFF292DA5C1000BE3EB /* InterceptorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2EDFE292DA5C1000BE3EB /* InterceptorProvider.swift */; };
 		28C2EE03292DA902000BE3EB /* RefreshMutation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 28C2EE02292DA902000BE3EB /* RefreshMutation.graphql */; };
 		28C2EE07292DF2E4000BE3EB /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2EE06292DF2E4000BE3EB /* Errors.swift */; };
@@ -159,6 +160,7 @@
 		28B0E87B2935A22B0093601C /* MockServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockServices.swift; sourceTree = "<group>"; };
 		28B0E87F2935A37D0093601C /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
 		28B0E8822935C6290093601C /* SignupViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModelTests.swift; sourceTree = "<group>"; };
+		28BF4E5B294EC66700AB8E49 /* EditableExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableExercise.swift; sourceTree = "<group>"; };
 		28C2EDFE292DA5C1000BE3EB /* InterceptorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterceptorProvider.swift; sourceTree = "<group>"; };
 		28C2EE02292DA902000BE3EB /* RefreshMutation.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = RefreshMutation.graphql; sourceTree = "<group>"; };
 		28C2EE06292DF2E4000BE3EB /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
@@ -197,30 +199,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		280874082938731000443453 /* EditWorkout */ = {
-			isa = PBXGroup;
-			children = (
-				280874092938732C00443453 /* EditWorkout.View.swift */,
-				2888DD0A2938A66B003F8905 /* EditableExerciseRoutineListItem.View.swift */,
-				289F155D2939B90F0074BBE8 /* EditableWorkoutName.View.swift */,
-				2865A812293B274600020C7A /* AddExerciseRoutineAlert.View.swift */,
-			);
-			path = EditWorkout;
-			sourceTree = "<group>";
-		};
 		2809EF552926EA3E00D0FF5B /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				28C9C9CD29426B0600ED77C3 /* WorkoutSession */,
-				28E03C5F2941AB5E00B38824 /* AddWorkoutSession */,
-				28F1401C293DCF3E00DF6857 /* WorkoutDetails */,
-				280874082938731000443453 /* EditWorkout */,
+				28BF4E5A294EC5F300AB8E49 /* Exercises */,
 				283DAA262936DC5B00AB2C18 /* ExerciseRoutines */,
-				285332A0292AE07C00BACB6A /* CreateWorkout */,
-				2853329D292ABF8400BACB6A /* Profile */,
 				28533298292ABDCB00BACB6A /* Workouts */,
 				28533297292ABDB200BACB6A /* WorkoutSessions */,
 				280B6A3B2929B6C7004D0F16 /* Home */,
+				2853329D292ABF8400BACB6A /* Profile */,
 				289CFDEF292836B200BE6773 /* Login */,
 				2809EF632926F0C300D0FF5B /* Signup */,
 			);
@@ -257,8 +244,8 @@
 		283DAA262936DC5B00AB2C18 /* ExerciseRoutines */ = {
 			isa = PBXGroup;
 			children = (
-				283DAA272936DC7100AB2C18 /* ExerciseRoutineList.View.swift */,
-				283DAA312938118A00AB2C18 /* ExerciseRoutineListItem.View.swift */,
+				28BF4E642952526700AB8E49 /* Add */,
+				28BF4E622952522200AB8E49 /* List */,
 			);
 			path = ExerciseRoutines;
 			sourceTree = "<group>";
@@ -275,9 +262,11 @@
 		28533297292ABDB200BACB6A /* WorkoutSessions */ = {
 			isa = PBXGroup;
 			children = (
+				28BF4E662952533C00AB8E49 /* Edit */,
+				28BF4E652952531400AB8E49 /* Add */,
+				28BF4E60295250D300AB8E49 /* List */,
 				289F15692939FAB30074BBE8 /* WorkoutSession.ViewModel.swift */,
-				28533299292ABE3300BACB6A /* WorkoutSessionList.View.swift */,
-				289F155F2939F7830074BBE8 /* WorkoutSessionListItem.View.swift */,
+				288A6E81294318DD008EFF7A /* EditWorkoutSessionViewModel.swift */,
 			);
 			path = WorkoutSessions;
 			sourceTree = "<group>";
@@ -285,9 +274,12 @@
 		28533298292ABDCB00BACB6A /* Workouts */ = {
 			isa = PBXGroup;
 			children = (
+				28BF4E612952515900AB8E49 /* Edit */,
+				28BF4E5F2952506C00AB8E49 /* Create */,
+				28BF4E5E2952502D00AB8E49 /* Detail */,
+				28BF4E5D2952502500AB8E49 /* List */,
+				28F14020293DCF8C00DF6857 /* Workout.ViewModel.swift */,
 				2858C56A292D4F68008DEA17 /* WorkoutList.ViewModel.swift */,
-				2853329B292ABE4300BACB6A /* WorkoutList.View.swift */,
-				283DAA292936DCC000AB2C18 /* WorkoutListItem.View.swift */,
 			);
 			path = Workouts;
 			sourceTree = "<group>";
@@ -299,14 +291,6 @@
 				2864844829369B6C00918D88 /* UserViewModel.swift */,
 			);
 			path = Profile;
-			sourceTree = "<group>";
-		};
-		285332A0292AE07C00BACB6A /* CreateWorkout */ = {
-			isa = PBXGroup;
-			children = (
-				2858C562292B4088008DEA17 /* CreateWorkout.View.swift */,
-			);
-			path = CreateWorkout;
 			sourceTree = "<group>";
 		};
 		2858C572292D67DE008DEA17 /* Network */ = {
@@ -489,30 +473,89 @@
 			path = Test;
 			sourceTree = "<group>";
 		};
-		28C9C9CD29426B0600ED77C3 /* WorkoutSession */ = {
+		28BF4E5A294EC5F300AB8E49 /* Exercises */ = {
 			isa = PBXGroup;
 			children = (
-				28C9C9D029426B4C00ED77C3 /* EditWorkoutSession.swift */,
-				288A6E81294318DD008EFF7A /* EditWorkoutSessionViewModel.swift */,
+				28BF4E5B294EC66700AB8E49 /* EditableExercise.swift */,
 			);
-			path = WorkoutSession;
+			path = Exercises;
 			sourceTree = "<group>";
 		};
-		28E03C5F2941AB5E00B38824 /* AddWorkoutSession */ = {
+		28BF4E5D2952502500AB8E49 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				2853329B292ABE4300BACB6A /* WorkoutList.View.swift */,
+				283DAA292936DCC000AB2C18 /* WorkoutListItem.View.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		28BF4E5E2952502D00AB8E49 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				283DAA2F2937295800AB2C18 /* WorkoutDetails.View.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		28BF4E5F2952506C00AB8E49 /* Create */ = {
+			isa = PBXGroup;
+			children = (
+				2858C562292B4088008DEA17 /* CreateWorkout.View.swift */,
+			);
+			path = Create;
+			sourceTree = "<group>";
+		};
+		28BF4E60295250D300AB8E49 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				28533299292ABE3300BACB6A /* WorkoutSessionList.View.swift */,
+				289F155F2939F7830074BBE8 /* WorkoutSessionListItem.View.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		28BF4E612952515900AB8E49 /* Edit */ = {
+			isa = PBXGroup;
+			children = (
+				280874092938732C00443453 /* EditWorkout.View.swift */,
+				289F155D2939B90F0074BBE8 /* EditableWorkoutName.View.swift */,
+				2888DD0A2938A66B003F8905 /* EditableExerciseRoutineListItem.View.swift */,
+			);
+			path = Edit;
+			sourceTree = "<group>";
+		};
+		28BF4E622952522200AB8E49 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				283DAA272936DC7100AB2C18 /* ExerciseRoutineList.View.swift */,
+				283DAA312938118A00AB2C18 /* ExerciseRoutineListItem.View.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		28BF4E642952526700AB8E49 /* Add */ = {
+			isa = PBXGroup;
+			children = (
+				2865A812293B274600020C7A /* AddExerciseRoutineAlert.View.swift */,
+			);
+			path = Add;
+			sourceTree = "<group>";
+		};
+		28BF4E652952531400AB8E49 /* Add */ = {
 			isa = PBXGroup;
 			children = (
 				28E03C602941AB7000B38824 /* AddWorkoutSession.View.swift */,
 			);
-			path = AddWorkoutSession;
+			path = Add;
 			sourceTree = "<group>";
 		};
-		28F1401C293DCF3E00DF6857 /* WorkoutDetails */ = {
+		28BF4E662952533C00AB8E49 /* Edit */ = {
 			isa = PBXGroup;
 			children = (
-				283DAA2F2937295800AB2C18 /* WorkoutDetails.View.swift */,
-				28F14020293DCF8C00DF6857 /* Workout.ViewModel.swift */,
+				28C9C9D029426B4C00ED77C3 /* EditWorkoutSession.swift */,
 			);
-			path = WorkoutDetails;
+			path = Edit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -728,6 +771,7 @@
 				2858C574292D67FB008DEA17 /* Interceptor.swift in Sources */,
 				283DAA282936DC7100AB2C18 /* ExerciseRoutineList.View.swift in Sources */,
 				289F15602939F7830074BBE8 /* WorkoutSessionListItem.View.swift in Sources */,
+				28BF4E5C294EC66700AB8E49 /* EditableExercise.swift in Sources */,
 				283DAA242936DA6800AB2C18 /* MockServices.swift in Sources */,
 				280B6A3929297FAA004D0F16 /* Auth.swift in Sources */,
 				2809EF5B2926EB0200D0FF5B /* Signup.View.swift in Sources */,

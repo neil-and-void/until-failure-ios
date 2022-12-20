@@ -29,6 +29,9 @@ struct EditWorkoutSession: View {
                         
                         Text(exercise.exerciseRoutine.name)
                         
+                        Button("Add Exercise") {
+                            print("add exercise")
+                        }
                     }
                     
                 } else {

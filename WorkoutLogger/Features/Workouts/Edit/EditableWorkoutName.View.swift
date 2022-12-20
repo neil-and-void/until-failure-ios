@@ -16,7 +16,7 @@ struct EditableWorkoutName: View {
 
             TextField("Name", text: $name)
                 .multilineTextAlignment(.center)
-                .font(.system(size: 30))
+                .font(.system(size: 30, weight: .semibold))
 
             Divider()
                 .frame(height: 1)

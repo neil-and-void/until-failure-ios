@@ -33,6 +33,7 @@ class WorkoutViewModel: ObservableObject {
     }
 
     func updateWorkoutRoutine(_ workoutRoutine: WorkoutRoutine, onSuccess: @escaping () -> Void) {
+        self.isLoading = true
         self.service.updateWorkoutRoutine(workoutRoutine) { result in
             switch result {
             case .success:
@@ -42,6 +43,7 @@ class WorkoutViewModel: ObservableObject {
             case .failure(let err):
                 self.error = err.localizedDescription
             }
+            self.isLoading = false
         }
     }
     

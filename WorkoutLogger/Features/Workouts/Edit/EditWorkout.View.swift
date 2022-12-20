@@ -29,8 +29,13 @@ struct EditWorkout: View {
                     
                     Spacer()
                     
+                    Text("Edit Routine")
+                        .bold()
+                    
+                    Spacer()
+                    
                     Button("Done") {
-
+                        
                         workoutViewModel.updateWorkoutRoutine(workoutRoutine) {
                             showSheet = false
                         }
@@ -40,49 +45,46 @@ struct EditWorkout: View {
                 }
                 .padding(.top)
                 .padding(.horizontal)
-                
+ 
                 VStack {
 
-                    HStack {
-
-                        EditableWorkoutName(name: $workoutRoutine.name)
-
-                    }
+                    EditableWorkoutName(name: $workoutRoutine.name)
+                        .padding(.bottom, 40)
 
                     List {
-
-                        Button(action: { showAlert.toggle() }) {
-
-                            Text("Add exercise")
-
-                        }
-                        .buttonStyle(TextButton())
-                        .alert("Add exercise", isPresented: $showAlert) {
-                            AddExerciseRoutineAlert(
-                                onAdd: { exerciseName in
-                                    workoutRoutine.exerciseRoutines.append(ExerciseRoutine(
-                                        id: "",
-                                        name: exerciseName,
-                                        sets: 0,
-                                        reps: 0
-                                    ))
-                                }
-                            ).preferredColorScheme(.dark)
-                        }
 
                         ForEach($workoutRoutine.exerciseRoutines, id: \.self._id) { $exerciseRoutine in
 
                             EditableExerciseRoutineListItem(editableExerciseRoutine: $exerciseRoutine)
 
                         }.onDelete(perform: { idx in
-
-                            workoutRoutine.exerciseRoutines.remove(atOffsets: idx)
-
+                            if !workoutViewModel.isLoading {
+                               workoutRoutine.exerciseRoutines.remove(atOffsets: idx) 
+                            }
                         })
 
                     }
                     .listStyle(PlainListStyle())
 
+                    Button(action: { showAlert.toggle() }) {
+
+                        Text("Add exercise")
+
+                    }
+                    .buttonStyle(RoundedButton())
+                    .alert("Add exercise", isPresented: $showAlert) {
+                        AddExerciseRoutineAlert(
+                            onAdd: { exerciseName in
+                                workoutRoutine.exerciseRoutines.append(ExerciseRoutine(
+                                    id: "",
+                                    name: exerciseName,
+                                    sets: 0,
+                                    reps: 0
+                                ))
+                            }
+                        ).preferredColorScheme(.dark)
+                    }
+                    
                 }
 
             }

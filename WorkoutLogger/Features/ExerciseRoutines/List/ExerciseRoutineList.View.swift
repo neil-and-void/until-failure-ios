@@ -25,8 +25,9 @@ struct ExerciseRoutineList: View {
                     .foregroundColor(.tertiaryText)
 
             }
+            .padding(.vertical)
             .frame(maxWidth: .infinity, alignment: .leading)
-             
+ 
             if exerciseRoutines.count > 0 {
                    
                 ForEach(exerciseRoutines, id: \.self.id) { exerciseRoutine in
@@ -49,7 +50,7 @@ struct ExerciseRoutineList: View {
             }
             
         }
-        .padding()
+        .padding(.horizontal)
         
     }
 

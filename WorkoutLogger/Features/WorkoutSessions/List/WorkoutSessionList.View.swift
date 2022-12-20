@@ -72,6 +72,7 @@ struct WorkoutSessionListView: View {
                     workoutSessionViewModel.addWorkoutSession(workoutRoutineId: workoutRoutineId, date: Date())
                     showSheet = false
                 }
+                .presentationDetents([.medium])
  
             }
 
