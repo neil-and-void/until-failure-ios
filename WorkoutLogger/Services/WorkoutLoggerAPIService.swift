@@ -25,6 +25,9 @@ extension WorkoutLoggerAPIServiceProtocol {
     func getWorkoutRoutines(withNetwork: Bool = false, completion: @escaping (Result<[WorkoutRoutineFull], APIError>) -> Void) {
         return getWorkoutRoutines(withNetwork: withNetwork, completion: completion)
     }
+    func getExerciseRoutines(workoutRoutineId: String, withNetwork: Bool = false, completion: @escaping (Result<[ExerciseRoutine], APIError>) -> Void) {
+        return getExerciseRoutines(workoutRoutineId: workoutRoutineId, withNetwork: withNetwork, completion: completion)
+    }
 }
 
 class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
@@ -232,6 +235,10 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
                 completion(Result.failure(APIError.networkError))
             }
         }
+    }
+    
+    func getExerciseRoutines(workoutRoutineId: String, withNetwork: Bool = false, completion: @escaping (Result<[ExerciseRoutine], APIError>) -> Void) {
+        print("implement")
     }
 }
 
