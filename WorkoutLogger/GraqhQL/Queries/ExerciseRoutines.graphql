@@ -1,0 +1,5 @@
+query ExerciseRoutines($workoutRoutineId: ID!) {
+    exerciseRoutines(workoutRoutineId: $workoutRoutineId) {
+        ...exerciseRoutineFull
+    }
+}

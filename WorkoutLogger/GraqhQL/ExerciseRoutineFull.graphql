@@ -1,0 +1,7 @@
+fragment exerciseRoutineFull on ExerciseRoutine {
+    id
+    active
+    name
+    sets
+    reps
+}
