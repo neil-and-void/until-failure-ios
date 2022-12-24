@@ -54,7 +54,6 @@ class Parser: WorkoutSessionParserProtocol {
         }
         
         let parsedExercises = workoutSession.exercises.compactMap { exercise in
-            
             let parsedSets = exercise.sets.map { setEntry in
                 SetEntry(
                     id: setEntry.id,
@@ -63,7 +62,7 @@ class Parser: WorkoutSessionParserProtocol {
                 )
             }
             
-            if let exerciseRoutine = exerciseRoutineDict[exercise.id] {
+            if let exerciseRoutine = exerciseRoutineDict[exercise.exerciseRoutineId] {
                 return Exercise(
                     id: exercise.id,
                     exerciseRoutine: exerciseRoutine,

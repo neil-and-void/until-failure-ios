@@ -33,7 +33,6 @@ class ExerciseRoutineViewModel: ObservableObject {
     }
     
     func addExercise(workoutSessionId: String, exerciseRoutineId: String, refetchQuery: @escaping () -> Void) {
-        print(workoutSessionId, exerciseRoutineId)
         self.service.addExercise(
             workoutSessionId: workoutSessionId,
             exerciseRoutineId: exerciseRoutineId

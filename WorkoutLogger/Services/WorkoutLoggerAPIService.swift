@@ -192,7 +192,6 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
         self.client.perform(mutation: DeleteWorkoutRoutineMutation(workoutRoutineId: id)) { result in
             switch result {
             case .success(let response):
-                print(response.data as Any)
                 if let errors = response.errors {
                     let error = APIError.GraphQLError(gqlError: errors[0].message)
                     completion(Result.failure(error))
@@ -239,11 +238,13 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
         self.client.fetch(query: WorkoutSessionQuery(workoutRoutineId: workoutRoutineId, workoutSessionId: workoutSessionId), cachePolicy: cachePolicy) { result in
             switch result {
             case .success(let response):
+                
                 if let errors = response.errors {
                     let error = APIError.GraphQLError(gqlError: errors[0].message)
                     completion(Result.failure(error))
                     return
                 }
+                
                 if let workoutSession = response.data?.workoutSession,
                    let workoutRoutine = response.data?.workoutRoutine {
                     let parsedWorkoutSession = self.parser.parseGraphQL(
@@ -253,6 +254,7 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
                     completion(Result.success(parsedWorkoutSession))
                     return
                 }
+
                 completion(Result.failure(APIError.unknown))
             case .failure:
                 completion(Result.failure(APIError.networkError))
@@ -262,8 +264,6 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
     
     func getExerciseRoutines(workoutRoutineId: String, withNetwork: Bool = false, completion: @escaping (Result<[ExerciseRoutine], APIError>) -> Void) {
         self.client.fetch(query: ExerciseRoutinesQuery(workoutRoutineId: workoutRoutineId)) { result in
-            print(result)
-
             switch result {
             case .success(let response):
                 

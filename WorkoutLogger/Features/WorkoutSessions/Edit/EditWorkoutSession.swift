@@ -31,7 +31,7 @@ struct EditWorkoutSession: View {
                         ForEach(workoutSession.exercises) { exercise in
                             
                             EditableExercise(exercise: exercise)
-                            
+ 
                         }
                         
                         Button("+ Add Exercise") {
@@ -58,7 +58,6 @@ struct EditWorkoutSession: View {
                         }
                         
                     }
-                    
                     
                 } else {
                     

@@ -349,6 +349,7 @@
 			children = (
 				2865A810293AE01A00020C7A /* schema.json */,
 				289F15672939FA080074BBE8 /* API.swift */,
+				283DAA1C2936AC0300AB2C18 /* Config.swift */,
 				2895BB4B292626A500A16CF8 /* WorkoutLoggerApp.swift */,
 				2841B83B29347D1B00B4AC76 /* CustomColors.swift */,
 				285332A1292AE9A000BACB6A /* AuthenticationProvider.swift */,
@@ -363,7 +364,6 @@
 				2858C572292D67DE008DEA17 /* Network */,
 				2895BB4F292626A600A16CF8 /* Assets.xcassets */,
 				2895BB51292626A600A16CF8 /* Preview Content */,
-				283DAA1C2936AC0300AB2C18 /* Config.swift */,
 			);
 			path = WorkoutLogger;
 			sourceTree = "<group>";

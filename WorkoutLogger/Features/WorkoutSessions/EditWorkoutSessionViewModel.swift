@@ -22,7 +22,8 @@ class EditWorkoutSessionViewModel: ObservableObject {
         self.isLoading = true
         self.service.getWorkoutSession(
             workoutRoutineId: workoutRoutineId,
-            workoutSessionId: workoutSessionId
+            workoutSessionId: workoutSessionId,
+            withNetwork: withNetwork
         ) { result in
             switch result {
             case .success(let workoutSession):
