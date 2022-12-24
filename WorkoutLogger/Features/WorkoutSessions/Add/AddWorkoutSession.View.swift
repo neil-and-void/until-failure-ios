@@ -42,7 +42,7 @@ struct AddWorkoutSession: View {
                         
                         HStack {
                             
-                            Text("Select a Routine...")
+                            Text("Select a Routine to Start...")
                                 .font(.system(size: 18, weight: .semibold))
                             
                             Spacer()
