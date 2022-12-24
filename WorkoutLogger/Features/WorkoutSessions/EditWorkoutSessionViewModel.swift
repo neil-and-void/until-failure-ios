@@ -18,7 +18,7 @@ class EditWorkoutSessionViewModel: ObservableObject {
         self.service = WorkoutLoggerAPIService()
     }
      
-    func getWorkoutSession(workoutSessionId: String, workoutRoutineId: String) {
+    func getWorkoutSession(workoutSessionId: String, workoutRoutineId: String, withNetwork: Bool = false) {
         self.isLoading = true
         self.service.getWorkoutSession(
             workoutRoutineId: workoutRoutineId,

@@ -1,0 +1,6 @@
+mutation AddExercise($workoutSessionId: ID!, $exercise: ExerciseInput!) {
+    addExercise(
+        workoutSessionId: $workoutSessionId
+        exercise: $exercise,
+    )
+}

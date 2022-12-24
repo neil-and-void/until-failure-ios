@@ -4,55 +4,6 @@
 import Apollo
 import Foundation
 
-public struct WorkoutSessionInput: GraphQLMapConvertible {
-  public var graphQLMap: GraphQLMap
-
-  /// - Parameters:
-  ///   - workoutRoutineId
-  ///   - start
-  ///   - end
-  ///   - exercises
-  public init(workoutRoutineId: GraphQLID, start: String, end: Swift.Optional<String?> = nil, exercises: [ExerciseInput]) {
-    graphQLMap = ["workoutRoutineId": workoutRoutineId, "start": start, "end": end, "exercises": exercises]
-  }
-
-  public var workoutRoutineId: GraphQLID {
-    get {
-      return graphQLMap["workoutRoutineId"] as! GraphQLID
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "workoutRoutineId")
-    }
-  }
-
-  public var start: String {
-    get {
-      return graphQLMap["start"] as! String
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "start")
-    }
-  }
-
-  public var end: Swift.Optional<String?> {
-    get {
-      return graphQLMap["end"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "end")
-    }
-  }
-
-  public var exercises: [ExerciseInput] {
-    get {
-      return graphQLMap["exercises"] as! [ExerciseInput]
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "exercises")
-    }
-  }
-}
-
 public struct ExerciseInput: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -117,6 +68,55 @@ public struct SetEntryInput: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "reps")
+    }
+  }
+}
+
+public struct WorkoutSessionInput: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - workoutRoutineId
+  ///   - start
+  ///   - end
+  ///   - exercises
+  public init(workoutRoutineId: GraphQLID, start: String, end: Swift.Optional<String?> = nil, exercises: [ExerciseInput]) {
+    graphQLMap = ["workoutRoutineId": workoutRoutineId, "start": start, "end": end, "exercises": exercises]
+  }
+
+  public var workoutRoutineId: GraphQLID {
+    get {
+      return graphQLMap["workoutRoutineId"] as! GraphQLID
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "workoutRoutineId")
+    }
+  }
+
+  public var start: String {
+    get {
+      return graphQLMap["start"] as! String
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "start")
+    }
+  }
+
+  public var end: Swift.Optional<String?> {
+    get {
+      return graphQLMap["end"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "end")
+    }
+  }
+
+  public var exercises: [ExerciseInput] {
+    get {
+      return graphQLMap["exercises"] as! [ExerciseInput]
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "exercises")
     }
   }
 }
@@ -273,6 +273,59 @@ public struct UpdateExerciseRoutineInput: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "reps")
+    }
+  }
+}
+
+public final class AddExerciseMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
+  public let operationDefinition: String =
+    """
+    mutation AddExercise($workoutSessionId: ID!, $exercise: ExerciseInput!) {
+      addExercise(workoutSessionId: $workoutSessionId, exercise: $exercise)
+    }
+    """
+
+  public let operationName: String = "AddExercise"
+
+  public var workoutSessionId: GraphQLID
+  public var exercise: ExerciseInput
+
+  public init(workoutSessionId: GraphQLID, exercise: ExerciseInput) {
+    self.workoutSessionId = workoutSessionId
+    self.exercise = exercise
+  }
+
+  public var variables: GraphQLMap? {
+    return ["workoutSessionId": workoutSessionId, "exercise": exercise]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["Mutation"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("addExercise", arguments: ["workoutSessionId": GraphQLVariable("workoutSessionId"), "exercise": GraphQLVariable("exercise")], type: .nonNull(.scalar(GraphQLID.self))),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(addExercise: GraphQLID) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "addExercise": addExercise])
+    }
+
+    public var addExercise: GraphQLID {
+      get {
+        return resultMap["addExercise"]! as! GraphQLID
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "addExercise")
+      }
     }
   }
 }

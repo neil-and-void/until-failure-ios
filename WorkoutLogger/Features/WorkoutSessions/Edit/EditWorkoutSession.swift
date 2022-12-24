@@ -11,6 +11,7 @@ struct EditWorkoutSession: View {
     var workoutSessionId: String
     var workoutRoutineId: String
     
+    @State private var showSheet = false
     @StateObject private var editWorkoutSessionViewModel = EditWorkoutSessionViewModel(service: WorkoutLoggerAPIService())
     
     var body: some View {
@@ -23,16 +24,41 @@ struct EditWorkoutSession: View {
                 
             } else {
                 
-                if let workoutSession = editWorkoutSessionViewModel.workoutSession {
+                if let workoutSession = Binding<WorkoutSession>($editWorkoutSessionViewModel.workoutSession) {
                     
-                    List(workoutSession.exercises) { exercise in
+                    ScrollView {
                         
-                        Text(exercise.exerciseRoutine.name)
-                        
-                        Button("Add Exercise") {
-                            print("add exercise")
+                        ForEach(workoutSession.exercises) { exercise in
+                            
+                            EditableExercise(exercise: exercise)
+                            
                         }
+                        
+                        Button("+ Add Exercise") {
+                            
+                            showSheet = true
+                            
+                        }
+                        .buttonStyle(TextButton())
+                        .sheet(isPresented: $showSheet) {
+                            
+                            AddExerciseRoutine(
+                                workoutSessionId: workoutSession.id,
+                                workoutRoutineId: workoutSession.workoutRoutine.id,
+                                refetchWorkoutSession: {
+                                    editWorkoutSessionViewModel.getWorkoutSession(
+                                        workoutSessionId: workoutSessionId,
+                                        workoutRoutineId: workoutRoutineId,
+                                        withNetwork: true
+                                    )
+                                },
+                                showSheet: $showSheet
+                            ).presentationDetents([.medium])
+                            
+                        }
+                        
                     }
+                    
                     
                 } else {
                     

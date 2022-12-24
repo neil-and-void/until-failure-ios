@@ -17,9 +17,10 @@ class ExerciseRoutineViewModel: ObservableObject {
     init(service: WorkoutLoggerAPIServiceProtocol) {
         self.service = service
     }
-
-    func getExerciseRoutines(workoutRoutineId: String, withNetwork: Bool = false, completion: @escaping () -> Void) {
-        self.service.getExerciseRoutines(workoutRoutineId: workoutRoutineId) { result in
+    
+    func getExerciseRoutines(workoutRoutineId: String, withNetwork: Bool = false) {
+        self.isLoading = true
+        self.service.getExerciseRoutines(workoutRoutineId: workoutRoutineId, withNetwork: withNetwork) { result in
             switch result {
             case .success(let exerciseRoutines):
                 self.error = nil
@@ -28,6 +29,22 @@ class ExerciseRoutineViewModel: ObservableObject {
                 self.error = err.localizedDescription
             }
             self.isLoading = false
+        }
+    }
+    
+    func addExercise(workoutSessionId: String, exerciseRoutineId: String, refetchQuery: @escaping () -> Void) {
+        print(workoutSessionId, exerciseRoutineId)
+        self.service.addExercise(
+            workoutSessionId: workoutSessionId,
+            exerciseRoutineId: exerciseRoutineId
+        ) { result in
+            switch result {
+            case .success:
+                self.error = nil
+                refetchQuery()
+            case .failure(let err):
+                self.error = err.localizedDescription
+            }
         }
     }
     
