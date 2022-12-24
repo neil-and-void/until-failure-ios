@@ -41,7 +41,9 @@ struct WorkoutSessionListView: View {
                         
                     }
                     
-                }.onAppear(perform: { workoutSessionViewModel.getWorkoutSessions() })
+                }.onAppear(perform: {
+                    workoutSessionViewModel.getWorkoutSessions()
+                })
                 
             }
             .padding(.horizontal)
@@ -68,11 +70,10 @@ struct WorkoutSessionListView: View {
             }
             .sheet(isPresented: $showSheet) {
                 
-                AddWorkoutSession() { workoutRoutineId in 
+                AddWorkoutSession(showSheet: $showSheet) { workoutRoutineId in 
                     workoutSessionViewModel.addWorkoutSession(workoutRoutineId: workoutRoutineId, date: Date())
                     showSheet = false
-                }
-                .presentationDetents([.medium])
+                }.presentationDetents([.medium])
  
             }
 

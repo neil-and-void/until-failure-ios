@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AddWorkoutSession: View {
     @StateObject var workoutListViewModel = WorkoutListViewModel(service: WorkoutLoggerAPIService())
+    @Binding var showSheet: Bool
     var onSelection: (String) -> Void
     
     var body: some View {
@@ -29,7 +30,7 @@ struct AddWorkoutSession: View {
                             
                             Button("Cancel") {
                                 
-                                print("cancel")
+                                showSheet = false
                                 
                             }
                             .padding()
@@ -40,28 +41,33 @@ struct AddWorkoutSession: View {
                         }
                         
                         HStack {
-                               
+                            
                             Text("Select a Routine...")
                                 .font(.system(size: 18, weight: .semibold))
                             
                             Spacer()
                             
                         }.padding(.horizontal)
-                    
-                        List {
+                        
+                        List(workoutListViewModel.workoutRoutineList, id: \.self.id) { workoutRoutine in
                             
-                            ForEach(workoutListViewModel.workoutRoutineList, id: \.self.id) { workoutRoutine in
+                            Button(action: { onSelection(workoutRoutine.id) }) {
                                 
-                                SelectWorkoutRoutine(
-                                    name: workoutRoutine.name,
-                                    exerciseCount: workoutRoutine.exerciseRoutines.count
-                                )
-                                .listRowSeparator(.hidden)
+                                HStack {
+                                    
+                                    Text(workoutRoutine.name)
+                                    
+                                    Spacer()
+                                    
+                                    Text("\(String(workoutRoutine.exerciseRoutines.count)) exercises")
+                                        .foregroundColor(.secondaryText)
+                                    
+                                }
                                 
-                            }
-
+                            }.listRowSeparator(.hidden)
+                            
                         }.listStyle(.plain)
-
+                        
                         
                     }
                     
@@ -74,12 +80,12 @@ struct AddWorkoutSession: View {
             }
             
         }.onAppear(perform: { workoutListViewModel.getWorkoutRoutines() })
-    
+        
     }
 }
 
 struct AddWorkoutSession_Previews: PreviewProvider {
     static var previews: some View {
-        AddWorkoutSession(onSelection: { _ in }).preferredColorScheme(.dark)
+        AddWorkoutSession(showSheet: .constant(true), onSelection: { _ in }).preferredColorScheme(.dark)
     }
 }

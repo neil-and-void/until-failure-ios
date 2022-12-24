@@ -18,7 +18,7 @@ class WorkoutSessionViewModel: ObservableObject {
     }
     
     func getWorkoutSessions(withNetwork: Bool = false) {
-        self.service.getWorkoutSessions() { result in
+        self.service.getWorkoutSessions(withNetwork: withNetwork) { result in
             switch result {
             case .success(let workoutSessions):
                 self.error = nil
@@ -38,6 +38,7 @@ class WorkoutSessionViewModel: ObservableObject {
             switch result {
             case .success:
                 self.error = nil
+                self.getWorkoutSessions(withNetwork: true)
             case .failure(let err):
                 self.error = err.localizedDescription
             }
