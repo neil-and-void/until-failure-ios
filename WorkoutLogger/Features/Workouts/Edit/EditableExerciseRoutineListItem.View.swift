@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct EditableExerciseRoutineListItem: View {
-    @Binding var editableExerciseRoutine: ExerciseRoutine
+    @Binding var exerciseRoutine: ExerciseRoutine
     
     var body: some View {
         
         HStack {
             
-            TextField("Name", text: $editableExerciseRoutine.name)
+            TextField("Name", text: $exerciseRoutine.name)
                 .padding(.horizontal)
                 .padding(.vertical, 5)
                 .background(.thinMaterial)
@@ -23,7 +23,7 @@ struct EditableExerciseRoutineListItem: View {
             
             Group {
                 
-                TextField("Sets", value: $editableExerciseRoutine.sets, formatter: NumberFormatter())
+                TextField("Sets", value: $exerciseRoutine.sets, formatter: NumberFormatter())
                     .padding(.horizontal)
                     .padding(.vertical, 4)
                     .background(.thinMaterial)
@@ -33,7 +33,7 @@ struct EditableExerciseRoutineListItem: View {
                     .multilineTextAlignment(.center)
                     .frame(width: 76)
                 
-                TextField("Reps", value: $editableExerciseRoutine.reps, formatter: NumberFormatter())
+                TextField("Reps", value: $exerciseRoutine.reps, formatter: NumberFormatter())
                     .padding(.horizontal)
                     .padding(.vertical, 4)
                     .background(.thinMaterial)
@@ -55,7 +55,7 @@ struct EditableExerciseRoutineListItem_Previews: PreviewProvider {
         
         VStack {
             EditableExerciseRoutineListItem(
-                editableExerciseRoutine: .constant(ExerciseRoutine(
+                exerciseRoutine: .constant(ExerciseRoutine(
                     id: "0",
                     name: "Squat",
                     sets: 9999,
@@ -64,7 +64,7 @@ struct EditableExerciseRoutineListItem_Previews: PreviewProvider {
             )
 
             EditableExerciseRoutineListItem(
-                editableExerciseRoutine: .constant(ExerciseRoutine(
+                exerciseRoutine: .constant(ExerciseRoutine(
                     id: "0",
                     name: "Squat",
                     sets: 4,
