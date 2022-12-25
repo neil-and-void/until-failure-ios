@@ -53,9 +53,9 @@ struct EditWorkout: View {
 
                     List {
 
-                        ForEach($workoutRoutine.exerciseRoutines) { exerciseRoutine in
+                        ForEach(workoutRoutine.exerciseRoutines.indices, id: \.self) {
 
-                            EditableExerciseRoutineListItem(editableExerciseRoutine: exerciseRoutine)
+                            EditableExerciseRoutineListItem(editableExerciseRoutine: $workoutRoutine.exerciseRoutines[$0])
 
                         }.onDelete(perform: { idx in
                             if !workoutViewModel.isLoading {
