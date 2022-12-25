@@ -30,7 +30,7 @@ struct AddExerciseRoutineAlert: View {
                 Text("Add")
             }
 
-        }
+        }.preferredColorScheme(.dark)
 
     }
 }

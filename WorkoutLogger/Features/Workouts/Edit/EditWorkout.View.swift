@@ -82,9 +82,10 @@ struct EditWorkout: View {
                                     reps: 0
                                 ))
                             }
-                        ).preferredColorScheme(.dark)
+                        )
+                         
                     }
-                    
+
                 }
 
             }
