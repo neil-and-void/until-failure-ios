@@ -1,12 +1,8 @@
 fragment workoutRoutineFull on WorkoutRoutine {
     id
-    active
     name
+    active
     exerciseRoutines {
-        id
-        active
-        name
-        sets
-        reps
+        ...exerciseRoutineFull
     }
 }

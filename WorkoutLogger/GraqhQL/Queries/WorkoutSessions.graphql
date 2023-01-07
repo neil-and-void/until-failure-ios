@@ -1,8 +1,12 @@
-query WorkoutSessions {
-    workoutRoutines {
-        ...workoutRoutineFull
-    }
-    workoutSessions {
-        ...workoutSessionFull
+query WorkoutSessions($limit: Int!, $after: String) {
+    workoutSessions(limit: $limit, after: $after) {
+        edges {
+            node {
+                ...workoutSessionFull
+            }
+        }
+        pageInfo {
+            hasNextPage
+        }
     }
 }

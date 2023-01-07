@@ -1,12 +1,6 @@
-mutation Login($email: String!, $password: String!) {
-  login(
-    email: $email,
-    password: $password,
-  ) {
-    ... on AuthSuccess {
-            refreshToken
-            accessToken
+mutation Login($loginInput: LoginInput!) {
+    login(loginInput: $loginInput) {
+        refreshToken
+        accessToken
     }
-  }
 }
-

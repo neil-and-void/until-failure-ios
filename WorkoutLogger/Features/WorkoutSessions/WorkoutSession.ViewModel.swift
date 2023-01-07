@@ -10,7 +10,7 @@ import Foundation
 class WorkoutSessionViewModel: ObservableObject {
     private let service: WorkoutLoggerAPIServiceProtocol
     
-    @Published var workoutSessionList: [WorkoutSession] = []
+    @Published var workoutSessionList: [WorkoutSessionFull] = []
     @Published var error: String?
 
     init(service: WorkoutLoggerAPIServiceProtocol) {
@@ -18,7 +18,7 @@ class WorkoutSessionViewModel: ObservableObject {
     }
     
     func getWorkoutSessions(withNetwork: Bool = false) {
-        self.service.getWorkoutSessions(withNetwork: withNetwork) { result in
+        self.service.getWorkoutSessions(limit: 8, after: "", withNetwork: withNetwork) { result in
             switch result {
             case .success(let workoutSessions):
                 self.error = nil

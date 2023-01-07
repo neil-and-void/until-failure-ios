@@ -11,7 +11,7 @@ let exerciseRoutines_mock = [
     WorkoutRoutineFull.ExerciseRoutine(id: "12", active: true, name: "Squat", sets: 4, reps: 8),
     WorkoutRoutineFull.ExerciseRoutine(id: "13", active: true, name: "hamstring curls", sets: 4, reps: 10)
 ]
-let workoutRoutinesfull_mock = [WorkoutRoutineFull(id: "11", active: true, name: "Legs", exerciseRoutines: exerciseRoutines_mock)]
+let workoutRoutinesfull_mock = [WorkoutRoutineFull(id: "11", name: "Legs", active: true, exerciseRoutines: exerciseRoutines_mock)]
 
 let workoutRoutine_mock = WorkoutRoutine(
     id: "11",

@@ -40,7 +40,7 @@ final class MockAuthenticationService: AuthServiceProtocol {
     }
 }
 
-final class MockWorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
+final class MockWorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol { 
     var getWorkoutRoutinesResult: Result<[WorkoutRoutineFull], APIError> = .success(workoutRoutinesfull_mock)
     var createWorkoutRoutineResult: Result<CreateWorkoutRoutineMutation.Data.CreateWorkoutRoutine, APIError> = .success(createWorkoutRoutine_mock)
     var getWorkoutSessionsResult: Result<[WorkoutSession], APIError> = .success(workoutSessionsFull_mock)
@@ -49,7 +49,7 @@ final class MockWorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
    
     init() {}
     
-    func deleteWorkoutRoutine(id: String, completion: @escaping (Result<String, APIError>) -> Void) {}
+    func deleteWorkoutRoutine(id: String, completion: @escaping (Result<Int, APIError>) -> Void) {}
     
     func getWorkoutRoutines(completion: @escaping (Result<[WorkoutRoutineFull], APIError>) -> Void) {
         completion(getWorkoutRoutinesResult)

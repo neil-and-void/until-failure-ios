@@ -21,7 +21,7 @@ class WorkoutListViewModel: ObservableObject {
     
     func getWorkoutRoutines(withNetwork: Bool = false) {
         self.isLoading = true
-        self.service.getWorkoutRoutines(withNetwork: withNetwork) { result in
+        self.service.getWorkoutRoutines(limit: 8, after: "", withNetwork: withNetwork) { result in
             switch result {
             case .success(let workoutRoutines):
                 self.error = nil

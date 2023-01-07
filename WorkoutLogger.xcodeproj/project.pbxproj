@@ -28,7 +28,7 @@
 		2841B8382934793B00B4AC76 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2841B8372934793B00B4AC76 /* ButtonStyles.swift */; };
 		2841B83C29347D1B00B4AC76 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2841B83B29347D1B00B4AC76 /* CustomColors.swift */; };
 		2841B8422935851100B4AC76 /* TextStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2841B8412935851100B4AC76 /* TextStyles.swift */; };
-		2848C0312926289700277523 /* Signup.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2848C0302926289700277523 /* Signup.graphql */; };
+		2848C0312926289700277523 /* SignupMutation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2848C0302926289700277523 /* SignupMutation.graphql */; };
 		2848D8062933161F001E8CD0 /* WorkoutRoutineFull.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 2848D8052933161F001E8CD0 /* WorkoutRoutineFull.graphql */; };
 		2848D808293316A3001E8CD0 /* CreateWorkoutRoutine.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2848D807293316A3001E8CD0 /* CreateWorkoutRoutine.graphql */; };
 		28533294292ABBE700BACB6A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28533293292ABBE700BACB6A /* ContentView.swift */; };
@@ -123,7 +123,7 @@
 		2841B8372934793B00B4AC76 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		2841B83B29347D1B00B4AC76 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
 		2841B8412935851100B4AC76 /* TextStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyles.swift; sourceTree = "<group>"; };
-		2848C0302926289700277523 /* Signup.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Signup.graphql; sourceTree = "<group>"; };
+		2848C0302926289700277523 /* SignupMutation.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = SignupMutation.graphql; sourceTree = "<group>"; };
 		2848D8052933161F001E8CD0 /* WorkoutRoutineFull.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = WorkoutRoutineFull.graphql; sourceTree = "<group>"; };
 		2848D807293316A3001E8CD0 /* CreateWorkoutRoutine.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = CreateWorkoutRoutine.graphql; sourceTree = "<group>"; };
 		28533293292ABBE700BACB6A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -408,7 +408,7 @@
 		2895BB7E292627FE00A16CF8 /* Mutations */ = {
 			isa = PBXGroup;
 			children = (
-				2848C0302926289700277523 /* Signup.graphql */,
+				2848C0302926289700277523 /* SignupMutation.graphql */,
 				289CFDED2928327F00BE6773 /* LoginMutation.graphql */,
 				28C2EE02292DA902000BE3EB /* RefreshMutation.graphql */,
 				2848D807293316A3001E8CD0 /* CreateWorkoutRoutine.graphql */,
@@ -708,7 +708,7 @@
 				2895BB53292626A600A16CF8 /* Preview Assets.xcassets in Resources */,
 				2841A11A293D432200751D13 /* WorkoutSessionFull.graphql in Resources */,
 				288A6E8429431EF1008EFF7A /* GetWorkoutSession.graphql in Resources */,
-				2848C0312926289700277523 /* Signup.graphql in Resources */,
+				2848C0312926289700277523 /* SignupMutation.graphql in Resources */,
 				28C2EE03292DA902000BE3EB /* RefreshMutation.graphql in Resources */,
 				2895BB7A2926271500A16CF8 /* schema.graphqls in Resources */,
 				289A54D5295515AF00DDED7D /* ExerciseRoutines.graphql in Resources */,

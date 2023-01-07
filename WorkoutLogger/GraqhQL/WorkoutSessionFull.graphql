@@ -1,16 +1,30 @@
 fragment workoutSessionFull on WorkoutSession {
+    id
+    start
+    end
+    workoutRoutine {
         id
-        start
-        end
-        workoutRoutineId
-        exercises {
-                id
-                exerciseRoutineId
-                sets {
-                        id
-                        weight
-                        reps
-                }
-                notes
+        name
+    }
+    exercises {
+        id
+        exerciseRoutine {
+            ...exerciseRoutineFull
         }
+        sets {
+            id
+            weight
+            reps
+        }
+        notes
+    }
+    prevExercises {
+        id
+        notes
+        sets {
+            id
+            reps
+            weight
+        }
+    }
 }

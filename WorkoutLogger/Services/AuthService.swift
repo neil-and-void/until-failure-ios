@@ -28,12 +28,8 @@ final class AuthService: AuthServiceProtocol {
         confirmPassword: String,
         completion: @escaping (Result<AuthResult, APIError>) -> Void
     ) {
-        self.client.perform(mutation: SignupMutation(
-            email: email,
-            name: name,
-            password: password,
-            confirmPassword: confirmPassword
-        )) { result in
+        let signupInput = SignupInput(email: email, name: name, password: password, confirmPassword: confirmPassword)
+        self.client.perform(mutation: SignupMutation(signupInput: signupInput)) { result in
             switch result {
             case .success(let response):
                 if let errors = response.errors {
@@ -42,7 +38,7 @@ final class AuthService: AuthServiceProtocol {
                     return
                 }
                 
-                if let tokens = response.data?.signup.asAuthSuccess {
+                if let tokens = response.data?.signup {
                     let authResult = AuthResult(refreshToken: tokens.refreshToken, accessToken: tokens.accessToken)
                     completion(Result.success(authResult))
                     return
@@ -61,7 +57,8 @@ final class AuthService: AuthServiceProtocol {
         password: String,
         completion: @escaping (Result<AuthResult, APIError>) -> Void
     ) {
-        self.client.perform(mutation: LoginMutation(email: email, password: password)) { result in
+        let loginInput = LoginInput(email: email, password: password)
+        self.client.perform(mutation: LoginMutation(loginInput: loginInput)) { result in
             switch result {
             case .success(let response):
                 if let errors = response.errors {
@@ -70,7 +67,7 @@ final class AuthService: AuthServiceProtocol {
                     return
                 }
                 
-                if let tokens = response.data?.login.asAuthSuccess {
+                if let tokens = response.data?.login {
                     let authResult = AuthResult(refreshToken: tokens.refreshToken, accessToken: tokens.accessToken)
                     completion(Result.success(authResult))
                     return

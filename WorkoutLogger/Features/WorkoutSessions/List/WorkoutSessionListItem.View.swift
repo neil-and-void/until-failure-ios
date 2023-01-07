@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WorkoutSessionListItem: View {
     var active: Bool
-    var workoutSession: WorkoutSession
+    var workoutSession: WorkoutSessionFull
     
     func formattedDate(date: Date) -> String {
         let formatter = DateFormatter()
@@ -31,7 +31,7 @@ struct WorkoutSessionListItem: View {
                 
                 Text(workoutSession.workoutRoutine.name).font(.system(size: 20, weight: .bold))
                 
-                Text(formattedDate(date: workoutSession.start))
+                Text("TIME Start")
                     .font(.system(size: 16))
                     .foregroundColor(.secondaryText)
                 
@@ -39,9 +39,10 @@ struct WorkoutSessionListItem: View {
             
             Spacer()
             
-            if let end = workoutSession.end {
+            if (workoutSession.end != nil) {
                 
-                Text(formattedDuration(start: workoutSession.start, end: end))
+//                Text(formattedDuration(start: workoutSession.start, end: end))
+                Text("TIME END")
                     .foregroundColor(.secondaryText)
 
             } else {
@@ -60,11 +61,17 @@ struct WorkoutSessionListItem: View {
     }
 }
 
-//struct WorkoutSessionListItem_Previews: PreviewProvider {
-//    static var previews: some View {
-//        WorkoutSessionListItem(
-//            active: true,
-//            workoutSession: WorkoutSession(id: "1", start: Date(), workoutRoutineId: "1", exercises: [])
-//        )
-//    }
-//}
+struct WorkoutSessionListItem_Previews: PreviewProvider {
+    static var previews: some View {
+        WorkoutSessionListItem(
+            active: true,
+            workoutSession: WorkoutSessionFull(
+                id: "1",
+                start: "TIME START",
+                workoutRoutine: WorkoutSessionFull.WorkoutRoutine(id: "Bruh", name: "what"),
+                exercises: [],
+                prevExercises: []
+            )
+        )
+    }
+}
