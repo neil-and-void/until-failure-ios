@@ -1,0 +1,29 @@
+{
+  "schemaName" : "WorkoutLoggerAPI",
+  "input" : {
+    "operationSearchPaths" : [
+      "**/*.graphql"
+    ],
+    "schemaSearchPaths" : [
+      "**/*.graphqls"
+    ]
+  },
+  "output" : {
+    "testMocks" : {
+      "none" : {
+      }
+    },
+    "schemaTypes" : {
+      "path" : "./WorkoutLoggerAPI",
+      "moduleType" : {
+        "embeddedInTarget" : {
+          "name" : "generated"
+        }
+      }
+    },
+    "operations" : {
+      "inSchemaModule" : {
+      }
+    }
+  }
+}
