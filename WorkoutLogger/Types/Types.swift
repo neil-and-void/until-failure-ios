@@ -13,14 +13,6 @@ struct AuthResult {
     var accessToken: String
 }
 
-struct ExerciseRoutine: Identifiable {
-    var _id = UUID()
-    var id: String
-    var name: String
-    var sets: Int
-    var reps: Int
-}
-
 struct NewDraftExerciseRoutine {
     var name: String = ""
     var reps: Int = 0
@@ -30,35 +22,35 @@ struct NewDraftExerciseRoutine {
 struct WorkoutRoutine: Identifiable {
     var id: String
     var name: String
+    var active: Bool
     var exerciseRoutines: [ExerciseRoutine]
+}
+
+struct ExerciseRoutine: Identifiable {
+    var _id = UUID()
+    var id: String
+    var active: Bool
+    var name: String
+    var sets: Int
+    var reps: Int
 }
 
 struct WorkoutSession: Identifiable {
     var id: String
     var start: Date
     var end: Date?
-    var workoutRoutine: EmbeddedWorkoutRoutine
+    var workoutRoutine: WorkoutRoutine
     var exercises: [Exercise]
-}
-
-struct EmbeddedWorkoutRoutine: Identifiable {
-    var id: String
-    var name: String
+    var prevExercises: [Exercise]
 }
 
 struct Exercise: Identifiable {
     var id: String
-    var exerciseRoutine: EmbeddedExerciseRoutine
+    var exerciseRoutine: ExerciseRoutine
     var sets: [SetEntry]
     var notes: String
 }
 
-struct EmbeddedExerciseRoutine {
-    var id: String
-    var name: String
-    var sets: Int
-    var reps: Int
-}
 
 struct SetEntry: Identifiable {
     var id: String
