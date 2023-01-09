@@ -89,7 +89,7 @@ class RefreshTokenInterceptor: ApolloInterceptor {
         request: Apollo.HTTPRequest<Operation>,
         response: Apollo.HTTPResponse<Operation>?,
         completion: @escaping (Result<Apollo.GraphQLResult<Operation.Data>, Error>) -> Void
-    ) where Operation: Apollo.GraphQLOperation {
+    ) where Operation: GraphQLOperation {
         guard let receivedResponse = response else {
             chain.handleErrorAsync(
                 RefreshTokenError.notYetReceived,
@@ -115,7 +115,8 @@ class RefreshTokenInterceptor: ApolloInterceptor {
             )
             return
         }
-        
+       
+        // attempt refreshing the access token if we get unauthorized response
         if code == "UNAUTHORIZED" {
             self.authService.refreshAccessToken(refreshToken: tokens!.refreshToken) { result in
                 switch result {

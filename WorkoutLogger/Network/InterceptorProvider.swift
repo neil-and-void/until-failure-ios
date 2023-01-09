@@ -36,7 +36,7 @@ struct NetworkInterceptorProvider: InterceptorProvider {
             TokenInterceptor(keychainService: self.keychainService, authService: self.authService),
             NetworkFetchInterceptor(client: self.client),
             ResponseCodeInterceptor(),
-            JSONResponseParsingInterceptor(cacheKeyForObject: self.store.cacheKeyForObject),
+            JSONResponseParsingInterceptor(),
             RefreshTokenInterceptor(keychainService: self.keychainService, authService: self.authService),
             AutomaticPersistedQueryInterceptor(),
             CacheWriteInterceptor(store: self.store)

@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct AddExerciseRoutine: View {
-    var workoutSessionId: String
-    var workoutRoutineId: String
+    let workoutSessionId: String
+    let workoutRoutineId: String
     var refetchWorkoutSession: () -> Void
     @StateObject var exerciseRoutineViewModel = ExerciseRoutineViewModel(service: WorkoutLoggerAPIService())
     @Binding var showSheet: Bool

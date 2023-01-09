@@ -1,0 +1,7 @@
+fragment exerciseDetails on Exercise {
+    id
+    notes
+    sets {
+        ...setEntryFull
+    }
+}

@@ -10,7 +10,7 @@ import Foundation
 class WorkoutSessionViewModel: ObservableObject {
     private let service: WorkoutLoggerAPIServiceProtocol
     
-    @Published var workoutSessionList: [WorkoutSessionFull] = []
+    @Published var workoutSessionList: [WorkoutSession] = []
     @Published var error: String?
 
     init(service: WorkoutLoggerAPIServiceProtocol) {

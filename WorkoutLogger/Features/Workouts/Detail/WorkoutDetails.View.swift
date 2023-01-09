@@ -16,12 +16,13 @@ struct WorkoutDetailsView: View {
     
     var body: some View {
         
-        Group {
+        VStack {
+//            Text("what?????")
             
             if workoutViewModel.isLoading {
-                
+
                 Text("Loading...")
-                
+
             } else {
                 
                 if let workoutRoutine = workoutViewModel.workoutRoutine {
@@ -32,9 +33,9 @@ struct WorkoutDetailsView: View {
                     )
                     
                 } else {
-                    
+
                     Text("Nothing to view here")
-                    
+
                 }
                 
             }

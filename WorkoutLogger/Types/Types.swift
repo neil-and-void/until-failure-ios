@@ -22,17 +22,17 @@ struct NewDraftExerciseRoutine {
 struct WorkoutRoutine: Identifiable {
     var id: String
     var name: String
-    var active: Bool
-    var exerciseRoutines: [ExerciseRoutine]
+    var active: Bool = true
+    var exerciseRoutines: [ExerciseRoutine] = []
 }
 
 struct ExerciseRoutine: Identifiable {
     var _id = UUID()
     var id: String
-    var active: Bool
-    var name: String
-    var sets: Int
-    var reps: Int
+    var active: Bool = true
+    var name: String = ""
+    var sets: Int = 0
+    var reps: Int = 0
 }
 
 struct WorkoutSession: Identifiable {
@@ -46,11 +46,10 @@ struct WorkoutSession: Identifiable {
 
 struct Exercise: Identifiable {
     var id: String
-    var exerciseRoutine: ExerciseRoutine
+    var exerciseRoutine: ExerciseRoutine = ExerciseRoutine(id: "", active: true, name: "", sets: 0, reps: 0)
     var sets: [SetEntry]
     var notes: String
 }
-
 
 struct SetEntry: Identifiable {
     var id: String

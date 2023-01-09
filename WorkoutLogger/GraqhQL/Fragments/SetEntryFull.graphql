@@ -1,0 +1,5 @@
+fragment setEntryFull on SetEntry {
+    id
+    reps
+    weight
+}

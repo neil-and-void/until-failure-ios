@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WorkoutSessionListItem: View {
     var active: Bool
-    var workoutSession: WorkoutSessionFull
+    var workoutSession: WorkoutSession
     
     func formattedDate(date: Date) -> String {
         let formatter = DateFormatter()
@@ -52,7 +52,7 @@ struct WorkoutSessionListItem: View {
                     .foregroundColor(.primaryColor)
                 
             }
-            
+
         }
         .padding()
         .background(Color.bgSecondary)
@@ -65,10 +65,10 @@ struct WorkoutSessionListItem_Previews: PreviewProvider {
     static var previews: some View {
         WorkoutSessionListItem(
             active: true,
-            workoutSession: WorkoutSessionFull(
+            workoutSession: WorkoutSession(
                 id: "1",
-                start: "TIME START",
-                workoutRoutine: WorkoutSessionFull.WorkoutRoutine(id: "Bruh", name: "what"),
+                start: Date(),
+                workoutRoutine: WorkoutRoutine(id: "Bruh", name: "what"),
                 exercises: [],
                 prevExercises: []
             )

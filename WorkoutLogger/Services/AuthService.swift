@@ -28,8 +28,8 @@ final class AuthService: AuthServiceProtocol {
         confirmPassword: String,
         completion: @escaping (Result<AuthResult, APIError>) -> Void
     ) {
-        let signupInput = SignupInput(email: email, name: name, password: password, confirmPassword: confirmPassword)
-        self.client.perform(mutation: SignupMutation(signupInput: signupInput)) { result in
+        let signupInput = WorkoutLoggerAPI.SignupInput(email: email, name: name, password: password, confirmPassword: confirmPassword)
+        self.client.perform(mutation: WorkoutLoggerAPI.SignupMutation(signupInput: signupInput)) { result in
             switch result {
             case .success(let response):
                 if let errors = response.errors {
@@ -57,8 +57,8 @@ final class AuthService: AuthServiceProtocol {
         password: String,
         completion: @escaping (Result<AuthResult, APIError>) -> Void
     ) {
-        let loginInput = LoginInput(email: email, password: password)
-        self.client.perform(mutation: LoginMutation(loginInput: loginInput)) { result in
+        let loginInput = WorkoutLoggerAPI.LoginInput(email: email, password: password)
+        self.client.perform(mutation: WorkoutLoggerAPI.LoginMutation(loginInput: loginInput)) { result in
             switch result {
             case .success(let response):
                 if let errors = response.errors {
@@ -83,7 +83,7 @@ final class AuthService: AuthServiceProtocol {
     }
     
     func refreshAccessToken(refreshToken: String, completion: @escaping (Result<String, APIError>) -> Void) {
-        self.client.perform(mutation: RefreshAccessTokenMutation(refreshToken: "Bearer " + refreshToken)) { result in
+        self.client.perform(mutation: WorkoutLoggerAPI.RefreshAccessTokenMutation(refreshToken: "Bearer " + refreshToken)) { result in
             switch result {
             case .success(let response):
                 if let errors = response.errors {

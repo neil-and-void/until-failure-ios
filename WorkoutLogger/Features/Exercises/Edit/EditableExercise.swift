@@ -143,7 +143,7 @@ struct EditableExercise_Previews: PreviewProvider {
         ScrollView {
             EditableExercise(exercise: .constant(Exercise(
                 id: "1",
-                exerciseRoutine: EmbeddedExerciseRoutine(id: "1", name: "Squat", sets: 4, reps: 5),
+                exerciseRoutine: ExerciseRoutine(id: "1", name: "Squat", sets: 4, reps: 5),
                 sets: [
                     SetEntry(id: "1", weight: 225, reps: 4),
                     SetEntry(id: "2", weight: 225, reps: 4),
@@ -154,7 +154,7 @@ struct EditableExercise_Previews: PreviewProvider {
             )
             EditableExercise(exercise: .constant(Exercise(
                 id: "1",
-                exerciseRoutine: EmbeddedExerciseRoutine(id: "1", name: "Squat", sets: 4, reps: 5),
+                exerciseRoutine: ExerciseRoutine(id: "1", name: "Squat", sets: 4, reps: 5),
                 sets: [],
                 notes: "Somwething"))
             )
