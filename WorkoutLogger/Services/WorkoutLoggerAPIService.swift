@@ -80,7 +80,6 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
             cachePolicy = .fetchIgnoringCacheData
         }
         self.client.fetch(query: WorkoutLoggerAPI.WorkoutRoutinesQuery(limit: limit, after: after ?? .none), cachePolicy: cachePolicy) { result in
-            print(result)
             switch result {
             case .success(let response):
                 if let errors = response.errors {

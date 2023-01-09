@@ -19,17 +19,14 @@ class WorkoutListViewModel: ObservableObject {
     }
     
     func getWorkoutRoutines(withNetwork: Bool = false) {
-        print("fetch the stuypdi thing")
         self.isLoading = true
         self.service.getWorkoutRoutines(limit: 8, after: "", withNetwork: withNetwork) { result in
             switch result {
             case .success(let workoutRoutines):
                 self.error = nil
                 self.workoutRoutineList = workoutRoutines
-                print("thsese are workotu routeins: ", workoutRoutines)
             case .failure(let err):
                 self.error = err.localizedDescription
-                print("fvererrrorr:", err.localizedDescription)
             }
             self.isLoading = false
         }
