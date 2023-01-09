@@ -193,6 +193,7 @@ public extension WorkoutLoggerAPI {
               public var id: ID { __data["id"] }
               public var notes: String { __data["notes"] }
               public var sets: [Set] { __data["sets"] }
+              public var exerciseRoutine: WorkoutSessionFull.PrevExercise.ExerciseRoutine { __data["exerciseRoutine"] }
 
               public struct Fragments: FragmentContainer {
                 public let __data: DataDict
