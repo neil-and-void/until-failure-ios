@@ -1,0 +1,3 @@
+mutation AddSet($exerciseId: ID!, $set: SetEntryInput!) {
+    addSet(exerciseId: $exerciseId, set: $set)
+}

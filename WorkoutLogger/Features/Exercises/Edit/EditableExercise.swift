@@ -8,7 +8,20 @@
 import SwiftUI
 
 struct EditableExercise: View {
+    @StateObject private var exerciseViewModel = ExerciseViewModel(service: WorkoutLoggerAPIService())
     @Binding var exercise: Exercise
+//    let prevExercises: Exercise
+    
+    func addSetEntry() {
+        // optimisitically update ui by passing a uuid for now and then updating later
+        let setEntry = SetEntry(id: UUID().uuidString, weight: 0, reps: 0)
+        exercise.sets.append(setEntry)
+        
+        exerciseViewModel.addSetEntry(
+            exerciseId: exercise.id,
+            setEntry: setEntry
+        )
+    }
     
     var body: some View {
         
@@ -59,8 +72,6 @@ struct EditableExercise: View {
                         
                     }
                     
-                    
-                    
                     ForEach($exercise.sets) { setEntry in
                         
                         GridRow {
@@ -93,20 +104,17 @@ struct EditableExercise: View {
                             
                         }
                         
-                        
-                        
                     }
                     
-
-                    
-                }.frame(maxWidth: .infinity)
+                }
+                .frame(maxWidth: .infinity)
                 
             }
             
             Button {
                 
-                print("flksdjf")
-                
+                addSetEntry()
+
             } label: {
                 
                 Text("+ Add Set")
@@ -132,6 +140,7 @@ struct EditableExercise: View {
         .padding(10)
         .background(Color.bgSecondary)
         .cornerRadius(10)
+        .padding(.horizontal, 8)
         
     }
     
