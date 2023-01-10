@@ -10,7 +10,7 @@ import SwiftUI
 struct EditableExercise: View {
     @StateObject private var exerciseViewModel = ExerciseViewModel(service: WorkoutLoggerAPIService())
     @Binding var exercise: Exercise
-//    let prevExercises: Exercise
+//    let prevExercises: Exercise MAP
     
     func addSetEntry() {
         // optimisitically update ui by passing a uuid for now and then updating later
@@ -94,6 +94,7 @@ struct EditableExercise: View {
                                 .multilineTextAlignment(.center)
                                 .background(.thinMaterial)
                                 .cornerRadius(8)
+                                .keyboardType(.numberPad)
                             
                             TextField("weight", value: setEntry.weight, formatter: NumberFormatter())
                                 .frame(width: 64)
@@ -101,6 +102,7 @@ struct EditableExercise: View {
                                 .multilineTextAlignment(.center)
                                 .background(.thinMaterial)
                                 .cornerRadius(8)
+                                .keyboardType(.decimalPad)
                             
                         }
                         

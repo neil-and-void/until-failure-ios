@@ -11,7 +11,7 @@ struct WorkoutSessionListItem: View {
     var active: Bool
     var workoutSession: WorkoutSession
     
-    func formattedDate(date: Date) -> String {
+    func formattedDate(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM d"
         formatter.timeZone = .current
@@ -31,7 +31,7 @@ struct WorkoutSessionListItem: View {
                 
                 Text(workoutSession.workoutRoutine.name).font(.system(size: 20, weight: .bold))
                 
-                Text("TIME Start")
+                Text(formattedDate(workoutSession.start))
                     .font(.system(size: 16))
                     .foregroundColor(.secondaryText)
                 
@@ -39,10 +39,9 @@ struct WorkoutSessionListItem: View {
             
             Spacer()
             
-            if (workoutSession.end != nil) {
+            if let workoutSessionEnd = workoutSession.end {
                 
-//                Text(formattedDuration(start: workoutSession.start, end: end))
-                Text("TIME END")
+                Text(formattedDuration(start: workoutSession.start, end: workoutSessionEnd))
                     .foregroundColor(.secondaryText)
 
             } else {

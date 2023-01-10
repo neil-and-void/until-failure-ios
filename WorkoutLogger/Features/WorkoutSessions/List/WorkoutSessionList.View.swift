@@ -13,7 +13,7 @@ struct WorkoutSessionListView: View {
     @State private var showSheet = false
     
     var body: some View {
-        
+
         NavigationStack {
             
             VStack {
@@ -71,7 +71,7 @@ struct WorkoutSessionListView: View {
             .sheet(isPresented: $showSheet) {
                 
                 AddWorkoutSession(showSheet: $showSheet) { workoutRoutineId in 
-                    workoutSessionViewModel.addWorkoutSession(workoutRoutineId: workoutRoutineId, date: Date())
+                    workoutSessionViewModel.addWorkoutSession(workoutRoutineId: workoutRoutineId, start: Date())
                     showSheet = false
                 }.presentationDetents([.medium])
  

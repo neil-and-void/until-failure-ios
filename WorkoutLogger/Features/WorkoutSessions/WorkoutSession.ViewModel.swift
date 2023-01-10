@@ -29,12 +29,8 @@ class WorkoutSessionViewModel: ObservableObject {
         }
     }
     
-    func addWorkoutSession(workoutRoutineId: String, date: Date) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-        formatter.timeZone = TimeZone(abbreviation: "UTC")
-        let formattedDate = formatter.string(from: date)
-        self.service.addWorkoutSession(id: workoutRoutineId, start: formattedDate) { result in
+    func addWorkoutSession(workoutRoutineId: String, start: Date) {
+        self.service.addWorkoutSession(id: workoutRoutineId, start: start) { result in
             switch result {
             case .success:
                 self.error = nil
