@@ -17,6 +17,7 @@ protocol WorkoutLoggerAPIParserProtocol {
     
     // parses from our native types to graphql types (mostly graphql inputs)
     static func UpdateWorkoutRoutineInput(_ workoutRoutine: WorkoutRoutine) -> WorkoutLoggerAPI.UpdateWorkoutRoutineInput
+    static func AddSetEntryInput(_ setEntry: SetEntry) -> WorkoutLoggerAPI.SetEntryInput
 }
 
 // used for parsing graphql objects to our defined project types
@@ -61,20 +62,12 @@ class Parser: WorkoutLoggerAPIParserProtocol {
         }
  
         let prevExercises = workoutSession.prevExercises.compactMap { Exercise($0.fragments.exerciseDetails) }
-        
-        let formatter = ISO8601DateFormatter()
-       
-        var start = Date()
-        if let workoutSessionStart = formatter.date(from: workoutSession.start) {
-            start = workoutSessionStart
-        }
-
-        let end = formatter.date(from: workoutSession.end ?? "")
+    
         
         return WorkoutLogger.WorkoutSession(
             id: workoutSession.id,
-            start: start,
-            end: end,
+            start: workoutSession.start,
+            end: workoutSession.end,
             workoutRoutine: workoutRoutine,
             exercises: exercises,
             prevExercises: prevExercises
@@ -111,4 +104,9 @@ class Parser: WorkoutLoggerAPIParserProtocol {
             exerciseRoutines: exerciseRoutines
         )
     }
+    
+    static func AddSetEntryInput(_ setEntry: SetEntry) -> WorkoutLoggerAPI.SetEntryInput {
+        return WorkoutLoggerAPI.SetEntryInput(weight: setEntry.weight, reps: setEntry.reps)
+    }
+    
 }

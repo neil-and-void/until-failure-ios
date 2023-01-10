@@ -52,7 +52,7 @@ struct Exercise: Identifiable {
 }
 
 struct SetEntry: Identifiable {
-    var id: String
+    var id: String = ""
     var weight: Double
     var reps: Int
 }
