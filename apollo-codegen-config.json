@@ -14,7 +14,7 @@
       }
     },
     "schemaTypes" : {
-      "path" : "./WorkoutLoggerAPI",
+      "path" : "./WorkoutLogger/WorkoutLoggerAPI",
       "moduleType" : {
         "embeddedInTarget" : {
           "name" : "generated"
