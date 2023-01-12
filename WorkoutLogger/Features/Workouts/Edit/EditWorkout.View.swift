@@ -50,7 +50,7 @@ struct EditWorkout: View {
                 VStack {
 
                     EditWorkoutName(name: $workoutRoutine.name)
-                        .padding(.bottom, 40)
+                        .padding(.bottom, 20)
 
                     EditExerciseRoutineList(
                         exerciseRoutines: $workoutRoutine.exerciseRoutines,
