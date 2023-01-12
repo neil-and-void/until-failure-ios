@@ -1,5 +1,5 @@
 //
-//  EditableWorkoutName.swift
+//  EditWorkoutName.swift
 //  WorkoutLogger
 //
 //  Created by Neil Viloria on 2022-12-01.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EditableWorkoutName: View {
+struct EditWorkoutName: View {
     @Binding var name: String
     
     var body: some View {
@@ -29,7 +29,7 @@ struct EditableWorkoutName: View {
 
 struct EditableWorkoutName_Previews: PreviewProvider { 
     static var previews: some View {
-        EditableWorkoutName(name: .constant("Legs"))
+        EditWorkoutName(name: .constant("Legs"))
             .preferredColorScheme(.dark)
     }
 }

@@ -17,8 +17,7 @@ struct WorkoutDetailsView: View {
     var body: some View {
         
         VStack {
-//            Text("what?????")
-            
+ 
             if workoutViewModel.isLoading {
 
                 Text("Loading...")

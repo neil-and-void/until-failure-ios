@@ -13,29 +13,30 @@ struct EditWorkout: View {
     
     @Binding var showSheet: Bool
     @State var workoutRoutine: WorkoutRoutine
-
+    
     var body: some View {
+        
         ZStack {
 
             VStack {
-                
+
                 HStack {
-                    
+
                     Button("Cancel") {
-                        
+
                         showSheet = false
-                        
+
                     }.buttonStyle(TextButton())
-                    
+
                     Spacer()
-                    
+
                     Text("Edit Routine")
                         .bold()
-                    
+
                     Spacer()
-                    
+
                     Button("Done") {
-                        
+
                         workoutViewModel.updateWorkoutRoutine(workoutRoutine) {
                             showSheet = false
                         }
@@ -45,26 +46,20 @@ struct EditWorkout: View {
                 }
                 .padding(.top)
                 .padding(.horizontal)
- 
+
                 VStack {
 
-                    EditableWorkoutName(name: $workoutRoutine.name)
+                    EditWorkoutName(name: $workoutRoutine.name)
                         .padding(.bottom, 40)
 
-                    List {
-
-                        ForEach(workoutRoutine.exerciseRoutines.indices, id: \.self) {
-
-                            EditableExerciseRoutineListItem(exerciseRoutine: $workoutRoutine.exerciseRoutines[$0])
-
-                        }.onDelete(perform: { idx in
+                    EditExerciseRoutineList(
+                        exerciseRoutines: $workoutRoutine.exerciseRoutines,
+                        onDelete: { idx in
                             if !workoutViewModel.isLoading {
-                               workoutRoutine.exerciseRoutines.remove(atOffsets: idx) 
+                                workoutRoutine.exerciseRoutines.remove(atOffsets: idx)
                             }
-                        })
-
-                    }
-                    .listStyle(PlainListStyle())
+                        }
+                    )
 
                     Button(action: { showAlert.toggle() }) {
 
@@ -83,15 +78,15 @@ struct EditWorkout: View {
                                 ))
                             }
                         )
-                         
+
                     }
 
                 }
-
+                
             }
 
         }
-
+        
     }
 }
 
@@ -100,7 +95,11 @@ struct EditWorkout_Previews: PreviewProvider {
         EditWorkout(
             workoutViewModel: WorkoutViewModel(service: WorkoutLoggerAPIService()),
             showSheet: .constant(true),
-            workoutRoutine: WorkoutRoutine(id: "0", name: "Legs", exerciseRoutines: [])
+            workoutRoutine: WorkoutRoutine(id: "0", name: "Legs", exerciseRoutines: [
+                ExerciseRoutine(id: "1", name: "exercise", sets: 5, reps: 4),
+                ExerciseRoutine(id: "2", name: "exercise", sets: 5, reps: 4),
+                ExerciseRoutine(id: "3", name: "exercise", sets: 5, reps: 4)
+            ])
         ).preferredColorScheme(.dark)
     }
 }
