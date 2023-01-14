@@ -40,18 +40,29 @@ struct WorkoutDetailsView: View {
             }
             
         }
-        .navigationBarItems(trailing: Button(action: { showSheet.toggle() }, label: { Text("Edit") })
+        .navigationBarItems(trailing: Button(action: {
+            
+            showSheet.toggle()
+            
+        }, label: { Text("Edit") })
             .buttonStyle(TextButton())
-            .sheet(isPresented: $showSheet) {
+            .sheet(isPresented: $showSheet, onDismiss: { workoutViewModel.getWorkoutRoutine(workoutRoutineId: workoutRoutineId) }) {
                 
                 if let workoutRoutine = workoutViewModel.workoutRoutine {
-                    EditWorkout(workoutViewModel: workoutViewModel, showSheet: $showSheet, workoutRoutine: workoutRoutine)
+                    EditWorkout(
+                        workoutViewModel: workoutViewModel,
+                        showSheet: $showSheet,
+                        workoutRoutine: workoutRoutine
+                    )
                 }
                 
             }
                             
         )
-        .onAppear(perform: { workoutViewModel.getWorkoutRoutine(workoutRoutineId: workoutRoutineId) })
+        .onAppear(perform: {
+            print("get workout")
+            workoutViewModel.getWorkoutRoutine(workoutRoutineId: workoutRoutineId)
+        })
         
     }
     

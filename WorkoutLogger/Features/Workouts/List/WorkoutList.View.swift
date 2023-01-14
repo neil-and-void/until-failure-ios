@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WorkoutListView: View {
-    @StateObject private var workoutListViewModel = WorkoutListViewModel(service: WorkoutLoggerAPIService())
+    @StateObject private var workoutListViewModel = WorkoutViewModel(service: WorkoutLoggerAPIService())
     
     var body: some View {
 

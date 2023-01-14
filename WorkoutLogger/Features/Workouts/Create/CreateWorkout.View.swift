@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CreateWorkoutView: View {
     @EnvironmentObject private var authState: AuthenticationState
-    @StateObject var workoutListViewModel: WorkoutListViewModel
+    @StateObject var workoutListViewModel: WorkoutViewModel
     @State private var workoutName = ""
     @State private var showSheet = false
     
@@ -99,6 +99,6 @@ struct CreateWorkoutView: View {
 
 struct CreateWorkoutView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateWorkoutView(workoutListViewModel: WorkoutListViewModel(service: WorkoutLoggerAPIService())).preferredColorScheme(.dark)
+        CreateWorkoutView(workoutListViewModel: WorkoutViewModel(service: WorkoutLoggerAPIService())).preferredColorScheme(.dark)
     }
 }
