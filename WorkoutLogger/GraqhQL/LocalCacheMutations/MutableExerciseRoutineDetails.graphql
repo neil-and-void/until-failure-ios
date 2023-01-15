@@ -1,0 +1,7 @@
+fragment MutableExerciseRoutineDetails on ExerciseRoutine @apollo_client_ios_localCacheMutation {
+    id
+    active
+    name
+    sets
+    reps
+}

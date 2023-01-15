@@ -17,14 +17,14 @@ extension Foundation.Date: CustomScalarType {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
         formatter.timeZone = TimeZone(abbreviation: "UTC")
-
+        
         guard let dateString = value as? String, let date = formatter.date(from: dateString) else {
             throw JSONDecodingError.couldNotConvert(value: value, to: Foundation.Date.self)
         }
         
         self = date
     }
-
+    
     public var _jsonValue: JSONValue {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"

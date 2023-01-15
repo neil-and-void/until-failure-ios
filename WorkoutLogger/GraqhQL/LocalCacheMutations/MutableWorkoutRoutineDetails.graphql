@@ -1,0 +1,5 @@
+fragment MutableWorkoutRoutineDetails on WorkoutRoutine @apollo_client_ios_localCacheMutation {
+    id
+    name
+    active
+}
