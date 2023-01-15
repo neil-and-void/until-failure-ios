@@ -10,7 +10,7 @@ import Foundation
 class WorkoutViewModel: ObservableObject {
     private let service: WorkoutLoggerAPIServiceProtocol
     private let localMutator: LocalCacheMutator
-    
+     
     @Published var error: String?
     @Published var isLoading: Bool = false
     @Published var workoutRoutine: WorkoutRoutine?
@@ -41,8 +41,8 @@ class WorkoutViewModel: ObservableObject {
         self.service.getWorkoutRoutines(limit: 8, after: "", withNetwork: withNetwork) { result in
             switch result {
             case .success(let workoutRoutines):
-                print("get workout routines list", workoutRoutines[0])
-                self.workoutRoutineList = workoutRoutines
+                let sortedWorkoutRoutines = workoutRoutines.sorted { $0.id < $1.id }
+                self.workoutRoutineList = sortedWorkoutRoutines
                 self.error = nil
             case .failure(let err):
                 self.error = err.localizedDescription
@@ -56,7 +56,6 @@ class WorkoutViewModel: ObservableObject {
         self.service.getWorkoutRoutine(withNetwork: withNetwork, workoutRoutineId: workoutRoutineId) { result in
             switch result {
             case .success(let workoutRoutine):
-                print("this was fetched in get workotu routine", workoutRoutine)
                 self.workoutRoutine = workoutRoutine
                 self.error = nil
             case .failure(let err):
@@ -68,10 +67,10 @@ class WorkoutViewModel: ObservableObject {
     
     func updateWorkoutRoutine(_ workoutRoutine: WorkoutRoutine, _ originalWorkoutRoutine: WorkoutRoutine, onSuccess: @escaping () -> Void) {
         // local mutation
+        // might not need this
         self.localMutator.updateWorkoutRoutine(workoutRoutine: workoutRoutine) { result in
             switch result {
             case .success:
-                onSuccess()
                 self.error = nil
             case .failure(let err):
                 self.workoutRoutine = originalWorkoutRoutine
@@ -84,6 +83,7 @@ class WorkoutViewModel: ObservableObject {
             switch result {
             case .success:
                 self.error = nil
+                onSuccess()
             case .failure(let err):
                 self.workoutRoutine = originalWorkoutRoutine
                 self.error = err.localizedDescription

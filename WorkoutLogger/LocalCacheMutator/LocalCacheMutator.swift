@@ -19,12 +19,31 @@ class LocalCacheMutator {
     
     func updateWorkoutRoutine(workoutRoutine: WorkoutRoutine, completion: @escaping (Result<Void, Error>) -> Void) {
         var exerciseRoutineDict: [String: ExerciseRoutine] = [:]
+        var deletedExerciseRoutines: [String] = []
         
-        for exerciseRoutine in workoutRoutine.exerciseRoutines {
+        for exerciseRoutine in workoutRoutine.exerciseRoutines where exerciseRoutine.id != "" {
             exerciseRoutineDict[exerciseRoutine.id] = exerciseRoutine
         }
         
-        store.withinReadWriteTransaction({ transaction in
+        self.store.withinReadTransaction({ transaction in
+            let data = try transaction.readObject(
+                ofType: WorkoutLoggerAPI.MutableWorkoutRoutineDetails.self,
+                withKey: "WorkoutRoutine:\(workoutRoutine.id)"
+            )
+            
+            for exerciseRoutine in data.exerciseRoutines {
+                let exerciseRoutineDeleted = exerciseRoutineDict[exerciseRoutine.id] == nil
+                if exerciseRoutineDeleted {
+                    print(exerciseRoutine.name)
+                    self.store.withinReadWriteTransaction({ transaction in
+                        try transaction.removeObject(for: "ExerciseRoutine:\(exerciseRoutine.id)")
+                    })
+                }
+            }
+            
+        })
+        
+        self.store.withinReadWriteTransaction({ transaction in
             try transaction.updateObject(
                 ofType: WorkoutLoggerAPI.MutableWorkoutRoutineDetails.self,
                 withKey: "WorkoutRoutine:\(workoutRoutine.id)"
@@ -51,12 +70,15 @@ class LocalCacheMutator {
                 
             }
             
+            self.store.withinReadWriteTransaction({ transaction in
+                transaction.removeObjects
+            })
+
+            
             // dispatch queue on main thread so the completion handler can update the view
         }, callbackQueue: .main, completion: completion)
         
     }
-    
-    func deleteWorkoutRoutine() {}
     
     func addExerciseRoutine() {}
     

@@ -2,4 +2,11 @@ fragment MutableWorkoutRoutineDetails on WorkoutRoutine @apollo_client_ios_local
     id
     name
     active
+    exerciseRoutines {
+        id
+        active
+        name
+        sets
+        reps
+    }
 }

@@ -45,13 +45,6 @@ struct EditWorkoutSession: View {
                             AddExerciseRoutine(
                                 workoutSessionId: workoutSession.id,
                                 workoutRoutineId: workoutSession.workoutRoutine.id,
-                                refetchWorkoutSession: {
-                                    editWorkoutSessionViewModel.getWorkoutSession(
-                                        workoutSessionId: workoutSessionId,
-                                        workoutRoutineId: workoutRoutineId,
-                                        withNetwork: true
-                                    )
-                                },
                                 showSheet: $showSheet
                             ).presentationDetents([.medium])
                             

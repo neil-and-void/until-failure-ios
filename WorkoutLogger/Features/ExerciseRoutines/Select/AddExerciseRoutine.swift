@@ -10,7 +10,6 @@ import SwiftUI
 struct AddExerciseRoutine: View {
     let workoutSessionId: String
     let workoutRoutineId: String
-    var refetchWorkoutSession: () -> Void
     @StateObject var exerciseRoutineViewModel = ExerciseRoutineViewModel(service: WorkoutLoggerAPIService())
     @Binding var showSheet: Bool
     
@@ -60,8 +59,7 @@ struct AddExerciseRoutine: View {
                             Button(action: {
                                 exerciseRoutineViewModel.addExercise(
                                     workoutSessionId: workoutSessionId,
-                                    exerciseRoutineId: exerciseRoutine.id,
-                                    refetchQuery: refetchWorkoutSession
+                                    exerciseRoutineId: exerciseRoutine.id
                                 )
                             }) {
                                 
@@ -96,6 +94,6 @@ struct AddExerciseRoutine: View {
 
 struct AddExerciseRoutine_Previews: PreviewProvider {
     static var previews: some View {
-        AddExerciseRoutine(workoutSessionId: "1", workoutRoutineId: "1", refetchWorkoutSession: {}, showSheet: .constant(true))
+        AddExerciseRoutine(workoutSessionId: "1", workoutRoutineId: "1", showSheet: .constant(true))
     }
 }

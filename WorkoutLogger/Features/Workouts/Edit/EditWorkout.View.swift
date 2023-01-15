@@ -37,7 +37,7 @@ struct EditWorkout: View {
                     
                     Spacer()
                     
-                    Button("Done") {
+                    Button("Save") {
                         
                         workoutViewModel.updateWorkoutRoutine(workoutRoutine, originalWorkoutRoutine) {
                             showSheet = false
