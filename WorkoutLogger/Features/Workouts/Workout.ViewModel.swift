@@ -77,7 +77,6 @@ class WorkoutViewModel: ObservableObject {
                 self.workoutRoutine = originalWorkoutRoutine
                 self.error = err.localizedDescription
             }
-
         }
         
         // send mutation to the server

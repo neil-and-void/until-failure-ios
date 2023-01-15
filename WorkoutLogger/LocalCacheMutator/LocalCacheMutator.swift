@@ -34,9 +34,9 @@ class LocalCacheMutator {
             }
             
             for exerciseRoutine in workoutRoutine.exerciseRoutines {
-
+                
                 if let updatedExerciseRoutine = exerciseRoutineDict[exerciseRoutine.id] {
-
+                    
                     try transaction.updateObject(
                         ofType: WorkoutLoggerAPI.MutableExerciseRoutineDetails.self,
                         withKey: "ExerciseRoutine:\(exerciseRoutine.id)"
@@ -46,12 +46,14 @@ class LocalCacheMutator {
                         exerciseRoutineDetails.sets = updatedExerciseRoutine.sets
                         exerciseRoutineDetails.reps = updatedExerciseRoutine.reps
                     }
- 
+                    
                 }
                 
             }
-
-        }, completion: completion)
+            
+            // dispatch queue on main thread so the completion handler can update the view
+        }, callbackQueue: .main, completion: completion)
+        
     }
     
     func deleteWorkoutRoutine() {}
