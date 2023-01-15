@@ -9,18 +9,18 @@ import Foundation
 
 class WorkoutViewModel: ObservableObject {
     private let service: WorkoutLoggerAPIServiceProtocol
-    private let localMutator: LocalMutator
-
+    private let localMutator: LocalCacheMutator
+    
     @Published var error: String?
     @Published var isLoading: Bool = false
     @Published var workoutRoutine: WorkoutRoutine?
     @Published var workoutRoutineList: [WorkoutRoutine] = []
-
+    
     init(service: WorkoutLoggerAPIServiceProtocol) {
         self.service = service
-        self.localMutator = LocalMutator(store: WorkoutLoggerAPIClient.client.store)
+        self.localMutator = LocalCacheMutator(store: WorkoutLoggerAPIClient.client.store)
     }
-        
+    
     func createWorkoutRoutine(name: String, completion: @escaping (Bool) -> Void) {
         self.isLoading = true
         self.service.createWorkoutRoutine(name: name) { result in
@@ -50,7 +50,7 @@ class WorkoutViewModel: ObservableObject {
             self.isLoading = false
         }
     }
-
+    
     func getWorkoutRoutine(workoutRoutineId: String, withNetwork: Bool = false) {
         self.isLoading = true
         self.service.getWorkoutRoutine(withNetwork: withNetwork, workoutRoutineId: workoutRoutineId) { result in
@@ -65,26 +65,28 @@ class WorkoutViewModel: ObservableObject {
             self.isLoading = false
         }
     }
-
-    func updateWorkoutRoutine(_ workoutRoutine: WorkoutRoutine, onSuccess: @escaping () -> Void) {
-        // mutate the cache
+    
+    func updateWorkoutRoutine(_ workoutRoutine: WorkoutRoutine, _ originalWorkoutRoutine: WorkoutRoutine, onSuccess: @escaping () -> Void) {
+        // local mutation
         self.localMutator.updateWorkoutRoutine(workoutRoutine: workoutRoutine) { result in
-            print("this should be first before update")
-            onSuccess()
+            switch result {
+            case .success:
+                onSuccess()
+                self.error = nil
+            case .failure(let err):
+                self.workoutRoutine = originalWorkoutRoutine
+                self.error = err.localizedDescription
+            }
+
         }
         
         // send mutation to the server
-        
-        // if ok, cache should update
-         
-        // if not ok, undo changes and report error
         self.service.updateWorkoutRoutine(workoutRoutine) { result in
             switch result {
             case .success:
-                // read from cache and update current workout
-                print("update workout routine success", workoutRoutine)
                 self.error = nil
             case .failure(let err):
+                self.workoutRoutine = originalWorkoutRoutine
                 self.error = err.localizedDescription
             }
         }

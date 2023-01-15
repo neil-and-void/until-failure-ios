@@ -10,48 +10,50 @@ import SwiftUI
 struct EditWorkout: View {
     @StateObject var workoutViewModel: WorkoutViewModel
     @State var showAlert: Bool = false
+    @State var showErrorAlert: Bool = false
     
     @Binding var showSheet: Bool
+    @State var originalWorkoutRoutine: WorkoutRoutine
     @State var workoutRoutine: WorkoutRoutine
     
     var body: some View {
         
         ZStack {
-
+            
             VStack {
-
+                
                 HStack {
-
+                    
                     Button("Cancel") {
-
+                        
                         showSheet = false
-
+                        
                     }.buttonStyle(TextButton())
-
+                    
                     Spacer()
-
+                    
                     Text("Edit Routine")
                         .bold()
-
+                    
                     Spacer()
-
+                    
                     Button("Done") {
-
-                        workoutViewModel.updateWorkoutRoutine(workoutRoutine) {
+                        
+                        workoutViewModel.updateWorkoutRoutine(workoutRoutine, originalWorkoutRoutine) {
                             showSheet = false
                         }
-
+                        
                     }.buttonStyle(TextButton())
-
+                    
                 }
                 .padding(.top)
                 .padding(.horizontal)
-
+                
                 VStack {
-
+                    
                     EditWorkoutName(name: $workoutRoutine.name)
                         .padding(.bottom, 20)
-
+                    
                     EditExerciseRoutineList(
                         exerciseRoutines: $workoutRoutine.exerciseRoutines,
                         onDelete: { idx in
@@ -60,11 +62,11 @@ struct EditWorkout: View {
                             }
                         }
                     )
-
+                    
                     Button(action: { showAlert.toggle() }) {
-
+                        
                         Text("Add exercise")
-
+                        
                     }
                     .buttonStyle(RoundedButton())
                     .alert("Add exercise", isPresented: $showAlert) {
@@ -78,13 +80,18 @@ struct EditWorkout: View {
                                 ))
                             }
                         )
-
+                        
                     }
-
+                    
                 }
                 
+            }.alert(isPresented: $showErrorAlert) {
+                Alert(
+                    title: Text("Title"),
+                    message: Text("Message")
+                )
             }
-
+            
         }
         
     }
@@ -95,6 +102,11 @@ struct EditWorkout_Previews: PreviewProvider {
         EditWorkout(
             workoutViewModel: WorkoutViewModel(service: WorkoutLoggerAPIService()),
             showSheet: .constant(true),
+            originalWorkoutRoutine: WorkoutRoutine(id: "0", name: "Legs", exerciseRoutines: [
+                ExerciseRoutine(id: "1", name: "exercise", sets: 5, reps: 4),
+                ExerciseRoutine(id: "2", name: "exercise", sets: 5, reps: 4),
+                ExerciseRoutine(id: "3", name: "exercise", sets: 5, reps: 4)
+            ]),
             workoutRoutine: WorkoutRoutine(id: "0", name: "Legs", exerciseRoutines: [
                 ExerciseRoutine(id: "1", name: "exercise", sets: 5, reps: 4),
                 ExerciseRoutine(id: "2", name: "exercise", sets: 5, reps: 4),

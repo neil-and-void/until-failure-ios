@@ -52,6 +52,7 @@ struct WorkoutDetailsView: View {
                     EditWorkout(
                         workoutViewModel: workoutViewModel,
                         showSheet: $showSheet,
+                        originalWorkoutRoutine: workoutRoutine,
                         workoutRoutine: workoutRoutine
                     )
                 }

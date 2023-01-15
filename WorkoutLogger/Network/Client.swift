@@ -36,10 +36,11 @@ class WorkoutLoggerAPIClient {
         // doesn't create one on its own
         return ApolloClient(networkTransport: requestChainTransport, store: store)
     }()
-    
+
     private init() {}
 }
 
+// separate client since this doesn't require failed request interceptor
 class AuthAPIClient{
     static let client = ApolloClient(url: URL(string: GRAPHQL_API_URL)!)
     

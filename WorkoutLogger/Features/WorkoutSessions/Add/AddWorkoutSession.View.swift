@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AddWorkoutSession: View {
-    @StateObject var workoutListViewModel = WorkoutListViewModel(service: WorkoutLoggerAPIService())
+    @StateObject var workoutListViewModel = WorkoutViewModel(service: WorkoutLoggerAPIService())
     @Binding var showSheet: Bool
     var onSelection: (String) -> Void
     
