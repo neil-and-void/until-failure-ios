@@ -24,7 +24,8 @@ class ExerciseRoutineViewModel: ObservableObject {
             switch result {
             case .success(let exerciseRoutines):
                 self.error = nil
-                self.exerciseRoutines = exerciseRoutines
+                let sortedExerciseRoutines = exerciseRoutines.sorted { $0.id < $1.id }
+                self.exerciseRoutines = sortedExerciseRoutines
             case .failure(let err):
                 self.error = err.localizedDescription
             }
@@ -32,7 +33,7 @@ class ExerciseRoutineViewModel: ObservableObject {
         }
     }
     
-    func addExercise(workoutSessionId: String, exerciseRoutineId: String, refetchQuery: @escaping () -> Void) {
+    func addExercise(workoutSessionId: String, exerciseRoutineId: String) {
         self.service.addExercise(
             workoutSessionId: workoutSessionId,
             exerciseRoutineId: exerciseRoutineId
@@ -40,7 +41,6 @@ class ExerciseRoutineViewModel: ObservableObject {
             switch result {
             case .success:
                 self.error = nil
-                refetchQuery()
             case .failure(let err):
                 self.error = err.localizedDescription
             }
