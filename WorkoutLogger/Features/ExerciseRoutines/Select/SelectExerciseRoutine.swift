@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AddExerciseRoutine: View {
+struct SelectExerciseRoutine: View {
     let workoutSessionId: String
     let workoutRoutineId: String
     @StateObject var exerciseRoutineViewModel = ExerciseRoutineViewModel(service: WorkoutLoggerAPIService())
@@ -94,6 +94,6 @@ struct AddExerciseRoutine: View {
 
 struct AddExerciseRoutine_Previews: PreviewProvider {
     static var previews: some View {
-        AddExerciseRoutine(workoutSessionId: "1", workoutRoutineId: "1", showSheet: .constant(true))
+        SelectExerciseRoutine(workoutSessionId: "1", workoutRoutineId: "1", showSheet: .constant(true))
     }
 }

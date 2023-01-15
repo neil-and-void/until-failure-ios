@@ -42,7 +42,7 @@ struct EditWorkoutSession: View {
                         .buttonStyle(TextButton())
                         .sheet(isPresented: $showSheet) {
                             
-                            AddExerciseRoutine(
+                            SelectExerciseRoutine(
                                 workoutSessionId: workoutSession.id,
                                 workoutRoutineId: workoutSession.workoutRoutine.id,
                                 showSheet: $showSheet
