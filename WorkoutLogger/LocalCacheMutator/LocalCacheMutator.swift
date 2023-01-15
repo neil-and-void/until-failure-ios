@@ -19,25 +19,22 @@ class LocalCacheMutator {
     
     func updateWorkoutRoutine(workoutRoutine: WorkoutRoutine, completion: @escaping (Result<Void, Error>) -> Void) {
         var exerciseRoutineDict: [String: ExerciseRoutine] = [:]
-        var deletedExerciseRoutines: [String] = []
         
         for exerciseRoutine in workoutRoutine.exerciseRoutines where exerciseRoutine.id != "" {
             exerciseRoutineDict[exerciseRoutine.id] = exerciseRoutine
         }
         
-        self.store.withinReadTransaction({ transaction in
+        self.store.withinReadWriteTransaction({ transaction in
             let data = try transaction.readObject(
                 ofType: WorkoutLoggerAPI.MutableWorkoutRoutineDetails.self,
                 withKey: "WorkoutRoutine:\(workoutRoutine.id)"
             )
             
+            // delete workout routines that are in cache but not updated workout routine
             for exerciseRoutine in data.exerciseRoutines {
                 let exerciseRoutineDeleted = exerciseRoutineDict[exerciseRoutine.id] == nil
                 if exerciseRoutineDeleted {
-                    print(exerciseRoutine.name)
-                    self.store.withinReadWriteTransaction({ transaction in
-                        try transaction.removeObject(for: "ExerciseRoutine:\(exerciseRoutine.id)")
-                    })
+                    try transaction.removeObject(for: "ExerciseRoutine:\(exerciseRoutine.id)")
                 }
             }
             
@@ -69,12 +66,7 @@ class LocalCacheMutator {
                 }
                 
             }
-            
-            self.store.withinReadWriteTransaction({ transaction in
-                transaction.removeObjects
-            })
-
-            
+             
             // dispatch queue on main thread so the completion handler can update the view
         }, callbackQueue: .main, completion: completion)
         
