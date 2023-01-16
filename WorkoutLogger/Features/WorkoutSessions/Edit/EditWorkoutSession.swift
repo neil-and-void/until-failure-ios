@@ -12,7 +12,7 @@ struct EditWorkoutSession: View {
     var workoutRoutineId: String
     
     @State private var showSheet = false
-    @StateObject private var editWorkoutSessionViewModel = EditWorkoutSessionViewModel(service: WorkoutLoggerAPIService())
+    @StateObject private var editWorkoutSessionViewModel = WorkoutSessionViewModel(service: WorkoutLoggerAPIService())
     
     var body: some View {
         

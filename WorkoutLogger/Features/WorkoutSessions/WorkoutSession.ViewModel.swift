@@ -9,9 +9,11 @@ import Foundation
 
 class WorkoutSessionViewModel: ObservableObject {
     private let service: WorkoutLoggerAPIServiceProtocol
-    
+
     @Published var workoutSessionList: [WorkoutSession] = []
+    @Published var workoutSession: WorkoutSession?
     @Published var error: String?
+    @Published var isLoading = false
 
     init(service: WorkoutLoggerAPIServiceProtocol) {
         self.service = service
@@ -26,6 +28,23 @@ class WorkoutSessionViewModel: ObservableObject {
             case .failure(let err):
                 self.error = err.localizedDescription
             }
+        }
+    }
+
+    func getWorkoutSession(workoutSessionId: String, workoutRoutineId: String, withNetwork: Bool = false) {
+        self.isLoading = true
+        self.service.getWorkoutSession(
+            workoutRoutineId: workoutRoutineId,
+            workoutSessionId: workoutSessionId,
+            withNetwork: withNetwork
+        ) { result in
+            switch result {
+            case .success(let workoutSession):
+                self.workoutSession = workoutSession
+            case .failure(let err):
+                self.error = err.localizedDescription
+            }
+            self.isLoading = false
         }
     }
     
