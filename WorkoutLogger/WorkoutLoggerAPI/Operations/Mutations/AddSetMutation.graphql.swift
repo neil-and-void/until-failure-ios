@@ -10,9 +10,13 @@ public extension WorkoutLoggerAPI {
       definition: .init(
         """
         mutation AddSet($exerciseId: ID!, $set: SetEntryInput!) {
-          addSet(exerciseId: $exerciseId, set: $set)
+          addSet(exerciseId: $exerciseId, set: $set) {
+            __typename
+            ...setEntryFull
+          }
         }
-        """
+        """,
+        fragments: [SetEntryFull.self]
       ))
 
     public var exerciseId: ID
@@ -37,13 +41,37 @@ public extension WorkoutLoggerAPI {
 
       public static var __parentType: ParentType { WorkoutLoggerAPI.Objects.Mutation }
       public static var __selections: [Selection] { [
-        .field("addSet", ID.self, arguments: [
+        .field("addSet", AddSet.self, arguments: [
           "exerciseId": .variable("exerciseId"),
           "set": .variable("set")
         ]),
       ] }
 
-      public var addSet: ID { __data["addSet"] }
+      public var addSet: AddSet { __data["addSet"] }
+
+      /// AddSet
+      ///
+      /// Parent Type: `SetEntry`
+      public struct AddSet: WorkoutLoggerAPI.SelectionSet {
+        public let __data: DataDict
+        public init(data: DataDict) { __data = data }
+
+        public static var __parentType: ParentType { WorkoutLoggerAPI.Objects.SetEntry }
+        public static var __selections: [Selection] { [
+          .fragment(SetEntryFull.self),
+        ] }
+
+        public var id: ID { __data["id"] }
+        public var reps: Int { __data["reps"] }
+        public var weight: Double { __data["weight"] }
+
+        public struct Fragments: FragmentContainer {
+          public let __data: DataDict
+          public init(data: DataDict) { __data = data }
+
+          public var setEntryFull: SetEntryFull { _toFragment() }
+        }
+      }
     }
   }
 
