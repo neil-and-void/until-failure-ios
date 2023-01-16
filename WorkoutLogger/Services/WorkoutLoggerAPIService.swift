@@ -178,6 +178,7 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
     }
     
     func deleteWorkoutRoutine(id: String, completion: @escaping (Result<Int, APIError>) -> Void) {
+        
         self.client.perform(mutation: WorkoutLoggerAPI.DeleteWorkoutRoutineMutation(workoutRoutineId: id)) { result in
             switch result {
             case .success(let response):

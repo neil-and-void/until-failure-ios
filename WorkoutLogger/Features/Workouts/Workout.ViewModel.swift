@@ -21,14 +21,14 @@ class WorkoutViewModel: ObservableObject {
         self.localMutator = LocalCacheMutator(store: WorkoutLoggerAPIClient.client.store)
     }
     
-    func createWorkoutRoutine(name: String, completion: @escaping (Bool) -> Void) {
+    func createWorkoutRoutine(name: String, onSuccess: @escaping () -> Void) {
         self.isLoading = true
         self.service.createWorkoutRoutine(name: name) { result in
             switch result {
             case .success:
                 self.getWorkoutRoutines(withNetwork: true)
                 self.error = nil
-                completion(true)
+                onSuccess()
             case .failure(let err):
                 self.error = err.localizedDescription
             }
@@ -91,11 +91,23 @@ class WorkoutViewModel: ObservableObject {
         }
     }
     
-    func deleteWorkoutRoutine(id: String) {
+    func deleteWorkoutRoutine(id: String, onSuccess: @escaping () -> Void) {
+        // invalidate deleted cache items
+        self.localMutator.deleteWorkoutRoutine(id: id) { result in
+            switch result {
+            case .success:
+                // remove from workout view model since we'll have a cache miss
+                self.workoutRoutineList = self.workoutRoutineList.filter { $0.id != id}
+                self.error = nil
+            case .failure(let err):
+                self.error = err.localizedDescription
+            }
+        }
+        
         self.service.deleteWorkoutRoutine(id: id) { result in
             switch result {
             case .success:
-                print(result as Any)
+                onSuccess()
                 self.error = nil
             case .failure(let err):
                 self.error = err.localizedDescription

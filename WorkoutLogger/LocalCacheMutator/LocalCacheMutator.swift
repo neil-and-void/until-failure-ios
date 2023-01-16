@@ -14,9 +14,7 @@ class LocalCacheMutator {
     init(store: ApolloStore) {
         self.store = store
     }
-    
-    func addWorkoutRoutine() {}
-    
+     
     func updateWorkoutRoutine(workoutRoutine: WorkoutRoutine, completion: @escaping (Result<Void, Error>) -> Void) {
         var exerciseRoutineDict: [String: ExerciseRoutine] = [:]
         
@@ -72,11 +70,21 @@ class LocalCacheMutator {
         
     }
     
-    func addExerciseRoutine() {}
-    
-    func updateExerciseRoutine() {}
-    
-    func deleteExerciseRoutine() {}
+    func deleteWorkoutRoutine(id: String, completion: @escaping ((Result<Void, Error>) -> Void)) {
+        self.store.withinReadWriteTransaction({ transaction in
+            let data = try transaction.readObject(
+                ofType: WorkoutLoggerAPI.MutableWorkoutRoutineDetails.self,
+                withKey: "WorkoutRoutine:\(id)"
+            )
+
+            // delete workout routines and cascade changes on exercise routines
+            try transaction.removeObject(for: "WorkoutRoutine:\(id)")
+            for exerciseRoutine in data.exerciseRoutines {
+                try transaction.removeObject(for: "ExerciseRoutine:\(exerciseRoutine.id)")
+            }
+            
+        }, callbackQueue: .main, completion: completion)
+    }
     
     func addWorkoutSession() {}
     

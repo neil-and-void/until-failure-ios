@@ -9,6 +9,13 @@ import SwiftUI
 
 struct WorkoutListView: View {
     @StateObject private var workoutListViewModel = WorkoutViewModel(service: WorkoutLoggerAPIService())
+    @State private var showDeleteAlert = false
+    
+    func deleteWorkoutRoutine(id: String) {
+        workoutListViewModel.deleteWorkoutRoutine(id: id, onSuccess: {
+            workoutListViewModel.getWorkoutRoutines()
+        })
+    }
     
     var body: some View {
 
@@ -35,16 +42,24 @@ struct WorkoutListView: View {
                             
                         }
                         .onDelete(perform: { indexSet in
-                            for i in indexSet {
-                                workoutListViewModel.deleteWorkoutRoutine(id: workoutListViewModel.workoutRoutineList[i].id)
-                            }
+//                            showAlert.toggle()
+                            indexSet.forEach({ i in
+                                deleteWorkoutRoutine(id: workoutListViewModel.workoutRoutineList[i].id)
+                            })
                         })
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 12).fill(Color.bgSecondary))
                         .listRowBackground(Color.clear)
                         .listRowSeparator(.hidden)
                         .listRowInsets(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0))
-                        
+//                        .alert("Are you sure you want to delete this workout routine", isPresented: $showAlert) {
+//                            Button("Cancel", role: .cancel) { showAlert.toggle() }
+//                            Button("Delete", role: .destructive) {
+//                                deleteWorkoutRoutine()
+//                                showAlert.toggle()
+//                            }
+//                        }
+ 
                     } else {
                         
                         Text("You don't have any routines here, tap the '+' above to add a workout")

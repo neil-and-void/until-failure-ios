@@ -57,7 +57,7 @@ struct CreateWorkoutView: View {
                         
                     }
                     
-                    TextField("", text: $workoutName)
+                    TextField("routine name...", text: $workoutName)
                         .multilineTextAlignment(.center)
                         .fontWeight(.bold)
                         .font(.system(size: 36))
@@ -66,25 +66,14 @@ struct CreateWorkoutView: View {
                         .frame(height: 1)
                         .background(.gray)
                     
-                    Button(action: {
+                    Button("Create", action: {
                         if !workoutListViewModel.isLoading {
-                            workoutListViewModel.createWorkoutRoutine(name: workoutName) { wasSuccessful in
-                                showSheet = !wasSuccessful
+                            workoutListViewModel.createWorkoutRoutine(name: workoutName) {
+                                showSheet.toggle()
+                                workoutName = ""
                             }
                         }
-                    }) {
-                        
-                        if workoutListViewModel.isLoading {
-
-                            ProgressView()
-
-                        } else {
-                            
-                            Text("Create")
-                            
-                        }
-
-                    }
+                    })
                     .buttonStyle(RoundedButton())
                     .padding()
                     
