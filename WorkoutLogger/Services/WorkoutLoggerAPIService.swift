@@ -15,11 +15,11 @@ protocol WorkoutLoggerAPIServiceProtocol {
     func createWorkoutRoutine(name: String, completion: @escaping (Result<WorkoutLoggerAPI.CreateWorkoutRoutineMutation.Data.CreateWorkoutRoutine, APIError>) -> Void)
     func updateWorkoutRoutine(_ workoutRoutine: WorkoutRoutine, completion: @escaping (Result<WorkoutRoutine, APIError>) -> Void)
     func deleteWorkoutRoutine(id: String, completion: @escaping (Result<Int, APIError>) -> Void)
-    func addWorkoutSession(id: String, start: Date, completion: @escaping(Result<String, APIError>) -> Void)
+    func addWorkoutSession(id: String, start: Date, completion: @escaping(Result<WorkoutSession, APIError>) -> Void)
     func getWorkoutSession(workoutRoutineId: String, workoutSessionId: String, withNetwork: Bool, completion: @escaping (Result<WorkoutSession, APIError>) -> Void)
     func getExerciseRoutines(workoutRoutineId: String, withNetwork: Bool, completion: @escaping (Result<[ExerciseRoutine], APIError>) -> Void)
-    func addExercise(workoutSessionId: String, exerciseRoutineId: String, completion: @escaping (Result<String, APIError>) -> Void)
-    func addSetEntry(exerciseId: String, setEntry: SetEntry, completion: @escaping (Result<String, APIError>) -> Void)
+    func addExercise(workoutSessionId: String, exerciseRoutineId: String, completion: @escaping (Result<Exercise, APIError>) -> Void)
+    func addSetEntry(exerciseId: String, setEntry: SetEntry, completion: @escaping (Result<SetEntry, APIError>) -> Void)
 }
 
 // extension that adds default values to protocol
@@ -200,7 +200,7 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
         }
     }
     
-    func addWorkoutSession(id: String, start: Date, completion: @escaping (Result<String, APIError>) -> Void) {
+    func addWorkoutSession(id: String, start: Date, completion: @escaping (Result<WorkoutSession, APIError>) -> Void) {
         let workoutSession = WorkoutLoggerAPI.WorkoutSessionInput(workoutRoutineId: id, start: start, exercises: [])
         self.client.perform(mutation: WorkoutLoggerAPI.AddWorkoutSessionMutation(workout: workoutSession)) { result in
             switch result {
@@ -210,8 +210,10 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
                     return
                 }
                 
-                if let newWorkoutSessionId = response.data?.addWorkoutSession {
-                    completion(Result.success(newWorkoutSessionId))
+                if let newWorkoutSession = response.data?.addWorkoutSession.fragments.workoutSessionFull {
+                    let parsedWorkoutSession = Parser.WorkoutSession(newWorkoutSession)
+
+                    completion(Result.success(parsedWorkoutSession))
                     return
                 }
                 
@@ -279,7 +281,7 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
         }
     }
     
-    func addExercise(workoutSessionId: String, exerciseRoutineId: String, completion: @escaping (Result<String, APIError>) -> Void) {
+    func addExercise(workoutSessionId: String, exerciseRoutineId: String, completion: @escaping (Result<Exercise, APIError>) -> Void) {
         let exerciseInput = WorkoutLoggerAPI.ExerciseInput(
             exerciseRoutineId: exerciseRoutineId,
             notes: "",
@@ -294,8 +296,9 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
                     return
                 }
                 
-                if let exerciseId = response.data?.addExercise {
-                    completion(Result.success(exerciseId))
+                if let newExercise = response.data?.addExercise.fragments.exerciseDetails {
+                    let parsedExercise = Parser.Exercise(newExercise)
+                    completion(Result.success(parsedExercise))
                     return
                 }
                 
@@ -307,7 +310,7 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
         }
     }
     
-    func addSetEntry(exerciseId: String, setEntry: SetEntry, completion: @escaping (Result<String, APIError>) -> Void) {
+    func addSetEntry(exerciseId: String, setEntry: SetEntry, completion: @escaping (Result<SetEntry, APIError>) -> Void) {
         let setEntryInput = Parser.AddSetEntryInput(setEntry)
         self.client.perform(mutation: WorkoutLoggerAPI.AddSetMutation(exerciseId: exerciseId, set: setEntryInput)) { result in
             switch result {
@@ -318,8 +321,9 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
                     return
                 }
                 
-                if let setEntryId = response.data?.addSet {
-                    completion(Result.success(setEntryId))
+                if let newSetEntry = response.data?.addSet.fragments.setEntryFull {
+                    let parsedSetEntry = Parser.SetEntry(newSetEntry)
+                    completion(Result.success(parsedSetEntry))
                     return
                 }
                 
