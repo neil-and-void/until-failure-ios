@@ -17,6 +17,7 @@ protocol WorkoutLoggerAPIServiceProtocol {
     func deleteWorkoutRoutine(id: String, completion: @escaping (Result<Int, APIError>) -> Void)
     func addWorkoutSession(id: String, start: Date, completion: @escaping(Result<WorkoutSession, APIError>) -> Void)
     func getWorkoutSession(workoutRoutineId: String, workoutSessionId: String, withNetwork: Bool, completion: @escaping (Result<WorkoutSession, APIError>) -> Void)
+    func deleteWorkoutSession(id: String, completion: @escaping (Result<Int, APIError>) -> Void)
     func getExerciseRoutines(workoutRoutineId: String, withNetwork: Bool, completion: @escaping (Result<[ExerciseRoutine], APIError>) -> Void)
     func addExercise(workoutSessionId: String, exerciseRoutineId: String, completion: @escaping (Result<Exercise, APIError>) -> Void)
     func addSetEntry(exerciseId: String, setEntry: SetEntry, completion: @escaping (Result<SetEntry, APIError>) -> Void)
@@ -199,6 +200,29 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
             }
         }
     }
+
+    func deleteWorkoutSession(id: String, completion: @escaping (Result<Int, APIError>) -> Void) {
+        self.client.perform(mutation: WorkoutLoggerAPI.DeleteWorkoutSessionMutation(workoutSessionId: id)) { result in
+            switch result {
+            case .success(let response):
+                if let errors = response.errors {
+                    completion(Result.failure(.GraphQLError(gqlError: errors[0].message)))
+                    return
+                }
+
+                if let deleteWorkoutSession = response.data?.deleteWorkoutSession {
+                    completion(Result.success(deleteWorkoutSession))
+                    return
+                }
+
+                completion(Result.failure(.unknown))
+
+            case .failure:
+                completion(Result.failure(.networkError))
+            }
+        }
+    }
+
     
     func addWorkoutSession(id: String, start: Date, completion: @escaping (Result<WorkoutSession, APIError>) -> Void) {
         let workoutSession = WorkoutLoggerAPI.WorkoutSessionInput(workoutRoutineId: id, start: start, exercises: [])

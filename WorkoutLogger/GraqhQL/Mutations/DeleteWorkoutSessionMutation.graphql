@@ -1,0 +1,3 @@
+mutation DeleteWorkoutSession($workoutSessionId: ID!) {
+    deleteWorkoutSession(workoutSessionId: $workoutSessionId)
+}

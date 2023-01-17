@@ -9,6 +9,7 @@ import Foundation
 
 class WorkoutSessionViewModel: ObservableObject {
     private let service: WorkoutLoggerAPIServiceProtocol
+    private let localMutator: LocalCacheMutator
 
     @Published var workoutSessionList: [WorkoutSession] = []
     @Published var workoutSession: WorkoutSession?
@@ -17,6 +18,7 @@ class WorkoutSessionViewModel: ObservableObject {
 
     init(service: WorkoutLoggerAPIServiceProtocol) {
         self.service = service
+        self.localMutator = LocalCacheMutator(store: WorkoutLoggerAPIClient.client.store)
     }
     
     func getWorkoutSessions(withNetwork: Bool = false) {
@@ -54,6 +56,30 @@ class WorkoutSessionViewModel: ObservableObject {
             case .success:
                 self.error = nil
                 onSuccess()
+            case .failure(let err):
+                self.error = err.localizedDescription
+            }
+        }
+    }
+
+    func deleteWorkoutSession(id: String, onSuccess: @escaping () -> Void) {
+        // invalidate deleted cache items
+        self.localMutator.deleteWorkoutSession(id: id) { result in
+            switch result {
+            case .success:
+                // remove from workout view model since we'll have a cache miss
+                self.workoutSessionList = self.workoutSessionList.filter { $0.id != id }
+                self.error = nil
+            case .failure(let err):
+                self.error = err.localizedDescription
+            }
+        }
+
+        self.service.deleteWorkoutSession(id: id) { result in
+            switch result {
+            case .success:
+                onSuccess()
+                self.error = nil
             case .failure(let err):
                 self.error = err.localizedDescription
             }

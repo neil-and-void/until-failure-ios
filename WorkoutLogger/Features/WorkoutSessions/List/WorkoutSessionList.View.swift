@@ -9,7 +9,8 @@ import SwiftUI
 
 struct WorkoutSessionListView: View {
     @StateObject private var workoutSessionViewModel = WorkoutSessionViewModel(service: WorkoutLoggerAPIService())
-    @State var workoutSessionId: String?
+
+    @State private var showDeleteAlert = false
     @State private var showSheet = false
     
     var body: some View {
@@ -31,9 +32,21 @@ struct WorkoutSessionListView: View {
                             }
                             
                         }
-                        .onDelete(perform: { _ in
-                            print("TODO: Delete workout session")
+                        .onDelete(perform: { indexSet in
+                            showDeleteAlert.toggle()
+                            indexSet.forEach({ i in
+                                workoutSessionViewModel.deleteWorkoutSession(id: workoutSessionViewModel.workoutSessionList[i].id, onSuccess: {
+                                    workoutSessionViewModel.getWorkoutSessions(withNetwork: true)
+                                })
+                            })
                         })
+//                        .alert("Are you sure you want to delete this workout session", isPresented: $showDeleteAlert) {
+//                            Button("Cancel", role: .cancel) { showDeleteAlert.toggle() }
+//                            Button("Delete", role: .destructive) {
+//                                deleteWorkoutRoutine()
+//                                showDeleteAlert.toggle()
+//                            }
+//                        }
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 12).fill(Color.bgSecondary))
                         .listRowBackground(Color.clear)

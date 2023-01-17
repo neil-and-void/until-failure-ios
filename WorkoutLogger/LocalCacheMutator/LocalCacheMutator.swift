@@ -90,7 +90,13 @@ class LocalCacheMutator {
     
     func updateWorkoutSession() {}
     
-    func deleteWorkoutSession() {}
+    func deleteWorkoutSession(id: String, completion: @escaping ((Result<Void, Error>) -> Void)) {
+        self.store.withinReadWriteTransaction({ transaction in
+            try transaction.removeObject(for: "WorkoutSession:\(id)")
+
+            // TODO: cascade onto other objects
+        }, callbackQueue: .main, completion: completion)
+    }
     
     func addExercise() {}
     

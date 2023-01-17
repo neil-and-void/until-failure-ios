@@ -1,0 +1,21 @@
+fragment MutableWorkoutSessionDetails on WorkoutSession @apollo_client_ios_localCacheMutation {
+    id
+    start
+    end
+    workoutRoutine {
+        id
+        name
+    }
+    exercises {
+        ...exerciseDetails
+        exerciseRoutine {
+            ...exerciseRoutineFull
+        }
+    }
+    prevExercises {
+        ...exerciseDetails
+        exerciseRoutine {
+            id
+        }
+    }
+}
