@@ -48,16 +48,15 @@ class WorkoutSessionViewModel: ObservableObject {
         }
     }
     
-    func addWorkoutSession(workoutRoutineId: String, start: Date) {
+    func addWorkoutSession(workoutRoutineId: String, start: Date, onSuccess: @escaping () -> Void) {
         self.service.addWorkoutSession(id: workoutRoutineId, start: start) { result in
             switch result {
             case .success:
                 self.error = nil
-                self.getWorkoutSessions(withNetwork: true)
+                onSuccess()
             case .failure(let err):
                 self.error = err.localizedDescription
             }
-
         }
     }
 }

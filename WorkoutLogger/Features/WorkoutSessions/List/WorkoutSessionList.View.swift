@@ -18,7 +18,7 @@ struct WorkoutSessionListView: View {
             
             VStack {
                 
-                ScrollView {
+                List {
                     
                     if workoutSessionViewModel.workoutSessionList.count > 0 {
 
@@ -31,6 +31,14 @@ struct WorkoutSessionListView: View {
                             }
                             
                         }
+                        .onDelete(perform: { _ in
+                            print("TODO: Delete workout session")
+                        })
+                        .padding()
+                        .background(RoundedRectangle(cornerRadius: 12).fill(Color.bgSecondary))
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
+                        .listRowInsets(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0))
 
                     } else {
                         
@@ -41,12 +49,15 @@ struct WorkoutSessionListView: View {
                         
                     }
                     
-                }.onAppear(perform: {
+                }
+                .onAppear(perform: {
                     workoutSessionViewModel.getWorkoutSessions()
                 })
+                .refreshable {
+                    workoutSessionViewModel.getWorkoutSessions(withNetwork: true)
+                }
                 
             }
-            .padding(.horizontal)
             .toolbar {
                 
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -71,8 +82,10 @@ struct WorkoutSessionListView: View {
             .sheet(isPresented: $showSheet) {
                 
                 AddWorkoutSession(showSheet: $showSheet) { workoutRoutineId in 
-                    workoutSessionViewModel.addWorkoutSession(workoutRoutineId: workoutRoutineId, start: Date())
-                    showSheet = false
+                    workoutSessionViewModel.addWorkoutSession(workoutRoutineId: workoutRoutineId, start: Date(), onSuccess: {
+                        showSheet = false
+                        workoutSessionViewModel.getWorkoutSessions(withNetwork: true)
+                    })
                 }.presentationDetents([.medium])
  
             }

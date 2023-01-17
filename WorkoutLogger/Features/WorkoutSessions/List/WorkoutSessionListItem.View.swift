@@ -53,9 +53,6 @@ struct WorkoutSessionListItem: View {
             }
 
         }
-        .padding()
-        .background(Color.bgSecondary)
-        .cornerRadius(10)
 
     }
 }

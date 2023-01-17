@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AddWorkoutSession: View {
-    @StateObject var workoutListViewModel = WorkoutViewModel(service: WorkoutLoggerAPIService())
+    @StateObject var workoutViewModel = WorkoutViewModel(service: WorkoutLoggerAPIService())
     @Binding var showSheet: Bool
     var onSelection: (String) -> Void
     
@@ -16,13 +16,13 @@ struct AddWorkoutSession: View {
         
         Group {
             
-            if workoutListViewModel.isLoading {
+            if workoutViewModel.isLoading {
                 
                 Text("Loading")
                 
             } else {
                 
-                if workoutListViewModel.workoutRoutineList.count > 0 {
+                if workoutViewModel.workoutRoutineList.count > 0 {
                     
                     VStack {
                         
@@ -49,8 +49,10 @@ struct AddWorkoutSession: View {
                             
                         }.padding(.horizontal)
                         
-                        List(workoutListViewModel.workoutRoutineList, id: \.self.id) { workoutRoutine in
-                            
+                        List(workoutViewModel.workoutRoutineList, id: \.self.id) { workoutRoutine in
+
+                            // TODO: probably put a forEach here
+
                             Button(action: { onSelection(workoutRoutine.id) }) {
                                 
                                 HStack {
@@ -79,7 +81,7 @@ struct AddWorkoutSession: View {
                 
             }
             
-        }.onAppear(perform: { workoutListViewModel.getWorkoutRoutines() })
+        }.onAppear(perform: { workoutViewModel.getWorkoutRoutines() })
         
     }
 }
