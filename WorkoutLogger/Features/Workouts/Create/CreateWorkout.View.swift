@@ -68,10 +68,11 @@ struct CreateWorkoutView: View {
                     
                     Button("Create", action: {
                         if !workoutListViewModel.isLoading {
-                            workoutListViewModel.createWorkoutRoutine(name: workoutName) {
-                                showSheet.toggle()
+                            workoutListViewModel.createWorkoutRoutine(name: workoutName, onSuccess: {
                                 workoutName = ""
-                            }
+                                showSheet.toggle()
+                                workoutListViewModel.getWorkoutRoutines(withNetwork: true)
+                            })
                         }
                     })
                     .buttonStyle(RoundedButton())

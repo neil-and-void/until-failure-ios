@@ -26,7 +26,6 @@ class WorkoutViewModel: ObservableObject {
         self.service.createWorkoutRoutine(name: name) { result in
             switch result {
             case .success:
-                self.getWorkoutRoutines(withNetwork: true)
                 self.error = nil
                 onSuccess()
             case .failure(let err):
