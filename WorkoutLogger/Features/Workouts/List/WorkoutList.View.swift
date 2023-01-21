@@ -39,6 +39,7 @@ struct WorkoutListView: View {
                                 )
  
                             }
+
                             
                         }
                         .onDelete(perform: { indexSet in
@@ -47,11 +48,6 @@ struct WorkoutListView: View {
                                 deleteWorkoutRoutine(id: workoutListViewModel.workoutRoutineList[i].id)
                             })
                         })
-                        .padding()
-                        .background(RoundedRectangle(cornerRadius: 12).fill(Color.bgSecondary))
-                        .listRowBackground(Color.clear)
-                        .listRowSeparator(.hidden)
-                        .listRowInsets(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0))
 //                        .alert("Are you sure you want to delete this workout routine", isPresented: $showAlert) {
 //                            Button("Cancel", role: .cancel) { showAlert.toggle() }
 //                            Button("Delete", role: .destructive) {
@@ -70,6 +66,7 @@ struct WorkoutListView: View {
                     }
                     
                 }
+                .listStyle(PlainListStyle())
                 .onAppear(perform: { workoutListViewModel.getWorkoutRoutines() })
                 .refreshable {
                     workoutListViewModel.getWorkoutRoutines(withNetwork: true)
