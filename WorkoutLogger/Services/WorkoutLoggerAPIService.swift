@@ -21,6 +21,7 @@ protocol WorkoutLoggerAPIServiceProtocol {
     func getExerciseRoutines(workoutRoutineId: String, withNetwork: Bool, completion: @escaping (Result<[ExerciseRoutine], APIError>) -> Void)
     func addExercise(workoutSessionId: String, exerciseRoutineId: String, completion: @escaping (Result<Exercise, APIError>) -> Void)
     func addSetEntry(exerciseId: String, setEntry: SetEntry, completion: @escaping (Result<SetEntry, APIError>) -> Void)
+    func deleteExercise(exerciseId: String, completion: @escaping (Result<Int, APIError>) -> Void)
 }
 
 // extension that adds default values to protocol
@@ -352,6 +353,29 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
                 
                 completion(Result.failure(.unknown))
                 
+            case .failure:
+                completion(Result.failure(.networkError))
+            }
+        }
+    }
+
+    func deleteExercise(exerciseId: String, completion: @escaping ((Result<Int, APIError>) -> Void)) {
+        self.client.perform(mutation: WorkoutLoggerAPI.DeleteExerciseMutation(exerciseId: exerciseId)) { result in
+            switch result {
+            case .success(let response):
+
+                if let errors = response.errors {
+                    completion(Result.failure(.GraphQLError(gqlError: errors[0].message)))
+                    return
+                }
+
+                if let deleteExercise = response.data?.deleteExercise {
+                    completion(Result.success(deleteExercise))
+                    return
+                }
+
+                completion(Result.failure(.unknown))
+
             case .failure:
                 completion(Result.failure(.networkError))
             }

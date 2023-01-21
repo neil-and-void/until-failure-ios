@@ -29,7 +29,12 @@ struct EditWorkoutSession: View {
                         
                         ForEach(workoutSession.exercises) { exercise in
                             
-                            EditableExercise(exercise: exercise)
+                            EditableExercise(
+                                exercise: exercise,
+                                onDelete: {
+                                    workoutSessionViewModel.getWorkoutSession(workoutSessionId: workoutSessionId, withNetwork: true)
+                                }
+                            )
  
                         }
                         

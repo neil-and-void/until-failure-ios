@@ -131,6 +131,8 @@
 		28DBDC74296D1DD8001B8815 /* LocalCacheMutator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DBDC73296D1DD7001B8815 /* LocalCacheMutator.swift */; };
 		28E03C5529401E8900B38824 /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E03C5429401E8900B38824 /* PullToRefresh.swift */; };
 		28E03C612941AB7000B38824 /* AddWorkoutSession.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E03C602941AB7000B38824 /* AddWorkoutSession.View.swift */; };
+		28E60BB5297BCCB200CDCCE9 /* DeleteExerciseMutation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 28E60BB4297BCCB200CDCCE9 /* DeleteExerciseMutation.graphql */; };
+		28E60BB7297BCDC800CDCCE9 /* DeleteExerciseMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E60BB6297BCDC800CDCCE9 /* DeleteExerciseMutation.graphql.swift */; };
 		28F14021293DCF8C00DF6857 /* Workout.ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F14020293DCF8C00DF6857 /* Workout.ViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -278,6 +280,8 @@
 		28DBDC73296D1DD7001B8815 /* LocalCacheMutator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCacheMutator.swift; sourceTree = "<group>"; };
 		28E03C5429401E8900B38824 /* PullToRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
 		28E03C602941AB7000B38824 /* AddWorkoutSession.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutSession.View.swift; sourceTree = "<group>"; };
+		28E60BB4297BCCB200CDCCE9 /* DeleteExerciseMutation.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = DeleteExerciseMutation.graphql; sourceTree = "<group>"; };
+		28E60BB6297BCDC800CDCCE9 /* DeleteExerciseMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeleteExerciseMutation.graphql.swift; path = WorkoutLogger/WorkoutLoggerAPI/Operations/Mutations/DeleteExerciseMutation.graphql.swift; sourceTree = SOURCE_ROOT; };
 		28F14020293DCF8C00DF6857 /* Workout.ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -449,6 +453,7 @@
 				2887D0082969437400B673A1 /* GetWorkoutSession.graphql */,
 				2887D0092969437400B673A1 /* AddExerciseMutation.graphql */,
 				28B2BD55296BAE8400660C06 /* AddSetEntryMutation.graphql */,
+				28E60BB4297BCCB200CDCCE9 /* DeleteExerciseMutation.graphql */,
 			);
 			path = Mutations;
 			sourceTree = "<group>";
@@ -580,6 +585,7 @@
 				288A249429762DB400F8F6E3 /* DeleteWorkoutSessionMutation.graphql.swift */,
 				2895F32A297365E60029ADD9 /* DeleteWorkoutRoutineMutation.graphql.swift */,
 				2895F32B297365E60029ADD9 /* AddSetMutation.graphql.swift */,
+				28E60BB6297BCDC800CDCCE9 /* DeleteExerciseMutation.graphql.swift */,
 				2895F32C297365E60029ADD9 /* CreateWorkoutRoutineMutation.graphql.swift */,
 				2895F32D297365E60029ADD9 /* LoginMutation.graphql.swift */,
 				2895F32E297365E60029ADD9 /* AddWorkoutSessionMutation.graphql.swift */,
@@ -947,6 +953,7 @@
 				2887D01C2969437400B673A1 /* ExerciseRoutines.graphql in Resources */,
 				2887D0132969437400B673A1 /* AddWorkoutSessionMutation.graphql in Resources */,
 				2887D0162969437400B673A1 /* SignupMutation.graphql in Resources */,
+				28E60BB5297BCCB200CDCCE9 /* DeleteExerciseMutation.graphql in Resources */,
 				2887D0202969437400B673A1 /* WorkoutSessionFull.graphql in Resources */,
 				2887D0152969437400B673A1 /* DeleteWorkoutRoutineMutation.graphql in Resources */,
 				2887D0222969437400B673A1 /* WorkoutRoutineFull.graphql in Resources */,
@@ -995,6 +1002,7 @@
 				2808740A2938732C00443453 /* EditWorkout.View.swift in Sources */,
 				2895F37F297365E60029ADD9 /* SignupInput.graphql.swift in Sources */,
 				28F14021293DCF8C00DF6857 /* Workout.ViewModel.swift in Sources */,
+				28E60BB7297BCDC800CDCCE9 /* DeleteExerciseMutation.graphql.swift in Sources */,
 				2809EF662926F10C00D0FF5B /* AuthService.swift in Sources */,
 				2865A813293B274600020C7A /* AddExerciseRoutineAlert.View.swift in Sources */,
 				2895F382297365E60029ADD9 /* ExerciseRoutineInput.graphql.swift in Sources */,

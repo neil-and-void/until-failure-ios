@@ -10,7 +10,7 @@ import SwiftUI
 struct EditableExercise: View {
     @StateObject private var exerciseViewModel = ExerciseViewModel(service: WorkoutLoggerAPIService())
     @Binding var exercise: Exercise
-//    let prevExercises: Exercise MAP
+    let onDelete: () -> Void
     
     func addSetEntry() {
         // optimisitically update ui by passing a uuid for now and then updating later
@@ -43,7 +43,7 @@ struct EditableExercise: View {
 
                 Menu {
                     Button("delete", role: .destructive) {
-                        print("delete")
+                        exerciseViewModel.deleteExercise(exerciseId: exercise.id, onSuccess: onDelete)
                     }
                 } label: {
                     Image(systemName: "ellipsis").font(.system(size: 18, weight: .bold))
@@ -160,22 +160,28 @@ struct EditableExercise_Previews: PreviewProvider {
     static var previews: some View {
         
         ScrollView {
-            EditableExercise(exercise: .constant(Exercise(
-                id: "1",
-                exerciseRoutine: ExerciseRoutine(id: "1", name: "Squat", sets: 4, reps: 5),
-                sets: [
-                    SetEntry(id: "1", weight: 225, reps: 4),
-                    SetEntry(id: "2", weight: 225, reps: 4),
-                    SetEntry(id: "3", weight: 225, reps: 4),
-                    SetEntry(id: "4", weight: 225, reps: 4),
-                ],
-                notes: "Somwething"))
+            EditableExercise(
+                exercise: .constant(Exercise(
+                    id: "1",
+                    exerciseRoutine: ExerciseRoutine(id: "1", name: "Squat", sets: 4, reps: 5),
+                    sets: [
+                        SetEntry(id: "1", weight: 225, reps: 4),
+                        SetEntry(id: "2", weight: 225, reps: 4),
+                        SetEntry(id: "3", weight: 225, reps: 4),
+                        SetEntry(id: "4", weight: 225, reps: 4),
+                    ],
+                    notes: "Somwething")
+                ),
+                onDelete: {}
             )
-            EditableExercise(exercise: .constant(Exercise(
-                id: "1",
-                exerciseRoutine: ExerciseRoutine(id: "1", name: "Squat", sets: 4, reps: 5),
-                sets: [],
-                notes: "Somwething"))
+            EditableExercise(
+                exercise: .constant(Exercise(
+                    id: "1",
+                    exerciseRoutine: ExerciseRoutine(id: "1", name: "Squat", sets: 4, reps: 5),
+                    sets: [],
+                    notes: "Somwething")
+                ),
+                onDelete: {}
             )
         }.preferredColorScheme(.dark)
     }

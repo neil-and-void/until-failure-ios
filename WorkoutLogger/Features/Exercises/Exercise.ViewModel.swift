@@ -22,7 +22,6 @@ class ExerciseViewModel: ObservableObject {
             switch result {
             case .success(let setEntryId):
                 self.error = ""
-                print("set entry id: ", setEntryId)
             case .failure(let err):
                 self.error = err.localizedDescription
             }
@@ -33,4 +32,18 @@ class ExerciseViewModel: ObservableObject {
     func editSetEntry() {}
     
     func editExercise() {}
+
+    func deleteExercise(exerciseId: String, onSuccess: @escaping () -> Void) {
+        self.isLoading = true
+        self.service.deleteExercise(exerciseId: exerciseId) { result in
+            switch result {
+            case .success:
+                self.error = ""
+                onSuccess()
+            case .failure(let err):
+                self.error = err.localizedDescription
+            }
+            self.isLoading = false
+        }
+    }
 }
