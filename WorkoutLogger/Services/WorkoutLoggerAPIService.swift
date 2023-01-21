@@ -16,7 +16,7 @@ protocol WorkoutLoggerAPIServiceProtocol {
     func updateWorkoutRoutine(_ workoutRoutine: WorkoutRoutine, completion: @escaping (Result<WorkoutRoutine, APIError>) -> Void)
     func deleteWorkoutRoutine(id: String, completion: @escaping (Result<Int, APIError>) -> Void)
     func addWorkoutSession(id: String, start: Date, completion: @escaping(Result<WorkoutSession, APIError>) -> Void)
-    func getWorkoutSession(workoutRoutineId: String, workoutSessionId: String, withNetwork: Bool, completion: @escaping (Result<WorkoutSession, APIError>) -> Void)
+    func getWorkoutSession(workoutSessionId: String, withNetwork: Bool, completion: @escaping (Result<WorkoutSession, APIError>) -> Void)
     func deleteWorkoutSession(id: String, completion: @escaping (Result<Int, APIError>) -> Void)
     func getExerciseRoutines(workoutRoutineId: String, withNetwork: Bool, completion: @escaping (Result<[ExerciseRoutine], APIError>) -> Void)
     func addExercise(workoutSessionId: String, exerciseRoutineId: String, completion: @escaping (Result<Exercise, APIError>) -> Void)
@@ -34,8 +34,8 @@ extension WorkoutLoggerAPIServiceProtocol {
     func getWorkoutSessions(limit: Int, after: String?, withNetwork: Bool = false, completion: @escaping (Result<[WorkoutSession], APIError>) -> Void) {
         return getWorkoutSessions(limit: limit, after: after, withNetwork: withNetwork, completion: completion)
     }
-    func getWorkoutSession(workoutRoutineId: String, workoutSessionId: String, withNetwork: Bool = false, completion: @escaping (Result<WorkoutSession, APIError>) -> Void) {
-        return getWorkoutSession(workoutRoutineId: workoutRoutineId, workoutSessionId: workoutSessionId, withNetwork: withNetwork, completion: completion)
+    func getWorkoutSession(workoutSessionId: String, withNetwork: Bool = false, completion: @escaping (Result<WorkoutSession, APIError>) -> Void) {
+        return getWorkoutSession(workoutSessionId: workoutSessionId, withNetwork: withNetwork, completion: completion)
     }
     func getExerciseRoutines(workoutRoutineId: String, withNetwork: Bool = false, completion: @escaping (Result<[ExerciseRoutine], APIError>) -> Void) {
         return getExerciseRoutines(workoutRoutineId: workoutRoutineId, withNetwork: withNetwork, completion: completion)
@@ -250,7 +250,6 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
     }
  
     func getWorkoutSession(
-        workoutRoutineId: String,
         workoutSessionId: String,
         withNetwork: Bool = false,
         completion: @escaping (Result<WorkoutSession, APIError>) -> Void
@@ -259,7 +258,7 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
         if withNetwork {
             cachePolicy = .fetchIgnoringCacheData
         }
-        self.client.fetch(query: WorkoutLoggerAPI.WorkoutSessionQuery(workoutRoutineId: workoutRoutineId, workoutSessionId: workoutSessionId), cachePolicy: cachePolicy) { result in
+        self.client.fetch(query: WorkoutLoggerAPI.WorkoutSessionQuery(workoutSessionId: workoutSessionId), cachePolicy: cachePolicy) { result in
             switch result {
             case .success(let response):
                 

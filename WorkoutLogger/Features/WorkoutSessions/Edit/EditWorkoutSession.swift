@@ -9,22 +9,21 @@ import SwiftUI
 
 struct EditWorkoutSession: View {
     var workoutSessionId: String
-    var workoutRoutineId: String
-    
+
     @State private var showSheet = false
-    @StateObject private var editWorkoutSessionViewModel = WorkoutSessionViewModel(service: WorkoutLoggerAPIService())
+    @StateObject private var workoutSessionViewModel = WorkoutSessionViewModel(service: WorkoutLoggerAPIService())
     
     var body: some View {
         
         Group {
             
-            if editWorkoutSessionViewModel.isLoading {
+            if workoutSessionViewModel.isLoading {
                 
                 Text("Loading")
                 
             } else {
                 
-                if let workoutSession = Binding<WorkoutSession>($editWorkoutSessionViewModel.workoutSession) {
+                if let workoutSession = Binding<WorkoutSession>($workoutSessionViewModel.workoutSession) {
                     
                     ScrollView {
                         
@@ -45,6 +44,9 @@ struct EditWorkoutSession: View {
                             SelectExerciseRoutine(
                                 workoutSessionId: workoutSession.id,
                                 workoutRoutineId: workoutSession.workoutRoutine.id,
+                                onSelectExerciseRoutine: {
+                                    workoutSessionViewModel.getWorkoutSession(workoutSessionId: workoutSessionId, withNetwork: true)
+                                },
                                 showSheet: $showSheet
                             ).presentationDetents([.medium])
                             
@@ -61,10 +63,7 @@ struct EditWorkoutSession: View {
             }
             
         }.onAppear {
-            editWorkoutSessionViewModel.getWorkoutSession(
-                workoutSessionId: workoutSessionId,
-                workoutRoutineId: workoutRoutineId
-            )
+            workoutSessionViewModel.getWorkoutSession(workoutSessionId: workoutSessionId)
         }
         
     }
@@ -72,6 +71,6 @@ struct EditWorkoutSession: View {
 
 struct EditWorkoutSession_Previews: PreviewProvider {
     static var previews: some View {
-        EditWorkoutSession(workoutSessionId: "1", workoutRoutineId: "1")
+        EditWorkoutSession(workoutSessionId: "1")
     }
 }

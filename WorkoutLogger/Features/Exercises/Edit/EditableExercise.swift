@@ -40,6 +40,14 @@ struct EditableExercise: View {
                 }
                 
                 Spacer()
+
+                Menu {
+                    Button("delete", role: .destructive) {
+                        print("delete")
+                    }
+                } label: {
+                    Image(systemName: "ellipsis").font(.system(size: 18, weight: .bold))
+                }
                 
             }
             
@@ -139,7 +147,7 @@ struct EditableExercise: View {
             }
             
         }
-        .padding(10)
+        .padding(16)
         .background(Color.bgSecondary)
         .cornerRadius(10)
         .padding(.horizontal, 8)

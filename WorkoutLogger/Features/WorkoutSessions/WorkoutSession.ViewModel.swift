@@ -33,10 +33,9 @@ class WorkoutSessionViewModel: ObservableObject {
         }
     }
 
-    func getWorkoutSession(workoutSessionId: String, workoutRoutineId: String, withNetwork: Bool = false) {
+    func getWorkoutSession(workoutSessionId: String, withNetwork: Bool = false) {
         self.isLoading = true
         self.service.getWorkoutSession(
-            workoutRoutineId: workoutRoutineId,
             workoutSessionId: workoutSessionId,
             withNetwork: withNetwork
         ) { result in

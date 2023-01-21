@@ -1,8 +1,5 @@
-query WorkoutSession($workoutRoutineId: ID!, $workoutSessionId: ID!) {
+query WorkoutSession($workoutSessionId: ID!) {
     workoutSession(workoutSessionId: $workoutSessionId) {
             ...workoutSessionFull
-    }
-    workoutRoutine(workoutRoutineId: $workoutRoutineId) {
-            ...workoutRoutineFull
     }
 }

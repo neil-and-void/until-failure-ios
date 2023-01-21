@@ -33,7 +33,7 @@ class ExerciseRoutineViewModel: ObservableObject {
         }
     }
     
-    func addExercise(workoutSessionId: String, exerciseRoutineId: String) {
+    func addExercise(workoutSessionId: String, exerciseRoutineId: String, onSuccess: @escaping () -> Void) {
         self.service.addExercise(
             workoutSessionId: workoutSessionId,
             exerciseRoutineId: exerciseRoutineId
@@ -41,6 +41,7 @@ class ExerciseRoutineViewModel: ObservableObject {
             switch result {
             case .success:
                 self.error = nil
+                onSuccess()
             case .failure(let err):
                 self.error = err.localizedDescription
             }

@@ -25,7 +25,7 @@ struct WorkoutSessionListView: View {
 
                         ForEach(workoutSessionViewModel.workoutSessionList, id: \.self.id) { workoutSession in
 
-                            NavigationLink(destination: EditWorkoutSession(workoutSessionId: workoutSession.id, workoutRoutineId: workoutSession.workoutRoutine.id)) {
+                            NavigationLink(destination: EditWorkoutSession(workoutSessionId: workoutSession.id)) {
                                 
                                 WorkoutSessionListItem(active: true, workoutSession: workoutSession)
                                 
