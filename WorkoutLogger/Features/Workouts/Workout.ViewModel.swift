@@ -65,9 +65,25 @@ class WorkoutViewModel: ObservableObject {
     }
     
     func updateWorkoutRoutine(_ workoutRoutine: WorkoutRoutine, _ originalWorkoutRoutine: WorkoutRoutine, onSuccess: @escaping () -> Void) {
+        // format strings
+        let fmtdWorkoutRoutine = WorkoutRoutine(
+            id: workoutRoutine.id,
+            name: workoutRoutine.name.trimmingCharacters(in: .whitespaces),
+            active: workoutRoutine.active,
+            exerciseRoutines: workoutRoutine.exerciseRoutines.map {
+                ExerciseRoutine(
+                    id: $0.id,
+                    active: $0.active,
+                    name: $0.name.trimmingCharacters(in: .whitespaces),
+                    sets: $0.sets,
+                    reps: $0.reps
+                )
+            }
+        )
+
         // local mutation
         // might not need this
-        self.localMutator.updateWorkoutRoutine(workoutRoutine: workoutRoutine) { result in
+        self.localMutator.updateWorkoutRoutine(workoutRoutine: fmtdWorkoutRoutine) { result in
             switch result {
             case .success:
                 self.error = nil
@@ -78,7 +94,7 @@ class WorkoutViewModel: ObservableObject {
         }
         
         // send mutation to the server
-        self.service.updateWorkoutRoutine(workoutRoutine) { result in
+        self.service.updateWorkoutRoutine(fmtdWorkoutRoutine) { result in
             switch result {
             case .success:
                 self.error = nil
