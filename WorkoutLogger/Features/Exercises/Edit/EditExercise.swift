@@ -1,5 +1,5 @@
 //
-//  EditableExercise.swift
+//  EditExercise.swift
 //  WorkoutLogger
 //
 //  Created by Neil Viloria on 2022-12-17.
@@ -7,16 +7,17 @@
 
 import SwiftUI
 
-struct EditableExercise: View {
+struct EditExercise: View {
     @StateObject private var exerciseViewModel = ExerciseViewModel(service: WorkoutLoggerAPIService())
+    @StateObject var textObserver: TextFieldObserver
     @Binding var exercise: Exercise
     let onDelete: () -> Void
-    
+
     func addSetEntry() {
         // optimisitically update ui by passing a uuid for now and then updating later
         let setEntry = SetEntry(id: UUID().uuidString, weight: 0, reps: 0)
         exercise.sets.append(setEntry)
-        
+
         exerciseViewModel.addSetEntry(
             exerciseId: exercise.id,
             setEntry: setEntry
@@ -44,7 +45,7 @@ struct EditableExercise: View {
                 Menu {
                     Button("delete", role: .destructive) {
                         exerciseViewModel.deleteExercise(exerciseId: exercise.id, onSuccess: onDelete)
-                    }
+                    }.padding()
                 } label: {
                     Image(systemName: "ellipsis").font(.system(size: 18, weight: .bold))
                 }
@@ -138,12 +139,16 @@ struct EditableExercise: View {
                 Text("Notes")
                     .font(.system(size: 20, weight: .semibold))
                 
-                TextField("notes...", text: $exercise.notes, axis: .vertical)
-                    .padding(4)
+                TextField("notes...", text: $textObserver.text, axis: .vertical)
+                    .padding(8)
                     .lineLimit(3, reservesSpace: true)
                     .background(.thinMaterial)
                     .cornerRadius(8)
-                
+                    .onReceive(textObserver.$debouncedText.dropFirst()) { val in
+                        exerciseViewModel.updateExercise(id: exercise.id, notes: val)
+                        exercise.notes = val
+                    }
+
             }
             
         }
@@ -156,11 +161,12 @@ struct EditableExercise: View {
     
 }
 
-struct EditableExercise_Previews: PreviewProvider {
+struct EditExercise_Previews: PreviewProvider {
     static var previews: some View {
         
         ScrollView {
-            EditableExercise(
+            EditExercise(
+                textObserver: TextFieldObserver(text: ""),
                 exercise: .constant(Exercise(
                     id: "1",
                     exerciseRoutine: ExerciseRoutine(id: "1", name: "Squat", sets: 4, reps: 5),
@@ -174,7 +180,8 @@ struct EditableExercise_Previews: PreviewProvider {
                 ),
                 onDelete: {}
             )
-            EditableExercise(
+            EditExercise(
+                textObserver: TextFieldObserver(text: ""),
                 exercise: .constant(Exercise(
                     id: "1",
                     exerciseRoutine: ExerciseRoutine(id: "1", name: "Squat", sets: 4, reps: 5),

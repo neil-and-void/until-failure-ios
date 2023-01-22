@@ -86,10 +86,6 @@ class LocalCacheMutator {
         }, callbackQueue: .main, completion: completion)
     }
     
-    func addWorkoutSession() {}
-    
-    func updateWorkoutSession() {}
-    
     func deleteWorkoutSession(id: String, completion: @escaping ((Result<Void, Error>) -> Void)) {
         self.store.withinReadWriteTransaction({ transaction in
             try transaction.removeObject(for: "WorkoutSession:\(id)")
@@ -98,15 +94,14 @@ class LocalCacheMutator {
         }, callbackQueue: .main, completion: completion)
     }
     
-    func addExercise() {}
-    
-    func updateExercise() {}
-    
-    func deleteExercise() {}
-    
-    func addSetEntry() {}
-    
-    func updateSetEntry() {}
-    
-    func deleteSetEntry() {}
+    func updateExercise(id: String, notes: String, completion: @escaping ((Result<Void, Error>) -> Void)) {
+        self.store.withinReadWriteTransaction({ transaction in
+            try transaction.updateObject(
+                ofType: WorkoutLoggerAPI.MutableExerciseDetails.self,
+                withKey: "Exercise:\(id)"
+            ) { (data: inout WorkoutLoggerAPI.MutableExerciseDetails) in
+                data.notes = notes
+            }
+        }, callbackQueue: .main, completion: completion)
+    }
 }

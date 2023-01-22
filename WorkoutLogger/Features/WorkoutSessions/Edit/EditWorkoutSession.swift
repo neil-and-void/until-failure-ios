@@ -29,7 +29,8 @@ struct EditWorkoutSession: View {
                         
                         ForEach(workoutSession.exercises) { exercise in
                             
-                            EditableExercise(
+                            EditExercise(
+                                textObserver: TextFieldObserver(text: exercise.wrappedValue.notes),
                                 exercise: exercise,
                                 onDelete: {
                                     workoutSessionViewModel.getWorkoutSession(workoutSessionId: workoutSessionId, withNetwork: true)

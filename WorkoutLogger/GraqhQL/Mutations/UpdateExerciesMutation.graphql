@@ -1,0 +1,9 @@
+mutation UpdateExercise(
+    $exerciseId: ID!
+    $exercise: UpdateExerciseInput!
+) {
+    updateExercise(exerciseId: $exerciseId, exercise: $exercise) {
+        id
+        notes
+    }
+}

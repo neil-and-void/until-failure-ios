@@ -18,6 +18,7 @@ protocol WorkoutLoggerAPIServiceProtocol {
     func addWorkoutSession(id: String, start: Date, completion: @escaping(Result<WorkoutSession, APIError>) -> Void)
     func getWorkoutSession(workoutSessionId: String, withNetwork: Bool, completion: @escaping (Result<WorkoutSession, APIError>) -> Void)
     func deleteWorkoutSession(id: String, completion: @escaping (Result<Int, APIError>) -> Void)
+    func updateExercise(exerciseId: String, notes: String, completion: @escaping (Result<Exercise, APIError>) -> Void)
     func getExerciseRoutines(workoutRoutineId: String, withNetwork: Bool, completion: @escaping (Result<[ExerciseRoutine], APIError>) -> Void)
     func addExercise(workoutSessionId: String, exerciseRoutineId: String, completion: @escaping (Result<Exercise, APIError>) -> Void)
     func addSetEntry(exerciseId: String, setEntry: SetEntry, completion: @escaping (Result<SetEntry, APIError>) -> Void)
@@ -371,6 +372,31 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
 
                 if let deleteExercise = response.data?.deleteExercise {
                     completion(Result.success(deleteExercise))
+                    return
+                }
+
+                completion(Result.failure(.unknown))
+
+            case .failure:
+                completion(Result.failure(.networkError))
+            }
+        }
+    }
+
+    func updateExercise(exerciseId: String, notes: String, completion: @escaping (Result<Exercise, APIError>) -> Void) {
+        let exerciseInput = WorkoutLoggerAPI.UpdateExerciseInput(notes: notes)
+        self.client.perform(mutation: WorkoutLoggerAPI.UpdateExerciseMutation(exerciseId: exerciseId, exercise: exerciseInput)) { result in
+            switch result {
+            case .success(let response):
+
+                if let errors = response.errors {
+                    completion(Result.failure(.GraphQLError(gqlError: errors[0].message)))
+                    return
+                }
+
+                if let updatedExercise = response.data?.updateExercise {
+                    // TODO make sure to populate set to not mess up sets in cache
+                    completion(Result.success(Exercise(id: updatedExercise.id, sets: [], notes: updatedExercise.notes)))
                     return
                 }
 
