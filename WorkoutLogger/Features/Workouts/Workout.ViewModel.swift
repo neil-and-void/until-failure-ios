@@ -40,8 +40,7 @@ class WorkoutViewModel: ObservableObject {
         self.service.getWorkoutRoutines(limit: 8, after: "", withNetwork: withNetwork) { result in
             switch result {
             case .success(let workoutRoutines):
-                let sortedWorkoutRoutines = workoutRoutines.sorted { $0.id < $1.id }
-                self.workoutRoutineList = sortedWorkoutRoutines
+                self.workoutRoutineList = workoutRoutines
                 self.error = nil
             case .failure(let err):
                 self.error = err.localizedDescription

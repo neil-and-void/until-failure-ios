@@ -24,8 +24,7 @@ class ExerciseRoutineViewModel: ObservableObject {
             switch result {
             case .success(let exerciseRoutines):
                 self.error = nil
-                let sortedExerciseRoutines = exerciseRoutines.sorted { $0.id < $1.id }
-                self.exerciseRoutines = sortedExerciseRoutines
+                self.exerciseRoutines = exerciseRoutines
             case .failure(let err):
                 self.error = err.localizedDescription
             }

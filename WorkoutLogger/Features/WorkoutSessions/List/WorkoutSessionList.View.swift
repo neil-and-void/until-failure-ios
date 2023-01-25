@@ -47,11 +47,6 @@ struct WorkoutSessionListView: View {
 //                                showDeleteAlert.toggle()
 //                            }
 //                        }
-                        .padding()
-                        .background(RoundedRectangle(cornerRadius: 12).fill(Color.bgSecondary))
-                        .listRowBackground(Color.clear)
-                        .listRowSeparator(.hidden)
-                        .listRowInsets(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0))
 
                     } else {
                         
@@ -63,6 +58,7 @@ struct WorkoutSessionListView: View {
                     }
                     
                 }
+                .listStyle(PlainListStyle())
                 .onAppear(perform: {
                     workoutSessionViewModel.getWorkoutSessions()
                 })
