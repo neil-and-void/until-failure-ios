@@ -52,6 +52,7 @@ struct Exercise: Identifiable {
 }
 
 struct SetEntry: Identifiable {
+    var _id = UUID()
     var id: String = ""
     var weight: Double
     var reps: Int

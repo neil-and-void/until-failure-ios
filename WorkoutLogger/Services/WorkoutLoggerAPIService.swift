@@ -23,6 +23,7 @@ protocol WorkoutLoggerAPIServiceProtocol {
     func addExercise(workoutSessionId: String, exerciseRoutineId: String, completion: @escaping (Result<Exercise, APIError>) -> Void)
     func addSetEntry(exerciseId: String, setEntry: SetEntry, completion: @escaping (Result<SetEntry, APIError>) -> Void)
     func deleteExercise(exerciseId: String, completion: @escaping (Result<Int, APIError>) -> Void)
+    func getExercise(exerciseId: String, withNetwork: Bool, completion: @escaping (Result<Exercise, APIError>) -> Void)
 }
 
 // extension that adds default values to protocol
@@ -41,6 +42,9 @@ extension WorkoutLoggerAPIServiceProtocol {
     }
     func getExerciseRoutines(workoutRoutineId: String, withNetwork: Bool = false, completion: @escaping (Result<[ExerciseRoutine], APIError>) -> Void) {
         return getExerciseRoutines(workoutRoutineId: workoutRoutineId, withNetwork: withNetwork, completion: completion)
+    }
+    func getExercise(exerciseId: String, withNetwork: Bool = false, completion: @escaping (Result<Exercise, APIError>) -> Void) {
+        return getExercise(exerciseId: exerciseId, withNetwork: withNetwork, completion: completion)
     }
 }
 
@@ -300,6 +304,33 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
                  
                 completion(Result.failure(.unknown))
                 
+            case .failure:
+                completion(Result.failure(.networkError))
+            }
+        }
+    }
+
+    func getExercise(exerciseId: String, withNetwork: Bool = false, completion: @escaping (Result<Exercise, APIError>) -> Void) {
+        self.client.fetch(query: WorkoutLoggerAPI.ExerciseQuery(exerciseId: exerciseId)) { result in
+            switch result {
+            case .success(let response):
+
+                if let errors = response.errors {
+                    completion(Result.failure(.GraphQLError(gqlError: errors[0].message)))
+                    return
+                }
+
+                if let exercise = response.data?.exercise.fragments.exerciseDetails,
+                   let exerciseRoutine = response.data?.exercise.exerciseRoutine.fragments.exerciseRoutineFull {
+                    var parsedExercise = Parser.Exercise(exercise)
+                    let parsedExerciseRoutine = Parser.ExerciseRoutine(exerciseRoutine)
+                    parsedExercise.exerciseRoutine = parsedExerciseRoutine
+                    completion(Result.success(parsedExercise))
+                    return
+                }
+
+                completion(Result.failure(.unknown))
+
             case .failure:
                 completion(Result.failure(.networkError))
             }

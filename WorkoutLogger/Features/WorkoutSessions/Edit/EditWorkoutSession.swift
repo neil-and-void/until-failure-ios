@@ -32,6 +32,7 @@ struct EditWorkoutSession: View {
                             EditExercise(
                                 textObserver: TextFieldObserver(text: exercise.wrappedValue.notes),
                                 exercise: exercise,
+                                onEdit: {},
                                 onDelete: {
                                     workoutSessionViewModel.getWorkoutSession(workoutSessionId: workoutSessionId, withNetwork: true)
                                 }

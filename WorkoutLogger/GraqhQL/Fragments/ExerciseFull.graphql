@@ -1,0 +1,6 @@
+fragment exerciseFull on Exercise {
+    ...exerciseDetails
+    exerciseRoutine {
+        ...exerciseRoutineFull
+    }
+}

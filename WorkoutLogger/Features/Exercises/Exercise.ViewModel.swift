@@ -18,16 +18,15 @@ class ExerciseViewModel: ObservableObject {
         self.service = service
         self.localMutator = LocalCacheMutator(store: WorkoutLoggerAPIClient.client.store)
     }
-   
-    func addSetEntry(exerciseId: String, setEntry: SetEntry) {
-        self.service.addSetEntry(exerciseId: exerciseId, setEntry: setEntry) { result in
+
+    func getExercise(id: String, withNetwork: Bool = false) {
+        self.service.getExercise(exerciseId: id, withNetwork: withNetwork) { result in
             switch result {
-            case .success(let setEntryId):
+            case .success:
                 self.error = nil
             case .failure(let err):
                 self.error = err.localizedDescription
             }
-            self.isLoading = false
         }
     }
 
