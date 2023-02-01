@@ -31,9 +31,9 @@ struct EditExerciseRoutineList: View {
                 
             }
             
-            ForEach($exerciseRoutines, id: \._id) { $exerciseRoutine in
+            ForEach($exerciseRoutines, id: \._id) { exerciseRoutine in
                 
-                EditWorkoutRoutineListItem(exerciseRoutine: $exerciseRoutine).listRowSeparator(.hidden)
+                EditWorkoutRoutineListItem(exerciseRoutine: exerciseRoutine).listRowSeparator(.hidden)
                 
             }.onDelete(perform: onDelete)
             

@@ -42,31 +42,34 @@ struct AddWorkoutSession: View {
                         
                         HStack {
                             
-                            Text("Select a Routine to Start...")
+                            Text("What are you hitting?")
                                 .font(.system(size: 18, weight: .semibold))
                             
                             Spacer()
                             
                         }.padding(.horizontal)
                         
-                        List(workoutViewModel.workoutRoutineList, id: \.self.id) { workoutRoutine in
+                        List {
 
+                            ForEach(workoutViewModel.workoutRoutineList, id: \.self.id) { workoutRoutine in
+
+                                Button(action: { onSelection(workoutRoutine.id) }) {
+
+                                    HStack {
+
+                                        Text(workoutRoutine.name)
+
+                                        Spacer()
+
+                                        Text("\(String(workoutRoutine.exerciseRoutines.count)) exercises")
+                                            .foregroundColor(.secondaryText)
+
+                                    }
+
+                                }.listRowSeparator(.hidden)
+
+                            }
                             // TODO: probably put a forEach here
-
-                            Button(action: { onSelection(workoutRoutine.id) }) {
-                                
-                                HStack {
-                                    
-                                    Text(workoutRoutine.name)
-                                    
-                                    Spacer()
-                                    
-                                    Text("\(String(workoutRoutine.exerciseRoutines.count)) exercises")
-                                        .foregroundColor(.secondaryText)
-                                    
-                                }
-                                
-                            }.listRowSeparator(.hidden)
                             
                         }.listStyle(.plain)
                         

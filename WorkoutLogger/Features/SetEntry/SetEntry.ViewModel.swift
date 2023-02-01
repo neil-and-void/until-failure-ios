@@ -30,4 +30,16 @@ class SetEntryViewModel: ObservableObject {
             }
         }
     }
+
+    func deleteSetEntry(id: String, onSuccess: @escaping () -> Void) {
+        self.service.deleteSetEntry(id: id) { result in
+            switch result {
+            case .success:
+                self.error = nil
+                onSuccess()
+            case .failure(let err):
+                self.error = err.localizedDescription
+            }
+        }
+    }
 }

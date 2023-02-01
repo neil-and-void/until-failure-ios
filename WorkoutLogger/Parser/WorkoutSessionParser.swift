@@ -43,6 +43,10 @@ class Parser: WorkoutLoggerAPIParserProtocol {
             reps: exerciseRoutine.reps
         )
     }
+
+    static func ExerciseRoutines(_ exerciseRoutines: [WorkoutLoggerAPI.ExerciseRoutinesQuery.Data.ExerciseRoutine]) -> [ExerciseRoutine] {
+        return exerciseRoutines.map({ ExerciseRoutine($0.fragments.exerciseRoutineFull) })
+    }
     
     static func WorkoutSession(_ workoutSession: WorkoutLoggerAPI.WorkoutSessionFull) -> WorkoutSession {
         let workoutRoutine = WorkoutLogger.WorkoutRoutine(

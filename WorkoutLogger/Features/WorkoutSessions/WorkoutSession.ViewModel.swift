@@ -41,6 +41,7 @@ class WorkoutSessionViewModel: ObservableObject {
         ) { result in
             switch result {
             case .success(let workoutSession):
+                print("sdklfjldskj ", workoutSession)
                 self.workoutSession = workoutSession
             case .failure(let err):
                 self.error = err.localizedDescription

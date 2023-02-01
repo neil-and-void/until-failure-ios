@@ -24,6 +24,7 @@ protocol WorkoutLoggerAPIServiceProtocol {
     func addSetEntry(exerciseId: String, setEntry: SetEntry, completion: @escaping (Result<SetEntry, APIError>) -> Void)
     func deleteExercise(exerciseId: String, completion: @escaping (Result<Int, APIError>) -> Void)
     func getExercise(exerciseId: String, withNetwork: Bool, completion: @escaping (Result<Exercise, APIError>) -> Void)
+    func deleteSetEntry(id: String, completion: @escaping (Result<Int, APIError>) -> Void)
 }
 
 // extension that adds default values to protocol
@@ -297,7 +298,7 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
                 }
                 
                 if let exerciseRoutines = response.data?.exerciseRoutines {
-                    let parsedExerciseRoutines = exerciseRoutines.compactMap { Parser.ExerciseRoutine($0.fragments.exerciseRoutineFull) }
+                    let parsedExerciseRoutines = Parser.ExerciseRoutines(exerciseRoutines)
                     completion(Result.success(parsedExerciseRoutines))
                     return
                 }
@@ -428,6 +429,29 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
                 if let updatedExercise = response.data?.updateExercise {
                     // TODO make sure to populate set to not mess up sets in cache
                     completion(Result.success(Exercise(id: updatedExercise.id, sets: [], notes: updatedExercise.notes)))
+                    return
+                }
+
+                completion(Result.failure(.unknown))
+
+            case .failure:
+                completion(Result.failure(.networkError))
+            }
+        }
+    }
+
+    func deleteSetEntry(id: String, completion: @escaping (Result<Int, APIError>) -> Void) {
+        self.client.perform(mutation: WorkoutLoggerAPI.DeleteSetMutation(setId: id)) { result in
+            switch result {
+            case .success(let response):
+
+                if let errors = response.errors {
+                    completion(Result.failure(.GraphQLError(gqlError: errors[0].message)))
+                    return
+                }
+
+                if let deleteSet = response.data?.deleteSet {
+                    completion(Result.success(deleteSet))
                     return
                 }
 

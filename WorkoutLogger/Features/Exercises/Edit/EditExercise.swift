@@ -44,7 +44,12 @@ struct EditExercise: View {
             
             Divider()
             
-            EditSetEntryList(setEntries: $exercise.sets)
+            EditSetEntryList(
+                setEntries: $exercise.sets,
+                onDelete: {
+                    onDelete()
+                }
+            )
             
             AddSetEntry(
                 exerciseId: exercise.id,
