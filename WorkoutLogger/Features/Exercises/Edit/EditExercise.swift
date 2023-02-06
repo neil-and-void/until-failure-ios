@@ -83,6 +83,7 @@ struct EditExercise: View {
             }
             
         }
+        .buttonStyle(PlainButtonStyle())
         .padding(16)
         .background(Color.bgSecondary)
         .cornerRadius(10)

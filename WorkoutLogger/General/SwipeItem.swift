@@ -17,7 +17,7 @@ struct SwipeItem<Content: View>: View {
     }
 
     var drag: some Gesture {
-        DragGesture()
+        DragGesture(minimumDistance: 30, coordinateSpace: .local)
             .onChanged { value in
                 withAnimation {
                     xOffset = anchor + value.translation.width

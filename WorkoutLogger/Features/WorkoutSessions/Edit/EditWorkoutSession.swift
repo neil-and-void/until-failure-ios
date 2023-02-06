@@ -25,7 +25,7 @@ struct EditWorkoutSession: View {
                 
                 if let workoutSession = Binding<WorkoutSession>($workoutSessionViewModel.workoutSession) {
                     
-                    ScrollView {
+                    List {
                         
                         ForEach(workoutSession.exercises) { exercise in
                             
@@ -36,7 +36,7 @@ struct EditWorkoutSession: View {
                                 onDelete: {
                                     workoutSessionViewModel.getWorkoutSession(workoutSessionId: workoutSessionId, withNetwork: true)
                                 }
-                            )
+                            ).listRowInsets(EdgeInsets())
  
                         }
                         
@@ -59,6 +59,8 @@ struct EditWorkoutSession: View {
                             
                         }
                         
+                    }.listStyle(.plain).refreshable {
+                        workoutSessionViewModel.getWorkoutSession(workoutSessionId: workoutSessionId, withNetwork: true)
                     }
                     
                 } else {
