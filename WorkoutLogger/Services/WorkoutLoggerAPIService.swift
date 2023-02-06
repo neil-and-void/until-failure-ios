@@ -126,7 +126,8 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
                 
                 if let workoutSessions = response.data?.workoutSessions {
                     let parsedWorkoutSessions = workoutSessions.edges.compactMap { Parser.WorkoutSession($0.node.fragments.workoutSessionFull) }
-                    completion(Result.success(parsedWorkoutSessions))
+                    let sortedWorkoutSessions = parsedWorkoutSessions.sorted(by: { $0.start > $1.start })
+                    completion(Result.success(sortedWorkoutSessions))
                     return
                 }
                 
