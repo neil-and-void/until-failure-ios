@@ -1,0 +1,5 @@
+fragment MutableSetEntryDetails on SetEntry @apollo_client_ios_localCacheMutation {
+    id
+    weight
+    reps
+}

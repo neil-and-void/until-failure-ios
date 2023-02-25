@@ -24,6 +24,7 @@ protocol WorkoutLoggerAPIServiceProtocol {
     func addSetEntry(exerciseId: String, setEntry: SetEntry, completion: @escaping (Result<SetEntry, APIError>) -> Void)
     func deleteExercise(exerciseId: String, completion: @escaping (Result<Int, APIError>) -> Void)
     func getExercise(exerciseId: String, withNetwork: Bool, completion: @escaping (Result<Exercise, APIError>) -> Void)
+    func updateSetEntry(id: String, reps: Int?, weight: Double?, completion: @escaping (Result<SetEntry, APIError>) -> Void)
     func deleteSetEntry(id: String, completion: @escaping (Result<Int, APIError>) -> Void)
 }
 
@@ -453,6 +454,31 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
 
                 if let deleteSet = response.data?.deleteSet {
                     completion(Result.success(deleteSet))
+                    return
+                }
+
+                completion(Result.failure(.unknown))
+
+            case .failure:
+                completion(Result.failure(.networkError))
+            }
+        }
+    }
+
+    func updateSetEntry(id: String, reps: Int?, weight: Double?, completion: @escaping (Result<SetEntry, APIError>) -> Void) {
+        let setEntryInput = WorkoutLoggerAPI.UpdateSetEntryInput(weight: weight ?? nil, reps: reps ?? nil)
+        self.client.perform(mutation: WorkoutLoggerAPI.UpdateSetMutation(setId: id, set: setEntryInput)) { result in
+            switch result {
+            case .success(let response):
+
+                if let errors = response.errors {
+                    completion(Result.failure(.GraphQLError(gqlError: errors[0].message)))
+                    return
+                }
+
+                if let updateSetEntry = response.data?.updateSet.fragments.setEntryFull {
+                    let parsedSetEntry = Parser.SetEntry(updateSetEntry)
+                    completion(Result.success(parsedSetEntry))
                     return
                 }
 

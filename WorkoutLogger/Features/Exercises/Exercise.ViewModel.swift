@@ -25,6 +25,7 @@ class ExerciseViewModel: ObservableObject {
             case .success:
                 self.error = nil
             case .failure(let err):
+                print("sdlfkjsdlkfjsoidjflsk", err.localizedDescription)
                 self.error = err.localizedDescription
             }
         }

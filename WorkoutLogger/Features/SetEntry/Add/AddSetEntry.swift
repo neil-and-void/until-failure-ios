@@ -18,7 +18,7 @@ struct AddSetEntry: View {
         Button("+ Add Set", action: {
             let setEntry = SetEntry(weight: 0, reps: 0)
 
-//            // local
+            // local
             onAdd(setEntry)
 
             // server

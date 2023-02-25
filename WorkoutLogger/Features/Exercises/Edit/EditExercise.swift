@@ -54,7 +54,7 @@ struct EditExercise: View {
             AddSetEntry(
                 exerciseId: exercise.id,
                 onAdd: { setEntry in
-//                // append to exercise sets
+                    // append to exercise sets
                     exercise.sets.append(setEntry)
                 },
                 onSuccess: {

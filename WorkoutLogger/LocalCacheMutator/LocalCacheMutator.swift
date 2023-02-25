@@ -104,4 +104,16 @@ class LocalCacheMutator {
             }
         }, callbackQueue: .main, completion: completion)
     }
+
+    func updateSetEntry(id: String, reps: Int?, weight: Double?, completion: @escaping ((Result<Void, Error>) -> Void)) {
+        self.store.withinReadWriteTransaction({ transaction in
+            try transaction.updateObject(
+                ofType: WorkoutLoggerAPI.MutableSetEntryDetails.self,
+                withKey: "SetEntry:\(id)"
+            ) { (data: inout WorkoutLoggerAPI.MutableSetEntryDetails) in
+                data.reps = reps ?? 0
+                data.weight = weight ?? 0
+            }
+        })
+    }
 }

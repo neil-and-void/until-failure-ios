@@ -26,6 +26,29 @@ class SetEntryViewModel: ObservableObject {
                 self.error = nil
                 onSuccess()
             case .failure(let err):
+                print("add set error: ", err.localizedDescription)
+                self.error = err.localizedDescription
+            }
+        }
+    }
+
+    func updateSetEntry(id: String, reps: Int?, weight: Double?) {
+        // local
+        self.localMutator.updateSetEntry(id: id, reps: reps, weight: weight) { result in
+            switch result {
+            case .success:
+                self.error = nil
+            case .failure(let err):
+                self.error = err.localizedDescription
+            }
+        }
+
+        // remote
+        self.service.updateSetEntry(id: id, reps: reps, weight: weight) { result in
+            switch result {
+            case .success:
+                self.error = nil
+            case .failure(let err):
                 self.error = err.localizedDescription
             }
         }

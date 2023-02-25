@@ -36,7 +36,12 @@ struct EditWorkoutSession: View {
                                 onDelete: {
                                     workoutSessionViewModel.getWorkoutSession(workoutSessionId: workoutSessionId, withNetwork: true)
                                 }
-                            ).listRowInsets(EdgeInsets())
+                            )
+                            .listRowInsets(EdgeInsets())
+                            .padding(.bottom, 8)
+                            .onTapGesture {
+                                self.hideKeyboard()
+                            }
  
                         }
                         

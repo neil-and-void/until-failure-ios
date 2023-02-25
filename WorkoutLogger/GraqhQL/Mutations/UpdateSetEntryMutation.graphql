@@ -1,0 +1,5 @@
+mutation UpdateSet($setId: ID!, $set: UpdateSetEntryInput!) {
+    updateSet(setId: $setId, set: $set) {
+        ...setEntryFull
+    }
+}

@@ -48,44 +48,28 @@ struct EditSetEntryList: View {
                 }
 
                 ForEach(Array(zip(setEntries.indices, $setEntries)), id: \.0) { (index, setEntry) in
-                    SwipeItem(content: {
-                        HStack {
-                            Text(String(index + 1))
-                                .fontWeight(.semibold)
-                                .frame(width: 32)
-                            Text(String("225 lbs x 4 reps"))
-                                .padding(4)
-                                .lineLimit(1)
-                                .multilineTextAlignment(.center)
-                                .frame(maxWidth: .infinity)
-                                .background(.thinMaterial)
-                                .foregroundColor(.secondaryText)
-                                .cornerRadius(8)
-                            TextField("reps", value: setEntry.reps, formatter: NumberFormatter())
-                                .padding(4)
-                                .multilineTextAlignment(.center)
-                                .frame(width: 64)
-                                .background(.thinMaterial)
-                                .cornerRadius(8)
-                                .keyboardType(.numberPad)
-                            TextField("weight", value: setEntry.weight, formatter: NumberFormatter())
-                                .padding(4)
-                                .multilineTextAlignment(.center)
-                                .frame(width: 64)
-                                .background(.thinMaterial)
-                                .cornerRadius(8)
-                                .keyboardType(.decimalPad)
-                        }
-                    }, onDelete: { confirmDeleteSetEntry(index: index) } )
-                    .confirmationDialog("Are you sure?", isPresented: $showDeleteConfirmation) {
-                        Button("Delete set", role: .destructive) {
-                            guard let index = setEntryIndexToDelete else { return }
-                            let setEntryToDelete = setEntries[index]
-                            setEntries.remove(at: index)
-                            setEntryViewModel.deleteSetEntry(id: setEntryToDelete.id, onSuccess: { onDelete() })
-                        }
-                    }
-                    .frame(height: 28) // TODO: figure out how not to choose hardcoded values
+                    SwipeItem(
+                        content: {
+                            EditSetEntryListItem(
+                                setNumber: index + 1,
+                                repFieldObserver: IntFieldObserver(text: setEntry.reps.wrappedValue),
+                                weightFieldObserver: DoubleFieldObserver(text: setEntry.weight.wrappedValue),
+                                onChange: { reps, weight in
+//                                    print("set id or something: ", setEntry)
+                                    setEntryViewModel.updateSetEntry(id: setEntry.id, reps: reps, weight: weight)
+                                }
+                            )
+                        },
+                        onDelete: { confirmDeleteSetEntry(index: index) } )
+                            .confirmationDialog("Are you sure?", isPresented: $showDeleteConfirmation) {
+                                Button("Delete set", role: .destructive) {
+                                    guard let index = setEntryIndexToDelete else { return }
+                                    let setEntryToDelete = setEntries[index]
+                                    setEntries.remove(at: index)
+                                    setEntryViewModel.deleteSetEntry(id: setEntryToDelete.id, onSuccess: { onDelete() })
+                                }
+                            }
+                            .frame(height: 28) // TODO: figure out how not to choose hardcoded values
                 }
 
             }
