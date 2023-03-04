@@ -63,6 +63,7 @@ struct SelectExerciseRoutine: View {
                                     exerciseRoutineId: exerciseRoutine.id,
                                     onSuccess: onSelectExerciseRoutine
                                 )
+                                showSheet = false
                             }) {
                                 
                                 HStack {

@@ -12,6 +12,8 @@ struct WorkoutSessionListView: View {
 
     @State private var showDeleteAlert = false
     @State private var showSheet = false
+
+    let limit = 21
     
     var body: some View {
 
@@ -25,7 +27,7 @@ struct WorkoutSessionListView: View {
 
                         ForEach(workoutSessionViewModel.workoutSessionList, id: \.self.id) { workoutSession in
 
-                            NavigationLink(destination: EditWorkoutSession(workoutSessionId: workoutSession.id)) {
+                            NavigationLink(destination: EditWorkoutSession(workoutSessionId: workoutSession.id, end: workoutSession.end)) {
                                 
                                 WorkoutSessionListItem(active: true, workoutSession: workoutSession)
                                 
@@ -36,7 +38,7 @@ struct WorkoutSessionListView: View {
                             showDeleteAlert.toggle()
                             indexSet.forEach({ i in
                                 workoutSessionViewModel.deleteWorkoutSession(id: workoutSessionViewModel.workoutSessionList[i].id, onSuccess: {
-                                    workoutSessionViewModel.getWorkoutSessions(withNetwork: true)
+                                    workoutSessionViewModel.getWorkoutSessions(limit: limit, after: "", withNetwork: true) // TODO: need to get correct "after" here
                                 })
                             })
                         })
@@ -60,10 +62,10 @@ struct WorkoutSessionListView: View {
                 }
                 .listStyle(PlainListStyle())
                 .onAppear(perform: {
-                    workoutSessionViewModel.getWorkoutSessions()
+                    workoutSessionViewModel.getWorkoutSessions(limit: limit, after: "")
                 })
                 .refreshable {
-                    workoutSessionViewModel.getWorkoutSessions(withNetwork: true)
+                    workoutSessionViewModel.getWorkoutSessions(limit: limit, after: "", withNetwork: true)
                 }
                 
             }
@@ -93,7 +95,7 @@ struct WorkoutSessionListView: View {
                 AddWorkoutSession(showSheet: $showSheet) { workoutRoutineId in 
                     workoutSessionViewModel.addWorkoutSession(workoutRoutineId: workoutRoutineId, start: Date(), onSuccess: {
                         showSheet = false
-                        workoutSessionViewModel.getWorkoutSessions(withNetwork: true)
+                        workoutSessionViewModel.getWorkoutSessions(limit: 21, after: "", withNetwork: true)
                     })
                 }.presentationDetents([.medium])
  

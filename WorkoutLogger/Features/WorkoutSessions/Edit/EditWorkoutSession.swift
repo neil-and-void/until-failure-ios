@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct EditWorkoutSession: View {
+    @Environment(\.presentationMode) var presentationMode
+
     var workoutSessionId: String
+    var end: Date?
 
     @State private var showSheet = false
     @StateObject private var workoutSessionViewModel = WorkoutSessionViewModel(service: WorkoutLoggerAPIService())
@@ -79,6 +82,11 @@ struct EditWorkoutSession: View {
         }.onAppear {
             workoutSessionViewModel.getWorkoutSession(workoutSessionId: workoutSessionId)
         }
+        .navigationBarItems(trailing: end == nil ?  Button("Finish", action: {
+            workoutSessionViewModel.finishWorkoutSession(id: workoutSessionId)
+            self.presentationMode.wrappedValue.dismiss()
+        }) : nil)
+
         
     }
 }

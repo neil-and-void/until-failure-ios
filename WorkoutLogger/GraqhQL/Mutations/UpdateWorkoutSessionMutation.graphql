@@ -1,0 +1,5 @@
+mutation UpdateWorkoutSession($workoutSessionId: ID!, $updateWorkoutSessionInput: UpdateWorkoutSessionInput!) {
+    updateWorkoutSession(workoutSessionId: $workoutSessionId, updateWorkoutSessionInput: $updateWorkoutSessionInput) {
+        ...workoutSessionFull
+    }
+}

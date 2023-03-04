@@ -17,6 +17,7 @@ protocol WorkoutLoggerAPIServiceProtocol {
     func deleteWorkoutRoutine(id: String, completion: @escaping (Result<Int, APIError>) -> Void)
     func addWorkoutSession(id: String, start: Date, completion: @escaping(Result<WorkoutSession, APIError>) -> Void)
     func getWorkoutSession(workoutSessionId: String, withNetwork: Bool, completion: @escaping (Result<WorkoutSession, APIError>) -> Void)
+    func updateWorkoutSession(workoutSessionId: String, start: Date?, end: Date?, completion: @escaping (Result<WorkoutSession, APIError>) -> Void)
     func deleteWorkoutSession(id: String, completion: @escaping (Result<Int, APIError>) -> Void)
     func updateExercise(exerciseId: String, notes: String, completion: @escaping (Result<Exercise, APIError>) -> Void)
     func getExerciseRoutines(workoutRoutineId: String, withNetwork: Bool, completion: @escaping (Result<[ExerciseRoutine], APIError>) -> Void)
@@ -479,6 +480,31 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
                 if let updateSetEntry = response.data?.updateSet.fragments.setEntryFull {
                     let parsedSetEntry = Parser.SetEntry(updateSetEntry)
                     completion(Result.success(parsedSetEntry))
+                    return
+                }
+
+                completion(Result.failure(.unknown))
+
+            case .failure:
+                completion(Result.failure(.networkError))
+            }
+        }
+    }
+
+    func updateWorkoutSession(workoutSessionId: String, start: Date?, end: Date?, completion: @escaping (Result<WorkoutSession, APIError>) -> Void) {
+        let updateWorkoutSessionInput = WorkoutLoggerAPI.UpdateWorkoutSessionInput(start: start ?? nil, end: end ?? nil)
+        self.client.perform(mutation: WorkoutLoggerAPI.UpdateWorkoutSessionMutation(workoutSessionId: workoutSessionId, updateWorkoutSessionInput: updateWorkoutSessionInput)) { result in
+            switch result {
+            case .success(let response):
+
+                if let errors = response.errors {
+                    completion(Result.failure(.GraphQLError(gqlError: errors[0].message)))
+                    return
+                }
+
+                if let updatedWorkoutSession = response.data?.updateWorkoutSession.fragments.workoutSessionFull {
+                    let parsedWorkoutSession = Parser.WorkoutSession(updatedWorkoutSession)
+                    completion(Result.success(parsedWorkoutSession))
                     return
                 }
 

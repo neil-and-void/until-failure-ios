@@ -21,8 +21,8 @@ class WorkoutSessionViewModel: ObservableObject {
         self.localMutator = LocalCacheMutator(store: WorkoutLoggerAPIClient.client.store)
     }
     
-    func getWorkoutSessions(withNetwork: Bool = false) {
-        self.service.getWorkoutSessions(limit: 8, after: "", withNetwork: withNetwork) { result in
+    func getWorkoutSessions(limit: Int, after: String, withNetwork: Bool = false) {
+        self.service.getWorkoutSessions(limit: limit, after: after, withNetwork: withNetwork) { result in
             switch result {
             case .success(let workoutSessions):
                 self.error = nil
@@ -78,6 +78,21 @@ class WorkoutSessionViewModel: ObservableObject {
             switch result {
             case .success:
                 onSuccess()
+                self.error = nil
+            case .failure(let err):
+                self.error = err.localizedDescription
+            }
+        }
+    }
+
+    func finishWorkoutSession(id: String) {
+        self.service.updateWorkoutSession(
+            workoutSessionId: id,
+            start: nil,
+            end: Date()
+        ) { result in
+            switch result {
+            case .success:
                 self.error = nil
             case .failure(let err):
                 self.error = err.localizedDescription
