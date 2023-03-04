@@ -49,6 +49,7 @@ struct EditSetEntryListItem: View {
                 .onReceive(repFieldObserver.$debouncedInt.dropFirst()) { val in
                     onChange(val, nil)
                 }
+                .textFieldStyle(SetEntryTextFieldStyle())
             TextField("weight", value: $weightFieldObserver.double, formatter: decimalNumberFormatter)
                 .padding(4)
                 .multilineTextAlignment(.center)
@@ -59,6 +60,7 @@ struct EditSetEntryListItem: View {
                 .onReceive(weightFieldObserver.$debouncedDouble.dropFirst()) { val in
                     onChange(nil, val)
                 }
+                .textFieldStyle(SetEntryTextFieldStyle())
         }
     }
 }
