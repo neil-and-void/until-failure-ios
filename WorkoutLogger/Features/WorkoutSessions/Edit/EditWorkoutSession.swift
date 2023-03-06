@@ -14,6 +14,7 @@ struct EditWorkoutSession: View {
     var end: Date?
 
     @State private var showSheet = false
+    @State private var showFinishWorkoutAlert = false
     @StateObject private var workoutSessionViewModel = WorkoutSessionViewModel(service: WorkoutLoggerAPIService())
     
     var body: some View {
@@ -42,33 +43,45 @@ struct EditWorkoutSession: View {
                             )
                             .listRowInsets(EdgeInsets())
                             .padding(.bottom, 8)
+                            .listRowSeparator(.hidden)
                             .onTapGesture {
                                 self.hideKeyboard()
                             }
- 
+
                         }
-                        
-                        Button("+ Add Exercise") {
-                            
-                            showSheet = true
-                            
-                        }
-                        .buttonStyle(TextButton())
-                        .sheet(isPresented: $showSheet) {
-                            
-                            SelectExerciseRoutine(
-                                workoutSessionId: workoutSession.id,
-                                workoutRoutineId: workoutSession.workoutRoutine.id,
-                                onSelectExerciseRoutine: {
-                                    workoutSessionViewModel.getWorkoutSession(workoutSessionId: workoutSessionId, withNetwork: true)
-                                },
-                                showSheet: $showSheet
-                            ).presentationDetents([.medium])
-                            
-                        }
+                        HStack {
+                            Spacer()
+                            Button("Add Exercise") {
+                                showSheet = true
+                            }
+                            .buttonStyle(RoundedButton())
+                            .sheet(isPresented: $showSheet) {
+                                SelectExerciseRoutine(
+                                    workoutSessionId: workoutSession.id,
+                                    workoutRoutineId: workoutSession.workoutRoutine.id,
+                                    onSelectExerciseRoutine: {
+                                        workoutSessionViewModel.getWorkoutSession(workoutSessionId: workoutSessionId, withNetwork: true)
+                                    },
+                                    showSheet: $showSheet
+                                ).presentationDetents([.medium])
+                            }
+                            Spacer()
+                        }.listRowSeparator(.hidden)
+
                         
                     }.listStyle(.plain).refreshable {
                         workoutSessionViewModel.getWorkoutSession(workoutSessionId: workoutSessionId, withNetwork: true)
+                    }
+                    .alert(isPresented: $showFinishWorkoutAlert) {
+                        Alert(
+                            title: Text("Are you sure you want to finish this workout?"),
+                            primaryButton: .default(Text("Confirm"), action: {
+                                workoutSessionViewModel.finishWorkoutSession(id: workoutSessionId)
+                                self.presentationMode.wrappedValue.dismiss()
+                                showFinishWorkoutAlert = false
+                            }),
+                            secondaryButton: .cancel()
+                        )
                     }
                     
                 } else {
@@ -83,8 +96,7 @@ struct EditWorkoutSession: View {
             workoutSessionViewModel.getWorkoutSession(workoutSessionId: workoutSessionId)
         }
         .navigationBarItems(trailing: end == nil ?  Button("Finish", action: {
-            workoutSessionViewModel.finishWorkoutSession(id: workoutSessionId)
-            self.presentationMode.wrappedValue.dismiss()
+            showFinishWorkoutAlert = true
         }) : nil)
 
         

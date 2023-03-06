@@ -15,7 +15,7 @@ struct AddSetEntry: View {
     let onSuccess: () -> Void
 
     var body: some View {
-        Button("+ Add Set", action: {
+        Button("Add Set", action: {
             let setEntry = SetEntry(weight: 0, reps: 0)
 
             // local
