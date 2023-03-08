@@ -27,7 +27,7 @@ struct EditExercise: View {
                     
                     Text("\(String(exercise.exerciseRoutine.sets)) sets, \(String(exercise.exerciseRoutine.reps)) reps")
                         .foregroundColor(.secondaryText)
-                    
+
                 }
                 
                 Spacer()
@@ -35,9 +35,9 @@ struct EditExercise: View {
                 Menu {
                     Button("delete", role: .destructive) {
                         exerciseViewModel.deleteExercise(exerciseId: exercise.id, onSuccess: onDelete)
-                    }.padding()
+                    }
                 } label: {
-                    Image(systemName: "ellipsis").font(.system(size: 18, weight: .bold))
+                    Image(systemName: "ellipsis.circle").font(.system(size: 18, weight: .bold))
                 }
                 
             }
