@@ -14,6 +14,8 @@
 		2809EF662926F10C00D0FF5B /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2809EF652926F10C00D0FF5B /* AuthService.swift */; };
 		280B6A3729297D8A004D0F16 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B6A3629297D8A004D0F16 /* KeychainService.swift */; };
 		280B6A3929297FAA004D0F16 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B6A3829297FAA004D0F16 /* Auth.swift */; };
+		281944D929B9A719009A5208 /* PrevExerciseFull.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 281944D829B9A719009A5208 /* PrevExerciseFull.graphql */; };
+		281944DB29B9A7EF009A5208 /* PrevExerciseFull.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281944DA29B9A7EF009A5208 /* PrevExerciseFull.graphql.swift */; };
 		281C66DA296A73A200906212 /* ExerciseDetails.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 281C66D9296A73A200906212 /* ExerciseDetails.graphql */; };
 		281C66DC296A73C900906212 /* SetEntryFull.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 281C66DB296A73C900906212 /* SetEntryFull.graphql */; };
 		281E0F6D2980ECCB00C81386 /* SetEntry.ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281E0F6C2980ECCB00C81386 /* SetEntry.ViewModel.swift */; };
@@ -188,6 +190,8 @@
 		2809EF652926F10C00D0FF5B /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		280B6A3629297D8A004D0F16 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		280B6A3829297FAA004D0F16 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
+		281944D829B9A719009A5208 /* PrevExerciseFull.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = PrevExerciseFull.graphql; sourceTree = "<group>"; };
+		281944DA29B9A7EF009A5208 /* PrevExerciseFull.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrevExerciseFull.graphql.swift; sourceTree = "<group>"; };
 		281C66D9296A73A200906212 /* ExerciseDetails.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = ExerciseDetails.graphql; sourceTree = "<group>"; };
 		281C66DB296A73C900906212 /* SetEntryFull.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = SetEntryFull.graphql; sourceTree = "<group>"; };
 		281E0F6C2980ECCB00C81386 /* SetEntry.ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetEntry.ViewModel.swift; sourceTree = "<group>"; };
@@ -455,6 +459,7 @@
 			children = (
 				281E0F7B298101BC00C81386 /* ExerciseFull.graphql.swift */,
 				281E0F7C298101BC00C81386 /* WorkoutSessionFull.graphql.swift */,
+				281944DA29B9A7EF009A5208 /* PrevExerciseFull.graphql.swift */,
 				281E0F7D298101BC00C81386 /* ExerciseRoutineFull.graphql.swift */,
 				281E0F7E298101BC00C81386 /* SetEntryFull.graphql.swift */,
 				281E0F7F298101BC00C81386 /* WorkoutRoutineFull.graphql.swift */,
@@ -662,6 +667,7 @@
 				281C66D9296A73A200906212 /* ExerciseDetails.graphql */,
 				281E0F772981002400C81386 /* ExerciseFull.graphql */,
 				281C66DB296A73C900906212 /* SetEntryFull.graphql */,
+				281944D829B9A719009A5208 /* PrevExerciseFull.graphql */,
 			);
 			path = Fragments;
 			sourceTree = "<group>";
@@ -1054,6 +1060,7 @@
 				289E91DE297CA95E009E67D3 /* MutableExerciseDetails.graphql in Resources */,
 				2887D0212969437400B673A1 /* ExerciseRoutineFull.graphql in Resources */,
 				28AB6E2E296FE2FB00EF7267 /* MutableWorkoutRoutineDetails.graphql in Resources */,
+				281944D929B9A719009A5208 /* PrevExerciseFull.graphql in Resources */,
 				288A24912976235300F8F6E3 /* MutableWorkoutSessionDetails.graphql in Resources */,
 				2887D0182969437400B673A1 /* LoginMutation.graphql in Resources */,
 				2887D01D2969437400B673A1 /* WorkoutRoutines.graphql in Resources */,
@@ -1145,6 +1152,7 @@
 				281E0FD5298101BD00C81386 /* WorkoutSessionsQuery.graphql.swift in Sources */,
 				281E0FC7298101BD00C81386 /* AddSetMutation.graphql.swift in Sources */,
 				283DAA302937295800AB2C18 /* WorkoutDetails.View.swift in Sources */,
+				281944DB29B9A7EF009A5208 /* PrevExerciseFull.graphql.swift in Sources */,
 				289CFDF3292836D400BE6773 /* Login.ViewModel.swift in Sources */,
 				2858C576292D6918008DEA17 /* Client.swift in Sources */,
 				289A54D029550F3900DDED7D /* SelectExerciseRoutine.swift in Sources */,

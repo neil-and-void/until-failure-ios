@@ -11,8 +11,16 @@ struct EditExercise: View {
     @StateObject private var exerciseViewModel = ExerciseViewModel(service: WorkoutLoggerAPIService())
     @StateObject var textObserver: TextFieldObserver
     @Binding var exercise: Exercise
+    var prevExercise: PrevExercise?
     let onEdit: () -> Void
     let onDelete: () -> Void
+
+    func getPrevSetEntries(prevExercise: PrevExercise?) -> [SetEntry] {
+        if let prevSetEntries = prevExercise?.sets {
+            return prevSetEntries
+        }
+        return []
+    }
     
     var body: some View {
         
@@ -46,6 +54,7 @@ struct EditExercise: View {
             
             EditSetEntryList(
                 setEntries: $exercise.sets,
+                prevSetEntries: getPrevSetEntries(prevExercise: prevExercise),
                 onDelete: {
                     onDelete()
                 }

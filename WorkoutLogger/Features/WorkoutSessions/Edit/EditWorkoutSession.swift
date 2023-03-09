@@ -16,6 +16,13 @@ struct EditWorkoutSession: View {
     @State private var showSheet = false
     @State private var showFinishWorkoutAlert = false
     @StateObject private var workoutSessionViewModel = WorkoutSessionViewModel(service: WorkoutLoggerAPIService())
+
+    func getPrevExercise(exerciseRoutineId: String) -> PrevExercise? {
+        if let prevExercise = workoutSessionViewModel.workoutSession?.prevExercises.first(where: { $0.exerciseRoutineId == exerciseRoutineId}) {
+            return prevExercise
+        }
+        return nil
+    }
     
     var body: some View {
         
@@ -36,6 +43,7 @@ struct EditWorkoutSession: View {
                             EditExercise(
                                 textObserver: TextFieldObserver(text: exercise.wrappedValue.notes),
                                 exercise: exercise,
+                                prevExercise: getPrevExercise(exerciseRoutineId: exercise.exerciseRoutine.id),
                                 onEdit: {},
                                 onDelete: {
                                     workoutSessionViewModel.getWorkoutSession(workoutSessionId: workoutSessionId, withNetwork: true)

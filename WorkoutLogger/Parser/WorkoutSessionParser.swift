@@ -67,9 +67,8 @@ class Parser: WorkoutLoggerAPIParserProtocol {
         }
         let sortedExercises = exercises.sorted(by: { $0.id < $1.id })
  
-        let prevExercises = workoutSession.prevExercises.compactMap { Exercise($0.fragments.exerciseDetails) }
+        let prevExercises = workoutSession.prevExercises.compactMap { PrevExercise($0.fragments.prevExerciseFull) }
     
-        
         return WorkoutLogger.WorkoutSession(
             id: workoutSession.id,
             start: workoutSession.start,
@@ -84,6 +83,17 @@ class Parser: WorkoutLoggerAPIParserProtocol {
         let setEntries = exercise.sets.compactMap { SetEntry($0.fragments.setEntryFull) }
         let sortedSetEntries = setEntries.sorted(by: { $0.id < $1.id })
         return WorkoutLogger.Exercise(id: exercise.id, sets: sortedSetEntries, notes: exercise.notes)
+    }
+
+    static func PrevExercise(_ prevExercise: WorkoutLoggerAPI.PrevExerciseFull) -> PrevExercise {
+        let setEntries = prevExercise.sets.compactMap { SetEntry($0.fragments.setEntryFull) }
+        let sortedSetEntries = setEntries.sorted(by: { $0.id < $1.id })
+        return WorkoutLogger.PrevExercise(
+            id: prevExercise.id,
+            exerciseRoutineId: prevExercise.exerciseRoutine.id,
+            sets: sortedSetEntries,
+            notes: prevExercise.notes
+        )
     }
     
     static func SetEntry(_ setEntry: WorkoutLoggerAPI.SetEntryFull) -> SetEntry {

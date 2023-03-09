@@ -10,6 +10,7 @@ import SwiftUI
 struct EditSetEntryList: View {
     @StateObject private var setEntryViewModel = SetEntryViewModel(service: WorkoutLoggerAPIService())
     @Binding var setEntries: [SetEntry]
+    var prevSetEntries: [SetEntry]
     var onDelete: () -> Void
 
     @State private var showDeleteConfirmation = false
@@ -18,6 +19,13 @@ struct EditSetEntryList: View {
     func confirmDeleteSetEntry(index: Int) {
         showDeleteConfirmation = true
         setEntryIndexToDelete = index
+    }
+
+    func getCorrespondingSetEntry(_ prevSetEntries: [SetEntry], _ index: Int) -> SetEntry? {
+        if index < prevSetEntries.count {
+            return prevSetEntries[index]
+        }
+        return nil
     }
 
     var body: some View {
@@ -52,10 +60,10 @@ struct EditSetEntryList: View {
                         content: {
                             EditSetEntryListItem(
                                 setNumber: index + 1,
+                                prevSetEntry: getCorrespondingSetEntry(prevSetEntries, index),
                                 repFieldObserver: IntFieldObserver(text: setEntry.reps.wrappedValue),
                                 weightFieldObserver: DoubleFieldObserver(text: setEntry.weight.wrappedValue),
                                 onChange: { reps, weight in
-//                                    print("set id or something: ", setEntry)
                                     setEntryViewModel.updateSetEntry(id: setEntry.id, reps: reps, weight: weight)
                                 }
                             )
@@ -80,6 +88,6 @@ struct EditSetEntryList: View {
 
 struct EditSetEntryList_Previews: PreviewProvider {
     static var previews: some View {
-        EditSetEntryList(setEntries: .constant([SetEntry(id: "1", weight: 225.0, reps: 5)]), onDelete: {})
+        EditSetEntryList(setEntries: .constant([SetEntry(id: "1", weight: 225.0, reps: 5)]), prevSetEntries: [], onDelete: {})
     }
 }

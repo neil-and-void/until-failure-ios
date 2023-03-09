@@ -41,12 +41,19 @@ struct WorkoutSession: Identifiable {
     var end: Date?
     var workoutRoutine: WorkoutRoutine
     var exercises: [Exercise]
-    var prevExercises: [Exercise]
+    var prevExercises: [PrevExercise]
 }
 
 struct Exercise: Identifiable {
     var id: String
     var exerciseRoutine: ExerciseRoutine = ExerciseRoutine(id: "", active: true, name: "", sets: 0, reps: 0)
+    var sets: [SetEntry]
+    var notes: String
+}
+
+struct PrevExercise: Identifiable{
+    var id: String
+    var exerciseRoutineId: String
     var sets: [SetEntry]
     var notes: String
 }

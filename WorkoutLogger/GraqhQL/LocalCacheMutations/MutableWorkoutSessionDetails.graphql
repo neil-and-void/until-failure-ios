@@ -13,9 +13,6 @@ fragment MutableWorkoutSessionDetails on WorkoutSession @apollo_client_ios_local
         }
     }
     prevExercises {
-        ...exerciseDetails
-        exerciseRoutine {
-            id
-        }
+        ...prevExerciseFull
     }
 }

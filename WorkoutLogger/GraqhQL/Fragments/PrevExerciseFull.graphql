@@ -1,0 +1,6 @@
+fragment prevExerciseFull on Exercise {
+    ...exerciseDetails
+    exerciseRoutine {
+        id
+    }
+}

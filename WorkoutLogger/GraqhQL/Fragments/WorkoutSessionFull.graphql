@@ -7,15 +7,9 @@ fragment workoutSessionFull on WorkoutSession {
         name
     }
     exercises {
-        ...exerciseDetails
-        exerciseRoutine {
-            ...exerciseRoutineFull
-        }
+        ...exerciseFull
     }
     prevExercises {
-        ...exerciseDetails
-        exerciseRoutine {
-            id
-        }
+        ...prevExerciseFull
     }
 }

@@ -11,6 +11,8 @@ import SwiftUI
 struct EditSetEntryListItem: View {
     var setNumber: Int
 
+    var prevSetEntry: SetEntry?
+
     @StateObject
     var repFieldObserver: IntFieldObserver
 
@@ -26,12 +28,20 @@ struct EditSetEntryListItem: View {
         return numberFormatter
     }()
 
+    func formattedPrevSetEntryString(_ prevSetEntry: SetEntry?) -> String {
+        if let prevSetEntry = prevSetEntry {
+            return "\(prevSetEntry.weight) lbs x \(prevSetEntry.reps) reps"
+        }
+        return ""
+    }
+
     var body: some View {
         HStack {
             Text(String(setNumber))
                 .fontWeight(.semibold)
                 .frame(width: 32)
-            Text(String("225 lbs x 4 reps"))
+
+            Text(formattedPrevSetEntryString(prevSetEntry))
                 .padding(4)
                 .lineLimit(1)
                 .multilineTextAlignment(.center)
@@ -39,6 +49,7 @@ struct EditSetEntryListItem: View {
                 .background(.thinMaterial)
                 .foregroundColor(.secondaryText)
                 .cornerRadius(8)
+
             TextField("reps", value: $repFieldObserver.int, formatter: NumberFormatter())
                 .padding(4)
                 .multilineTextAlignment(.center)

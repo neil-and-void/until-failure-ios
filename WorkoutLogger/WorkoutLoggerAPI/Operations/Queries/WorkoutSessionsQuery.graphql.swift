@@ -26,7 +26,7 @@ public extension WorkoutLoggerAPI {
           }
         }
         """,
-        fragments: [WorkoutSessionFull.self, ExerciseDetails.self, SetEntryFull.self, ExerciseRoutineFull.self]
+        fragments: [WorkoutSessionFull.self, ExerciseDetails.self, SetEntryFull.self, ExerciseRoutineFull.self, PrevExerciseFull.self]
       ))
 
     public var limit: Int
@@ -193,13 +193,14 @@ public extension WorkoutLoggerAPI {
               public var id: ID { __data["id"] }
               public var notes: String { __data["notes"] }
               public var sets: [Set] { __data["sets"] }
-              public var exerciseRoutine: WorkoutSessionFull.PrevExercise.ExerciseRoutine { __data["exerciseRoutine"] }
+              public var exerciseRoutine: PrevExerciseFull.ExerciseRoutine { __data["exerciseRoutine"] }
 
               public struct Fragments: FragmentContainer {
                 public let __data: DataDict
                 public init(data: DataDict) { __data = data }
 
                 public var exerciseDetails: ExerciseDetails { _toFragment() }
+                public var prevExerciseFull: PrevExerciseFull { _toFragment() }
               }
 
               /// WorkoutSessions.Edge.Node.PrevExercise.Set

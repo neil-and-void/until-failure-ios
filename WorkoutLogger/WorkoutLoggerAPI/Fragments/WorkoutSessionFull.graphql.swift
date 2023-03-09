@@ -26,11 +26,7 @@ public extension WorkoutLoggerAPI {
         }
         prevExercises {
           __typename
-          ...exerciseDetails
-          exerciseRoutine {
-            __typename
-            id
-          }
+          ...prevExerciseFull
         }
       }
       """ }
@@ -153,36 +149,22 @@ public extension WorkoutLoggerAPI {
 
       public static var __parentType: ParentType { WorkoutLoggerAPI.Objects.Exercise }
       public static var __selections: [Selection] { [
-        .field("exerciseRoutine", ExerciseRoutine.self),
-        .fragment(ExerciseDetails.self),
+        .fragment(PrevExerciseFull.self),
       ] }
 
-      public var exerciseRoutine: ExerciseRoutine { __data["exerciseRoutine"] }
       public var id: ID { __data["id"] }
       public var notes: String { __data["notes"] }
       public var sets: [Set] { __data["sets"] }
+      public var exerciseRoutine: PrevExerciseFull.ExerciseRoutine { __data["exerciseRoutine"] }
 
       public struct Fragments: FragmentContainer {
         public let __data: DataDict
         public init(data: DataDict) { __data = data }
 
+        public var prevExerciseFull: PrevExerciseFull { _toFragment() }
         public var exerciseDetails: ExerciseDetails { _toFragment() }
       }
 
-      /// PrevExercise.ExerciseRoutine
-      ///
-      /// Parent Type: `ExerciseRoutine`
-      public struct ExerciseRoutine: WorkoutLoggerAPI.SelectionSet {
-        public let __data: DataDict
-        public init(data: DataDict) { __data = data }
-
-        public static var __parentType: ParentType { WorkoutLoggerAPI.Objects.ExerciseRoutine }
-        public static var __selections: [Selection] { [
-          .field("id", ID.self),
-        ] }
-
-        public var id: ID { __data["id"] }
-      }
       /// PrevExercise.Set
       ///
       /// Parent Type: `SetEntry`
