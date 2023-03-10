@@ -29,17 +29,12 @@ struct EditExercise: View {
             HStack {
                 
                 VStack(alignment: .leading) {
-                    
                     Text(exercise.exerciseRoutine.name)
                         .font(.system(size: 24, weight: .semibold))
-                    
                     Text("\(String(exercise.exerciseRoutine.sets)) sets, \(String(exercise.exerciseRoutine.reps)) reps")
                         .foregroundColor(.secondaryText)
-
                 }
-                
                 Spacer()
-
                 Menu {
                     Button("delete", role: .destructive) {
                         exerciseViewModel.deleteExercise(exerciseId: exercise.id, onSuccess: onDelete)
@@ -75,10 +70,13 @@ struct EditExercise: View {
             Divider()
             
             VStack(alignment: .leading) {
-                
-                Text("Notes")
-                    .font(.system(size: 20, weight: .semibold))
-                
+                HStack {
+                    Text("Notes")
+                        .font(.system(size: 20, weight: .semibold))
+                    Spacer()
+                    Text("Current")
+                    Text("Previous")
+                }
                 TextField("notes...", text: $textObserver.text, axis: .vertical)
                     .padding(8)
                     .lineLimit(3, reservesSpace: true)
@@ -88,9 +86,7 @@ struct EditExercise: View {
                         exerciseViewModel.updateExercise(id: exercise.id, notes: val)
                         exercise.notes = val
                     }
-
             }
-            
         }
         .buttonStyle(PlainButtonStyle())
         .padding(16)

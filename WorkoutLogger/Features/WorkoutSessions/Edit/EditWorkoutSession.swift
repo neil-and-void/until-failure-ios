@@ -35,7 +35,7 @@ struct EditWorkoutSession: View {
             } else {
                 
                 if let workoutSession = Binding<WorkoutSession>($workoutSessionViewModel.workoutSession) {
-                    
+
                     List {
                         
                         ForEach(workoutSession.exercises) { exercise in
@@ -106,7 +106,6 @@ struct EditWorkoutSession: View {
         .navigationBarItems(trailing: end == nil ?  Button("Finish", action: {
             showFinishWorkoutAlert = true
         }) : nil)
-
         
     }
 }

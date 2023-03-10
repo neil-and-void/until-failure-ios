@@ -47,10 +47,10 @@ struct EditSetEntryList: View {
                     Text("Prev")
                         .fontWeight(.semibold)
                         .frame(maxWidth: .infinity)
-                    Text("Reps")
+                    Text("Weight")
                         .fontWeight(.semibold)
                         .frame(width: 64)
-                    Text("Weight")
+                    Text("Reps")
                         .fontWeight(.semibold)
                         .frame(width: 64)
                 }

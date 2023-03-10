@@ -49,18 +49,6 @@ struct EditSetEntryListItem: View {
                 .background(.thinMaterial)
                 .foregroundColor(.secondaryText)
                 .cornerRadius(8)
-
-            TextField("reps", value: $repFieldObserver.int, formatter: NumberFormatter())
-                .padding(4)
-                .multilineTextAlignment(.center)
-                .frame(width: 64)
-                .background(.thinMaterial)
-                .cornerRadius(8)
-                .keyboardType(.numberPad)
-                .onReceive(repFieldObserver.$debouncedInt.dropFirst()) { val in
-                    onChange(val, nil)
-                }
-                .textFieldStyle(SetEntryTextFieldStyle())
             TextField("weight", value: $weightFieldObserver.double, formatter: decimalNumberFormatter)
                 .padding(4)
                 .multilineTextAlignment(.center)
@@ -70,6 +58,17 @@ struct EditSetEntryListItem: View {
                 .keyboardType(.decimalPad)
                 .onReceive(weightFieldObserver.$debouncedDouble.dropFirst()) { val in
                     onChange(nil, val)
+                }
+                .textFieldStyle(SetEntryTextFieldStyle())
+            TextField("reps", value: $repFieldObserver.int, formatter: NumberFormatter())
+                .padding(4)
+                .multilineTextAlignment(.center)
+                .frame(width: 64)
+                .background(.thinMaterial)
+                .cornerRadius(8)
+                .keyboardType(.numberPad)
+                .onReceive(repFieldObserver.$debouncedInt.dropFirst()) { val in
+                    onChange(val, nil)
                 }
                 .textFieldStyle(SetEntryTextFieldStyle())
         }
