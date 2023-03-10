@@ -56,9 +56,7 @@ struct WorkoutDetailsView: View {
                         workoutRoutine: workoutRoutine
                     )
                 }
-                
-            }
-                            
+            }            
         )
         .onAppear(perform: {
             workoutViewModel.getWorkoutRoutine(workoutRoutineId: workoutRoutineId, withNetwork: true)

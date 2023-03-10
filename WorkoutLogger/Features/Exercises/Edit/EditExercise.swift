@@ -57,13 +57,8 @@ struct EditExercise: View {
             
             AddSetEntry(
                 exerciseId: exercise.id,
-                onAdd: { setEntry in
-                    // append to exercise sets
+                onAdd: {  setEntry in
                     exercise.sets.append(setEntry)
-                },
-                onSuccess: {
-                    // refreshes the cache entry for this exercise
-                    exerciseViewModel.getExercise(id: exercise.id, withNetwork: true)
                 }
             )
 

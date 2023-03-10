@@ -19,16 +19,17 @@ class SetEntryViewModel: ObservableObject {
         self.localMutator = LocalCacheMutator(store: WorkoutLoggerAPIClient.client.store)
     }
 
-    func addSetEntry(exerciseId: String, setEntry: SetEntry, onSuccess: @escaping () -> Void) {
+    func addSetEntry(exerciseId: String, setEntry: SetEntry, onSuccess: @escaping (SetEntry) -> Void) {
+        self.isLoading = true
         self.service.addSetEntry(exerciseId: exerciseId, setEntry: setEntry) { result in
             switch result {
-            case .success:
+            case .success(let newSetEntry):
                 self.error = nil
-                onSuccess()
+                onSuccess(newSetEntry)
             case .failure(let err):
-                print("add set error: ", err.localizedDescription)
                 self.error = err.localizedDescription
             }
+            self.isLoading = false
         }
     }
 

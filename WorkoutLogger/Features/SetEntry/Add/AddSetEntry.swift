@@ -12,27 +12,27 @@ struct AddSetEntry: View {
 
     let exerciseId: String
     let onAdd: (SetEntry) -> Void
-    let onSuccess: () -> Void
 
     var body: some View {
-        Button("Add Set", action: {
-            let setEntry = SetEntry(weight: 0, reps: 0)
-
-            // local
-            onAdd(setEntry)
-
-            // server
+        Button(action: {
             setEntryViewModel.addSetEntry(
                 exerciseId: exerciseId,
-                setEntry: setEntry,
-                onSuccess: onSuccess
+                setEntry: SetEntry(weight: 0, reps: 0),
+                onSuccess: onAdd
             )
+        }, label: {
+            HStack{
+                Text("Add set").padding(.trailing, 8)
+                if setEntryViewModel.isLoading {
+                    ProgressView()
+                }
+            }
         }).buttonStyle(TextButton())
     }
 }
 
 struct AddSetEntry_Previews: PreviewProvider {
     static var previews: some View {
-        AddSetEntry(exerciseId: "1", onAdd: {_ in}, onSuccess: {})
+        AddSetEntry(exerciseId: "1", onAdd: {_ in})
     }
 }

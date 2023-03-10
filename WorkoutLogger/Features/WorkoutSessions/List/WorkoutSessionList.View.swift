@@ -90,14 +90,12 @@ struct WorkoutSessionListView: View {
                 }
                 
             }
-            .sheet(isPresented: $showSheet) {
-                
-                AddWorkoutSession(showSheet: $showSheet) { workoutRoutineId in 
-                    workoutSessionViewModel.addWorkoutSession(workoutRoutineId: workoutRoutineId, start: Date(), onSuccess: {
-                        showSheet = false
-                        workoutSessionViewModel.getWorkoutSessions(limit: 21, after: "", withNetwork: true)
-                    })
-                }.presentationDetents([.medium])
+            .sheet(isPresented: $showSheet, onDismiss: {
+                workoutSessionViewModel.getWorkoutSessions(limit: 21, after: "", withNetwork: true) }) {
+                AddWorkoutSession(showSheet: $showSheet, onSelection: { workoutRoutineId in
+                    workoutSessionViewModel.addWorkoutSession(workoutRoutineId: workoutRoutineId, start: Date())
+                    showSheet = false
+                }).presentationDetents([.medium])
  
             }
 

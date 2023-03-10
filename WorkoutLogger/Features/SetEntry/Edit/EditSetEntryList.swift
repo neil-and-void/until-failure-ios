@@ -39,7 +39,6 @@ struct EditSetEntryList: View {
         } else {
 
             VStack {
-
                 HStack {
                     Text("Set")
                         .fontWeight(.semibold)
@@ -54,7 +53,6 @@ struct EditSetEntryList: View {
                         .fontWeight(.semibold)
                         .frame(width: 64)
                 }
-
                 ForEach(Array(zip(setEntries.indices, $setEntries)), id: \.0) { (index, setEntry) in
                     SwipeItem(
                         content: {
@@ -79,7 +77,6 @@ struct EditSetEntryList: View {
                             }
                             .frame(height: 28) // TODO: figure out how not to choose hardcoded values
                 }
-
             }
         }
 
