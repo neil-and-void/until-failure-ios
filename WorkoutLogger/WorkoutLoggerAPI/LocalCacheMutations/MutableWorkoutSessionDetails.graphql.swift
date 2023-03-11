@@ -26,11 +26,7 @@ public extension WorkoutLoggerAPI {
         }
         prevExercises {
           __typename
-          ...exerciseDetails
-          exerciseRoutine {
-            __typename
-            id
-          }
+          ...prevExerciseFull
         }
       }
       """ }
@@ -228,14 +224,9 @@ public extension WorkoutLoggerAPI {
 
       public static var __parentType: ParentType { WorkoutLoggerAPI.Objects.Exercise }
       public static var __selections: [Selection] { [
-        .field("exerciseRoutine", ExerciseRoutine.self),
-        .fragment(ExerciseDetails.self),
+        .fragment(PrevExerciseFull.self),
       ] }
 
-      public var exerciseRoutine: ExerciseRoutine {
-        get { __data["exerciseRoutine"] }
-        set { __data["exerciseRoutine"] = newValue }
-      }
       public var id: ID {
         get { __data["id"] }
         set { __data["id"] = newValue }
@@ -248,11 +239,21 @@ public extension WorkoutLoggerAPI {
         get { __data["sets"] }
         set { __data["sets"] = newValue }
       }
+      public var exerciseRoutine: PrevExerciseFull.ExerciseRoutine {
+        get { __data["exerciseRoutine"] }
+        set { __data["exerciseRoutine"] = newValue }
+      }
 
       public struct Fragments: FragmentContainer {
         public var __data: DataDict
         public init(data: DataDict) { __data = data }
 
+        public var prevExerciseFull: PrevExerciseFull {
+          get { _toFragment() }
+          _modify { var f = prevExerciseFull; yield &f; __data = f.__data }
+          @available(*, unavailable, message: "mutate properties of the fragment instead.")
+          set { preconditionFailure() }
+        }
         public var exerciseDetails: ExerciseDetails {
           get { _toFragment() }
           _modify { var f = exerciseDetails; yield &f; __data = f.__data }
@@ -261,23 +262,6 @@ public extension WorkoutLoggerAPI {
         }
       }
 
-      /// PrevExercise.ExerciseRoutine
-      ///
-      /// Parent Type: `ExerciseRoutine`
-      public struct ExerciseRoutine: WorkoutLoggerAPI.MutableSelectionSet {
-        public var __data: DataDict
-        public init(data: DataDict) { __data = data }
-
-        public static var __parentType: ParentType { WorkoutLoggerAPI.Objects.ExerciseRoutine }
-        public static var __selections: [Selection] { [
-          .field("id", ID.self),
-        ] }
-
-        public var id: ID {
-          get { __data["id"] }
-          set { __data["id"] = newValue }
-        }
-      }
       /// PrevExercise.Set
       ///
       /// Parent Type: `SetEntry`

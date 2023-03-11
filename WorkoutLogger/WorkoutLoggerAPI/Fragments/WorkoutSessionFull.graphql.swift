@@ -18,11 +18,7 @@ public extension WorkoutLoggerAPI {
         }
         exercises {
           __typename
-          ...exerciseDetails
-          exerciseRoutine {
-            __typename
-            ...exerciseRoutineFull
-          }
+          ...exerciseFull
         }
         prevExercises {
           __typename
@@ -77,47 +73,22 @@ public extension WorkoutLoggerAPI {
 
       public static var __parentType: ParentType { WorkoutLoggerAPI.Objects.Exercise }
       public static var __selections: [Selection] { [
-        .field("exerciseRoutine", ExerciseRoutine.self),
-        .fragment(ExerciseDetails.self),
+        .fragment(ExerciseFull.self),
       ] }
 
-      public var exerciseRoutine: ExerciseRoutine { __data["exerciseRoutine"] }
       public var id: ID { __data["id"] }
       public var notes: String { __data["notes"] }
       public var sets: [Set] { __data["sets"] }
+      public var exerciseRoutine: ExerciseRoutine { __data["exerciseRoutine"] }
 
       public struct Fragments: FragmentContainer {
         public let __data: DataDict
         public init(data: DataDict) { __data = data }
 
+        public var exerciseFull: ExerciseFull { _toFragment() }
         public var exerciseDetails: ExerciseDetails { _toFragment() }
       }
 
-      /// Exercise.ExerciseRoutine
-      ///
-      /// Parent Type: `ExerciseRoutine`
-      public struct ExerciseRoutine: WorkoutLoggerAPI.SelectionSet {
-        public let __data: DataDict
-        public init(data: DataDict) { __data = data }
-
-        public static var __parentType: ParentType { WorkoutLoggerAPI.Objects.ExerciseRoutine }
-        public static var __selections: [Selection] { [
-          .fragment(ExerciseRoutineFull.self),
-        ] }
-
-        public var id: ID { __data["id"] }
-        public var active: Bool { __data["active"] }
-        public var name: String { __data["name"] }
-        public var sets: Int { __data["sets"] }
-        public var reps: Int { __data["reps"] }
-
-        public struct Fragments: FragmentContainer {
-          public let __data: DataDict
-          public init(data: DataDict) { __data = data }
-
-          public var exerciseRoutineFull: ExerciseRoutineFull { _toFragment() }
-        }
-      }
       /// Exercise.Set
       ///
       /// Parent Type: `SetEntry`
@@ -136,6 +107,29 @@ public extension WorkoutLoggerAPI {
           public init(data: DataDict) { __data = data }
 
           public var setEntryFull: SetEntryFull { _toFragment() }
+        }
+      }
+
+      /// Exercise.ExerciseRoutine
+      ///
+      /// Parent Type: `ExerciseRoutine`
+      public struct ExerciseRoutine: WorkoutLoggerAPI.SelectionSet {
+        public let __data: DataDict
+        public init(data: DataDict) { __data = data }
+
+        public static var __parentType: ParentType { WorkoutLoggerAPI.Objects.ExerciseRoutine }
+
+        public var id: ID { __data["id"] }
+        public var active: Bool { __data["active"] }
+        public var name: String { __data["name"] }
+        public var sets: Int { __data["sets"] }
+        public var reps: Int { __data["reps"] }
+
+        public struct Fragments: FragmentContainer {
+          public let __data: DataDict
+          public init(data: DataDict) { __data = data }
+
+          public var exerciseRoutineFull: ExerciseRoutineFull { _toFragment() }
         }
       }
     }

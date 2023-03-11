@@ -10,8 +10,8 @@ import SwiftUI
 struct EditSetEntryList: View {
     @StateObject private var setEntryViewModel = SetEntryViewModel(service: WorkoutLoggerAPIService())
     @Binding var setEntries: [SetEntry]
+    var exerciseId: String
     var prevSetEntries: [SetEntry]
-    var onDelete: () -> Void
 
     @State private var showDeleteConfirmation = false
     @State private var setEntryIndexToDelete: Int?
@@ -53,7 +53,7 @@ struct EditSetEntryList: View {
                         .fontWeight(.semibold)
                         .frame(width: 64)
                 }
-                ForEach(Array(zip(setEntries.indices, $setEntries)), id: \.0) { (index, setEntry) in
+                ForEach(Array(zip(setEntries.indices, $setEntries)), id: \.1.id) { (index, setEntry) in
                     SwipeItem(
                         content: {
                             EditSetEntryListItem(
@@ -72,7 +72,7 @@ struct EditSetEntryList: View {
                                     guard let index = setEntryIndexToDelete else { return }
                                     let setEntryToDelete = setEntries[index]
                                     setEntries.remove(at: index)
-                                    setEntryViewModel.deleteSetEntry(id: setEntryToDelete.id, onSuccess: { onDelete() })
+                                    setEntryViewModel.deleteSetEntry(id: setEntryToDelete.id, exerciseId: exerciseId)
                                 }
                             }
                             .frame(height: 28) // TODO: figure out how not to choose hardcoded values
@@ -85,6 +85,6 @@ struct EditSetEntryList: View {
 
 struct EditSetEntryList_Previews: PreviewProvider {
     static var previews: some View {
-        EditSetEntryList(setEntries: .constant([SetEntry(id: "1", weight: 225.0, reps: 5)]), prevSetEntries: [], onDelete: {})
+        EditSetEntryList(setEntries: .constant([SetEntry(id: "1", weight: 225.0, reps: 5)]), exerciseId: "", prevSetEntries: [])
     }
 }

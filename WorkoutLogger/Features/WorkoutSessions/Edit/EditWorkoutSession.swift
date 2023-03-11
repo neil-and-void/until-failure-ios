@@ -30,21 +30,16 @@ struct EditWorkoutSession: View {
             
             if workoutSessionViewModel.isLoading {
                 
-                Text("Loading")
+                ProgressView()
                 
             } else {
-                
                 if let workoutSession = Binding<WorkoutSession>($workoutSessionViewModel.workoutSession) {
-
                     List {
-                        
                         ForEach(workoutSession.exercises) { exercise in
-                            
                             EditExercise(
                                 textObserver: TextFieldObserver(text: exercise.wrappedValue.notes),
                                 exercise: exercise,
                                 prevExercise: getPrevExercise(exerciseRoutineId: exercise.exerciseRoutine.id),
-                                onEdit: {},
                                 onDelete: {
                                     workoutSessionViewModel.getWorkoutSession(workoutSessionId: workoutSessionId, withNetwork: true)
                                 }
@@ -55,13 +50,10 @@ struct EditWorkoutSession: View {
                             .onTapGesture {
                                 self.hideKeyboard()
                             }
-
                         }
                         HStack {
                             Spacer()
-                            Button("Add Exercise") {
-                                showSheet = true
-                            }
+                            Button("Add Exercise") { showSheet = true }
                             .buttonStyle(RoundedButton())
                             .sheet(isPresented: $showSheet) {
                                 SelectExerciseRoutine(
@@ -75,8 +67,6 @@ struct EditWorkoutSession: View {
                             }
                             Spacer()
                         }.listRowSeparator(.hidden)
-
-                        
                     }.listStyle(.plain).refreshable {
                         workoutSessionViewModel.getWorkoutSession(workoutSessionId: workoutSessionId, withNetwork: true)
                     }
@@ -99,7 +89,7 @@ struct EditWorkoutSession: View {
                 }
                 
             }
-            
+
         }.onAppear {
             workoutSessionViewModel.getWorkoutSession(workoutSessionId: workoutSessionId)
         }

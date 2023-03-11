@@ -116,4 +116,35 @@ class LocalCacheMutator {
             }
         })
     }
+
+    func addSetEntry(exerciseId: String, setEntry: SetEntry, completion: @escaping ((Result<Void, Error>) -> Void)) {
+        self.store.withinReadWriteTransaction({ transaction in
+            try transaction.updateObject(
+                ofType: WorkoutLoggerAPI.MutableExerciseDetails.self,
+                withKey: "Exercise:\(exerciseId)"
+            ) { (data: inout WorkoutLoggerAPI.MutableExerciseDetails) in
+                let json: [String: AnyHashable] = [
+                    "__typename": "SetEntry",
+                    "id": setEntry.id,
+                    "reps": setEntry.reps,
+                    "weight": setEntry.weight,
+                ]
+                data.sets.append(WorkoutLoggerAPI.MutableExerciseDetails.Set(data: DataDict(json, variables: nil)))
+            }
+        }, callbackQueue: .main, completion: completion)
+    }
+
+    func deleteSetEntry(id: String, exerciseId: String) {
+        self.store.withinReadWriteTransaction({ transaction in
+            try transaction.removeObject(for: "SetEntry:\(id)")
+
+            try transaction.updateObject(
+                ofType: WorkoutLoggerAPI.MutableExerciseDetails.self,
+                withKey: "Exercise:\(exerciseId)"
+            ) { (data: inout WorkoutLoggerAPI.MutableExerciseDetails) in
+                guard let idx = data.sets.firstIndex(where: { $0.id == id }) else { return }
+                data.sets.remove(at: idx)
+            }
+        }, callbackQueue: .main)
+    }
 }

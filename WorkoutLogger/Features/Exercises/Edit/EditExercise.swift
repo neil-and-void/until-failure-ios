@@ -12,7 +12,6 @@ struct EditExercise: View {
     @StateObject var textObserver: TextFieldObserver
     @Binding var exercise: Exercise
     var prevExercise: PrevExercise?
-    let onEdit: () -> Void
     let onDelete: () -> Void
 
     func getPrevSetEntries(prevExercise: PrevExercise?) -> [SetEntry] {
@@ -49,10 +48,8 @@ struct EditExercise: View {
             
             EditSetEntryList(
                 setEntries: $exercise.sets,
-                prevSetEntries: getPrevSetEntries(prevExercise: prevExercise),
-                onDelete: {
-                    onDelete()
-                }
+                exerciseId: exercise.id,
+                prevSetEntries: getPrevSetEntries(prevExercise: prevExercise)
             )
             
             AddSetEntry(
@@ -65,22 +62,31 @@ struct EditExercise: View {
             Divider()
             
             VStack(alignment: .leading) {
-                HStack {
-                    Text("Notes")
-                        .font(.system(size: 20, weight: .semibold))
-                    Spacer()
-                    Text("Current")
-                    Text("Previous")
-                }
-                TextField("notes...", text: $textObserver.text, axis: .vertical)
-                    .padding(8)
-                    .lineLimit(3, reservesSpace: true)
-                    .background(.thinMaterial)
-                    .cornerRadius(8)
-                    .onReceive(textObserver.$debouncedText.dropFirst()) { val in
-                        exerciseViewModel.updateExercise(id: exercise.id, notes: val)
-                        exercise.notes = val
-                    }
+//                HStack {
+//                    Text("Notes")
+//                        .font(.system(size: 20, weight: .semibold))
+//                    Spacer()
+//                    Text("Current")
+//                    Text("Previous")
+//                }
+                TabView {
+                    Text("Notes current").tabItem({
+                        Text("Current")
+                    })
+                    Text("Notes previous").tabItem({
+                        Text("prev")
+                    })
+
+                }.frame(height: 300)
+//                TextField("notes...", text: $textObserver.text, axis: .vertical)
+//                    .padding(8)
+//                    .lineLimit(3, reservesSpace: true)
+//                    .background(.thinMaterial)
+//                    .cornerRadius(8)
+//                    .onReceive(textObserver.$debouncedText.dropFirst()) { val in
+//                        exerciseViewModel.updateExercise(id: exercise.id, notes: val)
+//                        exercise.notes = val
+//                    }
             }
         }
         .buttonStyle(PlainButtonStyle())
@@ -109,8 +115,9 @@ struct EditExercise_Previews: PreviewProvider {
                         SetEntry(id: "4", weight: 225, reps: 4),
                     ],
                     notes: "Somwething")
-                ), onEdit: {},
+                ),
                 onDelete: {}
+
             )
             EditExercise(
                 textObserver: TextFieldObserver(text: ""),
@@ -119,7 +126,7 @@ struct EditExercise_Previews: PreviewProvider {
                     exerciseRoutine: ExerciseRoutine(id: "1", name: "Squat", sets: 4, reps: 5),
                     sets: [],
                     notes: "Somwething")
-                ), onEdit: {},
+                ),
                 onDelete: {}
             )
         }.preferredColorScheme(.dark)

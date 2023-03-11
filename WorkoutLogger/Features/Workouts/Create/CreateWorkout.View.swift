@@ -14,23 +14,15 @@ struct CreateWorkoutView: View {
     @State private var showSheet = false
     
     var body: some View {
-        
         Button(action: { showSheet.toggle() }) {
-            
             Image(systemName: "plus")
-            
         }
         .buttonStyle(TextButton())
         .sheet(isPresented: $showSheet) {
-            
             ZStack {
-                
                 HStack {
-                    
                     Spacer()
-                    
                     VStack(alignment: .leading) {
-                        
                         Button(action: { showSheet.toggle()}) {
                             Text("Cancel")
                         }

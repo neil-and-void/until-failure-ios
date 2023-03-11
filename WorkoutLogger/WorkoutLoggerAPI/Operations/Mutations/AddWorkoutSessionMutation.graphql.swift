@@ -16,7 +16,7 @@ public extension WorkoutLoggerAPI {
           }
         }
         """,
-        fragments: [WorkoutSessionFull.self, ExerciseDetails.self, SetEntryFull.self, ExerciseRoutineFull.self, PrevExerciseFull.self]
+        fragments: [WorkoutSessionFull.self, ExerciseFull.self, ExerciseDetails.self, SetEntryFull.self, ExerciseRoutineFull.self, PrevExerciseFull.self]
       ))
 
     public var workout: WorkoutSessionInput
@@ -83,6 +83,7 @@ public extension WorkoutLoggerAPI {
             public init(data: DataDict) { __data = data }
 
             public var exerciseDetails: ExerciseDetails { _toFragment() }
+            public var exerciseFull: ExerciseFull { _toFragment() }
           }
 
           /// AddWorkoutSession.Exercise.Set

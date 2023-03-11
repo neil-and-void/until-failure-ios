@@ -26,6 +26,7 @@ class SetEntryViewModel: ObservableObject {
             case .success(let newSetEntry):
                 self.error = nil
                 onSuccess(newSetEntry)
+                self.localMutator.addSetEntry(exerciseId: exerciseId, setEntry: newSetEntry, completion: {_ in })
             case .failure(let err):
                 self.error = err.localizedDescription
             }
@@ -55,12 +56,12 @@ class SetEntryViewModel: ObservableObject {
         }
     }
 
-    func deleteSetEntry(id: String, onSuccess: @escaping () -> Void) {
+    func deleteSetEntry(id: String, exerciseId: String) {
         self.service.deleteSetEntry(id: id) { result in
             switch result {
             case .success:
                 self.error = nil
-                onSuccess()
+                self.localMutator.deleteSetEntry(id: id, exerciseId: exerciseId)
             case .failure(let err):
                 self.error = err.localizedDescription
             }

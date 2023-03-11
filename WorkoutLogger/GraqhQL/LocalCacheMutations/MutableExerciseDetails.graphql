@@ -1,4 +1,3 @@
 fragment MutableExerciseDetails on Exercise @apollo_client_ios_localCacheMutation {
-    id
-    notes
+    ...exerciseDetails
 }
