@@ -1,5 +1,6 @@
 # workout-logger-ios
 https://user-images.githubusercontent.com/46465568/224530573-e9577de9-b45a-467a-bdd6-ce4f4d8c9020.mp4
+
 Mobile app for the recording the reps and weights for exercises done at the gym.
 Implements the use of MVVM and dependency injection to practice writing tests and decoupling code
 
