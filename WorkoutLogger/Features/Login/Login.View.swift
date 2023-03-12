@@ -29,13 +29,14 @@ struct LoginView: View {
                 .background(.thinMaterial)
                 .cornerRadius(10)
                 .textInputAutocapitalization(.never)
+                .keyboardType(.emailAddress)
             
             SecureField("Password", text: $loginViewModel.password)
                 .padding()
                 .background(.thinMaterial)
                 .cornerRadius(10)
                 .padding(.bottom, 15)
-            
+
             Button(action: { loginViewModel.submit(setAuth: authState.setAuth) } ) {
                 if loginViewModel.isLoading {
                     ProgressView()

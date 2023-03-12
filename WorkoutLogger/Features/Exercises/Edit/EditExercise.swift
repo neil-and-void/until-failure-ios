@@ -9,7 +9,6 @@ import SwiftUI
 
 struct EditExercise: View {
     @StateObject private var exerciseViewModel = ExerciseViewModel(service: WorkoutLoggerAPIService())
-    @StateObject var textObserver: TextFieldObserver
     @Binding var exercise: Exercise
     var prevExercise: PrevExercise?
     let onDelete: () -> Void
@@ -60,34 +59,15 @@ struct EditExercise: View {
             )
 
             Divider()
-            
-            VStack(alignment: .leading) {
-//                HStack {
-//                    Text("Notes")
-//                        .font(.system(size: 20, weight: .semibold))
-//                    Spacer()
-//                    Text("Current")
-//                    Text("Previous")
-//                }
-                TabView {
-                    Text("Notes current").tabItem({
-                        Text("Current")
-                    })
-                    Text("Notes previous").tabItem({
-                        Text("prev")
-                    })
 
-                }.frame(height: 300)
-//                TextField("notes...", text: $textObserver.text, axis: .vertical)
-//                    .padding(8)
-//                    .lineLimit(3, reservesSpace: true)
-//                    .background(.thinMaterial)
-//                    .cornerRadius(8)
-//                    .onReceive(textObserver.$debouncedText.dropFirst()) { val in
-//                        exerciseViewModel.updateExercise(id: exercise.id, notes: val)
-//                        exercise.notes = val
-//                    }
-            }
+            NotesView(
+                textObserver: TextFieldObserver(text: $exercise.wrappedValue.notes),
+                prevNotes: prevExercise?.notes,
+                onChange: { val in
+                    exerciseViewModel.updateExercise(id: exercise.id, notes: val)
+                    exercise.notes = val
+                }
+            )
         }
         .buttonStyle(PlainButtonStyle())
         .padding(16)
@@ -104,7 +84,6 @@ struct EditExercise_Previews: PreviewProvider {
         
         ScrollView {
             EditExercise(
-                textObserver: TextFieldObserver(text: ""),
                 exercise: .constant(Exercise(
                     id: "1",
                     exerciseRoutine: ExerciseRoutine(id: "1", name: "Squat", sets: 4, reps: 5),
@@ -120,7 +99,6 @@ struct EditExercise_Previews: PreviewProvider {
 
             )
             EditExercise(
-                textObserver: TextFieldObserver(text: ""),
                 exercise: .constant(Exercise(
                     id: "1",
                     exerciseRoutine: ExerciseRoutine(id: "1", name: "Squat", sets: 4, reps: 5),

@@ -32,7 +32,7 @@ struct EditSetEntryListItem: View {
         if let prevSetEntry = prevSetEntry {
             return "\(prevSetEntry.weight) lbs x \(prevSetEntry.reps) reps"
         }
-        return ""
+        return "-"
     }
 
     var body: some View {

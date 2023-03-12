@@ -37,7 +37,6 @@ struct EditWorkoutSession: View {
                     List {
                         ForEach(workoutSession.exercises) { exercise in
                             EditExercise(
-                                textObserver: TextFieldObserver(text: exercise.wrappedValue.notes),
                                 exercise: exercise,
                                 prevExercise: getPrevExercise(exerciseRoutineId: exercise.exerciseRoutine.id),
                                 onDelete: {

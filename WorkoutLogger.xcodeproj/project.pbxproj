@@ -156,6 +156,7 @@
 		28BF4E5C294EC66700AB8E49 /* EditExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BF4E5B294EC66700AB8E49 /* EditExercise.swift */; };
 		28C2EDFF292DA5C1000BE3EB /* InterceptorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2EDFE292DA5C1000BE3EB /* InterceptorProvider.swift */; };
 		28C2EE07292DF2E4000BE3EB /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2EE06292DF2E4000BE3EB /* Errors.swift */; };
+		28C35F0829BC49300009FA9B /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C35F0729BC49300009FA9B /* NotesView.swift */; };
 		28C9C9D129426B4C00ED77C3 /* EditWorkoutSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C9C9D029426B4C00ED77C3 /* EditWorkoutSession.swift */; };
 		28CF40D5298243A5006F5D5F /* SwipeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CF40D4298243A5006F5D5F /* SwipeItem.swift */; };
 		28DBDC74296D1DD8001B8815 /* LocalCacheMutator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DBDC73296D1DD7001B8815 /* LocalCacheMutator.swift */; };
@@ -334,6 +335,7 @@
 		28BF4E5B294EC66700AB8E49 /* EditExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExercise.swift; sourceTree = "<group>"; };
 		28C2EDFE292DA5C1000BE3EB /* InterceptorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterceptorProvider.swift; sourceTree = "<group>"; };
 		28C2EE06292DF2E4000BE3EB /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		28C35F0729BC49300009FA9B /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
 		28C9C9D029426B4C00ED77C3 /* EditWorkoutSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWorkoutSession.swift; sourceTree = "<group>"; };
 		28CF40D4298243A5006F5D5F /* SwipeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeItem.swift; sourceTree = "<group>"; };
 		28DBDC73296D1DD7001B8815 /* LocalCacheMutator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCacheMutator.swift; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 				28CF40D4298243A5006F5D5F /* SwipeItem.swift */,
 				28375DC429A80CE30024CC56 /* DismissKeyboard.swift */,
 				284E512729B2E0B7007977B9 /* TextFieldStyles.swift */,
+				28C35F0729BC49300009FA9B /* NotesView.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -1177,6 +1180,7 @@
 				281E0FD7298101BD00C81386 /* Time.swift in Sources */,
 				283DAA2A2936DCC000AB2C18 /* WorkoutListItem.View.swift in Sources */,
 				281E0FD4298101BD00C81386 /* WorkoutRoutineQuery.graphql.swift in Sources */,
+				28C35F0829BC49300009FA9B /* NotesView.swift in Sources */,
 				281E0FDE298101BD00C81386 /* AuthResult.graphql.swift in Sources */,
 				28DBDC74296D1DD8001B8815 /* LocalCacheMutator.swift in Sources */,
 				281E0FE9298101BD00C81386 /* UpdateExerciseRoutineInput.graphql.swift in Sources */,
