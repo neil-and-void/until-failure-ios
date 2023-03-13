@@ -29,13 +29,23 @@ struct EditExerciseRoutineList: View {
                     .font(.headline)
                     .frame(width: 76)
                 
+            }.listRowSeparator(.hidden)
+
+            if exerciseRoutines.count == 0 {
+                HStack {
+                    Spacer()
+                    Text("You don't have any exercises for this routine yet")
+                        .foregroundColor(.tertiaryText)
+                    Spacer()
+                }.listRowSeparator(.hidden)
+            } else {
+
+                ForEach($exerciseRoutines, id: \._id) { exerciseRoutine in
+
+                    EditWorkoutRoutineListItem(exerciseRoutine: exerciseRoutine).listRowSeparator(.hidden)
+
+                }.onDelete(perform: onDelete)
             }
-            
-            ForEach($exerciseRoutines, id: \._id) { exerciseRoutine in
-                
-                EditWorkoutRoutineListItem(exerciseRoutine: exerciseRoutine).listRowSeparator(.hidden)
-                
-            }.onDelete(perform: onDelete)
             
         }.listStyle(PlainListStyle())
         

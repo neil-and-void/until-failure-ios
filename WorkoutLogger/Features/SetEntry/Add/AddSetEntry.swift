@@ -22,9 +22,9 @@ struct AddSetEntry: View {
             )
         }, label: {
             HStack{
-                Text("Add set").padding(.trailing, 8)
+                Text("Add set")
                 if setEntryViewModel.isLoading {
-                    ProgressView()
+                    ProgressView().padding(.leading, 8)
                 }
             }
             .frame(maxWidth: .infinity)

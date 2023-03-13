@@ -22,6 +22,7 @@ class WorkoutSessionViewModel: ObservableObject {
     }
     
     func getWorkoutSessions(limit: Int, after: String, withNetwork: Bool = false) {
+        self.isLoading = true
         self.service.getWorkoutSessions(limit: limit, after: after, withNetwork: withNetwork) { result in
             switch result {
             case .success(let workoutSessions):
@@ -30,6 +31,7 @@ class WorkoutSessionViewModel: ObservableObject {
             case .failure(let err):
                 self.error = err.localizedDescription
             }
+            self.isLoading = false
         }
     }
 
@@ -49,12 +51,12 @@ class WorkoutSessionViewModel: ObservableObject {
         }
     }
     
-    func addWorkoutSession(workoutRoutineId: String, start: Date, onSuccess: @escaping (WorkoutSession) -> Void) {
+    func addWorkoutSession(workoutRoutineId: String, start: Date, onSuccess: @escaping () -> Void) {
         self.service.addWorkoutSession(id: workoutRoutineId, start: start) { result in
             switch result {
-            case .success(let workoutSession):
+            case .success:
                 self.error = nil
-                onSuccess(workoutSession)
+                onSuccess()
             case .failure(let err):
                 self.error = err.localizedDescription
             }
