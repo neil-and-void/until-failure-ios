@@ -11,6 +11,7 @@ struct EditWorkoutSession: View {
     @Environment(\.presentationMode) var presentationMode
 
     var workoutSessionId: String
+    let workoutName: String
     var end: Date?
 
     @State private var showSheet = false
@@ -92,6 +93,7 @@ struct EditWorkoutSession: View {
         }.onAppear {
             workoutSessionViewModel.getWorkoutSession(workoutSessionId: workoutSessionId)
         }
+        .navigationTitle(workoutName)
         .navigationBarItems(trailing: end == nil ?  Button("Finish", action: {
             showFinishWorkoutAlert = true
         }) : nil)
@@ -101,6 +103,6 @@ struct EditWorkoutSession: View {
 
 struct EditWorkoutSession_Previews: PreviewProvider {
     static var previews: some View {
-        EditWorkoutSession(workoutSessionId: "1")
+        EditWorkoutSession(workoutSessionId: "1", workoutName: "legs")
     }
 }

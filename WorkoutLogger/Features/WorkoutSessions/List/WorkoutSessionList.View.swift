@@ -27,7 +27,7 @@ struct WorkoutSessionListView: View {
 
                         ForEach(workoutSessionViewModel.workoutSessionList, id: \.self.id) { workoutSession in
 
-                            NavigationLink(destination: EditWorkoutSession(workoutSessionId: workoutSession.id, end: workoutSession.end)) {
+                            NavigationLink(destination: EditWorkoutSession(workoutSessionId: workoutSession.id, workoutName: workoutSession.workoutRoutine.name, end: workoutSession.end)) {
                                 
                                 WorkoutSessionListItem(active: true, workoutSession: workoutSession)
                                 
@@ -91,7 +91,8 @@ struct WorkoutSessionListView: View {
                 
             }
             .sheet(isPresented: $showSheet, onDismiss: {
-                workoutSessionViewModel.getWorkoutSessions(limit: 21, after: "", withNetwork: true) }) {
+                workoutSessionViewModel.getWorkoutSessions(limit: 21, after: "", withNetwork: true) }
+            ) {
                 AddWorkoutSession(showSheet: $showSheet, onSelection: { workoutRoutineId in
                     workoutSessionViewModel.addWorkoutSession(workoutRoutineId: workoutRoutineId, start: Date())
                     showSheet = false
