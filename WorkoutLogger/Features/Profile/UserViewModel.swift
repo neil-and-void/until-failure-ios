@@ -23,4 +23,6 @@ class UserViewModel: ObservableObject {
         setAuth(false)
         // TODO: clear apollo cache
     }
+
+    func deleteAccount() {}
 }
