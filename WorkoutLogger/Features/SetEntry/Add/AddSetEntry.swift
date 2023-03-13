@@ -27,7 +27,12 @@ struct AddSetEntry: View {
                     ProgressView()
                 }
             }
-        }).buttonStyle(TextButton())
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 8)
+            .background(Color.stronkGray)
+            .cornerRadius(.infinity)
+            .padding(.vertical, 4)
+        })
     }
 }
 
