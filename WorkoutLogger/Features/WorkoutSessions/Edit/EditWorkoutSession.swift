@@ -26,7 +26,7 @@ struct EditWorkoutSession: View {
     
     var body: some View {
         
-        Group {
+        HStack {
             
             if workoutSessionViewModel.isLoading {
                 
@@ -58,8 +58,8 @@ struct EditWorkoutSession: View {
                                 SelectExerciseRoutine(
                                     workoutSessionId: workoutSession.id,
                                     workoutRoutineId: workoutSession.workoutRoutine.id,
-                                    onSelectExerciseRoutine: {
-                                        workoutSessionViewModel.getWorkoutSession(workoutSessionId: workoutSessionId, withNetwork: true)
+                                    onSelectExerciseRoutine: { exercise in
+                                        workoutSession.exercises.wrappedValue.append(exercise)
                                     },
                                     showSheet: $showSheet
                                 ).presentationDetents([.medium])
@@ -80,7 +80,7 @@ struct EditWorkoutSession: View {
                             secondaryButton: .cancel()
                         )
                     }
-                    
+
                 } else {
                     
                     Text("Nothing here")

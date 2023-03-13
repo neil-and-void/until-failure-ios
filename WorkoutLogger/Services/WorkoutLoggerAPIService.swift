@@ -21,7 +21,7 @@ protocol WorkoutLoggerAPIServiceProtocol {
     func deleteWorkoutSession(id: String, completion: @escaping (Result<Int, APIError>) -> Void)
     func updateExercise(exerciseId: String, notes: String, completion: @escaping (Result<Exercise, APIError>) -> Void)
     func getExerciseRoutines(workoutRoutineId: String, withNetwork: Bool, completion: @escaping (Result<[ExerciseRoutine], APIError>) -> Void)
-    func addExercise(workoutSessionId: String, exerciseRoutineId: String, completion: @escaping (Result<Exercise, APIError>) -> Void)
+    func addExercise(workoutSessionId: String, exerciseRoutineId: String, sets: Int, completion: @escaping (Result<Exercise, APIError>) -> Void)
     func addSetEntry(exerciseId: String, setEntry: SetEntry, completion: @escaping (Result<SetEntry, APIError>) -> Void)
     func deleteExercise(exerciseId: String, completion: @escaping (Result<Int, APIError>) -> Void)
     func getExercise(exerciseId: String, withNetwork: Bool, completion: @escaping (Result<Exercise, APIError>) -> Void)
@@ -341,11 +341,15 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
         }
     }
     
-    func addExercise(workoutSessionId: String, exerciseRoutineId: String, completion: @escaping (Result<Exercise, APIError>) -> Void) {
+    func addExercise(workoutSessionId: String, exerciseRoutineId: String, sets: Int, completion: @escaping (Result<Exercise, APIError>) -> Void) {
+        var setEntries: [WorkoutLoggerAPI.SetEntryInput] = []
+        for _ in 0..<sets {
+            setEntries.append(WorkoutLoggerAPI.SetEntryInput(weight: 0, reps: 0))
+        }
         let exerciseInput = WorkoutLoggerAPI.ExerciseInput(
             exerciseRoutineId: exerciseRoutineId,
             notes: "",
-            setEntries: []
+            setEntries: setEntries
         )
         self.client.perform(mutation: WorkoutLoggerAPI.AddExerciseMutation(workoutSessionId: workoutSessionId, exercise: exerciseInput)) { result in
             switch result {
@@ -356,8 +360,8 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
                     return
                 }
                 
-                if let newExercise = response.data?.addExercise.fragments.exerciseDetails {
-                    let parsedExercise = Parser.Exercise(newExercise)
+                if let newExercise = response.data?.addExercise.fragments.exerciseFull {
+                    let parsedExercise = Parser.ExerciseFull(newExercise)
                     completion(Result.success(parsedExercise))
                     return
                 }

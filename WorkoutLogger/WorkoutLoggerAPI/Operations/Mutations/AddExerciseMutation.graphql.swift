@@ -12,11 +12,11 @@ public extension WorkoutLoggerAPI {
         mutation AddExercise($workoutSessionId: ID!, $exercise: ExerciseInput!) {
           addExercise(workoutSessionId: $workoutSessionId, exercise: $exercise) {
             __typename
-            ...exerciseDetails
+            ...exerciseFull
           }
         }
         """,
-        fragments: [ExerciseDetails.self, SetEntryFull.self]
+        fragments: [ExerciseFull.self, ExerciseDetails.self, SetEntryFull.self, ExerciseRoutineFull.self]
       ))
 
     public var workoutSessionId: ID
@@ -58,17 +58,19 @@ public extension WorkoutLoggerAPI {
 
         public static var __parentType: ParentType { WorkoutLoggerAPI.Objects.Exercise }
         public static var __selections: [Selection] { [
-          .fragment(ExerciseDetails.self),
+          .fragment(ExerciseFull.self),
         ] }
 
         public var id: ID { __data["id"] }
         public var notes: String { __data["notes"] }
         public var sets: [Set] { __data["sets"] }
+        public var exerciseRoutine: ExerciseRoutine { __data["exerciseRoutine"] }
 
         public struct Fragments: FragmentContainer {
           public let __data: DataDict
           public init(data: DataDict) { __data = data }
 
+          public var exerciseFull: ExerciseFull { _toFragment() }
           public var exerciseDetails: ExerciseDetails { _toFragment() }
         }
 
@@ -90,6 +92,29 @@ public extension WorkoutLoggerAPI {
             public init(data: DataDict) { __data = data }
 
             public var setEntryFull: SetEntryFull { _toFragment() }
+          }
+        }
+
+        /// AddExercise.ExerciseRoutine
+        ///
+        /// Parent Type: `ExerciseRoutine`
+        public struct ExerciseRoutine: WorkoutLoggerAPI.SelectionSet {
+          public let __data: DataDict
+          public init(data: DataDict) { __data = data }
+
+          public static var __parentType: ParentType { WorkoutLoggerAPI.Objects.ExerciseRoutine }
+
+          public var id: ID { __data["id"] }
+          public var active: Bool { __data["active"] }
+          public var name: String { __data["name"] }
+          public var sets: Int { __data["sets"] }
+          public var reps: Int { __data["reps"] }
+
+          public struct Fragments: FragmentContainer {
+            public let __data: DataDict
+            public init(data: DataDict) { __data = data }
+
+            public var exerciseRoutineFull: ExerciseRoutineFull { _toFragment() }
           }
         }
       }
