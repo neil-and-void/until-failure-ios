@@ -49,11 +49,12 @@ class WorkoutSessionViewModel: ObservableObject {
         }
     }
     
-    func addWorkoutSession(workoutRoutineId: String, start: Date) {
+    func addWorkoutSession(workoutRoutineId: String, start: Date, onSuccess: @escaping (WorkoutSession) -> Void) {
         self.service.addWorkoutSession(id: workoutRoutineId, start: start) { result in
             switch result {
-            case .success:
+            case .success(let workoutSession):
                 self.error = nil
+                onSuccess(workoutSession)
             case .failure(let err):
                 self.error = err.localizedDescription
             }

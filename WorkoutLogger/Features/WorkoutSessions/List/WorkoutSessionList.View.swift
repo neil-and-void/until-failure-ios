@@ -90,18 +90,18 @@ struct WorkoutSessionListView: View {
                 }
                 
             }
-            .sheet(isPresented: $showSheet, onDismiss: {
-                workoutSessionViewModel.getWorkoutSessions(limit: 21, after: "", withNetwork: true) }
-            ) {
+            .sheet(isPresented: $showSheet) {
                 AddWorkoutSession(showSheet: $showSheet, onSelection: { workoutRoutineId in
-                    workoutSessionViewModel.addWorkoutSession(workoutRoutineId: workoutRoutineId, start: Date())
-                    showSheet = false
+                    workoutSessionViewModel.addWorkoutSession(workoutRoutineId: workoutRoutineId, start: Date(), onSuccess: { workoutSession in
+                        workoutSessionViewModel.workoutSessionList.insert(workoutSession, at: 0)
+                        showSheet = false
+                    })
                 }).presentationDetents([.medium])
- 
+
             }
 
         }
-        
+
     }
 }
 
