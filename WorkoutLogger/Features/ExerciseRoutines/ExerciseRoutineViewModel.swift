@@ -9,6 +9,7 @@ import Foundation
 
 class ExerciseRoutineViewModel: ObservableObject {
     private let service: WorkoutLoggerAPIServiceProtocol
+    private let localMutator: LocalCacheMutator
     
     @Published var error: String?
     @Published var isLoading = false
@@ -16,6 +17,7 @@ class ExerciseRoutineViewModel: ObservableObject {
     
     init(service: WorkoutLoggerAPIServiceProtocol) {
         self.service = service
+        self.localMutator = LocalCacheMutator(store: WorkoutLoggerAPIClient.client.store)
     }
     
     func getExerciseRoutines(workoutRoutineId: String, withNetwork: Bool = false) {
@@ -32,18 +34,22 @@ class ExerciseRoutineViewModel: ObservableObject {
         }
     }
     
-    func addExercise(workoutSessionId: String, exerciseRoutineId: String, onSuccess: @escaping () -> Void) {
+    func addExercise(workoutSessionId: String, exerciseRoutineId: String, sets: Int, onSuccess: @escaping (Exercise) -> Void) {
+        self.isLoading = true
         self.service.addExercise(
             workoutSessionId: workoutSessionId,
-            exerciseRoutineId: exerciseRoutineId
+            exerciseRoutineId: exerciseRoutineId,
+            sets: sets
         ) { result in
             switch result {
-            case .success:
+            case .success(let exercise):
                 self.error = nil
-                onSuccess()
+                self.localMutator.addExercise(workoutSessionId: workoutSessionId, exercise: exercise, completion: {_ in})
+                onSuccess(exercise)
             case .failure(let err):
                 self.error = err.localizedDescription
             }
+            self.isLoading = false
         }
     }
     

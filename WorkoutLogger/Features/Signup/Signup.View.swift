@@ -27,13 +27,14 @@ struct SignupView: View {
                 .background(.thinMaterial)
                 .cornerRadius(10)
                 .textInputAutocapitalization(.never)
-            
+ 
             TextField("Email", text: $signupViewModel.email)
                 .padding()
                 .background(.thinMaterial)
                 .cornerRadius(10)
                 .textInputAutocapitalization(.never)
                 .accessibilityIdentifier("signup.emailTextField")
+                .keyboardType(.emailAddress)
             
             SecureField("Password", text: $signupViewModel.password)
                 .padding()

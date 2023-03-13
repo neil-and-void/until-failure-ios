@@ -10,7 +10,7 @@ import SwiftUI
 struct SelectExerciseRoutine: View {
     let workoutSessionId: String
     let workoutRoutineId: String
-    let onSelectExerciseRoutine: () -> Void
+    let onSelectExerciseRoutine: (Exercise) -> Void
     @StateObject var exerciseRoutineViewModel = ExerciseRoutineViewModel(service: WorkoutLoggerAPIService())
     @Binding var showSheet: Bool
     
@@ -61,6 +61,7 @@ struct SelectExerciseRoutine: View {
                                 exerciseRoutineViewModel.addExercise(
                                     workoutSessionId: workoutSessionId,
                                     exerciseRoutineId: exerciseRoutine.id,
+                                    sets: exerciseRoutine.sets,
                                     onSuccess: onSelectExerciseRoutine
                                 )
                                 showSheet = false
@@ -97,6 +98,6 @@ struct SelectExerciseRoutine: View {
 
 struct AddExerciseRoutine_Previews: PreviewProvider {
     static var previews: some View {
-        SelectExerciseRoutine(workoutSessionId: "1", workoutRoutineId: "1", onSelectExerciseRoutine: {}, showSheet: .constant(true))
+        SelectExerciseRoutine(workoutSessionId: "1", workoutRoutineId: "1", onSelectExerciseRoutine: {_ in }, showSheet: .constant(true))
     }
 }

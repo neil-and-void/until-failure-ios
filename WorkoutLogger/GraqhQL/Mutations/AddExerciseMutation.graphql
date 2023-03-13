@@ -3,6 +3,6 @@ mutation AddExercise($workoutSessionId: ID!, $exercise: ExerciseInput!) {
         workoutSessionId: $workoutSessionId
         exercise: $exercise,
     ) {
-        ...exerciseDetails
+        ...exerciseFull
     }
 }

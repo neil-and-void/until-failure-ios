@@ -12,7 +12,7 @@ struct EditExercise: View {
     @Binding var exercise: Exercise
     var prevExercise: PrevExercise?
     let onDelete: () -> Void
-
+    
     func getPrevSetEntries(prevExercise: PrevExercise?) -> [SetEntry] {
         if let prevSetEntries = prevExercise?.sets {
             return prevSetEntries
@@ -57,9 +57,9 @@ struct EditExercise: View {
                     exercise.sets.append(setEntry)
                 }
             )
-
+            
             Divider()
-
+            
             NotesView(
                 textObserver: TextFieldObserver(text: $exercise.wrappedValue.notes),
                 prevNotes: prevExercise?.notes,
@@ -93,18 +93,16 @@ struct EditExercise_Previews: PreviewProvider {
                         SetEntry(id: "3", weight: 225, reps: 4),
                         SetEntry(id: "4", weight: 225, reps: 4),
                     ],
-                    notes: "Somwething")
-                ),
+                    notes: "Somwething")),
                 onDelete: {}
-
+                
             )
             EditExercise(
                 exercise: .constant(Exercise(
                     id: "1",
                     exerciseRoutine: ExerciseRoutine(id: "1", name: "Squat", sets: 4, reps: 5),
                     sets: [],
-                    notes: "Somwething")
-                ),
+                    notes: "Somwething")),
                 onDelete: {}
             )
         }.preferredColorScheme(.dark)

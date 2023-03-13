@@ -93,6 +93,57 @@ class LocalCacheMutator {
             // TODO: cascade onto other objects
         }, callbackQueue: .main, completion: completion)
     }
+
+    func addExercise(workoutSessionId: String, exercise: Exercise, completion: @escaping ((Result<Void, Error>) -> Void)) {
+        self.store.withinReadWriteTransaction({ transaction in
+            try transaction.updateObject(
+                ofType: WorkoutLoggerAPI.MutableWorkoutSessionDetails.self,
+                withKey: "WorkoutSession:\(workoutSessionId)"
+            ) { (data: inout WorkoutLoggerAPI.MutableWorkoutSessionDetails) in
+                // idk why but this needs to be set for transaction to succeed
+                // so we set it to the default value
+                data.end = nil
+
+                // set entry cache mutation
+                var setEntries: [WorkoutLoggerAPI.MutableWorkoutSessionDetails.Exercise.Set] = []
+                var setEntriesJson: [[String: AnyHashable]] = []
+                for setEntry in exercise.sets {
+                    let setEntryJson: [String: AnyHashable] = [
+                        "__typename": "SetEntry",
+                        "id": setEntry.id,
+                        "reps": setEntry.reps,
+                        "weight": setEntry.weight,
+                    ]
+                    setEntriesJson.append(setEntryJson)
+                    setEntries.append(WorkoutLoggerAPI.MutableWorkoutSessionDetails.Exercise.Set(data: DataDict(setEntryJson, variables: nil)))
+                }
+
+                // exercise routine
+                let exerciseRoutineJson: [String: AnyHashable] = [
+                    "__typename": "ExerciseRoutine",
+                    "id": exercise.exerciseRoutine.id,
+                    "active": exercise.exerciseRoutine.active,
+                    "name": exercise.exerciseRoutine.name,
+                    "sets": exercise.exerciseRoutine.sets,
+                    "reps": exercise.exerciseRoutine.reps,
+                ]
+                let exerciseRoutine = WorkoutLoggerAPI.MutableWorkoutSessionDetails.Exercise.ExerciseRoutine(data: DataDict(exerciseRoutineJson, variables: nil))
+
+                // exercise cache mutation
+                let exerciseJson: [String: AnyHashable] = [
+                    "__typename": "Exercise",
+                    "id": exercise.id,
+                    "exerciseRoutine": exerciseRoutineJson,
+                    "sets": setEntriesJson,
+                    "notes": exercise.notes
+                ]
+
+                let exerciseObj = WorkoutLoggerAPI.MutableWorkoutSessionDetails.Exercise(data: DataDict(exerciseJson, variables: nil))
+                data.exercises.append(exerciseObj)
+
+            }
+        }, callbackQueue: .main, completion: completion)
+    }
     
     func updateExercise(id: String, notes: String, completion: @escaping ((Result<Void, Error>) -> Void)) {
         self.store.withinReadWriteTransaction({ transaction in
