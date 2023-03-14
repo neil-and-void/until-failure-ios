@@ -8,6 +8,8 @@
 import Foundation
 import Apollo
 
+
+/// inject token in Authorization header for requests
 class TokenInterceptor: ApolloInterceptor {
     private let keychainService: KeychainServiceProtocol
     private let authService: AuthServiceProtocol
@@ -66,15 +68,10 @@ class TokenInterceptor: ApolloInterceptor {
     }
 }
 
+/// Retry a request after refreshing an access token
 class RefreshTokenInterceptor: ApolloInterceptor {
     private let keychainService: KeychainServiceProtocol
     private let authService: AuthServiceProtocol
-    
-    enum RefreshTokenError: Error {
-        case notYetReceived
-        case unauthenticated // no tokens found
-        case refreshTokenInvalid // invalid or expired refresh token
-    }
     
     init(keychainService: KeychainServiceProtocol, authService: AuthServiceProtocol) {
         self.keychainService = keychainService
@@ -92,7 +89,7 @@ class RefreshTokenInterceptor: ApolloInterceptor {
     ) where Operation: GraphQLOperation {
         guard let receivedResponse = response else {
             chain.handleErrorAsync(
-                RefreshTokenError.notYetReceived,
+                WorkoutLoggerError.notYetReceived,
                 request: request,
                 response: response,
                 completion: completion
@@ -106,9 +103,9 @@ class RefreshTokenInterceptor: ApolloInterceptor {
             account: WORKOUT_LOGGER_KEYCHAIN_ACCOUNT,
             type: AuthTokens.self
         )
-        if tokens == nil {
+        guard let tokens = tokens else {
             chain.handleErrorAsync(
-                RefreshTokenError.unauthenticated,
+                WorkoutLoggerError.unauthenticated,
                 request: request,
                 response: response,
                 completion: completion
@@ -118,12 +115,12 @@ class RefreshTokenInterceptor: ApolloInterceptor {
        
         // attempt refreshing the access token if we get unauthorized response
         if code == "UNAUTHORIZED" {
-            self.authService.refreshAccessToken(refreshToken: tokens!.refreshToken) { result in
+            self.authService.refreshAccessToken(refreshToken: tokens.refreshToken) { result in
                 switch result {
                 case .success(let result):
                     let tokens = AuthTokens(
                         accessToken: result,
-                        refreshToken: tokens!.refreshToken
+                        refreshToken: tokens.refreshToken
                     )
                     self.keychainService.save(
                         tokens,
@@ -131,9 +128,9 @@ class RefreshTokenInterceptor: ApolloInterceptor {
                         account: WORKOUT_LOGGER_KEYCHAIN_ACCOUNT
                     )
                     chain.retry(request: request, completion: completion)
-                case .failure(let err):
+                case .failure:
                     chain.handleErrorAsync(
-                        err,
+                        WorkoutLoggerError.refreshTokenInvalid,
                         request: request,
                         response: response,
                         completion: completion

@@ -9,9 +9,9 @@ import Foundation
 import Apollo
 
 protocol AuthServiceProtocol {
-    func signup(email: String, name: String, password: String, confirmPassword: String, completion: @escaping (Result<AuthResult, APIError>) -> Void)
-    func login(email: String, password: String, completion: @escaping (Result<AuthResult, APIError>) -> Void)
-    func refreshAccessToken(refreshToken: String, completion: @escaping (Result<String, APIError>) -> Void)
+    func signup(email: String, name: String, password: String, confirmPassword: String, completion: @escaping (Result<AuthResult, WorkoutLoggerError>) -> Void)
+    func login(email: String, password: String, completion: @escaping (Result<AuthResult, WorkoutLoggerError>) -> Void)
+    func refreshAccessToken(refreshToken: String, completion: @escaping (Result<String, WorkoutLoggerError>) -> Void)
 }
 
 final class AuthService: AuthServiceProtocol {
@@ -26,14 +26,14 @@ final class AuthService: AuthServiceProtocol {
         name: String,
         password: String,
         confirmPassword: String,
-        completion: @escaping (Result<AuthResult, APIError>) -> Void
+        completion: @escaping (Result<AuthResult, WorkoutLoggerError>) -> Void
     ) {
         let signupInput = WorkoutLoggerAPI.SignupInput(email: email, name: name, password: password, confirmPassword: confirmPassword)
         self.client.perform(mutation: WorkoutLoggerAPI.SignupMutation(signupInput: signupInput)) { result in
             switch result {
             case .success(let response):
                 if let errors = response.errors {
-                    let error = APIError.GraphQLError(gqlError: errors[0].message)
+                    let error = WorkoutLoggerError.GraphQLError(gqlError: errors[0].message)
                     completion(Result.failure(error))
                     return
                 }
@@ -44,10 +44,10 @@ final class AuthService: AuthServiceProtocol {
                     return
                 }
                 
-                return completion(Result.failure(APIError.unknown))
+                return completion(Result.failure(WorkoutLoggerError.unknown))
                 
             case .failure:
-                completion(Result.failure(APIError.networkError))
+                completion(Result.failure(WorkoutLoggerError.networkError))
             }
         }
     }
@@ -55,14 +55,14 @@ final class AuthService: AuthServiceProtocol {
     func login(
         email: String,
         password: String,
-        completion: @escaping (Result<AuthResult, APIError>) -> Void
+        completion: @escaping (Result<AuthResult, WorkoutLoggerError>) -> Void
     ) {
         let loginInput = WorkoutLoggerAPI.LoginInput(email: email, password: password)
         self.client.perform(mutation: WorkoutLoggerAPI.LoginMutation(loginInput: loginInput)) { result in
             switch result {
             case .success(let response):
                 if let errors = response.errors {
-                    let error = APIError.GraphQLError(gqlError: errors[0].message)
+                    let error = WorkoutLoggerError.GraphQLError(gqlError: errors[0].message)
                     completion(Result.failure(error))
                     return
                 }
@@ -74,20 +74,20 @@ final class AuthService: AuthServiceProtocol {
                 }
                
                 // if we get here irdk whats going on
-                return completion(Result.failure(APIError.unknown))
+                return completion(Result.failure(WorkoutLoggerError.unknown))
                 
             case .failure:
-                completion(Result.failure(APIError.networkError))
+                completion(Result.failure(WorkoutLoggerError.networkError))
             }
         }
     }
     
-    func refreshAccessToken(refreshToken: String, completion: @escaping (Result<String, APIError>) -> Void) {
+    func refreshAccessToken(refreshToken: String, completion: @escaping (Result<String, WorkoutLoggerError>) -> Void) {
         self.client.perform(mutation: WorkoutLoggerAPI.RefreshAccessTokenMutation(refreshToken: "Bearer " + refreshToken)) { result in
             switch result {
             case .success(let response):
                 if let errors = response.errors {
-                    let error = APIError.GraphQLError(gqlError: errors[0].message)
+                    let error = WorkoutLoggerError.GraphQLError(gqlError: errors[0].message)
                     completion(Result.failure(error))
                     return
                 }
@@ -97,10 +97,10 @@ final class AuthService: AuthServiceProtocol {
                     return
                 }
                
-                return completion(Result.failure(APIError.unknown))
+                return completion(Result.failure(WorkoutLoggerError.unknown))
                 
             case .failure:
-                completion(Result.failure(APIError.networkError))
+                completion(Result.failure(WorkoutLoggerError.networkError))
             }
 
         }

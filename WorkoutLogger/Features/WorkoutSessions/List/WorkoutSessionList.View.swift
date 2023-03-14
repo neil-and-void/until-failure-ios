@@ -118,7 +118,7 @@ struct WorkoutSessionListView: View {
 
             }
 
-        }
+        }.errorAlert($workoutSessionViewModel.error, confirm: {})
 
     }
 }

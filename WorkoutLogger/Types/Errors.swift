@@ -11,23 +11,30 @@ struct GraphQLAPIError: Error {
     var error = ""
 }
 
-enum APIError: LocalizedError {
-    case networkError
+enum WorkoutLoggerError: LocalizedError {
     case GraphQLError(gqlError: String?)
     case parsingError
+    case networkError
+    case notYetReceived
+    case unauthenticated // no tokens found
+    case refreshTokenInvalid // invalid or expired refresh token
     case unknown
 
-    var localizedDescription: String {
+    var errorDescription: String? {
         switch self {
         case .networkError:
             return "Sorry, there is was an issue reaching the server"
         case .GraphQLError(let gqlError):
-            var errMessage = "Sorry, something went wrong with the request"
+            let errMessage = "Sorry, something went wrong with the request"
             if let err = gqlError {
-                errMessage = "Sorry, someting went wrong: \(err)"
+                return "Something went wrong - \(err)"
             }
             return errMessage
-        case .unknown, .parsingError:
+        case .unauthenticated:
+            return "you are not authenticated"
+        case .refreshTokenInvalid:
+            return "your token has expired or is invalid"
+        case .unknown, .parsingError, .notYetReceived:
             return "Sorry, something went wrong"
         }
     }

@@ -13,7 +13,7 @@ class WorkoutSessionViewModel: ObservableObject {
 
     @Published var workoutSessionList: [WorkoutSession] = []
     @Published var workoutSession: WorkoutSession?
-    @Published var error: String?
+    @Published var error: WorkoutLoggerError?
     @Published var isLoading = false
 
     init(service: WorkoutLoggerAPIServiceProtocol) {
@@ -29,7 +29,7 @@ class WorkoutSessionViewModel: ObservableObject {
                 self.error = nil
                 self.workoutSessionList = workoutSessions
             case .failure(let err):
-                self.error = err.localizedDescription
+                self.error = err
             }
             self.isLoading = false
         }
@@ -45,7 +45,7 @@ class WorkoutSessionViewModel: ObservableObject {
             case .success(let workoutSession):
                 self.workoutSession = workoutSession
             case .failure(let err):
-                self.error = err.localizedDescription
+                self.error = err
             }
             self.isLoading = false
         }
@@ -58,7 +58,7 @@ class WorkoutSessionViewModel: ObservableObject {
                 self.error = nil
                 onSuccess()
             case .failure(let err):
-                self.error = err.localizedDescription
+                self.error = err
             }
         }
     }
@@ -71,8 +71,9 @@ class WorkoutSessionViewModel: ObservableObject {
                 // remove from workout view model since we'll have a cache miss
                 self.workoutSessionList = self.workoutSessionList.filter { $0.id != id }
                 self.error = nil
-            case .failure(let err):
-                self.error = err.localizedDescription
+            case .failure:
+                // TODO: might need to change this to make it represent real error
+                self.error = .unknown
             }
         }
 
@@ -82,7 +83,7 @@ class WorkoutSessionViewModel: ObservableObject {
                 onSuccess()
                 self.error = nil
             case .failure(let err):
-                self.error = err.localizedDescription
+                self.error = err
             }
         }
     }
@@ -97,7 +98,7 @@ class WorkoutSessionViewModel: ObservableObject {
             case .success:
                 self.error = nil
             case .failure(let err):
-                self.error = err.localizedDescription
+                self.error = err
             }
         }
     }

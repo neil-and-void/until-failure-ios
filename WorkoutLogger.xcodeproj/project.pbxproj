@@ -154,6 +154,7 @@
 		28B2BD56296BAE8500660C06 /* AddSetEntryMutation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 28B2BD55296BAE8400660C06 /* AddSetEntryMutation.graphql */; };
 		28B344A7296E6F290076FE50 /* EditExerciseRoutineList.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B344A6296E6F290076FE50 /* EditExerciseRoutineList.View.swift */; };
 		28BF4E5C294EC66700AB8E49 /* EditExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BF4E5B294EC66700AB8E49 /* EditExercise.swift */; };
+		28C072E429BFD9F100602821 /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C072E329BFD9F100602821 /* ErrorAlert.swift */; };
 		28C2EDFF292DA5C1000BE3EB /* InterceptorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2EDFE292DA5C1000BE3EB /* InterceptorProvider.swift */; };
 		28C2EE07292DF2E4000BE3EB /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2EE06292DF2E4000BE3EB /* Errors.swift */; };
 		28C35F0829BC49300009FA9B /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C35F0729BC49300009FA9B /* NotesView.swift */; };
@@ -333,6 +334,7 @@
 		28B2BD55296BAE8400660C06 /* AddSetEntryMutation.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = AddSetEntryMutation.graphql; sourceTree = "<group>"; };
 		28B344A6296E6F290076FE50 /* EditExerciseRoutineList.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExerciseRoutineList.View.swift; sourceTree = "<group>"; };
 		28BF4E5B294EC66700AB8E49 /* EditExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExercise.swift; sourceTree = "<group>"; };
+		28C072E329BFD9F100602821 /* ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
 		28C2EDFE292DA5C1000BE3EB /* InterceptorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterceptorProvider.swift; sourceTree = "<group>"; };
 		28C2EE06292DF2E4000BE3EB /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		28C35F0729BC49300009FA9B /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
@@ -397,6 +399,7 @@
 				28375DC429A80CE30024CC56 /* DismissKeyboard.swift */,
 				284E512729B2E0B7007977B9 /* TextFields.swift */,
 				28C35F0729BC49300009FA9B /* NotesView.swift */,
+				28C072E329BFD9F100602821 /* ErrorAlert.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -1126,6 +1129,7 @@
 				284E512829B2E0B7007977B9 /* TextFields.swift in Sources */,
 				2809EF662926F10C00D0FF5B /* AuthService.swift in Sources */,
 				281E0F742980F38300C81386 /* AddSetEntry.swift in Sources */,
+				28C072E429BFD9F100602821 /* ErrorAlert.swift in Sources */,
 				2865A813293B274600020C7A /* AddExerciseRoutineAlert.View.swift in Sources */,
 				281E0FE3298101BD00C81386 /* Query.graphql.swift in Sources */,
 				281E0FDB298101BD00C81386 /* SetEntry.graphql.swift in Sources */,
