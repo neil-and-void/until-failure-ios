@@ -57,25 +57,30 @@ struct SwipeItem<Content: View>: View {
 
     var body: some View {
         GeometryReader { geo in
-            HStack(spacing: 0) {
-                content().frame(width: geo.size.width)
-                Button(
-                    action: {
-                        // reset swipe position
-                        withAnimation {
-                            xOffset = 0
+            ZStack {
+                HStack {
+                    Spacer()
+                    Button(
+                        action: {
+                            // reset swipe position
+                            withAnimation {
+                                xOffset = 0
+                            }
+                            onDelete()
                         }
-                        onDelete()
+                    ) {
+                        Image(systemName: "trash").foregroundColor(.red)
                     }
-                ) {
-                    Image(systemName: "trash").foregroundColor(Color.red)
+                    .frame(width: screenWidth / 6)
                 }
-                .frame(width: anchorWidth).zIndex(1).clipped()
+                .cornerRadius(8)
+
+                content()
+                    .frame(width: geo.size.width)
+                    .offset(x: xOffset)
+                    .gesture(drag)
+                    .clipped()
             }
-            .offset(x: xOffset)
-            .contentShape(Rectangle())
-            .gesture(drag)
-            .clipped()
         }
     }
 }

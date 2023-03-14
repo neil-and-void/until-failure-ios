@@ -72,6 +72,8 @@ struct EditSetEntryListItem: View {
                 }
                 .textFieldStyle(SetEntryTextFieldStyle())
         }
+        .background(Color.bgSecondary)
+        .cornerRadius(8)
     }
 }
 
