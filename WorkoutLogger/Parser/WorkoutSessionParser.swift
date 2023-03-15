@@ -14,6 +14,7 @@ protocol WorkoutLoggerAPIParserProtocol {
     static func WorkoutSession(_ workoutSession: WorkoutLoggerAPI.WorkoutSessionFull) -> WorkoutSession
     static func Exercise(_ exercise: WorkoutLoggerAPI.ExerciseDetails) -> Exercise
     static func SetEntry(_ setEntry: WorkoutLoggerAPI.SetEntryFull) -> SetEntry
+    static func User(_ user: WorkoutLoggerAPI.UserFull) -> User
     
     // parses from our native types to graphql types (mostly graphql inputs)
     static func UpdateWorkoutRoutineInput(_ workoutRoutine: WorkoutRoutine) -> WorkoutLoggerAPI.UpdateWorkoutRoutineInput
@@ -32,6 +33,10 @@ class Parser: WorkoutLoggerAPIParserProtocol {
             active: workoutRoutine.active,
             exerciseRoutines: sortedExerciseRoutines
         )
+    }
+
+    static func User(_ user: WorkoutLoggerAPI.UserFull) -> User {
+        return WorkoutLogger.User(id: user.id, name: user.name, email: user.email)
     }
     
     static func ExerciseRoutine(_ exerciseRoutine: WorkoutLoggerAPI.ExerciseRoutineFull) -> ExerciseRoutine {

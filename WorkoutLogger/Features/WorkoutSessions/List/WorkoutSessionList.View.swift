@@ -13,7 +13,7 @@ struct WorkoutSessionListView: View {
     @State private var showDeleteAlert = false
     @State private var showSheet = false
 
-    let limit = 21
+    let limit = 30
     
     var body: some View {
 
@@ -57,7 +57,7 @@ struct WorkoutSessionListView: View {
 
                         HStack {
                             Spacer()
-                            Text("Showing up to last 21 workouts").foregroundColor(.tertiaryText)
+                            Text("Showing up to last \(String(limit)) workouts").foregroundColor(.tertiaryText)
                             Spacer()
                         }.listRowSeparator(.hidden)
 

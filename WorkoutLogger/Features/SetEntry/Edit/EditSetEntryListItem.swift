@@ -72,6 +72,7 @@ struct EditSetEntryListItem: View {
                 }
                 .textFieldStyle(SetEntryTextFieldStyle())
         }
+        .padding(.vertical, 8)
         .background(Color.bgSecondary)
         .cornerRadius(8)
     }

@@ -1,0 +1,5 @@
+fragment userFull on User {
+    id
+    email
+    name
+}

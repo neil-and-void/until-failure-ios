@@ -40,6 +40,7 @@ public extension WorkoutLoggerAPI {
       case "AuthResult": return WorkoutLoggerAPI.Objects.AuthResult
       case "RefreshSuccess": return WorkoutLoggerAPI.Objects.RefreshSuccess
       case "Query": return WorkoutLoggerAPI.Objects.Query
+      case "User": return WorkoutLoggerAPI.Objects.User
       case "WorkoutRoutineConnection": return WorkoutLoggerAPI.Objects.WorkoutRoutineConnection
       case "WorkoutRoutineEdge": return WorkoutLoggerAPI.Objects.WorkoutRoutineEdge
       case "PageInfo": return WorkoutLoggerAPI.Objects.PageInfo

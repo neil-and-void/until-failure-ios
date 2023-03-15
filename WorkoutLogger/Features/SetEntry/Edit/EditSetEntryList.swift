@@ -75,7 +75,7 @@ struct EditSetEntryList: View {
                                     setEntryViewModel.deleteSetEntry(id: setEntryToDelete.id, exerciseId: exerciseId)
                                 }
                             }
-                            .frame(height: 28) // TODO: figure out how not to choose hardcoded values
+                            .frame(height: 36) // TODO: figure out how not to choose hardcoded values
                 }
             }
         }

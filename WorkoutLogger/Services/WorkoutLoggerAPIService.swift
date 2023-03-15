@@ -27,6 +27,8 @@ protocol WorkoutLoggerAPIServiceProtocol {
     func getExercise(exerciseId: String, withNetwork: Bool, completion: @escaping (Result<Exercise, WorkoutLoggerError>) -> Void)
     func updateSetEntry(id: String, reps: Int?, weight: Double?, completion: @escaping (Result<SetEntry, WorkoutLoggerError>) -> Void)
     func deleteSetEntry(id: String, completion: @escaping (Result<Int, WorkoutLoggerError>) -> Void)
+    func getUser(completion: @escaping (Result<User, WorkoutLoggerError>) -> Void)
+    func deleteUser(completion: @escaping (Result<Int, WorkoutLoggerError>) -> Void)
 }
 
 // extension that adds default values to protocol
@@ -56,6 +58,13 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
     
     init(client: ApolloClient = WorkoutLoggerAPIClient.client) {
         self.client = client
+    }
+
+    private func parseError(_ err: Error) -> WorkoutLoggerError {
+        if let err = err as? WorkoutLoggerError {
+            return err
+        }
+        return WorkoutLoggerError.unknown
     }
     
     func getWorkoutRoutine(withNetwork: Bool = false, workoutRoutineId: String, completion: @escaping (Result<WorkoutRoutine, WorkoutLoggerError>) -> Void) {
@@ -518,11 +527,51 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
         }
     }
 
-    private func parseError(_ err: Error) -> WorkoutLoggerError {
-        if let err = err as? WorkoutLoggerError {
-            return err
+
+    func getUser(completion: @escaping (Result<User, WorkoutLoggerError>) -> Void) {
+        self.client.fetch(query: WorkoutLoggerAPI.UserQuery()) { result in
+            switch result {
+            case .success(let response):
+                if let errors = response.errors {
+                    completion(Result.failure(.GraphQLError(gqlError: errors[0].message)))
+                    return
+                }
+
+                guard let user = response.data?.user.fragments.userFull else {
+                    completion(Result.failure(.unknown))
+                    return
+                }
+
+                completion(.success(Parser.User(user)))
+                return
+
+            case .failure(let err):
+                return completion(.failure(self.parseError(err)))
+            }
         }
-        return WorkoutLoggerError.unknown
+    }
+
+    func deleteUser(completion: @escaping (Result<Int, WorkoutLoggerError>) -> Void) {
+        self.client.perform(mutation: WorkoutLoggerAPI.DeleteUserMutation()) { result in
+            switch result {
+            case .success(let response):
+                if let errors = response.errors {
+                    completion(Result.failure(.GraphQLError(gqlError: errors[0].message)))
+                    return
+                }
+
+                guard let deleteSuccess = response.data?.deleteUser else {
+                    completion(Result.failure(.unknown))
+                    return
+                }
+
+                completion(.success(deleteSuccess))
+                return
+
+            case .failure(let err):
+                return completion(.failure(self.parseError(err)))
+            }
+        }
     }
 }
 
