@@ -33,7 +33,7 @@ struct EditSetEntryList: View {
 
             Text("No set entries yet")
                 .foregroundColor(.tertiaryText)
-                .padding(.vertical, 2)
+                .padding(.vertical, 8)
                 .padding(.horizontal, 2)
 
         } else {

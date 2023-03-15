@@ -36,6 +36,7 @@ struct EditExerciseRoutineList: View {
                     Spacer()
                     Text("You don't have any exercises for this routine yet")
                         .foregroundColor(.tertiaryText)
+                        .multilineTextAlignment(.center)
                     Spacer()
                 }.listRowSeparator(.hidden)
             } else {
