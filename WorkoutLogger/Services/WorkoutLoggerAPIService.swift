@@ -129,7 +129,6 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
             switch result {
             case .success(let response):
                 if let errors = response.errors {
-                    print("succeeded somehoet", errors)
                     completion(Result.failure(.GraphQLError(gqlError: errors[0].message)))
                     return
                 }
