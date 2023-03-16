@@ -1,0 +1,3 @@
+mutation ResendVerificatCode($email: String!) {
+    resendVerificationCode(email: $email)
+}
