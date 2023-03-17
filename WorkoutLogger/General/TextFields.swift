@@ -8,6 +8,21 @@
 import Foundation
 import SwiftUI
 
+
+struct TappableTextFieldStyle: TextFieldStyle {
+    @FocusState private var textFieldFocused: Bool
+    func _body(configuration: TextField<Self._Label>) -> some View {
+        configuration
+            .padding()
+            .background(.thinMaterial)
+            .cornerRadius(10)
+            .focused($textFieldFocused)
+            .onTapGesture {
+                textFieldFocused = true
+            }
+    }
+}
+
 // allows to highlight a set entry textfield if value is 0 to make it easier to replace
 struct SetEntryTextFieldStyle: TextFieldStyle {
     func _body(configuration: TextField<Self._Label>) -> some View {

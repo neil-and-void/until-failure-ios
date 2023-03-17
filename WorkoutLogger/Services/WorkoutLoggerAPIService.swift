@@ -29,6 +29,8 @@ protocol WorkoutLoggerAPIServiceProtocol {
     func deleteSetEntry(id: String, completion: @escaping (Result<Int, WorkoutLoggerError>) -> Void)
     func getUser(completion: @escaping (Result<User, WorkoutLoggerError>) -> Void)
     func deleteUser(completion: @escaping (Result<Int, WorkoutLoggerError>) -> Void)
+    func resendEmailVerification(email: String, completion: @escaping (Result<Bool, WorkoutLoggerError>) -> Void)
+    func forgotPassword(email: String, completion: @escaping (Result<Bool, WorkoutLoggerError>) -> Void)
 }
 
 // extension that adds default values to protocol
@@ -560,6 +562,52 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
                 }
 
                 guard let deleteSuccess = response.data?.deleteUser else {
+                    completion(Result.failure(.unknown))
+                    return
+                }
+
+                completion(.success(deleteSuccess))
+                return
+
+            case .failure(let err):
+                return completion(.failure(self.parseError(err)))
+            }
+        }
+    }
+
+    func resendEmailVerification(email: String, completion: @escaping (Result<Bool, WorkoutLoggerError>) -> Void) {
+        self.client.perform(mutation: WorkoutLoggerAPI.ResendVerificationCodeMutation(email: email)) { result in
+            switch result {
+            case .success(let response):
+                if let errors = response.errors {
+                    completion(Result.failure(.GraphQLError(gqlError: errors[0].message)))
+                    return
+                }
+
+                guard let deleteSuccess = response.data?.resendVerificationCode else {
+                    completion(Result.failure(.unknown))
+                    return
+                }
+
+                completion(.success(deleteSuccess))
+                return
+
+            case .failure(let err):
+                return completion(.failure(self.parseError(err)))
+            }
+        }
+    }
+
+    func forgotPassword(email: String, completion: @escaping (Result<Bool, WorkoutLoggerError>) -> Void) {
+        self.client.perform(mutation: WorkoutLoggerAPI.ForgotPasswordMutation(email: email)) { result in
+            switch result {
+            case .success(let response):
+                if let errors = response.errors {
+                    completion(Result.failure(.GraphQLError(gqlError: errors[0].message)))
+                    return
+                }
+
+                guard let deleteSuccess = response.data?.forgotPassword else {
                     completion(Result.failure(.unknown))
                     return
                 }

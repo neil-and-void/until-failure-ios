@@ -56,7 +56,10 @@ struct SignupView: View {
                 }
             }
             .buttonStyle(RoundedButton())
-
+            Text("Already have an account?")
+            NavigationLink(destination: ResendCode()) {
+                Text("Resend email verification").fontWeight(.semibold).foregroundColor(.white)
+            }
         }.padding()
     }
 }

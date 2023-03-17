@@ -35,8 +35,18 @@ struct LoginView: View {
                 .padding()
                 .background(.thinMaterial)
                 .cornerRadius(10)
-                .padding(.bottom, 15)
-
+            
+            HStack {
+                Button("Signup", action: {
+                    showSheet.toggle()
+                })
+                Spacer()
+                Button("Forgot password?", action:{})
+            }
+            .padding(.bottom, 15)
+            .foregroundColor(.white)
+            .fontWeight(.semibold)
+            
             Button(action: { loginViewModel.submit(setAuth: authState.setAuth) } ) {
                 if loginViewModel.isLoading {
                     ProgressView()
@@ -45,33 +55,19 @@ struct LoginView: View {
                 }
             }.buttonStyle(RoundedButton())
             
-            Button(action: { showSheet.toggle() }) {
-                Text("Create an account")
-            }
-            .buttonStyle(TextButton())
-            .sheet(isPresented: $showSheet) {
-                ZStack {
-                    HStack {
-                        VStack(alignment: .leading) {
-                            
-                            Button(action: { showSheet.toggle()}) {
-                                Text("Cancel")
-                            }
-                            .buttonStyle(TextButton())
-                            .padding()
- 
-                            Spacer()
-                        }
-                        
-                        Spacer()
+            
+        }
+        .padding()
+        .sheet(isPresented: $showSheet) {
+            NavigationView {
+                SignupView()
+                    .toolbar {
+                        Button(action: { showSheet.toggle()}) {
+                            Text("Cancel")
+                        }.foregroundColor(.white)
                     }
-                    
-                    SignupView()
-
-                }.preferredColorScheme(.dark)
-
             }
-        }.padding()
+        }.preferredColorScheme(.dark)
     }
 }
 
