@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct SendForgotPasswordLink: View {
-    private var service = AuthService()
+    var service = AuthService()
+
+    @Binding
+    var showSheet: Bool
 
     @State
     var email = ""
@@ -18,7 +21,7 @@ struct SendForgotPasswordLink: View {
     var error: WorkoutLoggerError?
 
     @State
-    private var sent = false
+    var sent = false
 
     func sendForgotPasswordLink() {
         isLoading = true
@@ -27,6 +30,9 @@ struct SendForgotPasswordLink: View {
             case .success:
                 error = nil
                 sent = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    showSheet = false
+                }
             case .failure(let err):
                 error = err
                 sent = false
@@ -42,7 +48,10 @@ struct SendForgotPasswordLink: View {
                     .font(.title)
                 Spacer()
             }
-            Text("Enter in the email of account you forgot your password for")
+            HStack {
+                Text("Enter in the email of account you forgot your password for").foregroundColor(.secondaryText)
+                Spacer()
+            }
             TextField("Email", text: $email)
                 .keyboardType(.emailAddress)
                 .textFieldStyle(TappableTextFieldStyle())

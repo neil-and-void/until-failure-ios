@@ -10,6 +10,8 @@ import SwiftUI
 struct ResetPassword: View {
     @Binding
     var forgotPasswordCode: String?
+    @Binding
+    var showSheet: Bool
 
     @State
     var password = ""
@@ -35,6 +37,9 @@ struct ResetPassword: View {
             case .success:
                 error = nil
                 sent = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    showSheet = false
+                }
             case .failure(let err):
                 error = err
                 sent = false
@@ -47,12 +52,12 @@ struct ResetPassword: View {
         VStack {
             if forgotPasswordCode != nil {
                 HStack {
-                    Text("Reset Password").font(.system(size: 24, weight: .semibold))
+                    Text("Reset Password").font(.title)
                     Spacer()
                 }
                 TextField("New password", text: $password)
                     .textFieldStyle(TappableTextFieldStyle())
-                TextField("New password confirm", text: $confirmPassword)
+                TextField("Confirm new password", text: $confirmPassword)
                     .textFieldStyle(TappableTextFieldStyle())
                 Button(action: {
                     if(!sent && !isLoading) {
@@ -74,6 +79,6 @@ struct ResetPassword: View {
             } else {
                 Text("Hmmm... something went wrong...")
             }
-        }
+        }.padding()
     }
 }

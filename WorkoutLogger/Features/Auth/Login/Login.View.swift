@@ -10,7 +10,7 @@ import SwiftUI
 struct LoginView: View {
     @StateObject private var loginViewModel = LoginViewModel(service: AuthService())
     @State private var showSheet = false
-    @State private var forgotPasswordSheet = false
+    @State var forgotPasswordSheet = false
     @EnvironmentObject private var authState: AuthenticationState
     
     var body: some View {
@@ -74,7 +74,7 @@ struct LoginView: View {
                     }
                     Spacer()
                 }
-                SendForgotPasswordLink()
+                SendForgotPasswordLink(showSheet: $forgotPasswordSheet)
             }
         }
         .sheet(isPresented: $showSheet) {
@@ -85,7 +85,7 @@ struct LoginView: View {
                             Text("Cancel")
                         }.foregroundColor(.white)
                     }
-            }
+            }.accentColor(.white)
         }.preferredColorScheme(.dark)
     }
 }

@@ -34,7 +34,7 @@ struct WorkoutLoggerApp: App {
                             }
                             Spacer()
                         }
-                        ResetPassword(forgotPasswordCode: $forgotPasswordCode)
+                        ResetPassword(forgotPasswordCode: $forgotPasswordCode, showSheet: $showSheet)
                     }.interactiveDismissDisabled()
                 }
         }

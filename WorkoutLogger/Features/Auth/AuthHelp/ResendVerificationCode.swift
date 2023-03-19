@@ -42,7 +42,10 @@ struct ResendVerificationCode: View {
                     .font(.title)
                 Spacer()
             }
-            Text("Enter in the email of the account you've already created")
+            HStack {
+                Text("Enter in the email of the account you've already created").foregroundColor(.secondaryText)
+                Spacer()
+            }
             TextField("Email", text: $email)
                 .keyboardType(.emailAddress)
                 .textFieldStyle(TappableTextFieldStyle())
