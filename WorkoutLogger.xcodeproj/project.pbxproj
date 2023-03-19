@@ -112,7 +112,8 @@
 		2864844929369B6C00918D88 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2864844829369B6C00918D88 /* UserViewModel.swift */; };
 		2865A80D293AC21700020C7A /* WorkoutSessionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2865A80C293AC21700020C7A /* WorkoutSessionParser.swift */; };
 		2865A813293B274600020C7A /* AddExerciseRoutineAlert.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2865A812293B274600020C7A /* AddExerciseRoutineAlert.View.swift */; };
-		286AD2BA29C3B93E00827F12 /* ResendCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286AD2B929C3B93E00827F12 /* ResendCode.swift */; };
+		286AD2BA29C3B93E00827F12 /* ResendVerificationCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286AD2B929C3B93E00827F12 /* ResendVerificationCode.swift */; };
+		2882D5C129C67B720003F4B9 /* PasswordResetCredentials.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2882D5C029C67B720003F4B9 /* PasswordResetCredentials.graphql.swift */; };
 		2887D0122969437400B673A1 /* schema.graphqls in Resources */ = {isa = PBXBuildFile; fileRef = 2887CFFE2969437400B673A1 /* schema.graphqls */; };
 		2887D0132969437400B673A1 /* AddWorkoutSessionMutation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2887D0012969437400B673A1 /* AddWorkoutSessionMutation.graphql */; };
 		2887D0142969437400B673A1 /* UpdateWorkoutRoutineMutation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2887D0022969437400B673A1 /* UpdateWorkoutRoutineMutation.graphql */; };
@@ -173,10 +174,15 @@
 		28E03C612941AB7000B38824 /* AddWorkoutSession.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E03C602941AB7000B38824 /* AddWorkoutSession.View.swift */; };
 		28E60BB5297BCCB200CDCCE9 /* DeleteExerciseMutation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 28E60BB4297BCCB200CDCCE9 /* DeleteExerciseMutation.graphql */; };
 		28F14021293DCF8C00DF6857 /* Workout.ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F14020293DCF8C00DF6857 /* Workout.ViewModel.swift */; };
-		28F180A129C3D2CE007BED21 /* ForgotPasswordMutation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 28F180A029C3D2CE007BED21 /* ForgotPasswordMutation.graphql */; };
+		28F180A129C3D2CE007BED21 /* SendForgotPasswordLinkMutation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 28F180A029C3D2CE007BED21 /* SendForgotPasswordLinkMutation.graphql */; };
 		28F180A329C3D2E4007BED21 /* ResendVerificationCodeMutation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 28F180A229C3D2E4007BED21 /* ResendVerificationCodeMutation.graphql */; };
-		28F180A729C3D316007BED21 /* ForgotPasswordMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F180A529C3D316007BED21 /* ForgotPasswordMutation.graphql.swift */; };
-		28F180A929C4147F007BED21 /* ResendVerificationCodeMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F180A829C4147F007BED21 /* ResendVerificationCodeMutation.graphql.swift */; };
+		28F180AB29C41D41007BED21 /* SendForgotPasswordLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F180AA29C41D41007BED21 /* SendForgotPasswordLink.swift */; };
+		28F180AD29C4446D007BED21 /* ResetPasswordMutation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 28F180AC29C4446D007BED21 /* ResetPasswordMutation.graphql */; };
+		28F180B129C44AC0007BED21 /* ResendVerificationCodeMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F180AE29C44ABF007BED21 /* ResendVerificationCodeMutation.graphql.swift */; };
+		28F180B229C44AC0007BED21 /* ResetPasswordMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F180AF29C44ABF007BED21 /* ResetPasswordMutation.graphql.swift */; };
+		28F180B329C44AC0007BED21 /* SendForgotPasswordLinkMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F180B029C44ABF007BED21 /* SendForgotPasswordLinkMutation.graphql.swift */; };
+		28F180B629C44EA9007BED21 /* URLQueryParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F180B529C44EA9007BED21 /* URLQueryParameters.swift */; };
+		28F180B829C452E4007BED21 /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F180B729C452E4007BED21 /* ResetPassword.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -302,7 +308,8 @@
 		2864844829369B6C00918D88 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		2865A80C293AC21700020C7A /* WorkoutSessionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSessionParser.swift; sourceTree = "<group>"; };
 		2865A812293B274600020C7A /* AddExerciseRoutineAlert.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExerciseRoutineAlert.View.swift; sourceTree = "<group>"; };
-		286AD2B929C3B93E00827F12 /* ResendCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResendCode.swift; sourceTree = "<group>"; };
+		286AD2B929C3B93E00827F12 /* ResendVerificationCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResendVerificationCode.swift; sourceTree = "<group>"; };
+		2882D5C029C67B720003F4B9 /* PasswordResetCredentials.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordResetCredentials.graphql.swift; sourceTree = "<group>"; };
 		2887CFFE2969437400B673A1 /* schema.graphqls */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = schema.graphqls; sourceTree = "<group>"; };
 		2887D0012969437400B673A1 /* AddWorkoutSessionMutation.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AddWorkoutSessionMutation.graphql; sourceTree = "<group>"; };
 		2887D0022969437400B673A1 /* UpdateWorkoutRoutineMutation.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UpdateWorkoutRoutineMutation.graphql; sourceTree = "<group>"; };
@@ -365,10 +372,16 @@
 		28E03C602941AB7000B38824 /* AddWorkoutSession.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutSession.View.swift; sourceTree = "<group>"; };
 		28E60BB4297BCCB200CDCCE9 /* DeleteExerciseMutation.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = DeleteExerciseMutation.graphql; sourceTree = "<group>"; };
 		28F14020293DCF8C00DF6857 /* Workout.ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.ViewModel.swift; sourceTree = "<group>"; };
-		28F180A029C3D2CE007BED21 /* ForgotPasswordMutation.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = ForgotPasswordMutation.graphql; sourceTree = "<group>"; };
+		28F180A029C3D2CE007BED21 /* SendForgotPasswordLinkMutation.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = SendForgotPasswordLinkMutation.graphql; sourceTree = "<group>"; };
 		28F180A229C3D2E4007BED21 /* ResendVerificationCodeMutation.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = ResendVerificationCodeMutation.graphql; sourceTree = "<group>"; };
-		28F180A529C3D316007BED21 /* ForgotPasswordMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordMutation.graphql.swift; sourceTree = "<group>"; };
-		28F180A829C4147F007BED21 /* ResendVerificationCodeMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResendVerificationCodeMutation.graphql.swift; sourceTree = "<group>"; };
+		28F180AA29C41D41007BED21 /* SendForgotPasswordLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendForgotPasswordLink.swift; sourceTree = "<group>"; };
+		28F180AC29C4446D007BED21 /* ResetPasswordMutation.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = ResetPasswordMutation.graphql; sourceTree = "<group>"; };
+		28F180AE29C44ABF007BED21 /* ResendVerificationCodeMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResendVerificationCodeMutation.graphql.swift; sourceTree = "<group>"; };
+		28F180AF29C44ABF007BED21 /* ResetPasswordMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordMutation.graphql.swift; sourceTree = "<group>"; };
+		28F180B029C44ABF007BED21 /* SendForgotPasswordLinkMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendForgotPasswordLinkMutation.graphql.swift; sourceTree = "<group>"; };
+		28F180B429C44D18007BED21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		28F180B529C44EA9007BED21 /* URLQueryParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLQueryParameters.swift; sourceTree = "<group>"; };
+		28F180B729C452E4007BED21 /* ResetPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassword.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -423,6 +436,7 @@
 				284E512729B2E0B7007977B9 /* TextFields.swift */,
 				28C35F0729BC49300009FA9B /* NotesView.swift */,
 				28C072E329BFD9F100602821 /* ErrorAlert.swift */,
+				28F180B529C44EA9007BED21 /* URLQueryParameters.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -527,19 +541,20 @@
 				281E0F89298101BC00C81386 /* DeleteWorkoutRoutineMutation.graphql.swift */,
 				28336C6129C17C4C009E6A67 /* DeleteUserMutation.graphql.swift */,
 				289FDE35299CA6C100FA9990 /* UpdateSetMutation.graphql.swift */,
-				28F180A529C3D316007BED21 /* ForgotPasswordMutation.graphql.swift */,
 				281E0F8A298101BC00C81386 /* AddSetMutation.graphql.swift */,
 				284E512329B2C0F4007977B9 /* UpdateWorkoutSessionMutation.graphql.swift */,
 				281E0F8B298101BC00C81386 /* CreateWorkoutRoutineMutation.graphql.swift */,
 				281E0F8C298101BC00C81386 /* LoginMutation.graphql.swift */,
-				281E0F8D298101BC00C81386 /* AddWorkoutSessionMutation.graphql.swift */,
-				28F180A829C4147F007BED21 /* ResendVerificationCodeMutation.graphql.swift */,
 				281E0F8E298101BC00C81386 /* UpdateWorkoutRoutineMutation.graphql.swift */,
 				281E0F8F298101BD00C81386 /* SignupMutation.graphql.swift */,
 				281E0F90298101BD00C81386 /* DeleteWorkoutSessionMutation.graphql.swift */,
 				281E0F91298101BD00C81386 /* RefreshAccessTokenMutation.graphql.swift */,
 				281E0F92298101BD00C81386 /* DeleteExerciseMutation.graphql.swift */,
 				281E0F93298101BD00C81386 /* UpdateExerciseMutation.graphql.swift */,
+				281E0F8D298101BC00C81386 /* AddWorkoutSessionMutation.graphql.swift */,
+				28F180AE29C44ABF007BED21 /* ResendVerificationCodeMutation.graphql.swift */,
+				28F180AF29C44ABF007BED21 /* ResetPasswordMutation.graphql.swift */,
+				28F180B029C44ABF007BED21 /* SendForgotPasswordLinkMutation.graphql.swift */,
 			);
 			path = Mutations;
 			sourceTree = "<group>";
@@ -610,6 +625,7 @@
 				281E0FB2298101BD00C81386 /* SetEntryInput.graphql.swift */,
 				284E512529B2C110007977B9 /* UpdateWorkoutSessionInput.graphql.swift */,
 				281E0FB3298101BD00C81386 /* SignupInput.graphql.swift */,
+				2882D5C029C67B720003F4B9 /* PasswordResetCredentials.graphql.swift */,
 				281E0FB4298101BD00C81386 /* UpdateWorkoutRoutineInput.graphql.swift */,
 				281E0FB5298101BD00C81386 /* ExerciseInput.graphql.swift */,
 				281E0FB6298101BD00C81386 /* ExerciseRoutineInput.graphql.swift */,
@@ -694,7 +710,9 @@
 		286AD2B829C3B90F00827F12 /* AuthHelp */ = {
 			isa = PBXGroup;
 			children = (
-				286AD2B929C3B93E00827F12 /* ResendCode.swift */,
+				286AD2B929C3B93E00827F12 /* ResendVerificationCode.swift */,
+				28F180AA29C41D41007BED21 /* SendForgotPasswordLink.swift */,
+				28F180B729C452E4007BED21 /* ResetPassword.swift */,
 			);
 			path = AuthHelp;
 			sourceTree = "<group>";
@@ -746,8 +764,9 @@
 				289FDE33299CA5E900FA9990 /* UpdateSetEntryMutation.graphql */,
 				284E512129B2BF74007977B9 /* UpdateWorkoutSessionMutation.graphql */,
 				28336C5B29C17B74009E6A67 /* DeleteUserMutation.graphql */,
-				28F180A029C3D2CE007BED21 /* ForgotPasswordMutation.graphql */,
+				28F180A029C3D2CE007BED21 /* SendForgotPasswordLinkMutation.graphql */,
 				28F180A229C3D2E4007BED21 /* ResendVerificationCodeMutation.graphql */,
+				28F180AC29C4446D007BED21 /* ResetPasswordMutation.graphql */,
 			);
 			path = Mutations;
 			sourceTree = "<group>";
@@ -788,6 +807,7 @@
 		2895BB4A292626A500A16CF8 /* WorkoutLogger */ = {
 			isa = PBXGroup;
 			children = (
+				28F180B429C44D18007BED21 /* Info.plist */,
 				283DAA1C2936AC0300AB2C18 /* Config.swift */,
 				2895BB4B292626A500A16CF8 /* WorkoutLoggerApp.swift */,
 				2841B83B29347D1B00B4AC76 /* CustomColors.swift */,
@@ -1104,12 +1124,13 @@
 				288A249329762CC700F8F6E3 /* DeleteWorkoutSessionMutation.graphql in Resources */,
 				28336C5A29C17B40009E6A67 /* UserFull.graphql in Resources */,
 				280378D029713EEA00A0A8E2 /* MutableExerciseRoutineDetails.graphql in Resources */,
+				28F180AD29C4446D007BED21 /* ResetPasswordMutation.graphql in Resources */,
 				2887D01A2969437400B673A1 /* GetWorkoutSession.graphql in Resources */,
 				2887D0172969437400B673A1 /* RefreshMutation.graphql in Resources */,
 				289FDE34299CA5E900FA9990 /* UpdateSetEntryMutation.graphql in Resources */,
 				2887D0142969437400B673A1 /* UpdateWorkoutRoutineMutation.graphql in Resources */,
 				2887D0192969437400B673A1 /* CreateWorkoutRoutine.graphql in Resources */,
-				28F180A129C3D2CE007BED21 /* ForgotPasswordMutation.graphql in Resources */,
+				28F180A129C3D2CE007BED21 /* SendForgotPasswordLinkMutation.graphql in Resources */,
 				289FDE38299CA76900FA9990 /* MutableSetEntryDetails.graphql in Resources */,
 				281C66DA296A73A200906212 /* ExerciseDetails.graphql in Resources */,
 				2887D01E2969437400B673A1 /* WorkoutRoutine.graphql in Resources */,
@@ -1169,7 +1190,7 @@
 				281E0F712980ED6900C81386 /* EditSetEntryList.swift in Sources */,
 				2858C563292B4088008DEA17 /* CreateWorkout.View.swift in Sources */,
 				28336C6629C18597009E6A67 /* User.graphql.swift in Sources */,
-				28F180A929C4147F007BED21 /* ResendVerificationCodeMutation.graphql.swift in Sources */,
+				28F180B129C44AC0007BED21 /* ResendVerificationCodeMutation.graphql.swift in Sources */,
 				2864844929369B6C00918D88 /* UserViewModel.swift in Sources */,
 				281E0FDC298101BD00C81386 /* WorkoutRoutine.graphql.swift in Sources */,
 				281E0FEA298101BD00C81386 /* SetEntryInput.graphql.swift in Sources */,
@@ -1188,7 +1209,6 @@
 				28F14021293DCF8C00DF6857 /* Workout.ViewModel.swift in Sources */,
 				284E512829B2E0B7007977B9 /* TextFields.swift in Sources */,
 				2809EF662926F10C00D0FF5B /* AuthService.swift in Sources */,
-				28F180A729C3D316007BED21 /* ForgotPasswordMutation.graphql.swift in Sources */,
 				281E0F742980F38300C81386 /* AddSetEntry.swift in Sources */,
 				28C072E429BFD9F100602821 /* ErrorAlert.swift in Sources */,
 				2865A813293B274600020C7A /* AddExerciseRoutineAlert.View.swift in Sources */,
@@ -1199,13 +1219,14 @@
 				28B344A7296E6F290076FE50 /* EditExerciseRoutineList.View.swift in Sources */,
 				28336C6429C17C59009E6A67 /* UserQuery.graphql.swift in Sources */,
 				281E0FDF298101BD00C81386 /* RefreshSuccess.graphql.swift in Sources */,
-				286AD2BA29C3B93E00827F12 /* ResendCode.swift in Sources */,
+				286AD2BA29C3B93E00827F12 /* ResendVerificationCode.swift in Sources */,
 				2853329C292ABE4300BACB6A /* WorkoutList.View.swift in Sources */,
 				281E0FBF298101BD00C81386 /* WorkoutRoutineFull.graphql.swift in Sources */,
 				281E0FCD298101BD00C81386 /* DeleteWorkoutSessionMutation.graphql.swift in Sources */,
 				281E0FCC298101BD00C81386 /* SignupMutation.graphql.swift in Sources */,
 				281E0FDD298101BD00C81386 /* WorkoutRoutineEdge.graphql.swift in Sources */,
 				28CF40D5298243A5006F5D5F /* SwipeItem.swift in Sources */,
+				28F180B329C44AC0007BED21 /* SendForgotPasswordLinkMutation.graphql.swift in Sources */,
 				2853329F292ABF8D00BACB6A /* ProfileView.swift in Sources */,
 				28E03C5529401E8900B38824 /* PullToRefresh.swift in Sources */,
 				285332A2292AE9A000BACB6A /* AuthenticationProvider.swift in Sources */,
@@ -1248,6 +1269,7 @@
 				281E0FD7298101BD00C81386 /* Time.swift in Sources */,
 				283DAA2A2936DCC000AB2C18 /* WorkoutListItem.View.swift in Sources */,
 				281E0FD4298101BD00C81386 /* WorkoutRoutineQuery.graphql.swift in Sources */,
+				28F180B229C44AC0007BED21 /* ResetPasswordMutation.graphql.swift in Sources */,
 				28C35F0829BC49300009FA9B /* NotesView.swift in Sources */,
 				281E0FDE298101BD00C81386 /* AuthResult.graphql.swift in Sources */,
 				28DBDC74296D1DD8001B8815 /* LocalCacheMutator.swift in Sources */,
@@ -1258,6 +1280,7 @@
 				2809EF5D2926EDA100D0FF5B /* Signup.ViewModel.swift in Sources */,
 				281E0FF1298101BD00C81386 /* SchemaMetadata.graphql.swift in Sources */,
 				281E0FEE298101BD00C81386 /* ExerciseRoutineInput.graphql.swift in Sources */,
+				28F180AB29C41D41007BED21 /* SendForgotPasswordLink.swift in Sources */,
 				2858C574292D67FB008DEA17 /* Interceptor.swift in Sources */,
 				281E0FE8298101BD00C81386 /* UpdateExerciseInput.graphql.swift in Sources */,
 				281E0FBB298101BD00C81386 /* ExerciseFull.graphql.swift in Sources */,
@@ -1276,7 +1299,10 @@
 				289F15602939F7830074BBE8 /* WorkoutSessionListItem.View.swift in Sources */,
 				289FDE3A299CA7D900FA9990 /* UpdateSetEntryInput.graphql.swift in Sources */,
 				281E0FE2298101BD00C81386 /* PageInfo.graphql.swift in Sources */,
+				28F180B829C452E4007BED21 /* ResetPassword.swift in Sources */,
+				2882D5C129C67B720003F4B9 /* PasswordResetCredentials.graphql.swift in Sources */,
 				281E0FBD298101BD00C81386 /* ExerciseRoutineFull.graphql.swift in Sources */,
+				28F180B629C44EA9007BED21 /* URLQueryParameters.swift in Sources */,
 				28BF4E5C294EC66700AB8E49 /* EditExercise.swift in Sources */,
 				280B6A3929297FAA004D0F16 /* Auth.swift in Sources */,
 				289A54D32955116F00DDED7D /* ExerciseRoutineViewModel.swift in Sources */,
@@ -1399,18 +1425,20 @@
 				DEVELOPMENT_TEAM = GMQC6K47Q9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WorkoutLogger/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Stronk;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Neil-inc.WorkoutLogger";
+				PRODUCT_BUNDLE_IDENTIFIER = "Neil-inc.UntilFailure";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1581,18 +1609,20 @@
 				DEVELOPMENT_TEAM = GMQC6K47Q9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WorkoutLogger/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Stronk;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Neil-inc.WorkoutLogger";
+				PRODUCT_BUNDLE_IDENTIFIER = "Neil-inc.UntilFailure";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1611,18 +1641,20 @@
 				DEVELOPMENT_TEAM = GMQC6K47Q9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WorkoutLogger/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Stronk;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Neil-inc.WorkoutLogger";
+				PRODUCT_BUNDLE_IDENTIFIER = "Neil-inc.UntilFailure";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

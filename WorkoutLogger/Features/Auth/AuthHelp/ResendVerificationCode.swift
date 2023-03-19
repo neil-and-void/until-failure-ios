@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct ResendCode: View {
-    let workoutLoggerApiService = WorkoutLoggerAPIService(client: WorkoutLoggerAPIClient.client)
+struct ResendVerificationCode: View {
+    private var service = AuthService()
 
     @State
     var email = ""
@@ -22,14 +22,13 @@ struct ResendCode: View {
 
     func sendCode() {
         isLoading = true
-        workoutLoggerApiService.resendEmailVerification(email: email, completion: { result in
+        service.resendEmailVerification(email: email, completion: { result in
             switch result {
             case .success:
                 error = nil
                 sent = true
             case .failure(let err):
                 error = err
-                print(error)
                 sent = false
             }
             isLoading = false

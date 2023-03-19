@@ -12,6 +12,9 @@ protocol AuthServiceProtocol {
     func signup(email: String, name: String, password: String, confirmPassword: String, completion: @escaping (Result<AuthResult, WorkoutLoggerError>) -> Void)
     func login(email: String, password: String, completion: @escaping (Result<AuthResult, WorkoutLoggerError>) -> Void)
     func refreshAccessToken(refreshToken: String, completion: @escaping (Result<String, WorkoutLoggerError>) -> Void)
+    func resendEmailVerification(email: String, completion: @escaping (Result<Bool, WorkoutLoggerError>) -> Void)
+    func sendForgotPasswordLink(email: String, completion: @escaping (Result<Bool, WorkoutLoggerError>) -> Void)
+    func resetPassword(newPassword: String, confirmPassword: String, code: String, completion: @escaping (Result<Bool, WorkoutLoggerError>) -> Void)
 }
 
 final class AuthService: AuthServiceProtocol {
@@ -19,6 +22,13 @@ final class AuthService: AuthServiceProtocol {
     
     init(client: ApolloClient = AuthAPIClient.client) {
         self.client = client
+    }
+
+    private func parseError(_ err: Error) -> WorkoutLoggerError {
+        if let err = err as? WorkoutLoggerError {
+            return err
+        }
+        return WorkoutLoggerError.unknown
     }
     
     func signup(
@@ -103,6 +113,76 @@ final class AuthService: AuthServiceProtocol {
                 completion(Result.failure(WorkoutLoggerError.networkError))
             }
 
+        }
+    }
+
+    func resendEmailVerification(email: String, completion: @escaping (Result<Bool, WorkoutLoggerError>) -> Void) {
+        self.client.perform(mutation: WorkoutLoggerAPI.ResendVerificationCodeMutation(email: email)) { result in
+            switch result {
+            case .success(let response):
+                if let errors = response.errors {
+                    completion(Result.failure(.GraphQLError(gqlError: errors[0].message)))
+                    return
+                }
+
+                guard let deleteSuccess = response.data?.resendVerificationCode else {
+                    completion(Result.failure(.unknown))
+                    return
+                }
+
+                completion(.success(deleteSuccess))
+                return
+
+            case .failure(let err):
+                return completion(.failure(self.parseError(err)))
+            }
+        }
+    }
+
+    func sendForgotPasswordLink(email: String, completion: @escaping (Result<Bool, WorkoutLoggerError>) -> Void) {
+        self.client.perform(mutation: WorkoutLoggerAPI.SendForgotPasswordLinkMutation(email: email)) { result in
+            switch result {
+            case .success(let response):
+                if let errors = response.errors {
+                    completion(Result.failure(.GraphQLError(gqlError: errors[0].message)))
+                    return
+                }
+
+                guard let deleteSuccess = response.data?.sendForgotPasswordLink else {
+                    completion(Result.failure(.unknown))
+                    return
+                }
+
+                completion(.success(deleteSuccess))
+                return
+
+            case .failure(let err):
+                return completion(.failure(self.parseError(err)))
+            }
+        }
+    }
+
+    func resetPassword(newPassword: String, confirmPassword: String, code: String, completion: @escaping (Result<Bool, WorkoutLoggerError>) -> Void) {
+        let passwordResetCredentials = WorkoutLoggerAPI.PasswordResetCredentials(code: code, password: newPassword, confirmPassword: confirmPassword)
+        self.client.perform(mutation: WorkoutLoggerAPI.ResetPasswordMutation(passwordResetCredentials: passwordResetCredentials)) { result in
+            switch result {
+            case .success(let response):
+                if let errors = response.errors {
+                    completion(Result.failure(.GraphQLError(gqlError: errors[0].message)))
+                    return
+                }
+
+                guard let deleteSuccess = response.data?.resetPassword else {
+                    completion(Result.failure(.unknown))
+                    return
+                }
+
+                completion(.success(deleteSuccess))
+                return
+
+            case .failure(let err):
+                return completion(.failure(self.parseError(err)))
+            }
         }
     }
 }

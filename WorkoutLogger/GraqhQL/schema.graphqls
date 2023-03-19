@@ -149,6 +149,12 @@ input UpdateSetEntryInput {
   reps: Int
 }
 
+input PasswordResetCredentials {
+  code: String!
+  password: String!
+  confirmPassword: String!
+}
+
 ### END INPUTS ###
 
 type Query {
@@ -164,7 +170,8 @@ type Query {
 
 type Mutation {
   deleteUser: Int!
-  forgotPassword(email: String!): Boolean!
+  resetPassword(passwordResetCredentials: PasswordResetCredentials!): Boolean!
+  sendForgotPasswordLink(email: String!): Boolean!
   resendVerificationCode(email: String!): Boolean!
 
   login(loginInput: LoginInput!): AuthResult!
@@ -190,7 +197,6 @@ type Mutation {
   ): WorkoutSession!
   deleteWorkoutSession(workoutSessionId: ID!): Int!
 
-  # addImpromptuExercise(workoutSession, exerciseRoutine:{sets, reps, name, workoutRoutineId}) for later
   addExercise(workoutSessionId: ID!, exercise: ExerciseInput!): Exercise!
   updateExercise(exerciseId: ID!, exercise: UpdateExerciseInput!): Exercise!
   deleteExercise(exerciseId: ID!): Int!

@@ -10,6 +10,7 @@ import SwiftUI
 struct LoginView: View {
     @StateObject private var loginViewModel = LoginViewModel(service: AuthService())
     @State private var showSheet = false
+    @State private var forgotPasswordSheet = false
     @EnvironmentObject private var authState: AuthenticationState
     
     var body: some View {
@@ -38,10 +39,12 @@ struct LoginView: View {
             
             HStack {
                 Button("Signup", action: {
-                    showSheet.toggle()
+                    showSheet = true
                 })
                 Spacer()
-                Button("Forgot password?", action:{})
+                Button("Forgot password?", action:{
+                    forgotPasswordSheet = true
+                })
             }
             .padding(.bottom, 15)
             .foregroundColor(.white)
@@ -58,6 +61,22 @@ struct LoginView: View {
             
         }
         .padding()
+        .sheet(isPresented: $forgotPasswordSheet) {
+            ZStack {
+                VStack {
+                    HStack {
+                        Spacer()
+                        Button(action: { forgotPasswordSheet = false }) {
+                            Text("Cancel")
+                        }
+                        .padding()
+                        .foregroundColor(.white)
+                    }
+                    Spacer()
+                }
+                SendForgotPasswordLink()
+            }
+        }
         .sheet(isPresented: $showSheet) {
             NavigationView {
                 SignupView()
