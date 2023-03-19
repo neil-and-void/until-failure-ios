@@ -10,6 +10,7 @@ import SwiftUI
 struct LoginView: View {
     @StateObject private var loginViewModel = LoginViewModel(service: AuthService())
     @State private var showSheet = false
+    @State var forgotPasswordSheet = false
     @EnvironmentObject private var authState: AuthenticationState
     
     var body: some View {
@@ -35,8 +36,20 @@ struct LoginView: View {
                 .padding()
                 .background(.thinMaterial)
                 .cornerRadius(10)
-                .padding(.bottom, 15)
-
+            
+            HStack {
+                Button("Signup", action: {
+                    showSheet = true
+                })
+                Spacer()
+                Button("Forgot password?", action:{
+                    forgotPasswordSheet = true
+                })
+            }
+            .padding(.bottom, 15)
+            .foregroundColor(.white)
+            .fontWeight(.semibold)
+            
             Button(action: { loginViewModel.submit(setAuth: authState.setAuth) } ) {
                 if loginViewModel.isLoading {
                     ProgressView()
@@ -45,33 +58,35 @@ struct LoginView: View {
                 }
             }.buttonStyle(RoundedButton())
             
-            Button(action: { showSheet.toggle() }) {
-                Text("Create an account")
-            }
-            .buttonStyle(TextButton())
-            .sheet(isPresented: $showSheet) {
-                ZStack {
+            
+        }
+        .padding()
+        .sheet(isPresented: $forgotPasswordSheet) {
+            ZStack {
+                VStack {
                     HStack {
-                        VStack(alignment: .leading) {
-                            
-                            Button(action: { showSheet.toggle()}) {
-                                Text("Cancel")
-                            }
-                            .buttonStyle(TextButton())
-                            .padding()
- 
-                            Spacer()
-                        }
-                        
                         Spacer()
+                        Button(action: { forgotPasswordSheet = false }) {
+                            Text("Cancel")
+                        }
+                        .padding()
+                        .foregroundColor(.white)
                     }
-                    
-                    SignupView()
-
-                }.preferredColorScheme(.dark)
-
+                    Spacer()
+                }
+                SendForgotPasswordLink(showSheet: $forgotPasswordSheet)
             }
-        }.padding()
+        }
+        .sheet(isPresented: $showSheet) {
+            NavigationView {
+                SignupView()
+                    .toolbar {
+                        Button(action: { showSheet.toggle()}) {
+                            Text("Cancel")
+                        }.foregroundColor(.white)
+                    }
+            }.accentColor(.white)
+        }.preferredColorScheme(.dark)
     }
 }
 

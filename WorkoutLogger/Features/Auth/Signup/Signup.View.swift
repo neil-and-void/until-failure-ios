@@ -22,13 +22,13 @@ struct SignupView: View {
                     .multilineTextAlignment(.center)
             }
             
-            TextField("Name", text: $signupViewModel.name)
+            UsernameField(placeholder: "Name", text: $signupViewModel.name)
                 .padding()
                 .background(.thinMaterial)
                 .cornerRadius(10)
                 .textInputAutocapitalization(.never)
  
-            TextField("Email", text: $signupViewModel.email)
+            EmailField(placeholder: "Email", text: $signupViewModel.email)
                 .padding()
                 .background(.thinMaterial)
                 .cornerRadius(10)
@@ -36,13 +36,13 @@ struct SignupView: View {
                 .accessibilityIdentifier("signup.emailTextField")
                 .keyboardType(.emailAddress)
             
-            SecureField("Password", text: $signupViewModel.password)
+            PasswordField(placeholder: "Password", text: $signupViewModel.password)
                 .padding()
                 .background(.thinMaterial)
                 .cornerRadius(10)
                 .accessibilityIdentifier("signup.passwordSecureField")
             
-            SecureField("Confirm Password", text: $signupViewModel.confirmPassword)
+            PasswordField(placeholder: "Confirm Password", text: $signupViewModel.confirmPassword)
                 .padding()
                 .background(.thinMaterial)
                 .cornerRadius(10)
@@ -56,7 +56,10 @@ struct SignupView: View {
                 }
             }
             .buttonStyle(RoundedButton())
-
+            Text("Already have an account?")
+            NavigationLink(destination: ResendVerificationCode()) {
+                Text("Resend email verification").fontWeight(.semibold).foregroundColor(.white)
+            }
         }.padding()
     }
 }

@@ -22,12 +22,16 @@ struct AddSetEntry: View {
             )
         }, label: {
             HStack{
-                Text("Add set").padding(.trailing, 8)
+                Text("Add Set").font(.system(size: 16, weight: .medium))
                 if setEntryViewModel.isLoading {
-                    ProgressView()
+                    ProgressView().padding(.leading, 8)
                 }
             }
-        }).buttonStyle(TextButton())
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 8)
+            .background(.thinMaterial)
+            .cornerRadius(8)
+        })
     }
 }
 

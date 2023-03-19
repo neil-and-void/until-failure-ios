@@ -13,26 +13,31 @@ struct WorkoutSessionListView: View {
     @State private var showDeleteAlert = false
     @State private var showSheet = false
 
-    let limit = 21
+    let limit = 30
     
     var body: some View {
 
         NavigationStack {
             
             VStack {
-                
+
+                if workoutSessionViewModel.isLoading {
+                    ProgressView().padding(.vertical, 32)
+                }
+
                 List {
                     
-                    if workoutSessionViewModel.workoutSessionList.count > 0 {
+                    if !workoutSessionViewModel.isLoading && workoutSessionViewModel.workoutSessionList.count > 0  {
 
                         ForEach(workoutSessionViewModel.workoutSessionList, id: \.self.id) { workoutSession in
 
-                            NavigationLink(destination: EditWorkoutSession(workoutSessionId: workoutSession.id, end: workoutSession.end)) {
+                            NavigationLink(destination: EditWorkoutSession(workoutSessionId: workoutSession.id, workoutName: workoutSession.workoutRoutine.name, end: workoutSession.end)) {
                                 
                                 WorkoutSessionListItem(active: true, workoutSession: workoutSession)
                                 
                             }
-                            
+
+
                         }
                         .onDelete(perform: { indexSet in
                             showDeleteAlert.toggle()
@@ -42,21 +47,30 @@ struct WorkoutSessionListView: View {
                                 })
                             })
                         })
-//                        .alert("Are you sure you want to delete this workout session", isPresented: $showDeleteAlert) {
-//                            Button("Cancel", role: .cancel) { showDeleteAlert.toggle() }
-//                            Button("Delete", role: .destructive) {
-//                                deleteWorkoutRoutine()
-//                                showDeleteAlert.toggle()
-//                            }
-//                        }
+                        //                        .alert("Are you sure you want to delete this workout session", isPresented: $showDeleteAlert) {
+                        //                            Button("Cancel", role: .cancel) { showDeleteAlert.toggle() }
+                        //                            Button("Delete", role: .destructive) {
+                        //                                deleteWorkoutRoutine()
+                        //                                showDeleteAlert.toggle()
+                        //                            }
+                        //                        }
 
-                    } else {
-                        
-                        Text("You don't have any workouts here, start a workout by tapping \"+\" button at the top")
-                            .foregroundColor(.tertiaryText)
-                            .multilineTextAlignment(.center)
-                            .padding()
-                        
+                        HStack {
+                            Spacer()
+                            Text("Showing up to last \(String(limit)) workouts").foregroundColor(.tertiaryText)
+                            Spacer()
+                        }.listRowSeparator(.hidden)
+
+                    } else if !workoutSessionViewModel.isLoading && workoutSessionViewModel.workoutSessionList.count == 0 {
+                        HStack {
+                            Spacer()
+                            Text("You don't have any workouts here, start a workout by tapping \"+\" button at the top")
+                                .foregroundColor(.tertiaryText)
+                                .multilineTextAlignment(.center)
+                                .padding()
+                            Spacer()
+                        }.listRowSeparator(.hidden)
+
                     }
                     
                 }
@@ -90,17 +104,22 @@ struct WorkoutSessionListView: View {
                 }
                 
             }
-            .sheet(isPresented: $showSheet, onDismiss: {
-                workoutSessionViewModel.getWorkoutSessions(limit: 21, after: "", withNetwork: true) }) {
+            .sheet(isPresented: $showSheet) {
                 AddWorkoutSession(showSheet: $showSheet, onSelection: { workoutRoutineId in
-                    workoutSessionViewModel.addWorkoutSession(workoutRoutineId: workoutRoutineId, start: Date())
-                    showSheet = false
+                    workoutSessionViewModel.addWorkoutSession(
+                        workoutRoutineId: workoutRoutineId,
+                        start: Date(),
+                        onSuccess: {
+                            showSheet = false
+                            workoutSessionViewModel.getWorkoutSessions(limit: limit, after: "", withNetwork: true)
+                        }
+                    )
                 }).presentationDetents([.medium])
- 
+
             }
 
-        }
-        
+        }.errorAlert($workoutSessionViewModel.error, confirm: {})
+
     }
 }
 

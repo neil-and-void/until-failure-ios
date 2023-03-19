@@ -11,11 +11,15 @@ class LoginViewModel: ObservableObject {
     private let service: AuthServiceProtocol
     private let keychain: KeychainServiceProtocol
 
-    @Published var email: String = ""
-    @Published var password: String = ""
+    @Published
+    var email: String = ""
+    @Published
+    var password: String = ""
     
-    @Published var isLoading: Bool = false
-    @Published var error: String?
+    @Published
+    var isLoading: Bool = false
+    @Published
+    var error: String?
 
     init(service: AuthServiceProtocol, keychain: KeychainServiceProtocol = KeychainService()) {
         self.service = service

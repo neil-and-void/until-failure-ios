@@ -78,7 +78,10 @@ struct AddWorkoutSession: View {
                     
                 } else {
                     
-                    Text("No routines here...")
+                    Text("You don't have any routines, go to the workouts tab and add one")
+                        .padding(.horizontal, 20)
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.tertiaryText)
                     
                 }
                 

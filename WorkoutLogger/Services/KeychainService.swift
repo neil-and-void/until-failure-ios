@@ -33,7 +33,7 @@ final class KeychainService: KeychainServiceProtocol {
         let status = SecItemAdd(query, nil)
         
         if status != errSecSuccess {
-            print("Error: \(status)")
+            return
         }
         
         if status == errSecDuplicateItem {

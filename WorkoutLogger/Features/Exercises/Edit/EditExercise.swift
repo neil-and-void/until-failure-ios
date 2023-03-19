@@ -57,6 +57,7 @@ struct EditExercise: View {
                     exercise.sets.append(setEntry)
                 }
             )
+            .padding(.vertical, 8)
             
             Divider()
             

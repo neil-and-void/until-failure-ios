@@ -22,10 +22,15 @@ struct WorkoutListView: View {
         NavigationStack {
             
             VStack {
+
+                if workoutListViewModel.isLoading {
+                    ProgressView().padding(.vertical, 32)
+                }
                 
                 List {
                     
-                    if workoutListViewModel.workoutRoutineList.count > 0 {
+                    if !workoutListViewModel.isLoading && workoutListViewModel.workoutRoutineList.count > 0  {
+
                         
                         ForEach(workoutListViewModel.workoutRoutineList, id: \.self.id) { workoutRoutine in
                             
@@ -56,7 +61,8 @@ struct WorkoutListView: View {
 //                            }
 //                        }
  
-                    } else {
+                    } else if !workoutListViewModel.isLoading && workoutListViewModel.workoutRoutineList.count == 0 {
+
                         
                         Text("You don't have any routines here, tap the '+' above to add a workout")
                             .foregroundColor(.tertiaryText)

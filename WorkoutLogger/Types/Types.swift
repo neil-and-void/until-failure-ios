@@ -13,10 +13,10 @@ struct AuthResult {
     var accessToken: String
 }
 
-struct NewDraftExerciseRoutine {
-    var name: String = ""
-    var reps: Int = 0
-    var sets: Int = 0
+struct User {
+    var id: String
+    var name: String
+    var email: String
 }
 
 struct WorkoutRoutine: Identifiable {

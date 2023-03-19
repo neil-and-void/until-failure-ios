@@ -30,7 +30,7 @@ struct EditSetEntryListItem: View {
 
     func formattedPrevSetEntryString(_ prevSetEntry: SetEntry?) -> String {
         if let prevSetEntry = prevSetEntry {
-            return "\(prevSetEntry.weight) lbs x \(prevSetEntry.reps) reps"
+            return "\(prevSetEntry.weight) lbs x \(prevSetEntry.reps)"
         }
         return "-"
     }
@@ -72,6 +72,9 @@ struct EditSetEntryListItem: View {
                 }
                 .textFieldStyle(SetEntryTextFieldStyle())
         }
+        .padding(.vertical, 8)
+        .background(Color.bgSecondary)
+        .cornerRadius(8)
     }
 }
 
