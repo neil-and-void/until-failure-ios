@@ -37,7 +37,7 @@ struct ResetPassword: View {
             case .success:
                 error = nil
                 sent = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     showSheet = false
                 }
             case .failure(let err):
