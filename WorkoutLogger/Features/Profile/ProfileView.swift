@@ -16,14 +16,12 @@ struct ProfileView: View {
     private var showDeleteAccountAlert = false
     
     var body: some View {
-
         NavigationStack {
-            if (userViewModel.isLoading) {
-                ProgressView()
-            }
-            else if let user = userViewModel.user {
-                VStack(spacing: 20) {
-                    VStack {
+            VStack(spacing: 20) {
+                VStack {
+                    if (userViewModel.isLoading) {
+                        ProgressView()
+                    } else if let user = userViewModel.user {
                         Group {
                             HStack {
                                 Text("Name:")
@@ -37,47 +35,50 @@ struct ProfileView: View {
                             }
                         }.padding(.vertical, 16)
                     }
-                    .padding(.vertical, 8)
-                    Button(action: {
-                        userViewModel.logout() { loggedOut in
-                            authState.isAuthenticated = loggedOut
-                        }}) {
-                            Text("Logout")
-                        }.buttonStyle(RoundedButton())
-                    Spacer()
                 }
-                .padding(.horizontal)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Text("Profile")
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-                    }
-                    ToolbarItem(placement: .navigationBarTrailing, content: {
-                        Menu {
-                            Button("delete account", role: .destructive) {
-                                showDeleteAccountAlert = true
-                            }
-                        } label: {
-                            Image(systemName: "gearshape")
-                        }
-                    })
-                }
-                .alert(isPresented: $showDeleteAccountAlert) {
-                    Alert(
-                        title: Text("Are you sure you want to delete your account?"),
-                        primaryButton: .destructive(Text("Yes") , action: {
-                            userViewModel.deleteUser(success: {
-                                showDeleteAccountAlert = false
-                                userViewModel.logout(setAuth: { loggedOut in
-                                    authState.isAuthenticated = loggedOut
-                                })
-                            })
-                        }),
-                        secondaryButton: .cancel()
-                    )
-                }
+                .padding(.vertical, 8)
+
+
+                Button(action: {
+                    userViewModel.logout() { loggedOut in
+                        authState.isAuthenticated = loggedOut
+                    }}) {
+                        Text("Logout")
+                    }.buttonStyle(RoundedButton())
+                Spacer()
             }
+            .padding(.horizontal)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Text("Profile")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                }
+                ToolbarItem(placement: .navigationBarTrailing, content: {
+                    Menu {
+                        Button("delete account", role: .destructive) {
+                            showDeleteAccountAlert = true
+                        }
+                    } label: {
+                        Image(systemName: "gearshape")
+                    }
+                })
+            }
+            .alert(isPresented: $showDeleteAccountAlert) {
+                Alert(
+                    title: Text("Are you sure you want to delete your account?"),
+                    primaryButton: .destructive(Text("Yes") , action: {
+                        userViewModel.deleteUser(success: {
+                            showDeleteAccountAlert = false
+                            userViewModel.logout(setAuth: { loggedOut in
+                                authState.isAuthenticated = loggedOut
+                            })
+                        })
+                    }),
+                    secondaryButton: .cancel()
+                )
+            }
+
         }.onAppear(perform: {
             userViewModel.getUser()
         })
