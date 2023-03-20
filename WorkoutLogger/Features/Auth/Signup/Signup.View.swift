@@ -15,39 +15,39 @@ struct SignupView: View {
         VStack {
             Text("Signup")
                 .font(.system(size: 36))
-            
+
             if let error = signupViewModel.error {
                 Text(error)
                     .foregroundColor(.red)
                     .multilineTextAlignment(.center)
             }
-            
+
             UsernameField(placeholder: "Name", text: $signupViewModel.name)
                 .padding()
                 .background(.thinMaterial)
                 .cornerRadius(10)
                 .textInputAutocapitalization(.never)
- 
+
             EmailField(placeholder: "Email", text: $signupViewModel.email)
                 .padding()
                 .background(.thinMaterial)
                 .cornerRadius(10)
-                .textInputAutocapitalization(.never)
                 .accessibilityIdentifier("signup.emailTextField")
                 .keyboardType(.emailAddress)
-            
+                .textInputAutocapitalization(.never)
+
             PasswordField(placeholder: "Password", text: $signupViewModel.password)
                 .padding()
                 .background(.thinMaterial)
                 .cornerRadius(10)
                 .accessibilityIdentifier("signup.passwordSecureField")
-            
+
             PasswordField(placeholder: "Confirm Password", text: $signupViewModel.confirmPassword)
                 .padding()
                 .background(.thinMaterial)
                 .cornerRadius(10)
                 .padding(.bottom, 15)
-            
+
             Button(action: { signupViewModel.submit(setAuth: authState.setAuth) }) {
                 if signupViewModel.isLoading {
                     ProgressView()
@@ -56,11 +56,13 @@ struct SignupView: View {
                 }
             }
             .buttonStyle(RoundedButton())
-            Text("Already have an account?")
+            Text("Didn't get a code?")
             NavigationLink(destination: ResendVerificationCode()) {
                 Text("Resend email verification").fontWeight(.semibold).foregroundColor(.white)
             }
-        }.padding()
+            Spacer()
+        }
+        .padding()
     }
 }
 

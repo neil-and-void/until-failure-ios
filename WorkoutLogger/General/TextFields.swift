@@ -47,6 +47,7 @@ struct EmailField: UIViewRepresentable {
         textField.delegate = context.coordinator
         textField.placeholder = placeholder
         textField.textContentType = .emailAddress
+        textField.autocapitalizationType = .none
         return textField
     }
 
@@ -119,6 +120,7 @@ struct PasswordField: UIViewRepresentable {
         textField.delegate = context.coordinator
         textField.placeholder = placeholder
         textField.textContentType = .newPassword
+        textField.isSecureTextEntry = true
         return textField
     }
 

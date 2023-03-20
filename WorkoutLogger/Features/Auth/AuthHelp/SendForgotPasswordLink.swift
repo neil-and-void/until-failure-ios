@@ -49,7 +49,7 @@ struct SendForgotPasswordLink: View {
                 Spacer()
             }
             HStack {
-                Text("Enter in the email of account you forgot your password for").foregroundColor(.secondaryText)
+                Text("Enter in the email of account you forgot your password for.").foregroundColor(.secondaryText)
                 Spacer()
             }
             TextField("Email", text: $email)
@@ -72,6 +72,7 @@ struct SendForgotPasswordLink: View {
                 }
             })
             .buttonStyle(RoundedButton())
+            Spacer()
         }
         .onTapGesture {
             self.hideKeyboard()

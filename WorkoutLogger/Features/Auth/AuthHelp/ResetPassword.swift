@@ -76,6 +76,9 @@ struct ResetPassword: View {
                     }
                 })
                 .buttonStyle(RoundedButton())
+
+                Spacer()
+
             } else {
                 Text("Hmmm... something went wrong...")
             }

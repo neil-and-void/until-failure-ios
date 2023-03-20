@@ -16,8 +16,13 @@ struct LoginView: View {
     var body: some View {
         
         VStack() {
-            Text("Login")
-                .font(.system(size: 36))
+
+            Image("until-failure-icon")
+                .resizable()
+                .frame(width: 256.0, height: 256.0)
+
+            Text("Until Failure")
+                .font(.system(size: 32, weight: .semibold))
             
             if let error = loginViewModel.error {
                 Text(error)
@@ -57,24 +62,23 @@ struct LoginView: View {
                     Text("Login").bold()
                 }
             }.buttonStyle(RoundedButton())
-            
+
+            Spacer()
             
         }
         .padding()
         .sheet(isPresented: $forgotPasswordSheet) {
-            ZStack {
-                VStack {
-                    HStack {
-                        Spacer()
-                        Button(action: { forgotPasswordSheet = false }) {
-                            Text("Cancel")
-                        }
-                        .padding()
-                        .foregroundColor(.white)
-                    }
+            VStack {
+                HStack {
                     Spacer()
+                    Button(action: { forgotPasswordSheet = false }) {
+                        Text("Cancel")
+                    }
+                    .padding()
+                    .foregroundColor(.white)
                 }
                 SendForgotPasswordLink(showSheet: $forgotPasswordSheet)
+                Spacer()
             }
         }
         .sheet(isPresented: $showSheet) {
@@ -87,11 +91,5 @@ struct LoginView: View {
                     }
             }.accentColor(.white)
         }.preferredColorScheme(.dark)
-    }
-}
-
-struct Login_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView().environmentObject(AuthenticationState()).preferredColorScheme(.dark)
     }
 }
