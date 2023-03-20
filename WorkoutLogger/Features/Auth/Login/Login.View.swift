@@ -19,7 +19,7 @@ struct LoginView: View {
 
             Image("until-failure-icon")
                 .resizable()
-                .frame(width: 256.0, height: 256.0)
+                .frame(width: 128.0, height: 128.0)
 
             Text("Until Failure")
                 .font(.system(size: 32, weight: .semibold))
@@ -79,6 +79,9 @@ struct LoginView: View {
                 }
                 SendForgotPasswordLink(showSheet: $forgotPasswordSheet)
                 Spacer()
+            }
+            .onTapGesture {
+                self.hideKeyboard()
             }
         }
         .sheet(isPresented: $showSheet) {

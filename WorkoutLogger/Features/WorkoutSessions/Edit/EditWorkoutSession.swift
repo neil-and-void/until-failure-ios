@@ -47,9 +47,6 @@ struct EditWorkoutSession: View {
                             .listRowInsets(EdgeInsets())
                             .padding(.bottom, 8)
                             .listRowSeparator(.hidden)
-                            .onTapGesture {
-                                self.hideKeyboard()
-                            }
                         }
                         HStack {
                             Spacer()
@@ -69,6 +66,9 @@ struct EditWorkoutSession: View {
                         }.listRowSeparator(.hidden)
                     }.listStyle(.plain).refreshable {
                         workoutSessionViewModel.getWorkoutSession(workoutSessionId: workoutSessionId, withNetwork: true)
+                    }
+                    .onTapGesture {
+                        self.hideKeyboard()
                     }
                     .alert(isPresented: $showFinishWorkoutAlert) {
                         Alert(

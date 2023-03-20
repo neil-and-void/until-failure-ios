@@ -74,9 +74,6 @@ struct SendForgotPasswordLink: View {
             .buttonStyle(RoundedButton())
             Spacer()
         }
-        .onTapGesture {
-            self.hideKeyboard()
-        }
         .errorAlert($error, confirm: {})
         .padding()
     }

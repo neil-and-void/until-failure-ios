@@ -10,6 +10,8 @@ import SwiftUI
 struct SignupView: View {
     @StateObject private var signupViewModel = SignupViewModel(service: AuthService())
     @EnvironmentObject private var authState: AuthenticationState
+    @State
+    var showAlert = false
     
     var body: some View {
         VStack {
@@ -48,7 +50,7 @@ struct SignupView: View {
                 .cornerRadius(10)
                 .padding(.bottom, 15)
 
-            Button(action: { signupViewModel.submit(setAuth: authState.setAuth) }) {
+            Button(action: { signupViewModel.submit(success: { showAlert = true }) }) {
                 if signupViewModel.isLoading {
                     ProgressView()
                 } else {
@@ -56,6 +58,10 @@ struct SignupView: View {
                 }
             }
             .buttonStyle(RoundedButton())
+            .alert("Check your email for a verification link to start using Until Failure!", isPresented: $showAlert) {
+                Button("OK", role: .cancel) { }
+            }.tint(Color.primaryColor)
+
             Text("Didn't get a code?")
             NavigationLink(destination: ResendVerificationCode()) {
                 Text("Resend email verification").fontWeight(.semibold).foregroundColor(.white)

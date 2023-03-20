@@ -38,7 +38,7 @@ struct EditExercise: View {
                         exerciseViewModel.deleteExercise(exerciseId: exercise.id, onSuccess: onDelete)
                     }
                 } label: {
-                    Image(systemName: "ellipsis.circle").font(.system(size: 18, weight: .bold))
+                    Image(systemName: "ellipsis.circle").font(.system(size: 22, weight: .bold))
                 }
                 
             }

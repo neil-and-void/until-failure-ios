@@ -21,7 +21,6 @@ struct EditWorkoutRoutineListItem: View {
                 .cornerRadius(10)
             
             TextField("Sets", value: $exerciseRoutine.sets, formatter: NumberFormatter())
-                .padding(.horizontal)
                 .padding(.vertical, 4)
                 .background(.thinMaterial)
                 .cornerRadius(10)
@@ -30,7 +29,6 @@ struct EditWorkoutRoutineListItem: View {
                 .frame(width: 76)
             
             TextField("Reps", value: $exerciseRoutine.reps, formatter: NumberFormatter())
-                .padding(.horizontal)
                 .padding(.vertical, 4)
                 .background(.thinMaterial)
                 .cornerRadius(10)

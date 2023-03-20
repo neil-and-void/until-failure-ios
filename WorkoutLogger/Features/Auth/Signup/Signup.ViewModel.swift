@@ -24,21 +24,15 @@ class SignupViewModel: ObservableObject {
         self.keychain = keychain
     }
     
-    func submit(setAuth: @escaping (_ result: Bool) -> Void) {
+    func submit(success onSucces: @escaping () -> Void) {
         self.isLoading = true
         self.service.signup(email: email, name: name, password: password, confirmPassword: confirmPassword) { result in
             switch result {
             case .success(let result):
-                let tokens = AuthTokens(
-                    accessToken: result.accessToken,
-                    refreshToken: result.refreshToken
-                )
                 self.error = nil
-                self.keychain.save(tokens, service: WORKOUT_LOGGER_KEYCHAIN_SERVICE, account: WORKOUT_LOGGER_KEYCHAIN_ACCOUNT)
-                setAuth(true)
+                onSucces()
             case .failure(let err):
                 self.error = err.localizedDescription
-                setAuth(false)
             }
             self.isLoading = false
         }
