@@ -72,7 +72,7 @@ struct EditWorkoutSession: View {
                     }
                     .alert(isPresented: $showFinishWorkoutAlert) {
                         Alert(
-                            title: Text("Are you sure you want to finish this workout? This is irreversible!"),
+                            title: Text("Are you sure you want to finish this workout?"),
                             primaryButton: .default(Text("Confirm"), action: {
                                 workoutSessionViewModel.finishWorkoutSession(id: workoutSessionId)
                                 self.presentationMode.wrappedValue.dismiss()
@@ -96,7 +96,7 @@ struct EditWorkoutSession: View {
         .navigationTitle(workoutName)
         .navigationBarItems(trailing: end == nil ?  Button("Finish", action: {
             showFinishWorkoutAlert = true
-        }) : nil)
+        }).foregroundColor(.primaryColor) : nil)
         
     }
 }

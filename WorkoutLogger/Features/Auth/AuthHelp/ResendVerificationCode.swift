@@ -43,7 +43,7 @@ struct ResendVerificationCode: View {
                 Spacer()
             }
             HStack {
-                Text("Enter in the email of the account you've already created").foregroundColor(.secondaryText)
+                Text("Enter in the email you signed up with.").foregroundColor(.secondaryText)
                 Spacer()
             }
             TextField("Email", text: $email)
@@ -66,6 +66,9 @@ struct ResendVerificationCode: View {
                 }
             })
             .buttonStyle(RoundedButton())
+
+            Spacer()
+
         }
         .onTapGesture {
             self.hideKeyboard()

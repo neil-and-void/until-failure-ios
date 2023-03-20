@@ -13,8 +13,12 @@ struct ProfileView: View {
     @StateObject
     private var userViewModel = UserViewModel(service: WorkoutLoggerAPIService())
     @State
+    private var showLogoutConfirmation = false
+    @State
     private var showDeleteAccountAlert = false
-    
+    @State
+    private var showDeleteAccountFinalAlert = false
+
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
@@ -40,11 +44,18 @@ struct ProfileView: View {
 
 
                 Button(action: {
-                    userViewModel.logout() { loggedOut in
-                        authState.isAuthenticated = loggedOut
-                    }}) {
-                        Text("Logout")
-                    }.buttonStyle(RoundedButton())
+                    showLogoutConfirmation = true
+                }, label: {
+                    Text("Logout")}
+                )
+                .buttonStyle(RoundedButton())
+                .confirmationDialog("Are you sure?", isPresented: $showLogoutConfirmation) {
+                    Button("Logout", role: .destructive, action: {
+                        userViewModel.logout() { loggedOut in
+                            authState.isAuthenticated = loggedOut
+                        }
+                    })
+                }
                 Spacer()
             }
             .padding(.horizontal)
@@ -55,31 +66,39 @@ struct ProfileView: View {
                         .fontWeight(.bold)
                 }
                 ToolbarItem(placement: .navigationBarTrailing, content: {
-                    Menu {
+                    Menu(content: {
                         Button("delete account", role: .destructive) {
                             showDeleteAccountAlert = true
                         }
-                    } label: {
-                        Image(systemName: "gearshape")
+                    }, label: { Image(systemName: "gearshape") })
+                    .alert(isPresented: $showDeleteAccountAlert) {
+                        Alert(
+                            title: Text("Are you sure you want to delete your account?"),
+                            primaryButton: .destructive(Text("Yes") , action: {
+                                showDeleteAccountFinalAlert = true
+                                showDeleteAccountAlert = false
+                            }),
+                            secondaryButton: .cancel()
+                        )
                     }
                 })
             }
-            .alert(isPresented: $showDeleteAccountAlert) {
-                Alert(
-                    title: Text("Are you sure you want to delete your account?"),
-                    primaryButton: .destructive(Text("Yes") , action: {
-                        userViewModel.deleteUser(success: {
-                            showDeleteAccountAlert = false
-                            userViewModel.logout(setAuth: { loggedOut in
-                                authState.isAuthenticated = loggedOut
-                            })
+        }
+        .alert(isPresented: $showDeleteAccountFinalAlert) {
+            Alert(
+                title: Text("Deleting your account is IRREVERSIBLE! Are you sure?"),
+                primaryButton: .destructive(Text("Yes") , action: {
+                    userViewModel.deleteUser(success: {
+                        showDeleteAccountFinalAlert = false
+                        userViewModel.logout(setAuth: { loggedOut in
+                            authState.isAuthenticated = loggedOut
                         })
-                    }),
-                    secondaryButton: .cancel()
-                )
-            }
-
-        }.onAppear(perform: {
+                    })
+                }),
+                secondaryButton: .cancel()
+            )
+        }
+        .onAppear(perform: {
             userViewModel.getUser()
         })
 

@@ -18,14 +18,12 @@ struct EditWorkoutRoutineListItem: View {
                 .padding(.horizontal)
                 .padding(.vertical, 5)
                 .background(.thinMaterial)
-                .font(.system(size: 16))
                 .cornerRadius(10)
             
             TextField("Sets", value: $exerciseRoutine.sets, formatter: NumberFormatter())
                 .padding(.horizontal)
                 .padding(.vertical, 4)
                 .background(.thinMaterial)
-                .font(.system(size: 16))
                 .cornerRadius(10)
                 .keyboardType(.numberPad)
                 .multilineTextAlignment(.center)
@@ -35,14 +33,13 @@ struct EditWorkoutRoutineListItem: View {
                 .padding(.horizontal)
                 .padding(.vertical, 4)
                 .background(.thinMaterial)
-                .font(.system(size: 16))
                 .cornerRadius(10)
                 .keyboardType(.numberPad)
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: 76)
             
-        }
-        
+        }.font(.system(size: 20))
+
     }
 }
 

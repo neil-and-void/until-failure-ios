@@ -20,14 +20,14 @@ struct AddExerciseRoutineAlert: View {
                 .cornerRadius(10)
             
             Button(action: {}) {
-                Text("Cancel")
+                Text("Cancel").foregroundColor(.primaryColor)
             }
 
             Button(action: {
                 onAdd(name)
                 name = ""
             }) {
-                Text("Add")
+                Text("Add").foregroundColor(.primaryColor)
             }
 
         }.preferredColorScheme(.dark)
