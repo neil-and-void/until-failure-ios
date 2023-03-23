@@ -11,7 +11,7 @@ class WorkoutViewModel: ObservableObject {
     private let service: WorkoutLoggerAPIServiceProtocol
     private let localMutator: LocalCacheMutator
      
-    @Published var error: String?
+    @Published var error: WorkoutLoggerError?
     @Published var isLoading: Bool = false
     @Published var workoutRoutine: WorkoutRoutine?
     @Published var workoutRoutineList: [WorkoutRoutine] = []
@@ -29,7 +29,7 @@ class WorkoutViewModel: ObservableObject {
                 self.error = nil
                 onSuccess()
             case .failure(let err):
-                self.error = err.localizedDescription
+                self.error = err
             }
         }
         self.isLoading = false
@@ -43,7 +43,7 @@ class WorkoutViewModel: ObservableObject {
                 self.workoutRoutineList = workoutRoutines
                 self.error = nil
             case .failure(let err):
-                self.error = err.localizedDescription
+                self.error = err
             }
             self.isLoading = false
         }
@@ -57,7 +57,7 @@ class WorkoutViewModel: ObservableObject {
                 self.workoutRoutine = workoutRoutine
                 self.error = nil
             case .failure(let err):
-                self.error = err.localizedDescription
+                self.error = err
             }
             self.isLoading = false
         }
@@ -86,9 +86,9 @@ class WorkoutViewModel: ObservableObject {
             switch result {
             case .success:
                 self.error = nil
-            case .failure(let err):
+            case .failure:
                 self.workoutRoutine = originalWorkoutRoutine
-                self.error = err.localizedDescription
+                self.error = WorkoutLoggerError.GraphQLError(gqlError: "could not update workout routine")
             }
         }
         
@@ -100,7 +100,7 @@ class WorkoutViewModel: ObservableObject {
                 onSuccess()
             case .failure(let err):
                 self.workoutRoutine = originalWorkoutRoutine
-                self.error = err.localizedDescription
+                self.error = err
             }
         }
     }
@@ -113,8 +113,8 @@ class WorkoutViewModel: ObservableObject {
                 // remove from workout view model since we'll have a cache miss
                 self.workoutRoutineList = self.workoutRoutineList.filter { $0.id != id}
                 self.error = nil
-            case .failure(let err):
-                self.error = err.localizedDescription
+            case .failure:
+                self.error = WorkoutLoggerError.GraphQLError(gqlError: "could not delete workout routine")
             }
         }
         
@@ -124,7 +124,7 @@ class WorkoutViewModel: ObservableObject {
                 onSuccess()
                 self.error = nil
             case .failure(let err):
-                self.error = err.localizedDescription
+                self.error = err
             }
         }
     }

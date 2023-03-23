@@ -52,6 +52,7 @@ struct ProfileView: View {
                 .confirmationDialog("Are you sure?", isPresented: $showLogoutConfirmation) {
                     Button("Logout", role: .destructive, action: {
                         userViewModel.logout() { loggedOut in
+                            WorkoutLoggerAPIClient.client.clearCache()
                             authState.isAuthenticated = loggedOut
                         }
                     })
@@ -69,6 +70,7 @@ struct ProfileView: View {
                     Menu(content: {
                         Button("delete account", role: .destructive) {
                             showDeleteAccountAlert = true
+                            WorkoutLoggerAPIClient.client.clearCache()
                         }
                     }, label: { Image(systemName: "gearshape") })
                     .alert(isPresented: $showDeleteAccountAlert) {
@@ -77,6 +79,7 @@ struct ProfileView: View {
                             primaryButton: .destructive(Text("Yes") , action: {
                                 showDeleteAccountFinalAlert = true
                                 showDeleteAccountAlert = false
+                                WorkoutLoggerAPIClient.client.clearCache()
                             }),
                             secondaryButton: .cancel()
                         )

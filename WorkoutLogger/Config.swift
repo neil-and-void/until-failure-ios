@@ -9,13 +9,10 @@ import Foundation
 
 var baseURL: String {
     #if DEV
-//    return "http://localhost:8080"
-    return "https://workout-logger-api-ejtky726bq-uw.a.run.app"
+    return "https://api.viloria.dev"
     #elseif STAGING
-//    return "http://localhost:8080"
-    return "https://workout-logger-api-ejtky726bq-uw.a.run.app"
+    return "https://api.viloria.dev"
     #else
-//    return "http://localhost:8080"
-    return "https://workout-logger-api-ejtky726bq-uw.a.run.app"
+    return "https://api.viloria.dev"
     #endif
 }

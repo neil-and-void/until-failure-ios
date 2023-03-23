@@ -85,12 +85,7 @@ struct EditWorkout: View {
                     
                 }
                 
-            }.alert(isPresented: $showErrorAlert) {
-                Alert(
-                    title: Text("Title"),
-                    message: Text("Message")
-                )
-            }
+            }.errorAlert($workoutViewModel.error, confirm: {})
             
         }
         

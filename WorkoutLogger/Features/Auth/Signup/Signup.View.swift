@@ -59,8 +59,8 @@ struct SignupView: View {
             }
             .buttonStyle(RoundedButton())
             .alert("Check your email for a verification link to start using Until Failure!", isPresented: $showAlert) {
-                Button("OK", role: .cancel) { }
-            }.tint(Color.primaryColor)
+                Button("OK", role: .cancel) { }.tint(Color.primaryColor)
+            }
 
             Text("Didn't get a code?")
             NavigationLink(destination: ResendVerificationCode()) {

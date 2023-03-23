@@ -20,7 +20,7 @@ struct WorkoutDetailsView: View {
  
             if workoutViewModel.isLoading {
 
-                Text("Loading...")
+                ProgressView()
 
             } else {
                 

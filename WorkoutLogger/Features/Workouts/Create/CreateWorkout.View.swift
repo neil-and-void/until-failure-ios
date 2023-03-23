@@ -41,7 +41,7 @@ struct CreateWorkoutView: View {
                         
                         Text("Give your workout routine a name")
                         
-                        if let error = workoutListViewModel.error {
+                        if let error = workoutListViewModel.error?.errorDescription {
                             Text(error)
                                 .foregroundColor(.red)
                                 .multilineTextAlignment(.center)

@@ -28,8 +28,8 @@ class UserViewModel: ObservableObject {
             service: WORKOUT_LOGGER_KEYCHAIN_SERVICE,
             account: WORKOUT_LOGGER_KEYCHAIN_ACCOUNT
         )
+        WorkoutLoggerAPIClient.client.clearCache()
         setAuth(false)
-        // TODO: clear apollo cache
     }
 
     func getUser() {
