@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct WorkoutLoggerApp: App {
+    @StateObject
+    var authState = AuthenticationState()
     @State
     private var showSheet = false
     @State
@@ -17,6 +19,7 @@ struct WorkoutLoggerApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(authState)
                 .preferredColorScheme(.dark)
                 .onOpenURL(perform: { url in
                     guard let code = url.getQueryParam("code") else { return }
@@ -37,6 +40,16 @@ struct WorkoutLoggerApp: App {
                         ResetPassword(forgotPasswordCode: $forgotPasswordCode, showSheet: $showSheet)
                     }.interactiveDismissDisabled()
                 }
+                .onAppear(perform: {
+                    let keychain = KeychainService()
+                    if let _ = keychain.read(
+                        service: WORKOUT_LOGGER_KEYCHAIN_SERVICE,
+                        account: WORKOUT_LOGGER_KEYCHAIN_ACCOUNT,
+                        type: AuthTokens.self
+                    ) {
+                        authState.isAuthenticated = true
+                    }
+                })
         }
     }
 }

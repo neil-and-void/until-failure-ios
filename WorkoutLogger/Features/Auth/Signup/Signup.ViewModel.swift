@@ -28,7 +28,7 @@ class SignupViewModel: ObservableObject {
         self.isLoading = true
         self.service.signup(email: email, name: name, password: password, confirmPassword: confirmPassword) { result in
             switch result {
-            case .success(let result):
+            case .success:
                 self.error = nil
                 onSucces()
             case .failure(let err):

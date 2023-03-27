@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var authState = AuthenticationState()
+    @EnvironmentObject private var authState: AuthenticationState
  
     var body: some View {
         Group {
@@ -17,7 +17,7 @@ struct ContentView: View {
             } else {
                 LoginView()
             }
-        }.environmentObject(authState).preferredColorScheme(.dark)
+        }.preferredColorScheme(.dark)
     }
 }
 
