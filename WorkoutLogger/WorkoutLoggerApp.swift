@@ -27,14 +27,11 @@ struct WorkoutLoggerApp: App {
                     forgotPasswordCode = code
                 })
                 .sheet(isPresented: $showSheet) {
-                    ZStack {
-                        VStack {
-                            HStack {
-                                Button("Close", action: { showSheet = false })
-                                    .padding()
-                                    .foregroundColor(.white)
-                                Spacer()
-                            }
+                    VStack {
+                        HStack {
+                            Button("Close", action: { showSheet = false })
+                                .padding()
+                                .foregroundColor(.white)
                             Spacer()
                         }
                         ResetPassword(forgotPasswordCode: $forgotPasswordCode, showSheet: $showSheet)

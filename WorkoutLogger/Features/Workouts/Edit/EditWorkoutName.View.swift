@@ -11,19 +11,14 @@ struct EditWorkoutName: View {
     @Binding var name: String
     
     var body: some View {
-
         VStack {
-
             TextField("Name", text: $name)
                 .multilineTextAlignment(.center)
                 .font(.system(size: 30, weight: .semibold))
-
             Divider()
                 .frame(height: 1)
                 .background(.gray)
-
         }.padding(.horizontal)
-
     }
 }
 
