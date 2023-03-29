@@ -8,6 +8,6 @@
 import Foundation
 
 var baseURL: String {
-    return "http://localhost:8080"
-//    return "https://api.viloria.dev"
+//    return "http://localhost:8080"
+    return "https://api.viloria.dev"
 }
