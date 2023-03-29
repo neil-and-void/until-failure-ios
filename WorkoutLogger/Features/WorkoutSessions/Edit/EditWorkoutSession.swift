@@ -7,8 +7,18 @@
 
 import SwiftUI
 
+class SaveState: ObservableObject {
+    @State
+    var saving = false
+
+    init() {}
+}
+
 struct EditWorkoutSession: View {
     @Environment(\.presentationMode) var presentationMode
+
+    @StateObject
+    var saveState = SaveState()
 
     var workoutSessionId: String
     let workoutName: String
@@ -96,7 +106,9 @@ struct EditWorkoutSession: View {
         .navigationTitle(workoutName)
         .navigationBarItems(trailing: end == nil ?  Button("Finish", action: {
             showFinishWorkoutAlert = true
-        }).foregroundColor(.primaryColor) : nil)
+        })
+        .foregroundColor(.primaryColor) : nil)
+        .environmentObject(saveState)
         
     }
 }

@@ -16,25 +16,24 @@ struct SelectExerciseRoutine: View {
     
     var body: some View {
         Group {
-            
             HStack {
-                
                 Button("Cancel") {
-                    
                     showSheet = false
-                    
                 }
-                .padding()
                 .buttonStyle(TextButton())
-                
                 Spacer()
-                
+                Button(action: {
+                    exerciseRoutineViewModel.getExerciseRoutines(workoutRoutineId: workoutRoutineId, withNetwork: true)
+                }, label: {
+                    HStack {
+                        Text("Refresh")
+                        Image(systemName: "arrow.clockwise")
+                    }.foregroundColor(Color.white)
+                })
             }
-            
+            .padding()
             if exerciseRoutineViewModel.isLoading {
-                
                 ProgressView()
-                
             } else {
                 
                 if let exerciseRoutines = exerciseRoutineViewModel.exerciseRoutines {
