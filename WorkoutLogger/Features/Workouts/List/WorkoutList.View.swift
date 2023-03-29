@@ -54,7 +54,7 @@ struct WorkoutListView: View {
                         }
                         .alert(isPresented: $showDeleteAlert) {
                             Alert(
-                                title: Text("Are you sure you want to delete this routine? It will also delete all associated workouts with it"),
+                                title: Text("Are you sure you want to delete this routine? It will also delete all workouts associated with it"),
                                 primaryButton: .destructive(Text("Yes") , action: {
                                     guard let workoutRoutineId = workoutRoutineId else { return }
                                     withAnimation{
@@ -72,6 +72,7 @@ struct WorkoutListView: View {
                             .foregroundColor(.tertiaryText)
                             .multilineTextAlignment(.center)
                             .padding()
+                            .listRowSeparator(.hidden)
                         
                     }
                     

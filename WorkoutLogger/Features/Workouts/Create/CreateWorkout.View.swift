@@ -49,7 +49,7 @@ struct CreateWorkoutView: View {
                         
                     }
                     
-                    TextField("routine name...", text: $workoutName)
+                    TextField("Leg day...", text: $workoutName)
                         .multilineTextAlignment(.center)
                         .fontWeight(.bold)
                         .font(.system(size: 36))
