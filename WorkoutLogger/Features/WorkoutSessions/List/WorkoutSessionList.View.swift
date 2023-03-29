@@ -12,6 +12,7 @@ struct WorkoutSessionListView: View {
 
     @State private var showDeleteAlert = false
     @State private var showSheet = false
+    @State private var workoutSessionId: String?
 
     let limit = 30
     
@@ -36,24 +37,29 @@ struct WorkoutSessionListView: View {
                                 WorkoutSessionListItem(active: true, workoutSession: workoutSession)
                                 
                             }
-
-
-                        }
-                        .onDelete(perform: { indexSet in
-                            showDeleteAlert.toggle()
-                            indexSet.forEach({ i in
-                                workoutSessionViewModel.deleteWorkoutSession(id: workoutSessionViewModel.workoutSessionList[i].id, onSuccess: {
-                                    workoutSessionViewModel.getWorkoutSessions(limit: limit, after: "", withNetwork: true) // TODO: need to get correct "after" here
-                                })
+                            .swipeActions(allowsFullSwipe: false, content: {
+                                Button("Delete") {
+                                    showDeleteAlert = true
+                                    workoutSessionId = workoutSession.id
+                                }.tint(.red)
                             })
-                        })
-                        //                        .alert("Are you sure you want to delete this workout session", isPresented: $showDeleteAlert) {
-                        //                            Button("Cancel", role: .cancel) { showDeleteAlert.toggle() }
-                        //                            Button("Delete", role: .destructive) {
-                        //                                deleteWorkoutRoutine()
-                        //                                showDeleteAlert.toggle()
-                        //                            }
-                        //                        }
+                        }
+                        .alert(isPresented: $showDeleteAlert) {
+                            Alert(
+                                title: Text("Are you sure you want to delete this workout?"),
+                                primaryButton: .destructive(Text("Yes") , action: {
+                                    guard let workoutSessionId = workoutSessionId else { return }
+                                    withAnimation{
+                                        workoutSessionViewModel.deleteWorkoutSession(id: workoutSessionId, onSuccess: {
+                                            // TODO: need to get correct "after" here and delete from cache to not do another network call
+                                            workoutSessionViewModel.getWorkoutSessions(limit: limit, after: "", withNetwork: true)
+                                        })
+                                    }
+                                }),
+                                secondaryButton: .cancel()
+                            )
+                        }
+
 
                         HStack {
                             Spacer()

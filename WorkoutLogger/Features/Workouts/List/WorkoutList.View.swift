@@ -10,6 +10,7 @@ import SwiftUI
 struct WorkoutListView: View {
     @StateObject private var workoutListViewModel = WorkoutViewModel(service: WorkoutLoggerAPIService())
     @State private var showDeleteAlert = false
+    @State private var workoutRoutineId: String?
     
     func deleteWorkoutRoutine(id: String) {
         workoutListViewModel.deleteWorkoutRoutine(id: id, onSuccess: {
@@ -42,25 +43,28 @@ struct WorkoutListView: View {
                                     name: workoutRoutine.name,
                                     exerciseCount: workoutRoutine.exerciseRoutines.count
                                 )
- 
-                            }
 
-                            
-                        }
-                        .onDelete(perform: { indexSet in
-//                            showAlert.toggle()
-                            indexSet.forEach({ i in
-                                deleteWorkoutRoutine(id: workoutListViewModel.workoutRoutineList[i].id)
+                            }
+                            .swipeActions(allowsFullSwipe: false, content: {
+                                Button("Delete") {
+                                    showDeleteAlert = true
+                                    workoutRoutineId = workoutRoutine.id
+                                }.tint(.red)
                             })
-                        })
-//                        .alert("Are you sure you want to delete this workout routine", isPresented: $showAlert) {
-//                            Button("Cancel", role: .cancel) { showAlert.toggle() }
-//                            Button("Delete", role: .destructive) {
-//                                deleteWorkoutRoutine()
-//                                showAlert.toggle()
-//                            }
-//                        }
- 
+                        }
+                        .alert(isPresented: $showDeleteAlert) {
+                            Alert(
+                                title: Text("Are you sure you want to delete this routine? It will also delete all associated workouts with it"),
+                                primaryButton: .destructive(Text("Yes") , action: {
+                                    guard let workoutRoutineId = workoutRoutineId else { return }
+                                    withAnimation{
+                                        deleteWorkoutRoutine(id: workoutRoutineId)
+                                    }
+                                }),
+                                secondaryButton: .cancel()
+                            )
+                        }
+
                     } else if !workoutListViewModel.isLoading && workoutListViewModel.workoutRoutineList.count == 0 {
 
                         
