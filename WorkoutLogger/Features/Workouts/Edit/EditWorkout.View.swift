@@ -8,13 +8,18 @@
 import SwiftUI
 
 struct EditWorkout: View {
-    @StateObject var workoutViewModel: WorkoutViewModel
-    @State var showAlert: Bool = false
-    @State var showErrorAlert: Bool = false
+    @StateObject
+    var workoutViewModel: WorkoutViewModel
+    @State
+    var showAlert: Bool = false
+    @State
+    var showErrorAlert: Bool = false
     
-    @Binding var showSheet: Bool
-    @State var originalWorkoutRoutine: WorkoutRoutine
-    @State var workoutRoutine: WorkoutRoutine
+    @Binding
+    var showSheet: Bool
+    var originalWorkoutRoutine: WorkoutRoutine
+    @State
+    var workoutRoutine: WorkoutRoutine
     
     var body: some View {
         
@@ -36,14 +41,16 @@ struct EditWorkout: View {
                         .bold()
                     
                     Spacer()
-                    
-                    Button("Save") {
-                        
-                        workoutViewModel.updateWorkoutRoutine(workoutRoutine, originalWorkoutRoutine) {
-                            showSheet = false
-                        }
-                        
-                    }.buttonStyle(TextButton())
+
+                    if (workoutViewModel.isLoading) {
+                        ProgressView()
+                    } else {
+                        Button("Save") {
+                            workoutViewModel.updateWorkoutRoutine(workoutRoutine, originalWorkoutRoutine) {
+                                showSheet = false
+                            }
+                        }.buttonStyle(TextButton())
+                    }
                     
                 }
                 .padding(.top)

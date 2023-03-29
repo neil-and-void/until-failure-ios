@@ -64,6 +64,7 @@ class WorkoutViewModel: ObservableObject {
     }
     
     func updateWorkoutRoutine(_ workoutRoutine: WorkoutRoutine, _ originalWorkoutRoutine: WorkoutRoutine, onSuccess: @escaping () -> Void) {
+        self.isLoading = true
         // format strings
         let fmtdWorkoutRoutine = WorkoutRoutine(
             id: workoutRoutine.id,
@@ -79,18 +80,6 @@ class WorkoutViewModel: ObservableObject {
                 )
             }
         )
-
-        // local mutation
-        // might not need this
-        self.localMutator.updateWorkoutRoutine(workoutRoutine: fmtdWorkoutRoutine) { result in
-            switch result {
-            case .success:
-                self.error = nil
-            case .failure:
-                self.workoutRoutine = originalWorkoutRoutine
-                self.error = WorkoutLoggerError.GraphQLError(gqlError: "could not update workout routine")
-            }
-        }
         
         // send mutation to the server
         self.service.updateWorkoutRoutine(fmtdWorkoutRoutine) { result in
@@ -102,6 +91,7 @@ class WorkoutViewModel: ObservableObject {
                 self.workoutRoutine = originalWorkoutRoutine
                 self.error = err
             }
+            self.isLoading = false
         }
     }
     

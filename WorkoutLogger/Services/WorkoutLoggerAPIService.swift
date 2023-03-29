@@ -297,7 +297,11 @@ class WorkoutLoggerAPIService: WorkoutLoggerAPIServiceProtocol {
     }
     
     func getExerciseRoutines(workoutRoutineId: String, withNetwork: Bool = false, completion: @escaping (Result<[ExerciseRoutine], WorkoutLoggerError>) -> Void) {
-        self.client.fetch(query: WorkoutLoggerAPI.ExerciseRoutinesQuery(workoutRoutineId: workoutRoutineId)) { result in
+        var cachePolicy: CachePolicy = .returnCacheDataElseFetch
+        if withNetwork {
+            cachePolicy = .fetchIgnoringCacheData
+        }
+        self.client.fetch(query: WorkoutLoggerAPI.ExerciseRoutinesQuery(workoutRoutineId: workoutRoutineId), cachePolicy: cachePolicy) { result in
             switch result {
             case .success(let response):
                 

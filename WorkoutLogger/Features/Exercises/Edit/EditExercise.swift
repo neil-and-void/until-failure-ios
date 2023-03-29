@@ -79,33 +79,3 @@ struct EditExercise: View {
     }
     
 }
-
-struct EditExercise_Previews: PreviewProvider {
-    static var previews: some View {
-        
-        ScrollView {
-            EditExercise(
-                exercise: .constant(Exercise(
-                    id: "1",
-                    exerciseRoutine: ExerciseRoutine(id: "1", name: "Squat", sets: 4, reps: 5),
-                    sets: [
-                        SetEntry(id: "1", weight: 225, reps: 4),
-                        SetEntry(id: "2", weight: 225, reps: 4),
-                        SetEntry(id: "3", weight: 225, reps: 4),
-                        SetEntry(id: "4", weight: 225, reps: 4),
-                    ],
-                    notes: "Somwething")),
-                onDelete: {}
-                
-            )
-            EditExercise(
-                exercise: .constant(Exercise(
-                    id: "1",
-                    exerciseRoutine: ExerciseRoutine(id: "1", name: "Squat", sets: 4, reps: 5),
-                    sets: [],
-                    notes: "Somwething")),
-                onDelete: {}
-            )
-        }.preferredColorScheme(.dark)
-    }
-}

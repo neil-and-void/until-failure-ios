@@ -65,9 +65,3 @@ struct WorkoutDetailsView: View {
     }
     
 }
-
-struct WorkoutView_Previews: PreviewProvider {
-    static var previews: some View {
-        WorkoutDetailsView(workoutRoutineId: "23").preferredColorScheme(.dark)
-    }
-}

@@ -15,7 +15,7 @@ struct SelectExerciseRoutine: View {
     @Binding var showSheet: Bool
     
     var body: some View {
-        Group {
+        VStack {
             HStack {
                 Button("Cancel") {
                     showSheet = false
@@ -90,6 +90,7 @@ struct SelectExerciseRoutine: View {
                 }
                 
             }
+            Spacer()
             
         }.onAppear(perform: { exerciseRoutineViewModel.getExerciseRoutines(workoutRoutineId: workoutRoutineId) })
     }

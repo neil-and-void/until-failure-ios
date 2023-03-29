@@ -45,51 +45,61 @@ struct EditWorkoutSession: View {
                 
             } else {
                 if let workoutSession = Binding<WorkoutSession>($workoutSessionViewModel.workoutSession) {
-                    List {
-                        ForEach(workoutSession.exercises) { exercise in
-                            EditExercise(
-                                exercise: exercise,
-                                prevExercise: getPrevExercise(exerciseRoutineId: exercise.exerciseRoutine.id),
-                                onDelete: {
-                                    workoutSessionViewModel.getWorkoutSession(workoutSessionId: workoutSessionId, withNetwork: true)
-                                }
-                            )
-                            .listRowInsets(EdgeInsets())
-                            .padding(.bottom, 8)
-                            .listRowSeparator(.hidden)
-                        }
-                        HStack {
-                            Spacer()
-                            Button("Add Exercise") { showSheet = true }
-                            .buttonStyle(RoundedButton())
-                            .sheet(isPresented: $showSheet) {
-                                SelectExerciseRoutine(
-                                    workoutSessionId: workoutSession.id,
-                                    workoutRoutineId: workoutSession.workoutRoutine.id,
-                                    onSelectExerciseRoutine: { exercise in
-                                        workoutSession.exercises.wrappedValue.append(exercise)
-                                    },
-                                    showSheet: $showSheet
-                                ).presentationDetents([.medium])
+                    ScrollViewReader { scrollView in
+                        List {
+                            ForEach(workoutSession.exercises) { exercise in
+                                EditExercise(
+                                    exercise: exercise,
+                                    prevExercise: getPrevExercise(exerciseRoutineId: exercise.exerciseRoutine.id),
+                                    onDelete: {
+                                        workoutSessionViewModel.getWorkoutSession(workoutSessionId: workoutSessionId, withNetwork: true)
+                                    }
+                                )
+                                .id(exercise.id)
+                                .listRowInsets(EdgeInsets())
+                                .padding(.bottom, 8)
+                                .listRowSeparator(.hidden)
+                                .onChange(of: workoutSession.exercises.count, perform: {_ in
+                                    withAnimation {
+                                        scrollView.scrollTo(workoutSession.exercises[workoutSession.exercises.count - 1].id, anchor: .top)
+                                    }
+                                })
                             }
-                            Spacer()
-                        }.listRowSeparator(.hidden)
-                    }.listStyle(.plain).refreshable {
-                        workoutSessionViewModel.getWorkoutSession(workoutSessionId: workoutSessionId, withNetwork: true)
-                    }
-                    .onTapGesture {
-                        self.hideKeyboard()
-                    }
-                    .alert(isPresented: $showFinishWorkoutAlert) {
-                        Alert(
-                            title: Text("Are you sure you want to finish this workout?"),
-                            primaryButton: .default(Text("Confirm"), action: {
-                                workoutSessionViewModel.finishWorkoutSession(id: workoutSessionId)
-                                self.presentationMode.wrappedValue.dismiss()
-                                showFinishWorkoutAlert = false
-                            }),
-                            secondaryButton: .cancel()
-                        )
+                            HStack {
+                                Spacer()
+                                Button("Add Exercise") { showSheet = true }
+                                    .buttonStyle(RoundedButton())
+                                    .sheet(isPresented: $showSheet) {
+                                        SelectExerciseRoutine(
+                                            workoutSessionId: workoutSession.id,
+                                            workoutRoutineId: workoutSession.workoutRoutine.id,
+                                            onSelectExerciseRoutine: { exercise in
+                                                workoutSession.exercises.wrappedValue.append(exercise)
+                                            },
+                                            showSheet: $showSheet
+                                        ).presentationDetents([.medium])
+                                    }
+                                Spacer()
+                            }.listRowSeparator(.hidden)
+                        }
+                        .listStyle(.plain)
+                        .refreshable {
+                            workoutSessionViewModel.getWorkoutSession(workoutSessionId: workoutSessionId, withNetwork: true)
+                        }
+                        .onTapGesture {
+                            self.hideKeyboard()
+                        }
+                        .alert(isPresented: $showFinishWorkoutAlert) {
+                            Alert(
+                                title: Text("Are you sure you want to finish this workout?"),
+                                primaryButton: .default(Text("Confirm"), action: {
+                                    workoutSessionViewModel.finishWorkoutSession(id: workoutSessionId)
+                                    self.presentationMode.wrappedValue.dismiss()
+                                    showFinishWorkoutAlert = false
+                                }),
+                                secondaryButton: .cancel()
+                            )
+                        }
                     }
 
                 } else {
@@ -107,7 +117,7 @@ struct EditWorkoutSession: View {
         .navigationBarItems(trailing: end == nil ?  Button("Finish", action: {
             showFinishWorkoutAlert = true
         })
-        .foregroundColor(.primaryColor) : nil)
+            .foregroundColor(.primaryColor) : nil)
         .environmentObject(saveState)
         
     }
