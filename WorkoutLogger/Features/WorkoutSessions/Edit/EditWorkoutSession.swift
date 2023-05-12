@@ -12,6 +12,8 @@ class SaveState: ObservableObject {
     var saving = false
 
     init() {}
+
+    func addSource() {}
 }
 
 struct EditWorkoutSession: View {

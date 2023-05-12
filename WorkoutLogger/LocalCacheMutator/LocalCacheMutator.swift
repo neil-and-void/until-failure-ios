@@ -127,7 +127,6 @@ class LocalCacheMutator {
                     "sets": exercise.exerciseRoutine.sets,
                     "reps": exercise.exerciseRoutine.reps,
                 ]
-                let exerciseRoutine = WorkoutLoggerAPI.MutableWorkoutSessionDetails.Exercise.ExerciseRoutine(data: DataDict(exerciseRoutineJson, variables: nil))
 
                 // exercise cache mutation
                 let exerciseJson: [String: AnyHashable] = [

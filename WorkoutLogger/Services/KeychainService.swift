@@ -24,7 +24,7 @@ final class KeychainService: KeychainServiceProtocol {
             kSecClass: kSecClassGenericPassword,
             kSecAttrService: service,
             kSecAttrAccount: account,
-        ] as CFDictionary
+        ] as [CFString : Any] as CFDictionary
         
         // Add data in query to keychain
         let status = SecItemAdd(query, nil)
@@ -39,7 +39,7 @@ final class KeychainService: KeychainServiceProtocol {
                 kSecAttrService: service,
                 kSecAttrAccount: account,
                 kSecClass: kSecClassGenericPassword,
-            ] as CFDictionary
+            ] as [CFString : Any] as CFDictionary
 
             let attributesToUpdate = [kSecValueData: data] as CFDictionary
 
@@ -55,7 +55,7 @@ final class KeychainService: KeychainServiceProtocol {
             kSecAttrAccount: account,
             kSecClass: kSecClassGenericPassword,
             kSecReturnData: true
-        ] as CFDictionary
+        ] as [CFString : Any] as CFDictionary
         
         var result: AnyObject?
         SecItemCopyMatching(query, &result)
@@ -69,7 +69,7 @@ final class KeychainService: KeychainServiceProtocol {
             kSecAttrService: service,
             kSecAttrAccount: account,
             kSecClass: kSecClassGenericPassword,
-            ] as CFDictionary
+        ] as [CFString : Any] as CFDictionary
         
         // Delete item from keychain
         SecItemDelete(query)
