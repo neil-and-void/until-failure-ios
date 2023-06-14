@@ -28,11 +28,11 @@ final class KeychainService: KeychainServiceProtocol {
         
         // Add data in query to keychain
         let status = SecItemAdd(query, nil)
-        
-        if status != errSecSuccess {
+
+        if status == errSecSuccess {
             return
         }
-        
+
         if status == errSecDuplicateItem {
             // Item already exist, thus update it.
             let query = [
@@ -76,6 +76,7 @@ final class KeychainService: KeychainServiceProtocol {
     }
     
     func save<T>(_ item: T, service: String, account: String) where T : Codable {
+        print("saved", item)
         
         do {
             // Encode as JSON data and save in keychain
